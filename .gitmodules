@@ -1,0 +1,6 @@
+[submodule "LXStudio-P4"]
+	path = LXStudio-P4
+	url = https://github.com/heronarts/LXStudio-P4
+[submodule "LXStudio-IDE"]
+	path = LXStudio-IDE
+	url = https://github.com/heronarts/LXStudio-IDE
