@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1682021843843,
+  "timestamp": 1682018896375,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3462,13 +3462,13 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 8,
+              "focusedPattern": 7,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 7,
             "patterns": [
               {
                 "id": 52632,
@@ -3613,7 +3613,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09715996495224882
+                        "basis": 0.20148485125394308
                       }
                     ],
                     "modulations": [
@@ -4710,7 +4710,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.34310471549497323
+                        "basis": 0.4137321486286737
                       }
                     ],
                     "modulations": [
@@ -4765,44 +4765,6 @@
                 "children": {
                   "modulation": {
                     "id": 53636,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 53646,
-                "class": "org.iqe.BassBreathPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "BassBreath",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "Brightness": 0.2
-                },
-                "children": {
-                  "modulation": {
-                    "id": 53647,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -5083,33 +5045,6 @@
             },
             "children": {},
             "basis": 0.94900000000135
-          },
-          {
-            "id": 53960,
-            "class": "heronarts.lx.audio.BandGate",
-            "internal": {
-              "modulationColor": 0,
-              "modulationControlsExpanded": true
-            },
-            "parameters": {
-              "label": "Beat",
-              "running": true,
-              "trigger": false,
-              "gain": 0.0,
-              "range": 36.0,
-              "attack": 10.0,
-              "release": 100.0,
-              "slope": 4.5,
-              "threshold": 0.8,
-              "floor": 0.75,
-              "decay": 400.0,
-              "minFreq": 60.0,
-              "maxFreq": 120.0,
-              "gate": false,
-              "average": 0.0,
-              "tap": false
-            },
-            "children": {}
           }
         ],
         "modulations": [],
@@ -5187,7 +5122,7 @@
         "parameters": {
           "label": "Audio",
           "enabled": false,
-          "mode": 0,
+          "mode": 1,
           "expandedPerformance": true
         },
         "children": {
@@ -5200,7 +5135,7 @@
             },
             "parameters": {
               "label": "Input",
-              "device": 1
+              "device": 0
             },
             "children": {}
           },
