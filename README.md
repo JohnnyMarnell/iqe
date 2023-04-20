@@ -13,8 +13,10 @@ brew install --cask processing
 
 ```bash
 sdk env ; mvn -version
-( cd LXStudio-IDE ; mvn clean validate dependency:build-classpath install -Dmdep.outputFile=/tmp/cp )
-( cd LXStudio-IDE ; java -cp $(cat /tmp/cp):target/classes -Djava.library.path=lib/processing-4.0.1/macos-$(uname -m) heronarts.lx.app.LXStudioApp ../iqe.lxp )
+( cd LXStudio-IDE ; mvn clean validate ; mvn dependency:build-classpath install -Dmdep.outputFile=/tmp/cp )
+( cd LXStudio-IDE ; java -cp $(cat /tmp/cp):target/classes \
+    -Djava.library.path=lib/processing-4.0.1/macos-$([[ $(uname -m) == "arm64" ]] && echo "aarch64" || uname -m) heronarts.lx.app.LXStudioApp ../iqe.lxp )
+cat *slee* | node scripts/scripts.js > /tmp/f.lxp ; java -XstartOnFirstThread -cp glxs*.jar heronarts.lx.studio.Chromatik /tmp/f.lxp
 
 # add --headless for decapitaishe
 ```
