@@ -1,3 +1,11 @@
+# Jupyter
+**/.cache/
+**/.ipython/
+**/.ipynb_checkpoints/
+**/.local/
+**/.jupyter/
+**/.config/
+
 # IDEA Ignores #
 ################
 *.iml

@@ -1,0 +1,24 @@
+services:
+  jupyter-lab:
+    container_name: jupyter-lab
+    image: jupyter
+    build:
+      context: .
+      dockerfile: jupyter.Dockerfile
+    entrypoint: bash
+    command: -c " jupyter lab --IdentityProvider.token='' "
+    ports:
+      - "8888:8888"
+    volumes:
+      - $PWD:/home/jovyan
+  jupyter-server:
+    container_name: jupyter-server
+    build:
+      context: .
+      dockerfile: jupyter.Dockerfile
+    entrypoint: bash
+    command: -c " jupyter server --IdentityProvider.token='a' --ServerApp.allow_origin='*' --ServerApp.ip='0.0.0.0' --allow_remote_access=true "
+    ports:
+      - "8889:8888"
+    volumes:
+      - $PWD:/home/jovyan

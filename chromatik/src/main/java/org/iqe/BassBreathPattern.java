@@ -8,6 +8,10 @@ import heronarts.lx.parameter.BoundedParameter;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.pattern.LXPattern; import heronarts.lx.utils.LXUtils; import java.util.List;
+
+/**
+ * Mostly from ChatGPT. Though Audio device seems to be broken in Chromatik, unfortunately.
+ */
 public class BassBreathPattern extends LXPattern {
     // Audio input
     final GraphicMeter audioInput;

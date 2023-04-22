@@ -37,3 +37,10 @@ Then click Open button and browse to this folder's main LX Studio project file: 
 # To Do
 - Add base pre-requisites, sdkman, maven, java 17 Temurin
 - Re-organize this repository (dont use submodule for IDE?), submit PR to LXStudio-IDE with sdkmanrc, improved os + arch inference, for now cd
+
+# Scratch area
+
+Scrape a bunch of test files
+```bash
+youtube_dl_mp3  'Monolink (live) - Mayan Warrior - Burning Man 2022'  'Keinemusik Mayan Bruning Man'  'ed sheeran bad habits'  'Chill EDM Slow Dance Mix'  'SLOW TRANCE • Downtempo EDM Background Track'  'dua lipa levitating'  "dua don't "  "dua new rules "  "lady gaga poker face " '120 bpm metronome' '126 bpm metronome'
+```
