@@ -6,6 +6,9 @@
 **/.jupyter/
 **/.config/
 
+# Reaper DAW
+**/*.reapeaks
+
 # IDEA Ignores #
 ################
 *.iml
