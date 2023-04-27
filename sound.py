@@ -183,7 +183,7 @@ def click_tick():
             time.sleep(0.005)
 
 def debug_listen(path, time, num, size, keep_first=True, anchor='closestDiff', play_matched=False,
-                 play_full=True):
+                 play_full=True, keep_first_tempo=False):
     # load music segment, make n predictions
     print("loading and splitting into {} music segments of {} seconds".format(num + 1, size))
     full_duration = (num + 1) * size
@@ -197,6 +197,7 @@ def debug_listen(path, time, num, size, keep_first=True, anchor='closestDiff', p
         tempo = detect_tempo_from_onsets(onsets.data)
         # print("Detected tempo:", tempo.reported_tempo, tempo.avg_tempo)
         print("Beat separations", list(map(lambda d: "{:.4f}".format(d), np.diff(tempo.beats))))
+        print("Beat absolute times", list(map(lambda d: "{:.4f}".format(d), tempo.beats + (time + (i - 1) * size))))
         predictions.append(tempo)
     print("Reported bpms:", list(map(lambda p: p.reported_tempo, predictions)))
     print("Average  bpms:", list(map(lambda p: p.avg_tempo, predictions)))
@@ -210,7 +211,8 @@ def debug_listen(path, time, num, size, keep_first=True, anchor='closestDiff', p
     for i in range(num):
         tempo = predictions[i]
         prediction_start = i * size
-        spb = 60 / tempo.reported_tempo
+        if i == 0 or not keep_first_tempo:
+            spb = 60 / tempo.reported_tempo
         if i == 0 or not keep_first:
             if anchor == 'last':
                 beat = tempo.beats[-1]
@@ -224,6 +226,7 @@ def debug_listen(path, time, num, size, keep_first=True, anchor='closestDiff', p
                 clicks.append(beat)
             beat = beat + spb
     print("Building click track")
+    print("Click times", list(map(lambda d: "{:.4f}".format(d), tempo.beats + (time + (i - 1) * size))))
     click_track = librosa.clicks(times=np.array(clicks), sr=sr, length=len(full))
     merged = full + click_track
     if not play_full:
@@ -236,6 +239,7 @@ def debug_predictions():
     path = '/Users/inquesoemergency/Documents/tmp/Monolink (live) - Mayan Warrior - Burning Man 2022 [AQURf3JqnJY].mp3'
     # Always choosing a beat from last sounds jittery
     # debug_listen(path=path, time=42 * 60, num=5, size=5, keep_first=False)
+    # debug_listen(path=path, time=42 * 60 + 4 * 5, num=1, size=5, keep_first=False)
 
     # Keeping first beat happens to work, on the off-beat sound
     # debug_listen(path=path, time=42 * 60, num=5, size=5, keep_first=True)
@@ -247,10 +251,27 @@ def debug_predictions():
     # debug_listen(path=path, time=42 * 60 + 15, num=5, size=5, keep_first=True)
 
     # Use above best case, that was 5 predictions, make one big one instead
-    debug_listen(path=path, time=42 * 60 + 15, num=1, size=25, keep_first=True, play_matched=True)
+    # debug_listen(path=path, time=42 * 60 + 15, num=1, size=25, keep_first=True, play_matched=True)
     
-click_thread = threading.Thread(target=click_tick)
-click_thread.start()
-stream()
-# todo: remove this sleep!!!
-time.sleep(8 * 24 * 60 * 60)
+    path = './jupyter/audio/Ed Sheeran - Bad Habits [Official Video] [orJSJGHjBLI].mp3'
+    # listening to 5th prediction of 5 vs alone should sound the same, but I hear a lot of drift in former
+    # last 5 seconds i'm talking about are "habits lead to you -- wooo ooh ooh"
+    # abs. beat times look the same, bug in my code? time to sample drift in rendering?
+    # debug_listen(path=path, time=60, num=5, size=5, keep_first=False)
+    # debug_listen(path=path, time=60 + 4 * 5, num=1, size=5, keep_first=False)
+    
+    # lots of jitter in this example
+    # debug_listen(path=path, time=93, num=5, size=5, keep_first=False)
+    # keeping first prediction throughout is better but still drifts
+    # debug_listen(path=path, time=93, num=5, size=5, keep_first=True, keep_first_tempo=True)
+    # even worse
+    # debug_listen(path=path, time=93, num=5, size=5, keep_first=True, keep_first_tempo=False)
+    
+
+debug_predictions()
+    
+# click_thread = threading.Thread(target=click_tick)
+# click_thread.start()
+# stream()
+# # todo: remove this sleep!!!
+# time.sleep(8 * 24 * 60 * 60)
