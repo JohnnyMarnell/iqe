@@ -1,3 +1,6 @@
+import numpy as np
+from scipy.io import wavfile
+
 def chat_gpt_beep():
     # Set the sample rate and duration of the beep
     sample_rate = 48000
@@ -43,3 +46,25 @@ def test_play_generated_tone():
     tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1/sr))  # generate the tone
     sd.play(tone, sr, device=speakers)  # play it
     sd.wait()  # wait for the tone to finish
+
+def cgpt_square_wav():
+    # Set the parameters
+    frequency = 440  # Frequency of the square wave in Hz
+    duration = 0.2  # Duration of the square wave in seconds
+    sampling_rate = 48000  # Number of samples per second
+    amplitude = 0.3  # Amplitude of the square wave
+
+    # Generate the time axis
+    t = np.linspace(0, duration, int(duration * sampling_rate), endpoint=False)
+
+    # Generate the square wave
+    square_wave = amplitude * np.sign(np.sin(2 * np.pi * frequency * t))
+
+    # Scale the square wave to 16-bit integer range
+    scaled_wave = np.int16(square_wave * 32767)
+
+    # Save the square wave as a WAV file
+    output_file = "/tmp/square_wave.wav"
+    wavfile.write(output_file, sampling_rate, scaled_wave)
+
+cgpt_square_wav()
