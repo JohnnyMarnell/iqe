@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1682021843843,
+  "timestamp": 1683297029311,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -10,7 +10,7 @@
     },
     "parameters": {
       "label": "LX",
-      "syncModelFile": false
+      "syncModelFile": true
     },
     "children": {},
     "output": {
@@ -47,7 +47,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": false,
+          "selected": true,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -2903,7 +2903,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": true,
+          "selected": false,
           "deactivate": false,
           "enabled": false,
           "brightness": 1.0,
@@ -2929,7 +2929,8 @@
         },
         "children": {}
       }
-    ]
+    ],
+    "file": "TestExportModel.lxm"
   },
   "engine": {
     "id": 1,
@@ -3468,7 +3469,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 52632,
@@ -3613,7 +3614,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09715996495224882
+                        "basis": 0.47423429674395895
                       }
                     ],
                     "modulations": [
@@ -3729,7 +3730,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6599438077315795
+                        "basis": 0.2409642467599721
                       },
                       {
                         "id": 52865,
@@ -3757,7 +3758,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4292359781607013
+                        "basis": 0.3318941734821957
                       }
                     ],
                     "modulations": [
@@ -3892,7 +3893,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.16270540872227324
+                        "basis": 0.15894374062163974
                       },
                       {
                         "id": 53133,
@@ -3920,7 +3921,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.16270540872227324
+                        "basis": 0.15894374062163974
                       }
                     ],
                     "modulations": [
@@ -4798,7 +4799,9 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "Brightness": 0.2
+                  "Brightness": 0.2,
+                  "MinBand": 0.0,
+                  "NumBands": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -5293,7 +5296,7 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 5583.531046940255,
+          "radius": 6190.023940828771,
           "theta": 285.7112040359061,
           "phi": -4.905656499322504,
           "x": 336.80240202182904,
@@ -5312,7 +5315,7 @@
           },
           {
             "active": true,
-            "radius": 5583.531046940255,
+            "radius": 6190.023940828771,
             "theta": 285.7112040359061,
             "phi": -4.905656499322504,
             "x": 336.80240202182904,
