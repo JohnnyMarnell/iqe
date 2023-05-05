@@ -3,11 +3,10 @@ package org.iqe;
 import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.parameter.EnumParameter;
-import heronarts.lx.parameter.StringParameter;
 import heronarts.lx.structure.StripFixture;
 
 @LXCategory("IQE")
-public class NagBugglerLightSaber extends StripFixture {
+public class NagBugglerSaberOfLight extends StripFixture {
     public static enum Kind {
         PILLAR_LEFT,
         PILLAR_MIDDLE,
@@ -21,7 +20,7 @@ public class NagBugglerLightSaber extends StripFixture {
     public final EnumParameter<Kind> kind = new EnumParameter<>("Kind", Kind.PILLAR_LEFT)
             .setDescription("What kind / purpose / location of this strip, e.g. a pillar / pole");
 
-    public NagBugglerLightSaber(LX lx) {
+    public NagBugglerSaberOfLight(LX lx) {
         super(lx);
         init();
     }
@@ -30,7 +29,7 @@ public class NagBugglerLightSaber extends StripFixture {
      * Each of our customer strip is the same, so use those values (way to lock these?)
      */
     protected void init() {
-        System.out.println("***************I test");
+//        System.out.println("*************** test");
         numPoints.setValue(140, true);
         spacing.setValue(5, true);
         kind.setValue(Kind.PILLAR_LEFT);
