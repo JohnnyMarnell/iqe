@@ -8,7 +8,7 @@ e.g. real time beat detection and sync.
 
 Prereqs:
 1. Chromatik alpha build zip is downloaded and unzipped to your `~/Downloads` folder in your user Home folder.
-2. Java 17 Temurin / Eclipse is installed from here: https://https://adoptium.net/
+2. Java 17 Temurin / Eclipse is installed from here: https://adoptium.net/
 
 Then double click this [IQE.command](./IQE.command) in this repo / folder, or from sperminal:
 ```bash
