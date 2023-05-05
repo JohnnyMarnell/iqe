@@ -4,3 +4,9 @@
 [submodule "LXStudio-IDE"]
 	path = zzz_extinct/LXStudio-IDE
 	url = https://github.com/heronarts/LXStudio-IDE
+[submodule "zzz_extinct/LXStudio-IDE"]
+	path = zzz_extinct/LXStudio-IDE
+	url = https://github.com/heronarts/LXStudio-IDE
+[submodule "zzz_extinct/LXStudio-P4"]
+	path = zzz_extinct/LXStudio-P4
+	url = https://github.com/heronarts/LXStudio-P4
