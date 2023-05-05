@@ -1,47 +1,127 @@
+const fs = require('fs')
 
+// yaw, pitch, roll, (0,0,0) => along x axis, (0,90,0) => no visual change (so x axis?),
+//      (0,0,90) vertical up (y+) (so z axis?)
 let id = 100
 const stripLen = 700 // 5 spacing * 140 LED pixels / "numPoints"
+const s = defaultNagBugglerSaberOfLight
+const numPillars = 15
 
-console.log(JSON.stringify([
-    // 4 rows of 3 pilars, then 3 for rafter cross intersections === 
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 0   * stripLen, z: 0 + 0 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 0 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 3   * stripLen, z: 0 + 0 * 3 * stripLen})},
+function buildNagBugglerSaberOfLightFixtures() {
+    return [
+        // PILLARS:
+        // 4 rows of 3 pilars, then 3 for rafter cross intersections === 
+        {...s({roll: -90, x: 0 + 0   * stripLen, z: 0 + 0 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: 0 + 0 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 3   * stripLen, z: 0 + 0 * 3 * stripLen})},
 
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 0   * stripLen, z: 0 + 1 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 1 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 3   * stripLen, z: 0 + 1 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 0   * stripLen, z: 0 + 1 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: 0 + 1 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 3   * stripLen, z: 0 + 1 * 3 * stripLen})},
 
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 0   * stripLen, z: 0 + 2 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 2 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 3   * stripLen, z: 0 + 2 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 0   * stripLen, z: 0 + 2 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: 0 + 2 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 3   * stripLen, z: 0 + 2 * 3 * stripLen})},
 
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 0   * stripLen, z: 0 + 3 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 3 * 3 * stripLen})},
-    {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 3   * stripLen, z: 0 + 3 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 0   * stripLen, z: 0 + 3 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: 0 + 3 * 3 * stripLen})},
+        {...s({roll: -90, x: 0 + 3   * stripLen, z: 0 + 3 * 3 * stripLen})},
 
-    // {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 0 * 1.5 * stripLen})},
-    // {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 1 * 1.5 * stripLen})},
-    // {...defaultNagBugglerSaberOfLight({roll:90, x: 0 + 1.5 * stripLen, z: 0 + 2 * 1.5 * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: (1.5 + 0 * 3) * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: (1.5 + 1 * 3) * stripLen})},
+        {...s({roll: -90, x: 0 + 1.5 * stripLen, z: (1.5 + 2 * 3) * stripLen})},
+    
+        // CEILING RAFTERS:
+        // First, 2 rows running along Z-axis, each 3 * 3 == 9 strips each, same + x dir
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 1 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 2 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 3 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 4 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 5 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 6 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 7 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 8 * stripLen})},
+        {...s({yaw: 90, x: 0 + 0 * 1.5 * stripLen, z: 0 + 9 * stripLen})}, 
+        
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 1 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 2 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 3 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 4 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 5 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 6 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 7 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 8 * stripLen})},
+        {...s({yaw: 90, x: 0 + 2 * 1.5 * stripLen, z: 0 + 9 * stripLen})},
 
-    // Ceiling rafters orthogonals, 3 squares of len 3
+        // Next, 4 columns running along X-axis, each 3 strips in length
+        {...s({yaw: 180, x: 0 + 1 * stripLen, z: 0 + 0 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 2 * stripLen, z: 0 + 0 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 3 * stripLen, z: 0 + 0 * 3 * stripLen})},
+        //
+        {...s({yaw: 180, x: 0 + 1 * stripLen, z: 0 + 1 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 2 * stripLen, z: 0 + 1 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 3 * stripLen, z: 0 + 1 * 3 * stripLen})},
+        //
+        {...s({yaw: 180, x: 0 + 1 * stripLen, z: 0 + 2 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 2 * stripLen, z: 0 + 2 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 3 * stripLen, z: 0 + 2 * 3 * stripLen})},
+        //
+        {...s({yaw: 180, x: 0 + 1 * stripLen, z: 0 + 3 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 2 * stripLen, z: 0 + 3 * 3 * stripLen})},
+        {...s({yaw: 180, x: 0 + 3 * stripLen, z: 0 + 3 * 3 * stripLen})},
+    
+        // Lastly, 3 rafter cross diagonals "X"'s, each 2-prong oriented towards center
+        //     Order:        /, \ => \/
+        //            \, /,          /\ 
+        {...s({yaw: -45,  x: 0,                                 z: 0  })},
+        {...s({yaw: -45,  x: 0 + .75 * stripLen,                z: 0 + .75 * stripLen  })},
+        {...s({yaw: +45,  x: 0,                                 z: 0 + 3 * stripLen  })},
+        {...s({yaw: +45,  x: 0 + .75 * stripLen,                z: 0 + 3 * stripLen - .75 * stripLen  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen,                  z: 0  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen - .75 * stripLen, z: 0 + .75 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen,                  z: 0 + 3 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen - .75 * stripLen, z: 0 + 3 * stripLen - .75 * stripLen  })},
 
-    // Lastly, rafter cross diagonals ("supply" and "demand")
-]))
+        {...s({yaw: -45,  x: 0,                                 z: 3 * stripLen  })},
+        {...s({yaw: -45,  x: 0 + .75 * stripLen,                z: 3 * stripLen + .75 * stripLen  })},
+        {...s({yaw: +45,  x: 0,                                 z: 3 * stripLen + 3 * stripLen  })},
+        {...s({yaw: +45,  x: 0 + .75 * stripLen,                z: 3 * stripLen + 3 * stripLen - .75 * stripLen  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen,                  z: 3 * stripLen  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen - .75 * stripLen, z: 3 * stripLen + .75 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen,                  z: 3 * stripLen + 3 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen - .75 * stripLen, z: 3 * stripLen + 3 * stripLen - .75 * stripLen  })},
+
+        {...s({yaw: -45,  x: 0,                                 z: 6 * stripLen  })},
+        {...s({yaw: -45,  x: 0 + .75 * stripLen,                z: 6 * stripLen + .75 * stripLen  })},
+        {...s({yaw: +45,  x: 0,                                 z: 6 * stripLen + 3 * stripLen  })},
+        {...s({yaw: +45,  x: 0 + .75 * stripLen,                z: 6 * stripLen + 3 * stripLen - .75 * stripLen  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen,                  z: 6 * stripLen  })},
+        {...s({yaw: -135, x: 0 + 3 * stripLen - .75 * stripLen, z: 6 * stripLen + .75 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen,                  z: 6 * stripLen + 3 * stripLen  })},
+        {...s({yaw: +135, x: 0 + 3 * stripLen - .75 * stripLen, z: 6 * stripLen + 3 * stripLen - .75 * stripLen  })},
+    ]
+}
+
+// Load project file, overwrite fixtures, re-write file.
+const path = `${__dirname}/iqe.lxp`
+const project = JSON.parse(fs.readFileSync(path))
+project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
+console.log(JSON.stringify(project, null, 2))
+fs.writeFileSync(path, JSON.stringify(project, null, 2))
 
 function defaultNagBugglerSaberOfLight(params) {
     id++
     return {
         id: id,
-        class: "org.iqe.NagBugglerLightSaber",
+        class: "org.iqe.NagBugglerSaberOfLight",
         internal: {
             modulationColor: 0,
             modulationControlsExpanded: true
         },
         parameters: {
-            label: "Strip " + id,
+            label: (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + id,
             x: 0,
-            y: 0,
+            y: stripLen, // most (all) strips have origin in ceiling
             z: 0,
             yaw: 0,
             pitch: 0,
@@ -54,7 +134,7 @@ function defaultNagBugglerSaberOfLight(params) {
             identify: false,
             mute: false,
             solo: false,
-            tags: "strip foo bar",
+            tags: `strip ${id - 100 <= numPillars ? 'pillar' : 'rafter'}`,
             protocol: 1,
             byteOrder: 0,
             transport: 0,
