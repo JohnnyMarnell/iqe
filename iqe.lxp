@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1683311180304,
+  "timestamp": 1683321705526,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -39,7 +39,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 1; #101",
+          "label": "Pillar 1; #0",
           "x": 0.0,
           "y": 700.0,
           "z": 0.0,
@@ -54,7 +54,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f0",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -81,7 +81,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 2; #102",
+          "label": "Pillar 2; #1",
           "x": 1050.0,
           "y": 700.0,
           "z": 0.0,
@@ -96,7 +96,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f1",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -123,7 +123,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 3; #103",
+          "label": "Pillar 3; #2",
           "x": 2100.0,
           "y": 700.0,
           "z": 0.0,
@@ -138,7 +138,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -165,7 +165,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 4; #104",
+          "label": "Pillar 4; #3",
           "x": 0.0,
           "y": 700.0,
           "z": 2100.0,
@@ -180,7 +180,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f3",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -207,7 +207,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 5; #105",
+          "label": "Pillar 5; #4",
           "x": 1050.0,
           "y": 700.0,
           "z": 2100.0,
@@ -222,7 +222,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f4",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -249,7 +249,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 6; #106",
+          "label": "Pillar 6; #5",
           "x": 2100.0,
           "y": 700.0,
           "z": 2100.0,
@@ -264,7 +264,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f5",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -291,7 +291,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 7; #107",
+          "label": "Pillar 7; #6",
           "x": 0.0,
           "y": 700.0,
           "z": 4200.0,
@@ -306,7 +306,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f6",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -333,7 +333,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 8; #108",
+          "label": "Pillar 8; #7",
           "x": 1050.0,
           "y": 700.0,
           "z": 4200.0,
@@ -348,7 +348,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f7",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -375,7 +375,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 9; #109",
+          "label": "Pillar 9; #8",
           "x": 2100.0,
           "y": 700.0,
           "z": 4200.0,
@@ -390,7 +390,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f8",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -417,7 +417,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 10; #110",
+          "label": "Pillar 10; #9",
           "x": 0.0,
           "y": 700.0,
           "z": 6300.0,
@@ -432,7 +432,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f9",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -459,7 +459,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 11; #111",
+          "label": "Pillar 11; #10",
           "x": 1050.0,
           "y": 700.0,
           "z": 6300.0,
@@ -474,7 +474,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f10",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -501,7 +501,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 12; #112",
+          "label": "Pillar 12; #11",
           "x": 2100.0,
           "y": 700.0,
           "z": 6300.0,
@@ -516,7 +516,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f11",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -543,7 +543,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 13; #113",
+          "label": "Pillar 13; #12",
           "x": 1050.0,
           "y": 700.0,
           "z": 1050.0,
@@ -558,7 +558,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f12",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -585,7 +585,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 14; #114",
+          "label": "Pillar 14; #13",
           "x": 1050.0,
           "y": 700.0,
           "z": 3150.0,
@@ -600,7 +600,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f13",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -627,7 +627,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Pillar 15; #115",
+          "label": "Pillar 15; #14",
           "x": 1050.0,
           "y": 700.0,
           "z": 5250.0,
@@ -642,7 +642,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip pillar",
+          "tags": "strip pillar f14",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -669,7 +669,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 1; #116",
+          "label": "Rafter 1; #15",
           "x": 0.0,
           "y": 700.0,
           "z": 700.0,
@@ -684,7 +684,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f15",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -711,7 +711,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 2; #117",
+          "label": "Rafter 2; #16",
           "x": 0.0,
           "y": 700.0,
           "z": 1400.0,
@@ -726,7 +726,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f16",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -753,7 +753,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 3; #118",
+          "label": "Rafter 3; #17",
           "x": 0.0,
           "y": 700.0,
           "z": 2100.0,
@@ -768,7 +768,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f17",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -795,7 +795,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 4; #119",
+          "label": "Rafter 4; #18",
           "x": 0.0,
           "y": 700.0,
           "z": 2800.0,
@@ -810,7 +810,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f18",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -837,7 +837,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 5; #120",
+          "label": "Rafter 5; #19",
           "x": 0.0,
           "y": 700.0,
           "z": 3500.0,
@@ -852,7 +852,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f19",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -879,7 +879,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 6; #121",
+          "label": "Rafter 6; #20",
           "x": 0.0,
           "y": 700.0,
           "z": 4200.0,
@@ -894,7 +894,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f20",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -921,7 +921,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 7; #122",
+          "label": "Rafter 7; #21",
           "x": 0.0,
           "y": 700.0,
           "z": 4900.0,
@@ -936,7 +936,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f21",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -963,7 +963,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 8; #123",
+          "label": "Rafter 8; #22",
           "x": 0.0,
           "y": 700.0,
           "z": 5600.0,
@@ -978,7 +978,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f22",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1005,7 +1005,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 9; #124",
+          "label": "Rafter 9; #23",
           "x": 0.0,
           "y": 700.0,
           "z": 6300.0,
@@ -1020,7 +1020,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f23",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1047,7 +1047,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 10; #125",
+          "label": "Rafter 10; #24",
           "x": 2100.0,
           "y": 700.0,
           "z": 700.0,
@@ -1062,7 +1062,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f24",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1089,7 +1089,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 11; #126",
+          "label": "Rafter 11; #25",
           "x": 2100.0,
           "y": 700.0,
           "z": 1400.0,
@@ -1104,7 +1104,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f25",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1131,7 +1131,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 12; #127",
+          "label": "Rafter 12; #26",
           "x": 2100.0,
           "y": 700.0,
           "z": 2100.0,
@@ -1146,7 +1146,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f26",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1173,7 +1173,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 13; #128",
+          "label": "Rafter 13; #27",
           "x": 2100.0,
           "y": 700.0,
           "z": 2800.0,
@@ -1188,7 +1188,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f27",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1215,7 +1215,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 14; #129",
+          "label": "Rafter 14; #28",
           "x": 2100.0,
           "y": 700.0,
           "z": 3500.0,
@@ -1230,7 +1230,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f28",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1257,7 +1257,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 15; #130",
+          "label": "Rafter 15; #29",
           "x": 2100.0,
           "y": 700.0,
           "z": 4200.0,
@@ -1272,7 +1272,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f29",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1299,7 +1299,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 16; #131",
+          "label": "Rafter 16; #30",
           "x": 2100.0,
           "y": 700.0,
           "z": 4900.0,
@@ -1314,7 +1314,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f30",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1341,7 +1341,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 17; #132",
+          "label": "Rafter 17; #31",
           "x": 2100.0,
           "y": 700.0,
           "z": 5600.0,
@@ -1356,7 +1356,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f31",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1383,7 +1383,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 18; #133",
+          "label": "Rafter 18; #32",
           "x": 2100.0,
           "y": 700.0,
           "z": 6300.0,
@@ -1398,7 +1398,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f32",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1425,7 +1425,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 19; #134",
+          "label": "Rafter 19; #33",
           "x": 700.0,
           "y": 700.0,
           "z": 0.0,
@@ -1440,7 +1440,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f33",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1467,7 +1467,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 20; #135",
+          "label": "Rafter 20; #34",
           "x": 1400.0,
           "y": 700.0,
           "z": 0.0,
@@ -1482,7 +1482,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f34",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1509,7 +1509,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 21; #136",
+          "label": "Rafter 21; #35",
           "x": 2100.0,
           "y": 700.0,
           "z": 0.0,
@@ -1524,7 +1524,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f35",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1551,7 +1551,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 22; #137",
+          "label": "Rafter 22; #36",
           "x": 700.0,
           "y": 700.0,
           "z": 2100.0,
@@ -1566,7 +1566,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f36",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1593,7 +1593,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 23; #138",
+          "label": "Rafter 23; #37",
           "x": 1400.0,
           "y": 700.0,
           "z": 2100.0,
@@ -1608,7 +1608,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f37",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1635,7 +1635,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 24; #139",
+          "label": "Rafter 24; #38",
           "x": 2100.0,
           "y": 700.0,
           "z": 2100.0,
@@ -1650,7 +1650,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f38",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1677,7 +1677,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 25; #140",
+          "label": "Rafter 25; #39",
           "x": 700.0,
           "y": 700.0,
           "z": 4200.0,
@@ -1692,7 +1692,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f39",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1719,7 +1719,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 26; #141",
+          "label": "Rafter 26; #40",
           "x": 1400.0,
           "y": 700.0,
           "z": 4200.0,
@@ -1734,7 +1734,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f40",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1761,7 +1761,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 27; #142",
+          "label": "Rafter 27; #41",
           "x": 2100.0,
           "y": 700.0,
           "z": 4200.0,
@@ -1776,7 +1776,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f41",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1803,7 +1803,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 28; #143",
+          "label": "Rafter 28; #42",
           "x": 700.0,
           "y": 700.0,
           "z": 6300.0,
@@ -1818,7 +1818,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f42",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1845,7 +1845,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 29; #144",
+          "label": "Rafter 29; #43",
           "x": 1400.0,
           "y": 700.0,
           "z": 6300.0,
@@ -1860,7 +1860,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f43",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1887,7 +1887,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 30; #145",
+          "label": "Rafter 30; #44",
           "x": 2100.0,
           "y": 700.0,
           "z": 6300.0,
@@ -1902,7 +1902,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f44",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1929,7 +1929,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 31; #146",
+          "label": "Rafter 31; #45",
           "x": 0.0,
           "y": 700.0,
           "z": 0.0,
@@ -1944,7 +1944,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f45",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -1971,7 +1971,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 32; #147",
+          "label": "Rafter 32; #46",
           "x": 525.0,
           "y": 700.0,
           "z": 525.0,
@@ -1986,7 +1986,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f46",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2013,7 +2013,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 33; #148",
+          "label": "Rafter 33; #47",
           "x": 0.0,
           "y": 700.0,
           "z": 2100.0,
@@ -2028,7 +2028,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f47",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2055,7 +2055,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 34; #149",
+          "label": "Rafter 34; #48",
           "x": 525.0,
           "y": 700.0,
           "z": 1575.0,
@@ -2070,7 +2070,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f48",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2097,7 +2097,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 35; #150",
+          "label": "Rafter 35; #49",
           "x": 2100.0,
           "y": 700.0,
           "z": 0.0,
@@ -2112,7 +2112,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f49",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2139,7 +2139,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 36; #151",
+          "label": "Rafter 36; #50",
           "x": 1575.0,
           "y": 700.0,
           "z": 525.0,
@@ -2154,7 +2154,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f50",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2181,7 +2181,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 37; #152",
+          "label": "Rafter 37; #51",
           "x": 2100.0,
           "y": 700.0,
           "z": 2100.0,
@@ -2196,7 +2196,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f51",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2223,7 +2223,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 38; #153",
+          "label": "Rafter 38; #52",
           "x": 1575.0,
           "y": 700.0,
           "z": 1575.0,
@@ -2238,7 +2238,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f52",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2265,7 +2265,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 39; #154",
+          "label": "Rafter 39; #53",
           "x": 0.0,
           "y": 700.0,
           "z": 2100.0,
@@ -2280,7 +2280,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f53",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2307,7 +2307,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 40; #155",
+          "label": "Rafter 40; #54",
           "x": 525.0,
           "y": 700.0,
           "z": 2625.0,
@@ -2322,7 +2322,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f54",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2349,7 +2349,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 41; #156",
+          "label": "Rafter 41; #55",
           "x": 0.0,
           "y": 700.0,
           "z": 4200.0,
@@ -2364,7 +2364,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f55",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2391,7 +2391,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 42; #157",
+          "label": "Rafter 42; #56",
           "x": 525.0,
           "y": 700.0,
           "z": 3675.0,
@@ -2406,7 +2406,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f56",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2433,7 +2433,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 43; #158",
+          "label": "Rafter 43; #57",
           "x": 2100.0,
           "y": 700.0,
           "z": 2100.0,
@@ -2448,7 +2448,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f57",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2475,7 +2475,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 44; #159",
+          "label": "Rafter 44; #58",
           "x": 1575.0,
           "y": 700.0,
           "z": 2625.0,
@@ -2490,7 +2490,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f58",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2517,7 +2517,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 45; #160",
+          "label": "Rafter 45; #59",
           "x": 2100.0,
           "y": 700.0,
           "z": 4200.0,
@@ -2532,7 +2532,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f59",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2559,7 +2559,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 46; #161",
+          "label": "Rafter 46; #60",
           "x": 1575.0,
           "y": 700.0,
           "z": 3675.0,
@@ -2574,7 +2574,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f60",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2601,7 +2601,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 47; #162",
+          "label": "Rafter 47; #61",
           "x": 0.0,
           "y": 700.0,
           "z": 4200.0,
@@ -2616,7 +2616,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f61",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2643,7 +2643,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 48; #163",
+          "label": "Rafter 48; #62",
           "x": 525.0,
           "y": 700.0,
           "z": 4725.0,
@@ -2658,7 +2658,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f62",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2685,7 +2685,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 49; #164",
+          "label": "Rafter 49; #63",
           "x": 0.0,
           "y": 700.0,
           "z": 6300.0,
@@ -2700,7 +2700,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f63",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2727,7 +2727,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 50; #165",
+          "label": "Rafter 50; #64",
           "x": 525.0,
           "y": 700.0,
           "z": 5775.0,
@@ -2742,7 +2742,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f64",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2769,7 +2769,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 51; #166",
+          "label": "Rafter 51; #65",
           "x": 2100.0,
           "y": 700.0,
           "z": 4200.0,
@@ -2784,7 +2784,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f65",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2811,7 +2811,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 52; #167",
+          "label": "Rafter 52; #66",
           "x": 1575.0,
           "y": 700.0,
           "z": 4725.0,
@@ -2826,7 +2826,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f66",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2853,7 +2853,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 53; #168",
+          "label": "Rafter 53; #67",
           "x": 2100.0,
           "y": 700.0,
           "z": 6300.0,
@@ -2868,7 +2868,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f67",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -2895,7 +2895,7 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 54; #169",
+          "label": "Rafter 54; #68",
           "x": 1575.0,
           "y": 700.0,
           "z": 5775.0,
@@ -2910,7 +2910,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter",
+          "tags": "strip rafter f68",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -3210,14 +3210,14 @@
         "parameters": {
           "label": "Tempo",
           "clockSource": 0,
-          "period": 500.0,
-          "bpm": 120.0,
+          "period": 476.1904761904762,
+          "bpm": 126.0,
           "tap": false,
           "nudgeUp": false,
           "nudgeDown": false,
           "beatsPerMeasure": 4,
           "trigger": false,
-          "enabled": false
+          "enabled": true
         },
         "children": {
           "nudge": {
@@ -3462,13 +3462,13 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 8,
+              "focusedPattern": 7,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 3,
+            "patternIndex": 5,
             "patterns": [
               {
                 "id": 52632,
@@ -3613,7 +3613,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.47423429674395895
+                        "basis": 0.018879691826901204
                       }
                     ],
                     "modulations": [
@@ -3729,7 +3729,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2409642467599721
+                        "basis": 0.8690741975317656
                       },
                       {
                         "id": 52865,
@@ -3757,7 +3757,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3318941734821957
+                        "basis": 0.6923025839443478
                       }
                     ],
                     "modulations": [
@@ -3892,7 +3892,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3359995998983948
+                        "basis": 0.7337976920662653
                       },
                       {
                         "id": 53133,
@@ -3920,7 +3920,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3359995998983948
+                        "basis": 0.7337976920662653
                       }
                     ],
                     "modulations": [
@@ -4035,7 +4035,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.24273122900624186
+                        "basis": 0.16605696032779654
                       },
                       {
                         "id": 53174,
@@ -4063,7 +4063,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5941576724946173
+                        "basis": 0.4864780775349147
                       },
                       {
                         "id": 53194,
@@ -4091,7 +4091,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19147195499204664
+                        "basis": 0.7942272934644106
                       },
                       {
                         "id": 53196,
@@ -4119,7 +4119,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7716217914473794
+                        "basis": 0.6332101494799329
                       },
                       {
                         "id": 53198,
@@ -4147,7 +4147,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.770280021931613
+                        "basis": 0.861194430702309
                       },
                       {
                         "id": 53200,
@@ -4175,7 +4175,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9306727894859198
+                        "basis": 0.4705558007502006
                       }
                     ],
                     "modulations": [
@@ -4710,7 +4710,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.34310471549497323
+                        "basis": 0.9963865504679392
                       }
                     ],
                     "modulations": [
@@ -4757,7 +4757,7 @@
                 },
                 "parameters": {
                   "label": "TestIQE",
-                  "enabled": true,
+                  "enabled": false,
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0
@@ -4765,46 +4765,6 @@
                 "children": {
                   "modulation": {
                     "id": 53636,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 53646,
-                "class": "org.iqe.BassBreathPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "BassBreath",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "Brightness": 0.2,
-                  "MinBand": 0.0,
-                  "NumBands": 1.0
-                },
-                "children": {
-                  "modulation": {
-                    "id": 53647,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -4841,7 +4801,7 @@
               "enabled": true,
               "cue": false,
               "aux": false,
-              "fader": 1.0,
+              "fader": 0.0,
               "crossfadeGroup": 0,
               "blendMode": 1,
               "midiMonitor": false,
@@ -4913,7 +4873,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -5295,12 +5255,12 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 2873.1900437670834,
-          "theta": 306.4488843155559,
-          "phi": 22.419313554186374,
-          "x": -585.1680029607378,
-          "y": 1190.6475156098604,
-          "z": 587.3078025186551
+          "radius": 2584.947451674734,
+          "theta": 320.8742143937852,
+          "phi": 24.528685724828392,
+          "x": -303.1789690940641,
+          "y": 1201.2195265442133,
+          "z": 825.6276496106875
         },
         "cue": [
           {
@@ -5314,12 +5274,12 @@
           },
           {
             "active": true,
-            "radius": 2873.1900437670834,
-            "theta": 306.4488843155559,
-            "phi": 22.419313554186374,
-            "x": -585.1680029607378,
-            "y": 1190.6475156098604,
-            "z": 587.3078025186551
+            "radius": 2584.947451674734,
+            "theta": 320.8742143937852,
+            "phi": 24.528685724828392,
+            "x": -303.1789690940641,
+            "y": 1201.2195265442133,
+            "z": 825.6276496106875
           },
           {
             "active": false,
@@ -5365,7 +5325,7 @@
           "ledStyle": 0
         },
         "grid": {
-          "visible": true,
+          "visible": false,
           "spacing": 100.0,
           "size": 10,
           "plane": 0,
@@ -5377,7 +5337,7 @@
           "neg2": false
         },
         "axes": {
-          "visible": true
+          "visible": false
         }
       }
     }
