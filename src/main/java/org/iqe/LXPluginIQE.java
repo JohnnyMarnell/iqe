@@ -23,9 +23,31 @@ public class LXPluginIQE implements LXPlugin {
             super(lx);
             this.lx = lx;
             lx.engine.tempo.addListener(this);
-            System.out.println("*** LXP Pattern ctr");
+            initGroupsAndOrders();
+        }
 
-            // build all twelve triangles
+        @Override
+        protected void run(double deltaMs) {
+            // set all points to green
+            for (LXPoint p : model.points) {
+                colors[p.index] = LXColor.rgba(0, 255, 0, 255);
+            }
+
+            // Using current beat, identify group to highlight and highlight them red
+            int beat = (int) lx.engine.tempo.getCompositeBasis();
+            int div = 1; // could be halftime, measure/bar, etc
+            int index = (beat / div) % order.size(); // get the relative offset into the ordering
+
+            // paint that town red
+            for (int fixture : groups.get(order.get(index))) {
+                for (LXPoint p : model.children[fixture].points) {
+                    colors[p.index] = LXColor.rgba(255, 0, 0, 255);
+                }
+            }
+        }
+
+        void initGroupsAndOrders() {
+            // build all twelve triangles as groups
             groups = new ArrayList<>();
             int o1, o2;
 
@@ -48,29 +70,12 @@ public class LXPluginIQE implements LXPlugin {
             o1 = 3; o2 = 8;  groups.add(List.of(24 + o1, 25 + o1, 26 + o1, 49 + o2, 50 + o2, 51 + o2, 52 + o2));
             o1 = 6; o2 = 16; groups.add(List.of(24 + o1, 25 + o1, 26 + o1, 49 + o2, 50 + o2, 51 + o2, 52 + o2));
 
+            // add the 3 square orderings of its triangles
             int o3;
             this.order = new ArrayList<>();
             o3 = 0; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
             o3 = 1; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
             o3 = 2; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
-        }
-
-        @Override
-        protected void run(double deltaMs) {
-            // set all points to green
-            for (LXPoint p : model.points) {
-                colors[p.index] = LXColor.rgba(0, 255, 0, 255);
-            }
-
-            // set current highlighted fixture points to beat
-            int beat = (int) lx.engine.tempo.getCompositeBasis();
-            int div = 1;
-            int index = (beat / div) % order.size();
-            for (int fixture : groups.get(order.get(index))) {
-                for (LXPoint p : model.children[fixture].points) {
-                    colors[p.index] = LXColor.rgba(255, 0, 0, 255);
-                }
-            }
         }
 
         @Override
