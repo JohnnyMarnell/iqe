@@ -1,4 +1,4 @@
-import numpy as np, pyaudio
+import numpy as np, sounddevice as sd
 import time, threading, rtmidi2, math, os
 from typing import NamedTuple
 
@@ -15,7 +15,7 @@ blocks = [None] * BLOCK_TIMES_SZ
 sr = 48000 # sample rate
 audio_stream = None
 block_index = 0
-block_size = 256
+block_size = None
 beat_time = None
 spb = None # seconds per beat
 midi_out = rtmidi2.MidiOut()
@@ -24,44 +24,11 @@ midi_out.open_port(midi_port)
 print("Opened midi output", midi_out.get_port_name(midi_port))
 running = True
 
-p = pyaudio.PyAudio()
-for j in range(0, p.get_host_api_count()):    
-    info = p.get_host_api_info_by_index(j)
-    numdevices = info.get('deviceCount')
-    print(f"Host API {j}: {info}")
-
-    for i in range(0, numdevices):
-        dev_info = p.get_device_info_by_host_api_device_index(j, i)
-        print("Audio Device id ", i, " - ", dev_info)
-
-out_stream = p.open(
-    rate=sr,
-    channels=2,
-    format=pyaudio.paInt16,
-    input=False,
-    output=True,
-    frames_per_buffer=block_size,
-    # output_device_index=0,
-    output_device_index=2,
-    start=True,
-)
-
-in_stream = p.open(
-    rate=sr,
-    channels=2,
-    format=pyaudio.paInt16,
-    input=True,
-    output=False,
-    frames_per_buffer=block_size,
-    input_device_index=0,
-    start=True,
-)
-
-""" Simple callback, read and write data to ring buffers """
+""" Simple callback, write data to ring buffers """
 def stream_callback(indata, outdata, num_frames, block_time, status):
-    global block_index, in_stream, samples, beat_time, spb
+    global block_index, audio_stream, samples, beat_time, spb
     
-    stream_time = in_stream.time()
+    stream_time = audio_stream.time
     wall_time = time.time()
     
     # Mix to mono, store in listened samples ring buffer, and pipe to speakers as well, so it becomes audible
