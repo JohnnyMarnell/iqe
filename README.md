@@ -2,6 +2,11 @@
 
 LED control code, via LX Studio.
 
+# Top Notes
+
+Currently, [./chromatik](./chromatik/) is primary directory, runnable using alpha builds of new
+LX Studio (Chromatik).
+
 # Setup
 
 LX Studio requires Processing, install via web or Home Brew:
