@@ -1,51 +1,36 @@
 # In Queso Emergency
 
-LED control code, via LX Studio.
+Mainly LX Studio / Chromatik project and Java code for Burning Man IQE HQ shade structure LEDznutz.
+Also contains python code and Jupyter notebooks for audio analysis with Librosa,
+e.g. real time beat detection and sync.
 
-# Top Notes
+# Use
 
-Currently, [./chromatik](./chromatik/) is primary directory, runnable using alpha builds of new
-LX Studio (Chromatik).
+Prereqs:
+1. Chromatik alpha build zip is downloaded and unzipped to your `~/Downloads` folder in your user Home folder.
+2. Java 17 Temurin / Eclipse is installed from here: https://https://adoptium.net/
 
-# Setup
-
-LX Studio requires Processing, install via web or Home Brew:
+Then double click this [IQE.command](./IQE.command) in this repo / folder, or from sperminal:
 ```bash
-brew install --cask processing
+./mvnw clean package -DskipTests ; \
+java -XstartOnFirstThread \
+    -cp $(find target -name '*.jar'):$(\
+    find "$HOME/Downloads/Chromatik-alpha/" -name 'glxstudio*.jar') \
+    heronarts.lx.studio.Chromatik iqe.lxp \
+    --classpath-plugin org.iqe.LXPluginIQE
 ```
 
-# Standalone Command line
+# Audio analysis
 
+The [audio-tooling](./audio-tooling/) directory here contains python code, and experiments
+with real time audio analysis (like beat detection and sync).
+
+You can easily run the Jupyter notebooks as long as you have [Docker](https://www.docker.com/) installed,
 ```bash
-sdk env ; mvn -version
-( cd LXStudio-IDE ; mvn clean validate ; mvn dependency:build-classpath install -Dmdep.outputFile=/tmp/cp )
-( cd LXStudio-IDE ; java -cp $(cat /tmp/cp):target/classes \
-    -Djava.library.path=lib/processing-4.0.1/macos-$([[ $(uname -m) == "arm64" ]] && echo "aarch64" || uname -m) heronarts.lx.app.LXStudioApp ../iqe.lxp )
-cat *slee* | node scripts/scripts.js > /tmp/f.lxp ; java -XstartOnFirstThread -cp glxs*.jar heronarts.lx.studio.Chromatik /tmp/f.lxp
-
-# add --headless for decapitaishe
+cd audio-tooling/jupyter
+docker-compose up
 ```
-
-# With Processing UI
-
-To start LX Studio UI, open Processing App, then LX Studio Processing file,
-or via command line:
-```
-./run-lx-studio.sh
-```
-
-Then click Open button and browse to this folder's main LX Studio project file: [iqe.lxp]
-
-# Links
-- [Standford course involving LX Studio](https://code.stanford.edu/plevis/ee185/-/tree/master/software/FlightGui)
-
-# To Do
-- Add base pre-requisites, sdkman, maven, java 17 Temurin
-- Re-organize this repository (dont use submodule for IDE?), submit PR to LXStudio-IDE with sdkmanrc, improved os + arch inference, for now cd
-
-# Scratch area
-
-Scrape a bunch of test files
-```bash
-youtube_dl_mp3  'Monolink (live) - Mayan Warrior - Burning Man 2022'  'Keinemusik Mayan Bruning Man'  'ed sheeran bad habits'  'Chill EDM Slow Dance Mix'  'SLOW TRANCE • Downtempo EDM Background Track'  'dua lipa levitating'  "dua don't "  "dua new rules "  "lady gaga poker face " '120 bpm metronome' '126 bpm metronome'
-```
+And visit [localhost:8888](http://localhost:8888) for locally running Jupyter Labs notebook UI.
+(Or point an IDE (like
+[VS Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server), tested)
+to Jupyter server and python kernel with URL: `http://localhost:8889?token=a`).
