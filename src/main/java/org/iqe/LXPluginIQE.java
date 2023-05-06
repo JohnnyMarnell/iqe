@@ -34,9 +34,9 @@ public class LXPluginIQE implements LXPlugin {
             }
 
             // Using current beat, identify group to highlight and highlight them red
-            int beat = (int) lx.engine.tempo.getCompositeBasis();
-            int div = 1; // could be halftime, measure/bar, etc
-            int index = (beat / div) % order.size(); // get the relative offset into the ordering
+            double beat = lx.engine.tempo.getCompositeBasis();
+            double div = 1.0; // could be halftime, measure/bar, etc
+            int index = ((int) (beat / div)) % order.size(); // get the relative offset into the ordering
 
             // paint that town red
             for (int fixture : groups.get(order.get(index))) {
