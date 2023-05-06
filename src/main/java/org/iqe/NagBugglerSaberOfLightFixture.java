@@ -6,21 +6,15 @@ import heronarts.lx.parameter.EnumParameter;
 import heronarts.lx.structure.StripFixture;
 
 @LXCategory("IQE")
-public class NagBugglerSaberOfLight extends StripFixture {
+public class NagBugglerSaberOfLightFixture extends StripFixture {
     public static enum Kind {
-        PILLAR_LEFT,
-        PILLAR_MIDDLE,
-        PILLAR_RIGHT,
-        RAFTER_SUPPLY,
-        RAFTER_DEMAND,
-        RAFTER_PERIMETER_X,
-        RAFTER_PERIMETER_Z,
-        RAFTER_INNER_X
+        PILLAR,
+        RAFTER
     }
-    public final EnumParameter<Kind> kind = new EnumParameter<>("Kind", Kind.PILLAR_LEFT)
+    public final EnumParameter<Kind> kind = new EnumParameter<>("Kind", Kind.PILLAR)
             .setDescription("What kind / purpose / location of this strip, e.g. a pillar / pole");
 
-    public NagBugglerSaberOfLight(LX lx) {
+    public NagBugglerSaberOfLightFixture(LX lx) {
         super(lx);
         init();
     }
@@ -32,10 +26,9 @@ public class NagBugglerSaberOfLight extends StripFixture {
 //        System.out.println("*************** test");
         numPoints.setValue(140, true);
         spacing.setValue(5, true);
-        kind.setValue(Kind.PILLAR_LEFT);
+        kind.setValue(Kind.PILLAR);
 
         // todo protocol and its params / details
     }
-
 
 }

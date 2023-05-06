@@ -33,7 +33,7 @@
     "fixtures": [
       {
         "id": 101,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -75,7 +75,7 @@
       },
       {
         "id": 102,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -117,7 +117,7 @@
       },
       {
         "id": 103,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -159,7 +159,7 @@
       },
       {
         "id": 104,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -201,7 +201,7 @@
       },
       {
         "id": 105,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -243,7 +243,7 @@
       },
       {
         "id": 106,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -285,7 +285,7 @@
       },
       {
         "id": 107,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -327,7 +327,7 @@
       },
       {
         "id": 108,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -369,7 +369,7 @@
       },
       {
         "id": 109,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -411,7 +411,7 @@
       },
       {
         "id": 110,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -453,7 +453,7 @@
       },
       {
         "id": 111,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -495,7 +495,7 @@
       },
       {
         "id": 112,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -537,7 +537,7 @@
       },
       {
         "id": 113,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -579,7 +579,7 @@
       },
       {
         "id": 114,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -621,7 +621,7 @@
       },
       {
         "id": 115,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -663,7 +663,7 @@
       },
       {
         "id": 116,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -705,7 +705,7 @@
       },
       {
         "id": 117,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -747,7 +747,7 @@
       },
       {
         "id": 118,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -789,7 +789,7 @@
       },
       {
         "id": 119,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -831,7 +831,7 @@
       },
       {
         "id": 120,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -873,7 +873,7 @@
       },
       {
         "id": 121,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -915,7 +915,7 @@
       },
       {
         "id": 122,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -957,7 +957,7 @@
       },
       {
         "id": 123,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -999,7 +999,7 @@
       },
       {
         "id": 124,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1041,7 +1041,7 @@
       },
       {
         "id": 125,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1083,7 +1083,7 @@
       },
       {
         "id": 126,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1125,7 +1125,7 @@
       },
       {
         "id": 127,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1167,7 +1167,7 @@
       },
       {
         "id": 128,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1209,7 +1209,7 @@
       },
       {
         "id": 129,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1251,7 +1251,7 @@
       },
       {
         "id": 130,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1293,7 +1293,7 @@
       },
       {
         "id": 131,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1335,7 +1335,7 @@
       },
       {
         "id": 132,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1377,7 +1377,7 @@
       },
       {
         "id": 133,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1419,7 +1419,7 @@
       },
       {
         "id": 134,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1461,7 +1461,7 @@
       },
       {
         "id": 135,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1503,7 +1503,7 @@
       },
       {
         "id": 136,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1545,7 +1545,7 @@
       },
       {
         "id": 137,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1587,7 +1587,7 @@
       },
       {
         "id": 138,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1629,7 +1629,7 @@
       },
       {
         "id": 139,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1671,7 +1671,7 @@
       },
       {
         "id": 140,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1713,7 +1713,7 @@
       },
       {
         "id": 141,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1755,7 +1755,7 @@
       },
       {
         "id": 142,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1797,7 +1797,7 @@
       },
       {
         "id": 143,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1839,7 +1839,7 @@
       },
       {
         "id": 144,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1881,7 +1881,7 @@
       },
       {
         "id": 145,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1923,7 +1923,7 @@
       },
       {
         "id": 146,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -1965,7 +1965,7 @@
       },
       {
         "id": 147,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2007,7 +2007,7 @@
       },
       {
         "id": 148,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2049,7 +2049,7 @@
       },
       {
         "id": 149,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2091,7 +2091,7 @@
       },
       {
         "id": 150,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2133,7 +2133,7 @@
       },
       {
         "id": 151,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2175,7 +2175,7 @@
       },
       {
         "id": 152,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2217,7 +2217,7 @@
       },
       {
         "id": 153,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2259,7 +2259,7 @@
       },
       {
         "id": 154,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2301,7 +2301,7 @@
       },
       {
         "id": 155,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2343,7 +2343,7 @@
       },
       {
         "id": 156,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2385,7 +2385,7 @@
       },
       {
         "id": 157,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2427,7 +2427,7 @@
       },
       {
         "id": 158,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2469,7 +2469,7 @@
       },
       {
         "id": 159,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2511,7 +2511,7 @@
       },
       {
         "id": 160,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2553,7 +2553,7 @@
       },
       {
         "id": 161,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2595,7 +2595,7 @@
       },
       {
         "id": 162,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2637,7 +2637,7 @@
       },
       {
         "id": 163,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2679,7 +2679,7 @@
       },
       {
         "id": 164,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2721,7 +2721,7 @@
       },
       {
         "id": 165,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2763,7 +2763,7 @@
       },
       {
         "id": 166,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2805,7 +2805,7 @@
       },
       {
         "id": 167,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2847,7 +2847,7 @@
       },
       {
         "id": 168,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -2889,7 +2889,7 @@
       },
       {
         "id": 169,
-        "class": "org.iqe.NagBugglerSaberOfLight",
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
@@ -4746,7 +4746,7 @@
               },
               {
                 "id": 53635,
-                "class": "org.iqe.LXPluginIQE$TestIQEPattern",
+                "class": "org.iqe.HolyTrinitiesPattern",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
@@ -4756,7 +4756,7 @@
                   "modulationExpanded": false
                 },
                 "parameters": {
-                  "label": "TestIQE",
+                  "label": "HolyTrinities",
                   "enabled": false,
                   "recall": false,
                   "compositeMode": 0,
