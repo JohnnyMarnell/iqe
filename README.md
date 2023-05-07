@@ -3,6 +3,7 @@
 Mainly LX Studio / Chromatik project and Java code for Burning Man IQE HQ shade structure LEDznutz.
 Also contains python code and Jupyter notebooks for audio analysis with Librosa,
 e.g. real time beat detection and sync.
+
 ![Chromatik](audio-tooling/chromatik-project-screenshot.png)
 
 # Use
