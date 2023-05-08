@@ -28,20 +28,19 @@ public class HolyTrinitiesPattern extends LXPattern
 
     @Override
     protected void run(double deltaMs) {
-        // set all points to green
         for (LXPoint p : model.points) {
-            colors[p.index] = LXColor.rgba(0, 255, 0, 255);
+            colors[p.index] = LXColor.rgba(150, 150, 150, 255);
         }
 
-        // Using current beat, identify group to highlight and highlight them red
+        // Using current beat, identify group to highlight
         double beat = lx.engine.tempo.getCompositeBasis();
         double div = 1.0; // could be halftime, measure/bar, etc
         int index = ((int) (beat / div)) % order.size(); // get the relative offset into the ordering
 
-        // paint that town red
+        // highlight group
         for (int fixture : groups.get(order.get(index))) {
             for (LXPoint p : model.children[fixture].points) {
-                colors[p.index] = LXColor.rgba(255, 0, 0, 255);
+                colors[p.index] = LXColor.rgba(255, 255, 255, 255);
             }
         }
     }
