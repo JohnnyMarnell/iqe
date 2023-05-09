@@ -1,6 +1,9 @@
 <html>
     <body>
-    <style>body {font-family: "Lucida Grande", "Geneva", "Helvetica", Arial, sans-serif}</style>
+    <style>
+        body {font-family: "Lucida Grande", "Geneva", "Helvetica", Arial, sans-serif}
+        .selected {border-width: 2px; border-color: red}
+    </style>
     <h4>IQE LED Command Staishe</h4>
     <hr>
 
@@ -8,16 +11,28 @@
     <p> #2 <input data-path="/lx/modulation/Knobs/macro2" type="range" min="0" max="1.0" step="0.01"></p>
     <p> #3 <input data-path="/lx/modulation/Knobs/macro3" type="range" min="0" max="1.0" step="0.01"></p>
     
-    <p> Pattern:
+    <p> Form:
         <button data-path="/lx/mixer/channel/1/triggerPatternCycle">Next</button>
-        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="1">A</button>
-        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="2">B</button>
-        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="3">C</button>
-        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="7">D</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="1"
+                data-select="/lx/mixer/channel/1/activePattern">A</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="2"
+                data-select="/lx/mixer/channel/1/activePattern">B</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="3"
+                data-select="/lx/mixer/channel/1/activePattern">C</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="7"
+                data-select="/lx/mixer/channel/1/activePattern">D</button>
+    </p>
+
+    <p> Color:
+        <button data-path="/lx/mixer/channel/2/triggerPatternCycle">Next</button>
+        <button data-path="/lx/mixer/channel/2/nextPattern"
+                data-select="/lx/mixer/channel/2/activePattern" data-arg="0">A</button>
+        <button data-path="/lx/mixer/channel/2/nextPattern"
+                data-select="/lx/mixer/channel/2/activePattern" data-arg="1">B</button>
     </p>
     
-    <p>Tempo: <button data-path="/lx/tempo/tap">Tap</button>
-    <input data-path="/lx/tempo/bpm" type="text" size="5" value="">
+    <p>Tempo: <button data-path="/lx/tempo/tap" data-momentary-on="1" data-momentary-off="0">Tap</button>
+    <input data-path="/lx/tempo/bpm" type="text" size="7" value="">
     <button data-path="/lx/tempo/nudgeDown" data-momentary-on="1" data-momentary-off="0"> &larr; </button>
     <button data-path="/lx/tempo/nudgeUp" data-momentary-on="1" data-momentary-off="0"> &rarr; </button>
     </p>
@@ -25,13 +40,20 @@
     <script src="/osc.min.js"></script>
     <script type="application/javascript">
         const osc = new OSC()
-        const pathToElement = {}
+        const pathToElement = {}, selectPaths = {}
         document.querySelectorAll('[data-path]').forEach(el => pathToElement[el.getAttribute('data-path')] = el)
+        document.querySelectorAll('[data-select]').forEach(el => (selectPaths[el.getAttribute('data-select')] = selectPaths[el.getAttribute('data-select')] || []).push(el))
 
         function receiveOsc(msg) {
             const el = pathToElement[msg.address]
             if (el) {
                 el.value = msg.args[0]
+            }
+            const selections = selectPaths[msg.address]
+            if (selections) {
+                selections.forEach(el => el.classList.remove('selected'))
+                selections.filter(el => el.getAttribute('data-arg') == msg.args[0])
+                    .forEach(el => el.classList.add('selected'))
             }
         }
 
