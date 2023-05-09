@@ -73,8 +73,8 @@ function buildNagBugglerSaberOfLightFixtures() {
         {...s({yaw: 180, x: 0 + 3 * stripLen, z: 0 + 3 * 3 * stripLen})},
     
         // Lastly, 3 rafter cross diagonals "X"'s, each 2-prong oriented towards center
-        //     Order:        /, \ => \/
-        //            \, /,          /\ 
+        //     2 Prong Order:        /, \ => \/
+        //                     \, /,         /\
         // #45 - #48, #49 - #52
         {...s({yaw: -45,  x: 0,                                 z: 0  })},
         {...s({yaw: -45,  x: 0 + .75 * stripLen,                z: 0 + .75 * stripLen  })},
@@ -125,6 +125,7 @@ function defaultNagBugglerSaberOfLight(params) {
         },
         parameters: {
             label: (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + (id - 101),
+            tags: `strip ${id - 100 <= numPillars ? 'pillar' : 'rafter'} f${id - 101}`,
             x: 0,
             y: stripLen, // most (all) strips have origin in ceiling
             z: 0,
@@ -139,7 +140,6 @@ function defaultNagBugglerSaberOfLight(params) {
             identify: false,
             mute: false,
             solo: false,
-            tags: `strip ${id - 100 <= numPillars ? 'pillar' : 'rafter'} f${id - 101}`,
             protocol: 1,
             byteOrder: 0,
             transport: 0,
@@ -156,6 +156,7 @@ function defaultNagBugglerSaberOfLight(params) {
             numPoints: 140,
             spacing: 5,
             
+            // overlay any overriding params from above!
             ...params
         },
         children: {}
