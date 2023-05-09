@@ -1,13 +1,76 @@
 <html>
-    <h1>IQE LED Control Panel</h1>
+    <body>
+    <style>body {font-family: "Lucida Grande", "Geneva", "Helvetica", Arial, sans-serif}</style>
+    <h4>IQE LED Command Staishe</h4>
+    <hr>
 
-    Kenny Knobbins 2: <br>
-    <input type="range" min="0" max="1.0" step="0.05"> <br>
+    <p> Bilbo Knobbins: </p>
+    <p> #2 <input data-path="/lx/modulation/Knobs/macro2" type="range" min="0" max="1.0" step="0.01"></p>
+    <p> #3 <input data-path="/lx/modulation/Knobs/macro3" type="range" min="0" max="1.0" step="0.01"></p>
+    
+    <p> Pattern:
+        <button data-path="/lx/mixer/channel/1/triggerPatternCycle">Next</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="1">A</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="2">B</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="3">C</button>
+        <button data-path="/lx/mixer/channel/1/nextPattern" data-arg="7">D</button>
+    </p>
+    
+    <p>Tempo: <button data-path="/lx/tempo/tap">Tap</button>
+    <input data-path="/lx/tempo/bpm" type="text" size="5" value="">
+    <button data-path="/lx/tempo/nudgeDown" data-momentary-on="1" data-momentary-off="0"> &larr; </button>
+    <button data-path="/lx/tempo/nudgeUp" data-momentary-on="1" data-momentary-off="0"> &rarr; </button>
+    </p>
 
-    Kenny Knobbins 3: <br>
-    <input type="range" min="0" max="1.0" step="0.05"> <br>
-    <script src="https://cdn.jsdelivr.net/npm/osc-js@2.4.0/lib/osc.min.js"></script>
-    <script>
-        console.log('hi2', window.OSC)
+    <script src="/osc.min.js"></script>
+    <script type="application/javascript">
+        const osc = new OSC()
+        const pathToElement = {}
+        document.querySelectorAll('[data-path]').forEach(el => pathToElement[el.getAttribute('data-path')] = el)
+
+        function receiveOsc(msg) {
+            const el = pathToElement[msg.address]
+            if (el) {
+                el.value = msg.args[0]
+            }
+        }
+
+        document.querySelectorAll('[data-path][type="range"]').forEach(el => {
+            const path = el.getAttribute('data-path')
+            el.addEventListener('input', e => osc.send(new OSC.Message(path, parseFloat(e.target.value))))
+        })
+
+        document.querySelectorAll('button[data-path]').forEach(el => {
+            const path = el.getAttribute('data-path')
+            if (el.matches('[data-momentary-on][data-momentary-off]')) {
+                const on = parseInt(el.getAttribute('data-momentary-on'))
+                const off = parseInt(el.getAttribute('data-momentary-off'))
+                el.addEventListener('mousedown', e => osc.send(new OSC.Message(path, on)))
+                el.addEventListener('mouseup', e => osc.send(new OSC.Message(path, off)))
+            }
+            else {
+                const arg = el.getAttribute('data-arg') ? parseFloat(el.getAttribute('data-arg')) : 1
+                el.addEventListener('click', e => osc.send(new OSC.Message(path, arg)))
+            }
+        })
+
+        document.querySelectorAll('[data-path][type="text"]').forEach(el => {
+            const path = el.getAttribute('data-path')
+            el.addEventListener('change', e => osc.send(new OSC.Message(path, parseFloat(e.target.value))))
+        })
+
+        osc.on('open', () => console.log('OSC Connected'))
+        osc.on('*', msg => receiveOsc(msg))
+
+        async function run() {
+            const initialStateRes = await fetch('/state')
+            const initialState = await initialStateRes.json()
+            Object.values(initialState).forEach(msg => receiveOsc(msg))
+            osc.open({ host: location.hostname, port: 8080 })
+        }
+        
+        run()
+        
     </script>
+    </body>
 </html>

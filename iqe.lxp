@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1683562826529,
+  "timestamp": 1683598498699,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3210,8 +3210,8 @@
         "parameters": {
           "label": "Tempo",
           "clockSource": 0,
-          "period": 476.1904761904762,
-          "bpm": 126.0,
+          "period": 600.0,
+          "bpm": 100.0,
           "tap": false,
           "nudgeUp": false,
           "nudgeDown": false,
@@ -3237,7 +3237,7 @@
               "tempoLock": true
             },
             "children": {},
-            "basis": 0.0
+            "basis": -0.0
           }
         }
       },
@@ -3460,15 +3460,15 @@
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 45.0,
               "transitionEnabled": true,
-              "transitionTimeSecs": 5.0,
+              "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 7,
+              "focusedPattern": 3,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 7,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 52632,
@@ -3613,7 +3613,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3863252148274001
+                        "basis": 0.9738283922591711
                       }
                     ],
                     "modulations": [
@@ -3729,7 +3729,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.38375386648519666
+                        "basis": 0.9775951042903619
                       },
                       {
                         "id": 52865,
@@ -3757,7 +3757,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8790444125005092
+                        "basis": 0.5534632734519989
                       }
                     ],
                     "modulations": [
@@ -3892,7 +3892,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19079426275500025
+                        "basis": 0.8205493507297311
                       },
                       {
                         "id": 53133,
@@ -3920,7 +3920,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19079426275500025
+                        "basis": 0.8205493507297311
                       }
                     ],
                     "modulations": [
@@ -4035,7 +4035,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.06286958265329917
+                        "basis": 0.9481997364850444
                       },
                       {
                         "id": 53174,
@@ -4063,7 +4063,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5097374915310193
+                        "basis": 0.6986685503444585
                       },
                       {
                         "id": 53194,
@@ -4091,7 +4091,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9097273702615147
+                        "basis": 0.9064884628688491
                       },
                       {
                         "id": 53196,
@@ -4119,7 +4119,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2478276431865409
+                        "basis": 0.7264773058675352
                       },
                       {
                         "id": 53198,
@@ -4147,7 +4147,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6853869438652412
+                        "basis": 0.5818924371127352
                       },
                       {
                         "id": 53200,
@@ -4175,7 +4175,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5805027889530985
+                        "basis": 0.7477597808141301
                       }
                     ],
                     "modulations": [
@@ -4710,7 +4710,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3962331787395831
+                        "basis": 0.406143029230436
                       }
                     ],
                     "modulations": [
@@ -4818,7 +4818,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -4873,7 +4873,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -5044,7 +5044,7 @@
               "exp": -0.00781250256113708
             },
             "children": {},
-            "basis": 0.8704999999954453
+            "basis": 0.8106759890670219
           },
           {
             "id": 53960,
@@ -5085,8 +5085,8 @@
               "running": true,
               "trigger": false,
               "macro1": 0.0,
-              "macro2": 0.0,
-              "macro3": 0.0,
+              "macro2": 0.6000000238418579,
+              "macro3": 0.8855859397808672,
               "macro4": 0.0,
               "macro5": 0.0
             },
@@ -5326,10 +5326,10 @@
           "label": "OSC",
           "receiveHost": "0.0.0.0",
           "receivePort": 3030,
-          "receiveActive": false,
+          "receiveActive": true,
           "transmitHost": "localhost",
           "transmitPort": 3131,
-          "transmitActive": false,
+          "transmitActive": true,
           "logInput": false,
           "logOutput": false
         },
@@ -5352,8 +5352,8 @@
         "camera": {
           "active": true,
           "radius": 2798.5150399349027,
-          "theta": 319.7777794813737,
-          "phi": 21.648065011017025,
+          "theta": 320.1001060223207,
+          "phi": 22.32356597762555,
           "x": 665.5448882416822,
           "y": 349.249958999455,
           "z": 1263.3683758469415
@@ -5371,8 +5371,8 @@
           {
             "active": true,
             "radius": 2798.5150399349027,
-            "theta": 319.7777794813737,
-            "phi": 21.648065011017025,
+            "theta": 320.1001060223207,
+            "phi": 22.32356597762555,
             "x": 665.5448882416822,
             "y": 349.249958999455,
             "z": 1263.3683758469415
