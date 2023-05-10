@@ -12,7 +12,7 @@ function bridge(webPort = 80, wsPort = 8080, lxTo = 3030, lxFrom = 3131) {
     lx.open({ port: lxFrom })
 
     // Open a websocket bridge, for web app send and receive bridging; wire to/from LX
-    const oscBridge = new OSC({ plugin: new OSC.WebsocketServerPlugin({ port: wsPort }) })
+    const oscBridge = new OSC({ plugin: new OSC.WebsocketServerPlugin({ port: wsPort, host: '0.0.0.0' }) })
     oscBridge.on('open', () => console.log('Bridge listening', oscBridge.options.plugin.options))
     oscBridge.on('*', msg => lx.send(new OSC.Message(msg.address, ...msg.args)))
     lx.on('*', msg => oscBridge.send(new OSC.Message(msg.address, ...msg.args)))
@@ -20,8 +20,7 @@ function bridge(webPort = 80, wsPort = 8080, lxTo = 3030, lxFrom = 3131) {
 
     // Start a webserver to serve the app
     const app = express()
-    app.use('/led', express.static('./remote-control.html'))
-    app.use('/osc.min.js', express.static('./node_modules/osc-js/lib/osc.min.js'))
+    app.use('/', express.static('./dist'))
     app.use('/state', (req, res) => res.json(last))
     app.listen(webPort, () => console.log('Web server listening on port', webPort))
 }

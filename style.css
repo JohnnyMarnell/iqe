@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    body {
+        @apply touch-pan-y p-1 w-full;
+    }
+    .row {
+        @apply space-x-1 space-y-2 w-full;
+    }
+    .button {
+        @apply bg-blue-500 text-white font-bold py-1 px-2 rounded;
+        @apply active:bg-blue-700;
+    }
+    .selected {
+        @apply border-pink-400 border-solid border-2 rounded;
+    }
+    .text {
+        @apply outline p-0.5;
+    }
+    .title {
+        @apply font-bold;
+    }
+    .slider {
+        @apply w-64 py-4 scale-y-150 translate-x-8;
+    }
+    .slider.vertical {
+        /* @apply rotate-90; */
+    }
+    .section {
+        @apply text-3xl;
+    }
+}
