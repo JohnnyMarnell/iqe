@@ -1,5 +1,6 @@
 import RangeTouch from '/rangetouch/dist/rangetouch.mjs'
 import '/osc-js/lib/osc.min.js'
+import XYPad from '/xy.mjs'
 
 const ranges = RangeTouch.setup('input[type="range"]:not([data-raw])', { })
 const osc = new OSC({plugin: new OSC.WebsocketClientPlugin({ port: 8080, host: '192.168.1.249' }) })
@@ -40,7 +41,6 @@ oscElements.filter(el => el.path).forEach(el => pathToElement[el.path] = el)
 const selects = oscElements.filter(el => el.select)
 selects.forEach(el => selectPaths[el.select] = [])
 selects.forEach(el => selectPaths[el.select].push(el))
-console.log(oscElements.filter(el => el.arg).map(el => el.path + ' ' + el.arg))
 const all = selector => oscElements.filter(el => el.matches(selector))
 
 // Handle sliders movement
@@ -69,6 +69,13 @@ all('.button').forEach(el => {
         el.addEventListener('touchstart', e => send(el.path, arg) || e.preventDefault())
     }
 })
+
+const xyPads = all('.xy').map(el => new XYPad(el))
+xyPads.forEach(xy => xy.pad.pathY = attr(xy.pad, 'path-y'))
+xyPads.forEach(xy => xy.pad.addEventListener('xy', e => {
+    send(xy.pad.path, e.detail.x)
+    send(xy.pad.pathY, e.detail.y)
+}))
 
 // Grab the inital state that's been listening server side, and open OSC port
 async function run() {
