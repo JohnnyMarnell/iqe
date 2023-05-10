@@ -16,6 +16,7 @@ function bridge(webPort = 80, wsPort = 8080, lxTo = 3030, lxFrom = 3131) {
     oscBridge.on('open', () => console.log('Bridge listening', oscBridge.options.plugin.options))
     oscBridge.on('*', msg => lx.send(new OSC.Message(msg.address, ...msg.args)))
     lx.on('*', msg => oscBridge.send(new OSC.Message(msg.address, ...msg.args)))
+    oscBridge.on('*', msg => console.log(msg.address, ...msg.args))
     oscBridge.open()
 
     // Start a webserver to serve the app

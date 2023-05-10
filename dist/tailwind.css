@@ -766,10 +766,6 @@ video {
   display: none;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -2351,6 +2347,42 @@ body {
 .section {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+/* todo, these should be tailwindified? barf */
+
+/* todo the xy controller I took from https://github.com/madsstoumann */
+
+.xy {
+  --bgc: #333;
+  --size: 15rem;
+  --xybdc: rgba(136, 136, 136, .5);
+  --xybdw: 8px;
+  --xybgc: rgb(245, 230, 99);
+  --xysize: 4rem;
+  background-color:var(--bgc);
+  block-size: var(--size);
+  border: 0;
+  inline-size: var(--size);
+  overflow: hidden;
+  padding: 0;
+  touch-action: none;
+}
+
+.xy * {
+  background-color: var(--xybgc);
+  block-size: var(--xysize);
+  border: var(--xybdw) solid var(--xybdc);
+  border-radius: var(--xybdrs, 50%);
+  inline-size: var(--xysize);
+  touch-action: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.xy *:active {
+  background-color: rgba(168, 218, 220, 1.00);
 }
 
 @media (min-width: 640px) {
