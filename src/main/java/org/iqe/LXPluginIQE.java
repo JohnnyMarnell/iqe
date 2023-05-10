@@ -46,7 +46,6 @@ public class LXPluginIQE implements LXPlugin {
     // IMHO it's great this exists, and should be made public and happen by default on project load
     public static void oscQuery(Set<Integer> visited, LX lx, LXComponent component) {
         if (!visited.contains(component.getId())) {
-            System.out.println("sigh " + component.getId() + " " + component.getLabel() + " " + component.getClass());
             visited.add(component.getId());
             component.getParameters().forEach(lx.engine.osc::sendParameter);
             if (component instanceof LXModulationEngine) {
