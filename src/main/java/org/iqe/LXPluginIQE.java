@@ -23,6 +23,7 @@ public class LXPluginIQE implements LXPlugin {
         this.lx = lx;
         lx.registry.addPattern(HolyTrinitiesPattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
+        lx.registry.addEffect(Audio.class);
 
         // IMHO it's great this exists, and should be made public and happen by default on project load
         lx.addProjectListener((file, change) -> {
