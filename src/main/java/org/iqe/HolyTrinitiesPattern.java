@@ -12,18 +12,21 @@ import java.util.List;
 
 @LXCategory(LXCategory.TEST)
 public class HolyTrinitiesPattern extends LXPattern
-        implements Tempo.Listener
 {
-    private LX lx;
-
+    private int index;
     private List<List<Integer>> groups;
     private List<Integer> order;
 
     public HolyTrinitiesPattern(LX lx) {
         super(lx);
-        this.lx = lx;
-        lx.engine.tempo.addListener(this);
+        this.index = 0;
         initGroupsAndOrders();
+    }
+
+    public int nextIndex() {
+//        boolean advance = Audio.get().bassHit();
+        boolean advance = Audio.get().click(Tempo.Division.QUARTER);
+        return advance ? index + 1 : index;
     }
 
     @Override
@@ -32,10 +35,7 @@ public class HolyTrinitiesPattern extends LXPattern
             colors[p.index] = LXColor.rgba(150, 150, 150, 255);
         }
 
-        // Using current beat, identify group to highlight
-        double beat = lx.engine.tempo.getCompositeBasis();
-        double div = 1.0; // could be halftime, measure/bar, etc
-        int index = ((int) (beat / div)) % order.size(); // get the relative offset into the ordering
+        this.index = nextIndex() % order.size();
 
         // highlight group
         for (int fixture : groups.get(order.get(index))) {
@@ -75,18 +75,5 @@ public class HolyTrinitiesPattern extends LXPattern
         o3 = 0; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
         o3 = 1; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
         o3 = 2; this.order.addAll(List.of(6 + o3, 0 + o3, 9 + o3, 3 + o3));
-    }
-
-    @Override
-    public void onBeat(Tempo tempo, int beat) {
-        System.out.println("beat " + beat + ", " + lx.engine.tempo.getCompositeBasis()
-                + " " + model.children[0].tags);
-        Tempo.Listener.super.onBeat(tempo, beat);
-    }
-
-    @Override
-    public void onMeasure(Tempo tempo) {
-        System.out.println("measure " + tempo.measure());
-        Tempo.Listener.super.onMeasure(tempo);
     }
 }
