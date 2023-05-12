@@ -21,9 +21,10 @@ public class LXPluginIQE implements LXPlugin {
     @Override
     public void initialize(LX lx) {
         this.lx = lx;
+        lx.registry.addEffect(Audio.class);
+        lx.registry.addPattern(ZipStripPattern.class);
         lx.registry.addPattern(HolyTrinitiesPattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
-        lx.registry.addEffect(Audio.class);
 
         // IMHO it's great this exists, and should be made public and happen by default on project load
         lx.addProjectListener((file, change) -> {
