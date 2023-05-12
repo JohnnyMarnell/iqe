@@ -7,7 +7,7 @@ function bridge(webPort = 80, wsPort = 8080, lxTo = 3030, lxFrom = 3131) {
     const lx = new OSC({plugin: new OSC.DatagramPlugin({ port: lxFrom, send: { port: lxTo } })})
     lx.on('open', () => console.log('LX OSC echo listening on port', lxFrom))
     lx.on('*', msg => last[msg.address] = msg)
-    lx.on('*', msg => !msg.address.startsWith('/lx/palette/swatch/color')
+    lx.on('*', msg => !msg.address.startsWith('/lx/palette/swatch/color') && !msg.address.startsWith('/lx/color/hue')
                        && console.log(msg.address, ...msg.args))
     lx.open({ port: lxFrom })
 

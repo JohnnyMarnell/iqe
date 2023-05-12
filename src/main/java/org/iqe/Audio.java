@@ -5,17 +5,23 @@ import heronarts.lx.Tempo;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.modulator.Click;
 import heronarts.lx.parameter.LXParameter;
+import heronarts.lx.utils.LXUtils;
 
 import java.util.Arrays;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.sin;
+
 // todo: decide on Singleton-ify
+// todo: Add global modulators for patterns to switch between, with default division as well
+// todo: Maybe multiple clicks is a bad idea, could detect clicks based on basis changes, if they ever
+//          decrease, assume click?
 public class Audio extends LXEffect implements Tempo.Listener {
 
     // todo: barves.
     private static Audio instance = null;
     private final TEAudioPattern teEngine;
     private long lastBassHit = 0;
-
 
     double bpm = 120.0d;
     /* period is millis of 1 beat */
@@ -47,27 +53,35 @@ public class Audio extends LXEffect implements Tempo.Listener {
         lx.engine.tempo.bpm.addListener(this::onBpm, true);
     }
 
-    public boolean click(Tempo.Division division) {
-        return click[division.ordinal()].click();
-    }
-
-    private Click buildClick(Tempo.Division division) {
-        Click click = new Click("Click_" + division.name(), period);
-        click.tempoSync.setValue(true);
-        click.tempoDivision.setValue(division);
-        startModulator(click);
-        return click;
-    }
-
-    private void refresh() {
-        LX.log("DEBUG Audio refresh");
-        updateFromPeriod();
-    }
-
     @Override
     public void run(double deltaMs, double enabledAmount) {
-        long now = System.currentTimeMillis();
+        long now = lx.engine.nowMillis;
         teEngine.computeAudio(deltaMs);
+
+        // Some example metrics found in TE
+        // I see this in Heart + Art Standards patterns
+        double energyNormalized = .7;
+        double scaledTrebleRatio = LXUtils.clamp(
+                (teEngine.getTrebleRatio() - .5) / (1.01 - energyNormalized) / 6 -
+                        .2 + energyNormalized / 2,
+                0, 1);
+        double squaredScaledTrebleRatio = Math.pow(scaledTrebleRatio, 2);
+        energyNormalized = .6;
+        double bassHeightNormalized = (teEngine.getBassRatio() - .5) / (1.01 - energyNormalized) / 3 - .2;
+        double beats = lx.engine.tempo.getCompositeBasis();
+        double sinPhaseBeat = .5 * sin(PI * beats) + .5;
+        // actually, this should use time sig right? and be "8 'bars / measures'"?
+        double phrase = beats / 32 % 1.0D;
+        double beatsPerMeasure = lx.engine.tempo.beatsPerMeasure.getValue();
+        double measure = (beats % beatsPerMeasure) / beatsPerMeasure;
+        // interesting mention of swing in Tempo Reactive, idk if I agree with this calc / def
+        double swingBeat = TEMath.easeOutPow(basis(Tempo.Division.QUARTER), energyNormalized);
+
+        // all the basis obviously... (especially quarter, half, eighth, whole)
+        // expose all in teEngine
+        // maybe the rotation / spin / rotor stuff? tho I don't yet see how the other basis parameters * 2pi, maybe
+        //   with built-in damping used, wouldn't get you there already?
+
         if (bassHit()) {
             double bpm = 0;
             if (lastBassHit != 0) {
@@ -84,6 +98,29 @@ public class Audio extends LXEffect implements Tempo.Listener {
         } else if (beat.click()) {
 //            LX.log("beat");
         }
+    }
+    public boolean click(Tempo.Division division) {
+        return click[division.ordinal()].click();
+    }
+
+    public double basis(Tempo.Division division) {
+        // todo: there's bad jumps when I use the clicks... modulator sync?
+        return lx.engine.tempo.getBasis(division);
+//         return click[division.ordinal()].getBasis();
+    }
+
+    private Click buildClick(Tempo.Division division) {
+        Click click = new Click("Click_" + division.name(), period);
+        click.tempoSync.setValue(true);
+        click.tempoLock.setValue(true);
+        click.tempoDivision.setValue(division);
+        startModulator(click);
+        return click;
+    }
+
+    private void refresh() {
+        LX.log("DEBUG Audio refresh");
+        updateFromPeriod();
     }
 
     public boolean bassHit() {
