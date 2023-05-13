@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1683851202654,
+  "timestamp": 1683936509740,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -2963,7 +2963,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 0,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 0,
+          "autoCycleCursor": 1,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -2976,7 +2976,7 @@
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "Swatch-1",
+              "label": "Swatch-2",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -2995,7 +2995,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 0.0,
+                  "primary/hue": 178.81640625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3015,7 +3015,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 35.28515625,
+                  "primary/hue": 91.1953125,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3035,7 +3035,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 301.875,
+                  "primary/hue": 214.53515625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3447,22 +3447,22 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.3438073776385805,
-              "band-2": 0.37257822864860735,
-              "band-3": 0.35306213205684156,
-              "band-4": 0.3175886594185243,
-              "band-5": 0.29873858103567164,
-              "band-6": 0.21300262568664385,
-              "band-7": 0.24563455173837478,
-              "band-8": 0.28380193230327233,
-              "band-9": 0.18419902477224126,
-              "band-10": 0.11818520375871666,
-              "band-11": 0.12333523731737583,
-              "band-12": 0.060457878288809774,
-              "band-13": 0.033442092470117424,
-              "band-14": 0.033417791388615115,
-              "band-15": 0.012024025933147997,
-              "band-16": 0.0
+              "band-1": 0.5757018735426227,
+              "band-2": 0.6197876805118112,
+              "band-3": 0.6196729182531258,
+              "band-4": 0.6768167562006489,
+              "band-5": 0.654952539819925,
+              "band-6": 0.5618047335747536,
+              "band-7": 0.5072083084602832,
+              "band-8": 0.43762606412388083,
+              "band-9": 0.45826167485031377,
+              "band-10": 0.4517504376018855,
+              "band-11": 0.412547407667755,
+              "band-12": 0.357049475320638,
+              "band-13": 0.37741724559812795,
+              "band-14": 0.37171398659727684,
+              "band-15": 0.34176669508685575,
+              "band-16": 0.09116275708651356
             },
             "children": {}
           }
@@ -3505,42 +3505,7 @@
               "previewMode": 0
             },
             "children": {},
-            "effects": [
-              {
-                "id": 56028,
-                "class": "org.iqe.Audio",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "Audio",
-                  "enabled": true
-                },
-                "children": {
-                  "modulation": {
-                    "id": 56029,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              }
-            ],
+            "effects": [],
             "clips": []
           }
         },
@@ -3580,13 +3545,13 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 8,
+              "focusedPattern": 3,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 8,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 52632,
@@ -3731,7 +3696,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.28610911711342474
+                        "basis": 0.5608838382084338
                       }
                     ],
                     "modulations": [
@@ -3847,7 +3812,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6141944198963061
+                        "basis": 0.22853533744142085
                       },
                       {
                         "id": 52865,
@@ -3875,7 +3840,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5735379739154842
+                        "basis": 0.08400618333994442
                       }
                     ],
                     "modulations": [
@@ -3955,7 +3920,7 @@
                   "shapeLerp": 0.6037946525029838,
                   "fill": 1.0,
                   "x": 0.5012109394883737,
-                  "y": 0.5,
+                  "y": 0.5907421897281893,
                   "z": 0.5521874917249079,
                   "xAmt": 1.0,
                   "yAmt": 1.0,
@@ -4010,7 +3975,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8886555120939642
+                        "basis": 0.8896708681178139
                       },
                       {
                         "id": 53133,
@@ -4038,7 +4003,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8886555120939642
+                        "basis": 0.8896708681178139
                       }
                     ],
                     "modulations": [
@@ -4153,7 +4118,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8284541995584264
+                        "basis": 0.43836896583746365
                       },
                       {
                         "id": 53174,
@@ -4181,7 +4146,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8590161438852577
+                        "basis": 0.17829841833557233
                       },
                       {
                         "id": 53194,
@@ -4209,7 +4174,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.44916972210719447
+                        "basis": 0.2948494766682653
                       },
                       {
                         "id": 53196,
@@ -4237,7 +4202,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8213664558331331
+                        "basis": 0.47452518493126844
                       },
                       {
                         "id": 53198,
@@ -4265,7 +4230,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19487661019670913
+                        "basis": 0.7028135907673059
                       },
                       {
                         "id": 53200,
@@ -4293,7 +4258,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.046688596055940335
+                        "basis": 0.7100281953341475
                       }
                     ],
                     "modulations": [
@@ -4463,7 +4428,7 @@
                       "axis": 0,
                       "tilt": 0.0,
                       "spin": 0.0,
-                      "tiltPosition": 0.0,
+                      "tiltPosition": -0.10509671227191575,
                       "spinPosition": 0.0,
                       "active": true,
                       "positionMin": 0.3,
@@ -4828,7 +4793,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20107759930965155
+                        "basis": 0.7171331276624628
                       }
                     ],
                     "modulations": [
@@ -4878,7 +4843,9 @@
                   "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
-                  "compositeLevel": 1.0
+                  "compositeLevel": 1.0,
+                  "bassOn": false,
+                  "tdiv": 2
                 },
                 "children": {
                   "modulation": {
@@ -4916,11 +4883,102 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "energy": 0.2161039043015626
+                  "energy": 0.22,
+                  "trigger": false,
+                  "tmp2": false,
+                  "tmp": 0.0,
+                  "tmp3": 0
                 },
                 "children": {
                   "modulation": {
                     "id": 56345,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              }
+            ]
+          },
+          {
+            "id": 58313,
+            "class": "heronarts.lx.mixer.LXChannel",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true,
+              "controlsExpandedCue": true,
+              "controlsExpandedAux": true,
+              "controlsExpanded": true,
+              "viewPatternLabel": false
+            },
+            "parameters": {
+              "label": "Bass",
+              "fader": 1.0,
+              "arm": false,
+              "selected": false,
+              "enabled": true,
+              "cue": false,
+              "aux": false,
+              "crossfadeGroup": 0,
+              "blendMode": 1,
+              "midiMonitor": false,
+              "midiChannel": 16,
+              "viewEnabled": false,
+              "viewSelector": "",
+              "viewNormalization": 0,
+              "compositeMode": 0,
+              "compositeDampingEnabled": true,
+              "compositeDampingTimeSecs": 0.1,
+              "autoCycleEnabled": false,
+              "autoCycleMode": 0,
+              "autoCycleTimeSecs": 60.0,
+              "transitionEnabled": false,
+              "transitionTimeSecs": 5.0,
+              "transitionBlendMode": 0,
+              "focusedPattern": 0,
+              "triggerPatternCycle": false
+            },
+            "children": {},
+            "effects": [],
+            "clips": [],
+            "patternIndex": 0,
+            "patterns": [
+              {
+                "id": 58347,
+                "class": "heronarts.lx.pattern.color.SolidPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "Solid",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "color/brightness": 47.37723178113811,
+                  "color/saturation": 0.0,
+                  "color/hue": 359.0,
+                  "color/mode": 0,
+                  "color/index": 1
+                },
+                "children": {
+                  "modulation": {
+                    "id": 58348,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -4974,7 +5032,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -5029,7 +5087,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -5175,59 +5233,32 @@
         "children": {},
         "modulators": [
           {
-            "id": 60,
-            "class": "heronarts.lx.modulator.VariableLFO",
+            "id": 57947,
+            "class": "org.iqe.AudioModulators$Root",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": false
             },
             "parameters": {
-              "label": "LFO",
+              "label": "Root",
               "running": true,
               "trigger": false,
               "loop": true,
-              "tempoSync": true,
+              "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
-              "clockMode": 2,
-              "periodFast": 1000.0,
-              "periodSlow": 10000.0,
-              "wave": 0,
-              "skew": 0.005937508540228009,
-              "shape": 0.0012500081793405116,
-              "bias": 0.0,
-              "phase": 0.0,
-              "exp": -0.00781250256113708
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
             },
             "children": {},
-            "basis": 0.1866999999999166
-          },
-          {
-            "id": 53960,
-            "class": "heronarts.lx.audio.BandGate",
-            "internal": {
-              "modulationColor": 0,
-              "modulationControlsExpanded": true
-            },
-            "parameters": {
-              "label": "Beat",
-              "running": true,
-              "trigger": false,
-              "gain": 0.0,
-              "range": 36.0,
-              "attack": 10.0,
-              "release": 100.0,
-              "slope": 4.5,
-              "threshold": 0.8,
-              "floor": 0.75,
-              "decay": 400.0,
-              "minFreq": 60.0,
-              "maxFreq": 120.0,
-              "gate": false,
-              "average": 0.21846220991492848,
-              "tap": false
-            },
-            "children": {}
+            "basis": 0.3110000000008727
           },
           {
             "id": 54255,
@@ -5241,44 +5272,468 @@
               "running": true,
               "trigger": false,
               "macro1": 0.0,
-              "macro2": 0.6912109387340024,
-              "macro3": 0.6399999856948853,
+              "macro2": 0.6979687705097604,
+              "macro3": 0.6224218790157465,
               "macro4": 0.0,
               "macro5": 0.0
             },
             "children": {}
-          }
-        ],
-        "modulations": [
+          },
           {
-            "source": {
-              "id": 60,
-              "path": "/modulation/modulator/1"
+            "id": 56972,
+            "class": "org.iqe.AudioModulators$Boots",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
             },
-            "target": {
-              "componentId": 54255,
-              "parameterPath": "macro1",
-              "path": "/modulation/modulator/3/macro1"
+            "parameters": {
+              "label": "Boots",
+              "running": false,
+              "trigger": false,
+              "loop": false,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "clockMode": 0,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 0,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
             },
-            "id": 54419,
-            "class": "heronarts.lx.modulation.LXCompoundModulation",
+            "children": {},
+            "basis": 1.0
+          },
+          {
+            "id": 56973,
+            "class": "org.iqe.AudioModulators$Quarter",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "QuarterBeat",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": true,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "clockMode": 2,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 3,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
+            },
+            "children": {},
+            "basis": 0.7735999999998739
+          },
+          {
+            "id": 56974,
+            "class": "org.iqe.AudioModulators$Bar",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "BarBeat",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": true,
+              "tempoMultiplier": 10,
+              "tempoLock": true,
+              "clockMode": 2,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 3,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
+            },
+            "children": {},
+            "basis": 0.4433999999999685
+          },
+          {
+            "id": 56975,
+            "class": "org.iqe.AudioModulators$Half",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "HalfBeat",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": true,
+              "tempoMultiplier": 8,
+              "tempoLock": true,
+              "clockMode": 2,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 0,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
+            },
+            "children": {},
+            "basis": 0.886799999999937
+          },
+          {
+            "id": 56976,
+            "class": "org.iqe.AudioModulators$Eighth",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "EighthBeat",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": true,
+              "tempoMultiplier": 2,
+              "tempoLock": true,
+              "clockMode": 2,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 0,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
+            },
+            "children": {},
+            "basis": 0.5471999999997479
+          },
+          {
+            "id": 56978,
+            "class": "org.iqe.AudioModulators$Triplet",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "TripletBeat",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": true,
+              "tempoMultiplier": 4,
+              "tempoLock": true,
+              "clockMode": 2,
+              "periodFast": 1000.0,
+              "periodSlow": 10000.0,
+              "wave": 0,
+              "skew": 0.0,
+              "shape": 0.0,
+              "bias": 0.0,
+              "phase": 0.0,
+              "exp": 0.0
+            },
+            "children": {},
+            "basis": 0.3647999999998319
+          },
+          {
+            "id": 56979,
+            "class": "org.iqe.AudioModulators$VolumeLevel",
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "LX",
-              "enabled": true,
-              "polarity": 1,
-              "range": 0.5765136728878133
+              "label": "VolumeLevel",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
             },
-            "children": {}
+            "children": {},
+            "basis": 0.688000000001096
           },
+          {
+            "id": 56980,
+            "class": "org.iqe.AudioModulators$BassLevel",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "BassLevel",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.688000000001096
+          },
+          {
+            "id": 56981,
+            "class": "org.iqe.AudioModulators$TrebleLevel",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "TrebleLevel",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": true,
+              "speed": 0.39249295701882647,
+              "accel": 0.6415194634705356,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.688000000001096
+          },
+          {
+            "id": 56982,
+            "class": "org.iqe.AudioModulators$BassRatio",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "BassRatio",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.688000000001096
+          },
+          {
+            "id": 56983,
+            "class": "org.iqe.AudioModulators$TrebleRatio",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "TrebleRatio",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.688000000001096
+          },
+          {
+            "id": 57307,
+            "class": "org.iqe.AudioModulators$QuarterClick",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "QuarterClick",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.6430000000009682
+          },
+          {
+            "id": 57308,
+            "class": "org.iqe.AudioModulators$HalfClick",
+            "internal": {
+              "modulationColor": 1,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "HalfClick",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.594000000000971
+          },
+          {
+            "id": 57309,
+            "class": "org.iqe.AudioModulators$WholeClick",
+            "internal": {
+              "modulationColor": 2,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "WholeClick",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.5750000000009647
+          },
+          {
+            "id": 57636,
+            "class": "org.iqe.AudioModulators$BootsHit",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "BootsHit",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.826000000000914
+          },
+          {
+            "id": 58358,
+            "class": "org.iqe.AudioModulators$BassAvg",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": false
+            },
+            "parameters": {
+              "label": "BassAvg",
+              "running": true,
+              "trigger": false,
+              "loop": true,
+              "tempoSync": false,
+              "tempoMultiplier": 5,
+              "tempoLock": true,
+              "periodMs": 1000.0,
+              "randomMs": 0.0,
+              "chance": 100.0,
+              "damping": false,
+              "speed": 5.0,
+              "accel": 5.0,
+              "min": 0.0,
+              "max": 1.0,
+              "triggerOut": false
+            },
+            "children": {},
+            "basis": 0.01300000000067536
+          }
+        ],
+        "modulations": [
           {
             "source": {
               "componentId": 54255,
               "parameterPath": "macro1",
-              "path": "/modulation/modulator/3/macro1"
+              "path": "/modulation/modulator/2/macro1"
             },
             "target": {
               "componentId": 52905,
@@ -5303,12 +5758,12 @@
             "source": {
               "componentId": 54255,
               "parameterPath": "macro3",
-              "path": "/modulation/modulator/3/macro3"
+              "path": "/modulation/modulator/2/macro3"
             },
             "target": {
               "componentId": 52574,
               "parameterPath": "gradient",
-              "path": "/mixer/channel/2/pattern/1/gradient"
+              "path": "/mixer/channel/3/pattern/1/gradient"
             },
             "id": 55668,
             "class": "heronarts.lx.modulation.LXCompoundModulation",
@@ -5328,12 +5783,12 @@
             "source": {
               "componentId": 54255,
               "parameterPath": "macro2",
-              "path": "/modulation/modulator/3/macro2"
+              "path": "/modulation/modulator/2/macro2"
             },
             "target": {
               "componentId": 52574,
               "parameterPath": "xAmount",
-              "path": "/mixer/channel/2/pattern/1/xAmount"
+              "path": "/mixer/channel/3/pattern/1/xAmount"
             },
             "id": 55723,
             "class": "heronarts.lx.modulation.LXCompoundModulation",
@@ -5353,12 +5808,12 @@
             "source": {
               "componentId": 54255,
               "parameterPath": "macro2",
-              "path": "/modulation/modulator/3/macro2"
+              "path": "/modulation/modulator/2/macro2"
             },
             "target": {
               "componentId": 53241,
               "parameterPath": "midpoint",
-              "path": "/mixer/channel/2/pattern/2/midpoint"
+              "path": "/mixer/channel/3/pattern/2/midpoint"
             },
             "id": 55724,
             "class": "heronarts.lx.modulation.LXCompoundModulation",
@@ -5378,12 +5833,12 @@
             "source": {
               "componentId": 54255,
               "parameterPath": "macro3",
-              "path": "/modulation/modulator/3/macro3"
+              "path": "/modulation/modulator/2/macro3"
             },
             "target": {
               "componentId": 53241,
               "parameterPath": "contrast",
-              "path": "/mixer/channel/2/pattern/2/contrast"
+              "path": "/mixer/channel/3/pattern/2/contrast"
             },
             "id": 55743,
             "class": "heronarts.lx.modulation.LXCompoundModulation",
@@ -5403,7 +5858,7 @@
             "source": {
               "componentId": 54255,
               "parameterPath": "macro2",
-              "path": "/modulation/modulator/3/macro2"
+              "path": "/modulation/modulator/2/macro2"
             },
             "target": {
               "componentId": 56344,
@@ -5423,22 +5878,19 @@
               "range": 1.0
             },
             "children": {}
-          }
-        ],
-        "triggers": [
+          },
           {
             "source": {
-              "componentId": 54255,
-              "parameterPath": "running",
-              "path": "/modulation/modulator/3/running"
+              "id": 56980,
+              "path": "/modulation/modulator/10"
             },
             "target": {
-              "componentId": 60,
-              "parameterPath": "trigger",
-              "path": "/modulation/modulator/1/trigger"
+              "componentId": 58347,
+              "parameterPath": "color/brightness",
+              "path": "/mixer/channel/2/pattern/1/color/brightness"
             },
-            "id": 54400,
-            "class": "heronarts.lx.modulation.LXTriggerModulation",
+            "id": 58396,
+            "class": "heronarts.lx.modulation.LXCompoundModulation",
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true
@@ -5446,13 +5898,37 @@
             "parameters": {
               "label": "LX",
               "enabled": true,
-              "toggleMode": 0,
-              "momentaryToggleMode": 0,
-              "toggleMomentaryMode": 2
+              "polarity": 0,
+              "range": 1.0
+            },
+            "children": {}
+          },
+          {
+            "source": {
+              "id": 56980,
+              "path": "/modulation/modulator/10"
+            },
+            "target": {
+              "componentId": 52905,
+              "parameterPath": "y",
+              "path": "/mixer/channel/1/pattern/4/y"
+            },
+            "id": 58789,
+            "class": "heronarts.lx.modulation.LXCompoundModulation",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "LX",
+              "enabled": true,
+              "polarity": 0,
+              "range": 0.4674316453638312
             },
             "children": {}
           }
-        ]
+        ],
+        "triggers": []
       },
       "output": {
         "id": 26,
@@ -5532,7 +6008,7 @@
           {
             "channel": 0,
             "type": "CONTROL_CHANGE",
-            "path": "/lx/modulation/modulator/3/macro2",
+            "path": "/lx/modulation/modulator/2/macro2",
             "componentId": 54255,
             "parameterPath": "macro2",
             "cc": 21
@@ -5540,7 +6016,7 @@
           {
             "channel": 0,
             "type": "CONTROL_CHANGE",
-            "path": "/lx/modulation/modulator/3/macro3",
+            "path": "/lx/modulation/modulator/2/macro3",
             "componentId": 54255,
             "parameterPath": "macro3",
             "cc": 22
@@ -5583,7 +6059,7 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 2798.5150399349027,
+          "radius": 3158.610974379267,
           "theta": 320.1725309183821,
           "phi": 22.25114108156413,
           "x": 665.5448882416822,
@@ -5602,7 +6078,7 @@
           },
           {
             "active": true,
-            "radius": 2798.5150399349027,
+            "radius": 3158.610974379267,
             "theta": 320.1725309183821,
             "phi": 22.25114108156413,
             "x": 665.5448882416822,
