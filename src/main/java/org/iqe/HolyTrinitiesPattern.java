@@ -5,6 +5,8 @@ import heronarts.lx.LXCategory;
 import heronarts.lx.Tempo;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.model.LXPoint;
+import heronarts.lx.parameter.BooleanParameter;
+import heronarts.lx.parameter.EnumParameter;
 import heronarts.lx.pattern.LXPattern;
 
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ import java.util.List;
 @LXCategory(LXCategory.TEST)
 public class HolyTrinitiesPattern extends LXPattern
 {
+    public static final BooleanParameter bass = new BooleanParameter("bassOn", false);
+    public static final EnumParameter<Tempo.Division> division = new EnumParameter<>("tdiv", Tempo.Division.QUARTER);
+
     private int index;
     private List<List<Integer>> groups;
     private List<Integer> order;
@@ -20,12 +25,13 @@ public class HolyTrinitiesPattern extends LXPattern
     public HolyTrinitiesPattern(LX lx) {
         super(lx);
         this.index = 0;
+        addParameter("bassOn", bass);
+        addParameter("tdiv", division);
         initGroupsAndOrders();
     }
 
     public int nextIndex() {
-//        boolean advance = Audio.get().bassHit();
-        boolean advance = Audio.get().click(Tempo.Division.QUARTER);
+        boolean advance = bass.isOn() ? AudioModulators.bootsHit.isOn() : Audio.get().click(division.getEnum());
         return advance ? index + 1 : index;
     }
 

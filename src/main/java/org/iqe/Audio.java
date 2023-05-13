@@ -2,48 +2,40 @@ package org.iqe;
 
 import heronarts.lx.LX;
 import heronarts.lx.Tempo;
-import heronarts.lx.effect.LXEffect;
-import heronarts.lx.modulator.Click;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.utils.LXUtils;
-
-import java.util.Arrays;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.sin;
 
+// todo: consolidate / organize with AudioModulators
 // todo: decide on Singleton-ify
 // todo: Add global modulators for patterns to switch between, with default division as well
-// todo: Maybe multiple clicks is a bad idea, could detect clicks based on basis changes, if they ever
-//          decrease, assume click?
-public class Audio extends LXEffect implements Tempo.Listener {
+// todo: Clicks are mostly stable, I see rare jitters tho
+// todo: How do I "find" components in LX project / univers?
+public class Audio implements Tempo.Listener {
 
     // todo: barves.
     private static Audio instance = null;
-    private final TEAudioPattern teEngine;
+
+    private final LX lx;
+    public final TEAudioPattern teEngine;
     private long lastBassHit = 0;
 
     double bpm = 120.0d;
     /* period is millis of 1 beat */
     double period = 60.0d / bpm * 1_000d;
-
-    private final Click beat;
-    private final Click bar;
-    private final Click[] click = new Click[Tempo.Division.values().length];
+    final TempoClick[] clicks = new TempoClick[Tempo.Division.values().length];
 
     /** LX seems inheritance heavy, so try using a Global, always on effect */
-    public Audio(LX lx) {
-        super(lx);
-        if (instance != null) throw new IllegalStateException("Highlander Exception, there can only be one.");
-        Audio.instance = this;
+    private Audio(LX lx) {
+        this.lx = lx;
 
         teEngine = new TEAudioPattern(lx);
 
         for (Tempo.Division division : Tempo.Division.values()) {
-            this.click[division.ordinal()] = buildClick(division);
+            this.clicks[division.ordinal()] = new TempoClick(lx, division);
         }
-        this.beat = click[Tempo.Division.QUARTER.ordinal()];
-        this.bar = click[Tempo.Division.WHOLE.ordinal()];
 
         lx.engine.tempo.addListener(this);
         lx.engine.tempo.tap.addListener(this::onTap, true);
@@ -53,8 +45,29 @@ public class Audio extends LXEffect implements Tempo.Listener {
         lx.engine.tempo.bpm.addListener(this::onBpm, true);
     }
 
-    @Override
-    public void run(double deltaMs, double enabledAmount) {
+    public static class TempoClick {
+        private final LX lx;
+        public int clicks = 0;
+        public boolean isOn = false;
+        public Tempo.Division division;
+
+        public TempoClick(LX lx, Tempo.Division division) {
+            this.lx = lx;
+            this.division = division;
+        }
+
+        void tick() {
+            int clicks = ((int) lx.engine.tempo.getBasis(division, false)) + 1;
+            if (clicks != this.clicks) {
+                isOn = true;
+                this.clicks = clicks;
+            } else {
+                isOn = false;
+            }
+        }
+    }
+
+    public void run(double deltaMs) {
         long now = lx.engine.nowMillis;
         teEngine.computeAudio(deltaMs);
 
@@ -83,6 +96,7 @@ public class Audio extends LXEffect implements Tempo.Listener {
         //   with built-in damping used, wouldn't get you there already?
 
         if (bassHit()) {
+            AudioModulators.boots.trigger();
             double bpm = 0;
             if (lastBassHit != 0) {
                 double secondsPerBeat = (now - lastBassHit) / 1_000.0d;
@@ -93,29 +107,13 @@ public class Audio extends LXEffect implements Tempo.Listener {
             LX.log("BASS HIT! High varying implied bpm: " + bpm);
         }
 
-        if (bar.click()) {
-//            LX.log("bar");
-        } else if (beat.click()) {
-//            LX.log("beat");
-        }
     }
     public boolean click(Tempo.Division division) {
-        return click[division.ordinal()].click();
+        return clicks[division.ordinal()].isOn;
     }
 
     public double basis(Tempo.Division division) {
-        // todo: there's bad jumps when I use the clicks... modulator sync?
         return lx.engine.tempo.getBasis(division);
-//         return click[division.ordinal()].getBasis();
-    }
-
-    private Click buildClick(Tempo.Division division) {
-        Click click = new Click("Click_" + division.name(), period);
-        click.tempoSync.setValue(true);
-        click.tempoLock.setValue(true);
-        click.tempoDivision.setValue(division);
-        startModulator(click);
-        return click;
     }
 
     private void refresh() {
@@ -151,10 +149,8 @@ public class Audio extends LXEffect implements Tempo.Listener {
     private void updateFromPeriod() {
         // Allow the beat detect to only trigger as fast as the tempo division
         // bassRetriggerMs =  15./16 * lx.engine.tempo.period.getValue() / tempoDivision.getObject().multiplier;
-        teEngine.bassRetriggerMs = 15./16 * period / beat.tempoDivision.getObject().multiplier;
-
-        // todo Make sure these phases don't auto reset, or that they need to or something
-        Arrays.stream(click).forEach(click -> click.setPeriod(period));
+        // teEngine.bassRetriggerMs = 15./16 * period / beat.tempoDivision.getObject().multiplier;
+        teEngine.bassRetriggerMs = 15./16 * period / Tempo.Division.QUARTER.multiplier;
     }
 
     // Any NA near beers brah?
@@ -170,20 +166,25 @@ public class Audio extends LXEffect implements Tempo.Listener {
 
     }
 
-    @Override
-    protected void onEnable() {
-        refresh();
-        super.onEnable();
-    }
-
-    @Override
-    protected void onDisable() {
-        super.onDisable();
-    }
+//    @Override
+//    protected void onEnable() {
+//        LX.log("Audio Engine Init");
+//        refresh();
+//        super.onEnable();
+//    }
+//
+//    @Override
+//    protected void onDisable() {
+//        super.onDisable();
+//    }
 
     public static Audio get() {
-        if (instance == null) throw new IllegalStateException("Ah fuck, static singleton Audio not ready. "
-                + "Who would've ever thought this was a bad idea?");
         return instance;
+    }
+
+    public static void create(LX lx) {
+        if (instance != null) throw new IllegalStateException("HighlanderException, there can only be one, "
+                    + "who would've ever thought static singletons were a bad idea...");
+        instance = new Audio(lx);
     }
 }

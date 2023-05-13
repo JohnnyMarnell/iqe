@@ -4,11 +4,16 @@ import heronarts.lx.*;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.model.LXPoint;
 import heronarts.lx.modulation.LXModulationEngine;
+import heronarts.lx.modulator.LXModulator;
+import heronarts.lx.modulator.LXWaveshape;
+import heronarts.lx.modulator.VariableLFO;
 import heronarts.lx.osc.LXOscComponent;
+import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.pattern.LXPattern;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class LXPluginIQE implements LXPlugin {
     protected LX lx;
@@ -21,12 +26,14 @@ public class LXPluginIQE implements LXPlugin {
     @Override
     public void initialize(LX lx) {
         this.lx = lx;
-        lx.registry.addEffect(Audio.class);
+        Audio.create(lx);
         lx.registry.addPattern(ZipStripPattern.class);
         lx.registry.addPattern(HolyTrinitiesPattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
 
-        // IMHO it's great this exists, and should be made public and happen by default on project load
+        AudioModulators.initialize(lx);
+
+        // todo: can I loop back osc query message?
         lx.addProjectListener((file, change) -> {
             if (change == LX.ProjectListener.Change.OPEN) {
                 oscQueryAll(lx);
@@ -34,7 +41,7 @@ public class LXPluginIQE implements LXPlugin {
         });
     }
 
-    // IMHO it's great this exists, and should be made public and happen by default on project load
+    // todo: can I loop back osc query message?
     public static void oscQueryAll(LX lx) {
         int index = 1;
         LXComponent component;
@@ -45,7 +52,7 @@ public class LXPluginIQE implements LXPlugin {
         }
     }
 
-    // IMHO it's great this exists, and should be made public and happen by default on project load
+    // todo: can I loop back osc query message?
     public static void oscQuery(Set<Integer> visited, LX lx, LXComponent component) {
         if (!visited.contains(component.getId())) {
             visited.add(component.getId());
