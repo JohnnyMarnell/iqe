@@ -15,8 +15,11 @@ import java.util.Set;
 /**
  * Basically a one-shot / click type of parameter / synchronization system,
  * mappable from Tempo or Hit detect type modulators.
+ *
+ * Meant to abstract away sync and timing, so patterns are easier to write,
+ * and control / interact with / choreograph.
  */
-// todo: bulletproof this to act like a click modulator, 1 for one tick 0 all else
+// todo: Allow momentary button behavior and firing (e.g. trigger button held, for "fire" effect especially)
 public class Sync extends CompoundParameter implements LXParameterListener {
     public final TriggerParameter trigger = new TriggerParameter("trigger");
 
@@ -27,18 +30,22 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     public Tempo.Division division = Tempo.Division.QUARTER;
     private long lastTrigger = -1;
     private long minTriggerWaveDetectDelayMs = 1;
+    private boolean tempoLock = true;
+    private boolean variableDivision = true;
 
     private int step = 0;
     private Integer staticSteps;
     // We might want multiple patterns to re-use same sync objects?
     private final Set<String> components = new HashSet<>();
 
+    // todo: Builder pattern, easy constructors
     public Sync(LXPattern pattern) {
-        this(pattern, null);
+        this(pattern, null, true, true);
     }
-    public Sync(LXPattern pattern, Integer staticSteps) {
+    public Sync(LXPattern pattern, Integer staticSteps, boolean tempoLock, boolean variableDivision) {
         super("sync", 0, 1);
         this.staticSteps = staticSteps;
+        this.tempoLock = tempoLock;
         components.add(pattern.getLabel());
         pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
         Audio.get().addEndTask(deltaMs -> triggering = false);
@@ -58,10 +65,14 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     }
 
     private void detectAndFireTrigger() {
-        // Check for peak wave input
-        long now = Audio.now();
-        if (now - lastTrigger > minTriggerWaveDetectDelayMs && getValue() >= 0.95) {
-            markTriggering();
+        // Allow for checking a wave signal as well, try to detect cycle
+        //   (only if this Sync's compound parameter "sync" is exposed and being driven. I think
+        //    I prefer the trigger approach, which is currently only in use)
+        if (!triggering) {
+            long now = Audio.now();
+            if (now - lastTrigger > minTriggerWaveDetectDelayMs && getValue() > 0 && getValue() <= 0.05) {
+                markTriggering();
+            }
         }
 
         if (triggering) {
@@ -77,9 +88,9 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         LOG.debug("Sync onTrigger");
         advance();
         long now = Audio.now();
-        if (lastTrigger > 0) {
+        if (lastTrigger > 0 && variableDivision) {
             Tempo.Division division = Audio.get().closestTempoDivision(now - lastTrigger);
-            // todo: Might not want to update this if manual (click or midi/osc message) trigger, but
+            // todo: Might not want to update this if manually triggered (click or midi/osc message), but
             //      also don't want to clutter the UI
             if (division != this.division) {
                 LOG.info("Sync division {} for {}, prev: {}", this.division, components, division);
@@ -105,8 +116,11 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     public int advance() {
         if (staticSteps != null) return advance(staticSteps);
 
+        // this is probably wrong
         double timeSignatureNumerator = Audio.get().lx.engine.tempo.beatsPerMeasure.getValue();
-        return advance((int) (division.multiplier * timeSignatureNumerator));
+        int steps = (int) (division.multiplier * timeSignatureNumerator);
+        if (steps == 0) steps = 4;
+        return advance(steps);
     }
 
     public void markTriggering() {
@@ -115,16 +129,11 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     }
 
     public boolean stale() {
-        long now = Audio.now();
-        long diff = now - lastTrigger;
-        double periodMs = Audio.get().periodOf(division);
-        boolean stale = diff > periodMs;
-//        if (stale) LOG.info("Sync became stale");
-        return stale;
+        return !tempoLock && basis() >= 1.;
     }
 
     public double basis() {
-        return Audio.get().lx.engine.tempo.getBasis(division);
+        return tempoLock ? Audio.get().lx.engine.tempo.getBasis(division) : (Audio.now() - lastTrigger) / Audio.get().periodOf(division);
     }
 
     @Override

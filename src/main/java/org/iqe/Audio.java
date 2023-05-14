@@ -24,7 +24,7 @@ public class Audio implements Tempo.Listener {
 
     public final LX lx;
     public final TEAudioPattern teEngine;
-    private long lastBassHit = 0;
+    public long lastBassHit = 0;
 
     public double bpm = 120.0d;
     /* period is millis of 1 beat */
@@ -117,7 +117,6 @@ public class Audio implements Tempo.Listener {
         //   with built-in damping used, wouldn't get you there already?
 
         if (bassHit()) {
-            AudioModulators.boots.trigger();
             double bpm = 0;
             if (lastBassHit != 0) {
                 double secondsPerBeat = (now - lastBassHit) / 1_000.0d;
