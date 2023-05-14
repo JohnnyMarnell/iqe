@@ -26,16 +26,17 @@ public class LXPluginIQE implements LXPlugin {
     @Override
     public void initialize(LX lx) {
         this.lx = lx;
-        Audio.create(lx);
+        Audio.initialize(lx);
+        AudioModulators.initialize(lx);
         lx.registry.addPattern(ZipStripPattern.class);
         lx.registry.addPattern(HolyTrinitiesPattern.class);
+        lx.registry.addPattern(PillarFirePattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
-
-        AudioModulators.initialize(lx);
 
         // todo: can I loop back osc query message?
         lx.addProjectListener((file, change) -> {
             if (change == LX.ProjectListener.Change.OPEN) {
+                LOG.info("Project open");
                 oscQueryAll(lx);
             }
         });
