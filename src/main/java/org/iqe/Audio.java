@@ -5,6 +5,10 @@ import heronarts.lx.Tempo;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.utils.LXUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static java.lang.Math.PI;
 import static java.lang.Math.sin;
 
@@ -18,13 +22,17 @@ public class Audio implements Tempo.Listener {
     // todo: barves.
     private static Audio instance = null;
 
-    private final LX lx;
+    public final LX lx;
     public final TEAudioPattern teEngine;
     private long lastBassHit = 0;
 
-    double bpm = 120.0d;
+    public double bpm = 120.0d;
     /* period is millis of 1 beat */
-    double period = 60.0d / bpm * 1_000d;
+    public double period = 60.0d / bpm * 1_000d;
+
+    public static interface Task { void run(double deltaMs); }
+    private final List<Task> startTasks = new ArrayList<>();
+    private final List<Task> endTasks = new ArrayList<>();
     final TempoClick[] clicks = new TempoClick[Tempo.Division.values().length];
 
     /** LX seems inheritance heavy, so try using a Global, always on effect */
@@ -45,6 +53,17 @@ public class Audio implements Tempo.Listener {
         lx.engine.tempo.bpm.addListener(this::onBpm, true);
     }
 
+    public Tempo.Division closestTempoDivision(double periodMillis) {
+        return Arrays.stream(Tempo.Division.values())
+                .min((lhs, rhs) -> {
+                    double period = lx.engine.tempo.period.getValue();
+                    double lDiff = Math.abs((periodMillis / lhs.multiplier) - period);
+                    double rDiff = Math.abs((periodMillis / rhs.multiplier) - period);
+                    return (int) (lDiff - rDiff);
+                }).orElseThrow();
+    }
+
+    /** I think this is tempo sync + locked clicking */
     public static class TempoClick {
         private final LX lx;
         public int clicks = 0;
@@ -68,6 +87,8 @@ public class Audio implements Tempo.Listener {
     }
 
     public void run(double deltaMs) {
+        Arrays.stream(clicks).parallel().forEach(TempoClick::tick);
+
         long now = lx.engine.nowMillis;
         teEngine.computeAudio(deltaMs);
 
@@ -104,9 +125,28 @@ public class Audio implements Tempo.Listener {
                 bpm = beatsPerSecond * 60.0d;
             }
             lastBassHit = now;
+            LOG.debug("Bass hit detected");
             LX.log("BASS HIT! High varying implied bpm: " + bpm);
         }
 
+        startTasks.stream().parallel().forEach(task -> task.run(deltaMs));
+    }
+
+    public void addStartTask(Task task) {
+        startTasks.add(task);
+    }
+
+    public void addEndTask(Task task) {
+        endTasks.add(task);
+    }
+
+    public void engineLoop(double deltaMs) {
+        LOG.debug("LX Engine loop task, post global modulators");
+    }
+
+    public void engineLoopEnd(double deltaMs) {
+        LOG.debug("Last phase, Master Audio Effect space");
+        endTasks.stream().parallel().forEach(task -> task.run(deltaMs));
     }
     public boolean click(Tempo.Division division) {
         return clicks[division.ordinal()].isOn;
@@ -114,6 +154,10 @@ public class Audio implements Tempo.Listener {
 
     public double basis(Tempo.Division division) {
         return lx.engine.tempo.getBasis(division);
+    }
+
+    public double periodOf(Tempo.Division division) {
+        return period / division.multiplier;
     }
 
     private void refresh() {
@@ -137,13 +181,15 @@ public class Audio implements Tempo.Listener {
 
     public void onBpm(LXParameter bpm) {
         this.bpm = bpm.getValue();
-        LX.log("Tempo BPM: " + this.bpm);
+        LOG.debug("Tempo bpm changed");
+        LOG.info("Tempo BPM: {}", this.bpm);
     }
 
     public void onPeriod(LXParameter period) {
         this.period = period.getValue();
         updateFromPeriod();
-        LX.log("Tempo period (ms of 1 beat): " + this.period);
+        LOG.debug("Tempo period changed");
+        LOG.info("Tempo period (ms of 1 beat): {}", this.period);
     }
 
     private void updateFromPeriod() {
@@ -178,11 +224,14 @@ public class Audio implements Tempo.Listener {
 //        super.onDisable();
 //    }
 
+    public static long now() {
+        return instance.lx.engine.nowMillis;
+    }
     public static Audio get() {
         return instance;
     }
 
-    public static void create(LX lx) {
+    public static void initialize(LX lx) {
         if (instance != null) throw new IllegalStateException("HighlanderException, there can only be one, "
                     + "who would've ever thought static singletons were a bad idea...");
         instance = new Audio(lx);

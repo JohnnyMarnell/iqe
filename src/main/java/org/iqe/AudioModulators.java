@@ -4,11 +4,15 @@ import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
+import heronarts.lx.audio.BandGate;
+import heronarts.lx.effect.LXEffect;
 import heronarts.lx.modulator.*;
-import heronarts.lx.parameter.MutableParameter;
+import heronarts.lx.parameter.*;
 import heronarts.lx.utils.LXUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Work in Progress.
@@ -43,19 +47,23 @@ public class AudioModulators {
     public static BassAvg bassAvg;
     public static TrebleAvg trebleAvg;
 
+    public static GlobalClick globalClick;
     public static QuarterClick quarterClick;
     public static HalfClick halfClick;
     public static WholeClick wholeClick;
 
     public static BootsHit bootsHit;
 
+    public static Controls controls;
+
     public static void initialize(LX lx) {
         AudioModulators.lx = lx;
         Arrays.stream(AudioModulators.class.getFields())
                 .filter(field -> LXModulator.class.isAssignableFrom(field.getType()))
-//                .peek(field -> LX.log("Audio modulator: " + field.getType().getSimpleName()))
                 .forEach(field -> lx.registry.addModulator(field.getType().asSubclass(LXModulator.class)));
         lx.registry.addModulator(Root.class);
+        lx.registry.addEffect(Controls.class);
+        lx.engine.addLoopTask(deltaMs -> Audio.get().engineLoop(deltaMs));
     }
 
     private static void register(LXComponent component) {
@@ -76,14 +84,13 @@ public class AudioModulators {
     }
 
     /** Tempo syncing is tricky, we want it centralized and uniform.
-     *  The modulators probably come first, so adding this "Root" to tick the Audio engine */
-    @LXCategory("Anal-yzed") @LXModulator.Global("Root") @LXModulator.Device("Root")
+     *  The modulators seem to come first, so adding this "Root" to tick the Audio engine,
+     *  main entry point for us */
+    @LXCategory("NO_TOUCHY") @LXModulator.Global("NO_TOUCHY") @LXModulator.Device("Root")
     public static class Root extends Gauge {
         @Override
         protected double computeValue(double deltaMs, double basis) {
-            for (Audio.TempoClick click : Audio.get().clicks) {
-                click.tick();
-            }
+            LOG.debug("Root Modulator tick");
             Audio.get().run(deltaMs);
             return super.computeValue(deltaMs, basis);
         }
@@ -94,9 +101,38 @@ public class AudioModulators {
         }
     }
 
+    /** A lot of the finagling and hacky stuff here is because I don't yet know about proper UI
+     *  and organization. Adding a global effect that I can throw controls into */
+    public static class Controls extends LXEffect {
+
+        public static final List<String> clicks = new ArrayList<>();
+        static {
+            clicks.add("BASS");
+            Arrays.stream(Tempo.Division.values()).forEach(div -> clicks.add(div.toString()));
+        }
+        public static final DiscreteParameter defaultClick =
+                new DiscreteParameter("click", clicks.toArray(new String[0]))
+                        .setDescription("Tempo division (quantize) amount or triggering (e.g. from bass) that default / global setting uses.");
+        public Controls(LX lx) {
+            super(lx);
+            this.label.setValue("Global Controls");
+            this.setDescription("Global / default control panel");
+            this.addParameter("sync", defaultClick);
+
+            defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
+
+            register(this);
+        }
+
+        @Override
+        protected void run(double deltaMs, double dampedAmount) {
+            Audio.get().engineLoopEnd(deltaMs);
+        }
+    }
+
     /** Meant to be a one shot pulse. Can have a shape to the LFO when it triggers */
-    public static class Trigger extends VariableLFO {
-        public Trigger() {
+    public static class TriggeredLIFO extends VariableLFO {
+        public TriggeredLIFO() {
             label.setValue(getClass().getSimpleName(), true);
             setPeriod(AudioModulators.lx.engine.tempo.period);
             setPolarity(Polarity.UNIPOLAR);
@@ -135,9 +171,7 @@ public class AudioModulators {
         @Override
         protected double computeValue(double deltaMs, double basis) {
             double val = val();
-            if (loop() || finished()) {
-                this.target.setValue(val());
-            }
+            this.target.setValue(val());
             this.damper.loop(deltaMs);
             return !damping.isOn() ? val : LXUtils.constrain(this.damper.getValue(), 0, 1);
         }
@@ -169,8 +203,53 @@ public class AudioModulators {
         }
     }
 
+    /**
+     * This modulator is mappable / provides automation as both trigger event and parameter output (the latter
+     * same as Click modulator, 1.0 exactly per trigger). Jerry rigging BandGate UI since it has trigger + modulator
+     * outs.
+     */
+    public abstract static class Trigger extends BandGate {
+        abstract boolean shouldTrigger();
+
+        public Trigger() {
+            super(Audio.get().lx);
+        }
+
+        @Override
+        protected double computeValue(double deltaMs) {
+            boolean triggering = shouldTrigger();
+            this.getTriggerSource().setValue(triggering);
+            return triggering ? 1 : 0;
+        }
+    }
+
+    /**
+     * Easy click / tempo based triggers, per some division
+     */
+    public static class TempoTrigger extends Trigger {
+        final private Tempo.Division division;
+        public TempoTrigger(Tempo.Division division) {
+            this.division = division;
+        }
+
+        @Override
+        boolean shouldTrigger() {
+            return Audio.get().click(division);
+        }
+    }
+    @LXCategory("Rhythm") @LXModulator.Global("GlobalClick") @LXModulator.Device("GlobalClick")
+    public static class GlobalClick extends Trigger {
+        @Override
+        boolean shouldTrigger() {
+            LOG.debug("Global click tick");
+            int option = Controls.defaultClick.getValuei();
+            boolean triggering = option == 0 ? Audio.get().bassHit() : Audio.get().click(Tempo.Division.values()[option - 1]);
+            return triggering;
+        }
+    }
+
     @LXCategory("Rhythm") @LXModulator.Global("Boots") @LXModulator.Device("Boots")
-    public static class Boots extends Trigger { }
+    public static class Boots extends TriggeredLIFO { }
 
     @LXCategory("Rhythm") @LXModulator.Global("BootsHit") @LXModulator.Device("BootsHit")
     public static class BootsHit extends Hit { public boolean isOn() { return Audio.get().bassHit(); } }
@@ -194,9 +273,18 @@ public class AudioModulators {
     public static class Triplet extends Beat { public Triplet() { super(Tempo.Division.QUARTER_TRIPLET); } }
 
     @LXCategory("Rhythm") @LXModulator.Global("QuarterClick") @LXModulator.Device("QuarterClick")
-    public static class QuarterClick extends Click { public QuarterClick() { super(Tempo.Division.QUARTER_TRIPLET); } }
+    public static class QuarterClick extends TempoTrigger {
+        @Override
+        boolean shouldTrigger() {
+            LOG.debug("QuarterClick tick");
+            return super.shouldTrigger();
+        }
+
+        public QuarterClick() { super(Tempo.Division.QUARTER);
+
+    } }
     @LXCategory("Rhythm") @LXModulator.Global("HalfClick") @LXModulator.Device("HalfClick")
-    public static class HalfClick extends Click { public HalfClick() { super(Tempo.Division.HALF); } }
+    public static class HalfClick extends TempoTrigger { public HalfClick() { super(Tempo.Division.HALF); } }
     @LXCategory("Rhythm") @LXModulator.Global("WholeClick") @LXModulator.Device("WholeClick")
     public static class WholeClick extends Click { public WholeClick() { super(Tempo.Division.WHOLE); } }
 

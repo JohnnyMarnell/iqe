@@ -2,55 +2,41 @@ package org.iqe;
 
 import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
-import heronarts.lx.Tempo;
 import heronarts.lx.color.LXColor;
-import heronarts.lx.model.LXPoint;
-import heronarts.lx.parameter.BooleanParameter;
-import heronarts.lx.parameter.EnumParameter;
 import heronarts.lx.pattern.LXPattern;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.iqe.Geometry.*;
+
 @LXCategory(LXCategory.TEST)
 public class HolyTrinitiesPattern extends LXPattern
 {
-    public static final BooleanParameter bass = new BooleanParameter("bassOn", false);
-    public static final EnumParameter<Tempo.Division> division = new EnumParameter<>("tdiv", Tempo.Division.QUARTER);
-
-    private int index;
+    public final Sync sync;
     private List<List<Integer>> groups;
     private List<Integer> order;
 
     public HolyTrinitiesPattern(LX lx) {
         super(lx);
-        this.index = 0;
-        addParameter("bassOn", bass);
-        addParameter("tdiv", division);
         initGroupsAndOrders();
-    }
-
-    public int nextIndex() {
-        boolean advance = bass.isOn() ? AudioModulators.bootsHit.isOn() : Audio.get().click(division.getEnum());
-        return advance ? index + 1 : index;
+        this.sync = new Sync(this, order.size());
     }
 
     @Override
     protected void run(double deltaMs) {
-        for (LXPoint p : model.points) {
-            colors[p.index] = LXColor.rgba(150, 150, 150, 255);
-        }
+        // First dim all colors on all points
+        colorize(this, p -> LXColor.grayn(0.60));
 
-        this.index = nextIndex() % order.size();
-
-        // highlight group
-        for (int fixture : groups.get(order.get(index))) {
-            for (LXPoint p : model.children[fixture].points) {
-                colors[p.index] = LXColor.rgba(255, 255, 255, 255);
-            }
-        }
+        // Then highlight active group
+        int highlightAlpha = LXColor.WHITE;
+        List<Integer> stripIndexes = groups.get(order.get(sync.step()));
+        stripIndexes.stream()
+                .flatMap(stripIndex -> childPoints(this, stripIndex))
+                .forEach(point -> colors[point.index] = highlightAlpha);
     }
 
+    // todo: make this configurable, and more than triangles
     void initGroupsAndOrders() {
         // build all twelve triangles as groups
         groups = new ArrayList<>();

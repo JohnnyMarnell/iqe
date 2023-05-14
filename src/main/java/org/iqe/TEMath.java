@@ -65,6 +65,7 @@ public class TEMath {
     public static double easeOutPow(double basis, double normalizedPower) {
         // Rescaling normalizedPower gives better fingerspitzengefühl
         double scaledPow = 1 + 40 * Math.pow(normalizedPower, 5);
+        scaledPow = LXUtils.constrain(scaledPow, 0.001, scaledPow);
         return Math.pow(basis, 1. / scaledPow);
     }
 
