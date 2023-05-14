@@ -20,7 +20,7 @@ public class HolyTrinitiesPattern extends LXPattern
     public HolyTrinitiesPattern(LX lx) {
         super(lx);
         initGroupsAndOrders();
-        this.sync = new Sync(this, order.size());
+        this.sync = new Sync(this, order.size(), true, true);
     }
 
     @Override
