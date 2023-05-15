@@ -31,6 +31,7 @@ public class LXPluginIQE implements LXPlugin {
         lx.registry.addPattern(ZipStripPattern.class);
         lx.registry.addPattern(HolyTrinitiesPattern.class);
         lx.registry.addPattern(PillarFirePattern.class);
+        lx.registry.addPattern(BouncingDotsPattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
 
         // todo: can I loop back osc query message?
@@ -62,6 +63,12 @@ public class LXPluginIQE implements LXPlugin {
                 ((LXModulationEngine) component).getModulators().forEach(m -> oscQuery(visited, lx, m));
             }
             component.children.values().forEach(c -> oscQuery(visited, lx, component));
+        }
+    }
+
+    public static class LegacyMainPApplet {
+        public static void main(String args[]) {
+            PApplet.main("titanicsend.app.TEApp", args);
         }
     }
 }

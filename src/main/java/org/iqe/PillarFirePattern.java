@@ -18,10 +18,10 @@ public class PillarFirePattern extends LXPattern {
     protected void run(double v) {
         colorize(this, point -> LXColor.WHITE);
         if (sync.stale()) return;
-        
+
         // todo: trying different ease / ramp functions for "fire" motion upward
-//        double fireHeight = sync.basis();
-//        double fireHeight = TEMath.easeOutPow(sync.basis(), .78);
+        // double fireHeight = sync.basis();
+        // double fireHeight = TEMath.easeOutPow(sync.basis(), .78);
         double fireHeight = Math.pow(2, 4 * (sync.basis() - 1));
 
         int fireColor = LXColor.rgba(255, 255, 255, (int) fireHeight * 255);
