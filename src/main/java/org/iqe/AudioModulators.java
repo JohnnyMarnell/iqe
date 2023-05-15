@@ -104,22 +104,29 @@ public class AudioModulators {
     // todo: random to-do, add to audio engine (and modulators? tho not sure I could "script" what I want thru UI)
     //     a bass drop out and re-enter by counting hits
     public static class Controls extends LXEffect {
+        public static final List<String> clicks = buildClicks();
+        public static final DiscreteParameter defaultClick =
+                new DiscreteParameter("syncMode", clicks.toArray(new String[0]))
+                        .setDescription("Tempo division (quantize) amount or triggering (e.g. from bass) that default / global setting uses.");
+        public static final BooleanParameter bassDynamics = new BooleanParameter("bassDynamics")
+                .setDescription("Whether or not overall mood / energy can respond to bass pattern changes (e.g. drop)")
+                .setValue(true);
+
+        public static final TriggerParameter build = new TriggerParameter("build")
+                .setDescription("Trigger a build up dynamic event");
+        public static final TriggerParameter highIntensity = new TriggerParameter("highIntensity")
+                .setDescription("Trigger a high intensity dynamic event");
+
         public static final int BASS = 0;
         public static final int TEMPO = 1;
-
-        public static final List<String> clicks = new ArrayList<>();
-        static {
-            clicks.add(BASS, "BASS");
-            Arrays.stream(Tempo.Division.values()).forEach(div -> clicks.add(div.toString()));
-        }
-        public static final DiscreteParameter defaultClick =
-                new DiscreteParameter("click", clicks.toArray(new String[0]))
-                        .setDescription("Tempo division (quantize) amount or triggering (e.g. from bass) that default / global setting uses.");
         public Controls(LX lx) {
             super(lx);
             this.label.setValue("Global Controls");
             this.setDescription("Global / default control panel");
-            this.addParameter("sync", defaultClick);
+            this.addParameter("defaultSyncMode", defaultClick);
+            this.addParameter("bassDynamics", bassDynamics);
+            this.addParameter("build", build);
+            this.addParameter("highIntensity", highIntensity);
 
             defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
 
@@ -129,6 +136,13 @@ public class AudioModulators {
         @Override
         protected void run(double deltaMs, double dampedAmount) {
             Audio.get().engineLoopEnd(deltaMs);
+        }
+
+        private static List<String> buildClicks() {
+            List<String> clicks = new ArrayList<>();
+            clicks.add(BASS, "BASS");
+            Arrays.stream(Tempo.Division.values()).forEach(div -> clicks.add(div.toString()));
+            return clicks;
         }
     }
 
@@ -174,7 +188,7 @@ public class AudioModulators {
         }
 
         protected double period() {
-            return this.chance.getValue() / 100. * Audio.get().periodOf(Tempo.Division.WHOLE);
+            return this.chance.getValue() / 100. * Audio.periodOf(Tempo.Division.WHOLE);
         }
 
         protected double elapsedBasis() {

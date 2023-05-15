@@ -48,6 +48,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         this.tempoLock = tempoLock;
         components.add(pattern.getLabel());
         pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
+        // todo: unify these, static, one forever task
         Audio.get().addEndTask(deltaMs -> triggering = false);
         trigger.onTrigger(this::markTriggering);
 
@@ -55,7 +56,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         try {
             Method adder = LXComponent.class.getDeclaredMethod("addParameter", String.class, LXParameter.class);
             adder.setAccessible(true);
-            adder.invoke(pattern, "trigger", trigger);
+            adder.invoke(pattern, "syncTrigger", trigger);
 
             // shouldn't need this parameter anymore, trigger approach has been working
             // adder.invoke(pattern, "sync", this);
@@ -132,11 +133,11 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     //      maybe I should add more controls, like manual trigger + quantize select, including: time divisions obviously,
     //      whatever Global is at (and changes to), bass, infer from triggers (kind of like tap tempo?)
     public boolean stale() {
-        return tempoLock ? Audio.now() - lastTrigger > Audio.get().periodOf(Tempo.Division.WHOLE) : basis() >= 1.;
+        return tempoLock ? Audio.now() - lastTrigger > Audio.periodOf(Tempo.Division.WHOLE) : basis() >= 1.;
     }
 
     public double basis() {
-        return tempoLock ? Audio.get().lx.engine.tempo.getBasis(division) : (Audio.now() - lastTrigger) / Audio.get().periodOf(division);
+        return tempoLock ? Audio.get().lx.engine.tempo.getBasis(division) : (Audio.now() - lastTrigger) / Audio.periodOf(division);
     }
 
     @Override
