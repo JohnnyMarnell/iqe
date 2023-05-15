@@ -128,8 +128,11 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         this.triggering = true;
     }
 
+    // todo: yikers island...
+    //      maybe I should add more controls, like manual trigger + quantize select, including: time divisions obviously,
+    //      whatever Global is at (and changes to), bass, infer from triggers (kind of like tap tempo?)
     public boolean stale() {
-        return !tempoLock && basis() >= 1.;
+        return tempoLock ? Audio.now() - lastTrigger > Audio.get().periodOf(Tempo.Division.WHOLE) : basis() >= 1.;
     }
 
     public double basis() {
