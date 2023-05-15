@@ -1,44 +1,47 @@
 const OSC = require('osc-js')
 const express = require('express')
 
-function bridge(webPort = 80, wsPort = 8080, lxTo = 3030, lxFrom = 3131) {
-    // Open port for receiving OSC messages from LX
+function bridge(webPort = 80, wsPort = 8080, appTo = 3030, appFrom = 3131, exclude = null) {
+    // Open port for receiving OSC messages from APP
+    if (exclude) exclude = new RegExp(exclude, "gi")
     const last = {}
-    const lx = new OSC({plugin: new OSC.DatagramPlugin({ port: lxFrom, send: { port: lxTo } })})
-    lx.on('open', () => console.log('LX OSC echo listening on port', lxFrom))
-    lx.on('*', msg => last[msg.address] = msg)
-    lx.on('*', msg => !msg.address.startsWith('/lx/palette/swatch/color') && !msg.address.startsWith('/lx/color/hue')
-                       && console.log(msg.address, ...msg.args))
-    lx.open({ port: lxFrom })
+    const app = new OSC({plugin: new OSC.DatagramPlugin({ port: appFrom, send: { port: appTo } })})
+    app.on('open', () => console.log('OSC listening from server', exclude, app.options.plugin.options))
+    app.on('*', msg => last[msg.address] = msg)
+    app.on('*', msg => (!exclude || !msg.address.match(exclude)) && console.log('APP', msg.address, ...msg.args))
+    app.open({ port: appFrom })
 
-    // Open a websocket bridge, for web app send and receive bridging; wire to/from LX
+    // Open a websocket bridge, for web app send and receive bridging; wire to/from APP
     const oscBridge = new OSC({ plugin: new OSC.WebsocketServerPlugin({ port: wsPort, host: '0.0.0.0' }) })
     oscBridge.on('open', () => console.log('Bridge listening', oscBridge.options.plugin.options))
-    oscBridge.on('*', msg => lx.send(new OSC.Message(msg.address, ...msg.args)))
-    lx.on('*', msg => oscBridge.send(new OSC.Message(msg.address, ...msg.args)))
-    oscBridge.on('*', msg => console.log(msg.address, ...msg.args))
+    oscBridge.on('*', msg => app.send(new OSC.Message(msg.address, ...msg.args)))
+    app.on('*', msg => oscBridge.send(new OSC.Message(msg.address, ...msg.args)))
+    oscBridge.on('*', msg => console.log('WSC', msg.address, ...msg.args))
     oscBridge.open()
 
     // Start a webserver to serve the app
-    const app = express()
-    app.use('/', express.static('./dist'))
-    app.use('/state', (req, res) => res.json(last))
-    app.listen(webPort, () => console.log('Web server listening on port', webPort))
+    const expressApp = express()
+    expressApp.use('/', express.static('./dist'))
+    expressApp.use('/state', (req, res) => res.json(last))
+    expressApp.listen(webPort, () => console.log('Web server listening on port', webPort))
 }
 
 function bridgeSend(path, data) {
-    const osc = new OSC()
+    console.log('test', path, data)
+    const osc = new OSC({ plugin: new OSC.WebsocketClientPlugin({ port: wsPort, host: '0.0.0.0' })})
     data = JSON.parse(data)
     if (!data.length) data = [ data ]    
-    osc.on('open', () => osc.send(new OSC.Message(path, ...data)))
+    osc.on('open', () => { osc.send(new OSC.Message(path, ...data)) ; osc.close() })
     osc.open()
 }
 
 const args = process.argv.join(' ').toLowerCase()
-const earg = (key, defaultVal) => parseInt(process.env[`IQE_${key}`] || defaultVal)
+const eargs = (key, defaultVal) => (key = `IQE_${key}`) && key in process.env ? process.env[key] : defaultVal
+const eargi = (key, defaultVal) => parseInt(eargs(key, defaultVal))
 
+const [webPort, wsPort, appTo, appFrom] = [eargi('WEB_PORT', 80), eargi('OSC_WS_PORT', 8080), eargi('APP_OSC_TO_PORT', 3030),
+    eargi('APP_OSC_FROM_PORT', 3131)], exclude = eargs('EXCLUDE', null)
 if (args.includes('bridge'))
-    bridge(earg('WEB_PORT', 80), earg('OSC_WS_PORT', 8080), earg('LX_OSC_TO_PORT', 3030),
-           earg('LX_OSC_FROM_PORT', 3131))
+    bridge(webPort, wsPort, appTo, appFrom, exclude)
 else if (args.includes('send'))
     bridgeSend(...process.argv.slice(3))

@@ -7,11 +7,14 @@ import heronarts.lx.modulation.LXModulationEngine;
 import heronarts.lx.modulator.LXModulator;
 import heronarts.lx.modulator.LXWaveshape;
 import heronarts.lx.modulator.VariableLFO;
-import heronarts.lx.osc.LXOscComponent;
+import heronarts.lx.osc.*;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.pattern.LXPattern;
 
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.function.Function;
 
@@ -28,47 +31,18 @@ public class LXPluginIQE implements LXPlugin {
         this.lx = lx;
         Audio.initialize(lx);
         AudioModulators.initialize(lx);
+
         lx.registry.addPattern(ZipStripPattern.class);
         lx.registry.addPattern(HolyTrinitiesPattern.class);
         lx.registry.addPattern(PillarFirePattern.class);
         lx.registry.addPattern(BouncingDotsPattern.class);
         lx.registry.addPattern(BassBreathPattern.class);
 
-        // todo: can I loop back osc query message?
         lx.addProjectListener((file, change) -> {
             if (change == LX.ProjectListener.Change.OPEN) {
-                LOG.info("Project open");
-                oscQueryAll(lx);
+                LOG.info("Project open, dumping OSC state for clients");
+                Audio.get().osc.command("/lx/osc-query");
             }
         });
-    }
-
-    // todo: can I loop back osc query message?
-    public static void oscQueryAll(LX lx) {
-        int index = 1;
-        LXComponent component;
-        Set<Integer> visited = new HashSet<>();
-        while ((component = lx.getComponent(index)) != null) {
-            oscQuery(visited, lx, component);
-            index++;
-        }
-    }
-
-    // todo: can I loop back osc query message?
-    public static void oscQuery(Set<Integer> visited, LX lx, LXComponent component) {
-        if (!visited.contains(component.getId())) {
-            visited.add(component.getId());
-            component.getParameters().forEach(lx.engine.osc::sendParameter);
-            if (component instanceof LXModulationEngine) {
-                ((LXModulationEngine) component).getModulators().forEach(m -> oscQuery(visited, lx, m));
-            }
-            component.children.values().forEach(c -> oscQuery(visited, lx, component));
-        }
-    }
-
-    public static class LegacyMainPApplet {
-        public static void main(String args[]) {
-            PApplet.main("titanicsend.app.TEApp", args);
-        }
     }
 }

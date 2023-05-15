@@ -1,0 +1,101 @@
+package org.iqe;
+
+import heronarts.lx.LX;
+import heronarts.lx.osc.LXOscEngine;
+import heronarts.lx.osc.LXOscListener;
+import heronarts.lx.osc.OscMessage;
+
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.*;
+
+/**
+ * Still more private inheritance hoops to jump through, create chained TX/RX OSC bridge,
+ * so we can receive clients and listen to output
+ */
+public class OscBridge {
+    private final LX lx;
+    public final LXOscEngine.Transmitter txToOscClients;
+    public final LXOscEngine.Receiver rxFromOscClients;
+    public final LXOscEngine.Receiver rxFromLxLoopback;
+
+    public final Map<String, OscMessage> state = new HashMap<>();
+    public final Map<String, Set<LXOscListener>> listeners = new HashMap<>();
+
+    public OscBridge(LX lx) {
+        this.lx = lx;
+
+        try {
+            int txToCP = 3333, rxFromCP = 3232, rxFromLoopbackP = lx.engine.osc.transmitPort.getValuei();
+            txToOscClients = lx.engine.osc.transmitter("0.0.0.0", txToCP);
+            rxFromOscClients = lx.engine.osc.receiver(rxFromCP);
+            rxFromLxLoopback = lx.engine.osc.receiver(rxFromLoopbackP);
+
+            LOG.info("Initialized OSC ports, TX to Clients: {}, RX From Clients: {}, Internal RX Loopback {}",
+                    txToCP, rxFromCP, rxFromLoopbackP);
+        } catch (SocketException | UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+
+        wire();
+    }
+
+    public void on(String path, LXOscListener listener) {
+        listeners.putIfAbsent(path, new HashSet<>());
+        listeners.get(path).add(listener);
+    }
+
+    public void fire(String path) {
+        OscMessage lastMessage = state.get(path);
+        if (lastMessage == null) {
+            lastMessage = new OscMessage(path);
+        }
+        final OscMessage message = lastMessage;
+        listeners.getOrDefault(path, Set.of()).forEach(l -> l.oscMessage(message));
+    }
+
+    public void command(String path) {
+        command(new OscMessage(path).add(1.));
+    }
+    public void command(String path, float data) {
+        command(new OscMessage(path).add(data));
+    }
+    public void command(String path, double data) {
+        command(new OscMessage(path).add(data));
+    }
+
+    public void command(OscMessage msg) {
+        String path = msg.getAddressPattern().toString();
+        state.put(path, msg);
+        boolean handled = lx.engine.handleOscMessage(msg, path.split("/"), 2);
+        fire(path);
+        LOG.debug("Forwarded INCOMING OSC, handled {}, msg: {}", handled, msg);
+        if (!handled) throw new UnsupportedOperationException("Couldn't handle OSC message: " + msg);
+    }
+
+    public void sendMessage(String path, float data) {
+        lx.engine.osc.sendMessage(path, data);
+    }
+
+    public void sendMessage(String path, int data) {
+        lx.engine.osc.sendMessage(path, data);
+    }
+
+
+    public void wire() {
+        lx.engine.osc.addListener(msg -> LX.log("***** \n\n\n\n ***** Never works? OSC msg: " + msg));
+        rxFromOscClients.addListener(this::command);
+        rxFromLxLoopback.addListener(msg -> {
+            LOG.debug("Forwarding OUTGOING OSC msg: {}", msg);
+            String path = msg.getAddressPattern().toString();
+            state.put(path, msg);
+            fire(path);
+            try {
+                txToOscClients.send(msg);
+            } catch (IOException e) {
+                LX.error(e, "Error forwarding outgoing OSC message " + msg);
+            }
+        });
+    }
+}

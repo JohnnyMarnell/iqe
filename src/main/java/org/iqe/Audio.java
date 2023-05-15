@@ -23,6 +23,9 @@ public class Audio implements Tempo.Listener {
     private static Audio instance = null;
 
     public final LX lx;
+    public final OscBridge osc;
+    public final Orchestrator orchestrator;
+
     public final TEAudioPattern teEngine;
     public long lastBassHit = 0;
 
@@ -38,6 +41,8 @@ public class Audio implements Tempo.Listener {
     /** LX seems inheritance heavy, so try using a Global, always on effect */
     private Audio(LX lx) {
         this.lx = lx;
+        osc = new OscBridge(lx);
+        orchestrator = new Orchestrator(lx, osc);
 
         teEngine = new TEAudioPattern(lx);
 
@@ -128,7 +133,9 @@ public class Audio implements Tempo.Listener {
             LX.log("BASS HIT! High varying implied bpm: " + bpm);
         }
 
-        startTasks.stream().parallel().forEach(task -> task.run(deltaMs));
+        for (int i = startTasks.size() - 1; i >= 0; i--) {
+            startTasks.get(i).run(deltaMs);
+        }
     }
 
     public void addStartTask(Task task) {
@@ -137,6 +144,10 @@ public class Audio implements Tempo.Listener {
 
     public void addEndTask(Task task) {
         endTasks.add(task);
+    }
+
+    public void removeStartTask(Task task) {
+        startTasks.remove(task);
     }
 
     public void engineLoop(double deltaMs) {
@@ -155,8 +166,8 @@ public class Audio implements Tempo.Listener {
         return lx.engine.tempo.getBasis(division);
     }
 
-    public double periodOf(Tempo.Division division) {
-        return period / division.multiplier;
+    public static double periodOf(Tempo.Division division) {
+        return Audio.get().period / division.multiplier;
     }
 
     private void refresh() {
