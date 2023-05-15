@@ -1,4 +1,4 @@
-package org.iqe;
+package org.iqe.pattern;
 
 
 import heronarts.lx.LX;
@@ -8,6 +8,8 @@ import heronarts.lx.model.LXModel;
 import heronarts.lx.model.LXPoint;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.pattern.LXPattern;
+import org.iqe.Sync;
+import titanicsend.TEMath;
 
 /**
  * From TE TempoReactiveEdge

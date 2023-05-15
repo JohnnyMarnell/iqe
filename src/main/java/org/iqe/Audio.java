@@ -4,6 +4,8 @@ import heronarts.lx.LX;
 import heronarts.lx.Tempo;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.utils.LXUtils;
+import titanicsend.TEAudioPattern;
+import titanicsend.TEMath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +14,15 @@ import java.util.List;
 import static java.lang.Math.PI;
 import static java.lang.Math.sin;
 
-// todo: consolidate / organize with AudioModulators
+/**
+ * Main Audio engine class and logic.
+ * todo: Also has become a bit more than that, entry point to a lot of classes, change that?
+ */
+
 // todo: decide on Singleton-ify
-// todo: Add global modulators for patterns to switch between, with default division as well
-// todo: Clicks are mostly stable, I see rare jitters tho
-// todo: How do I "find" components in LX project / univers?
+// todo: How do I "find" components in LX project / universe?
+// todo: add to audio engine (and modulators? tho not sure I could "script" what I want thru UI)
+//     a bass drop out and re-enter by counting hits
 public class Audio implements Tempo.Listener {
 
     // todo: barves.
@@ -33,12 +39,11 @@ public class Audio implements Tempo.Listener {
     /* period is millis of 1 beat */
     public double period = 60.0d / bpm * 1_000d;
 
-    public static interface Task { void run(double deltaMs); }
+    public interface Task { void run(double deltaMs); }
     private final List<Task> startTasks = new ArrayList<>();
     private final List<Task> endTasks = new ArrayList<>();
     final TempoClick[] clicks = new TempoClick[Tempo.Division.values().length];
 
-    /** LX seems inheritance heavy, so try using a Global, always on effect */
     private Audio(LX lx) {
         this.lx = lx;
         osc = new OscBridge(lx);
@@ -61,9 +66,8 @@ public class Audio implements Tempo.Listener {
     public Tempo.Division closestTempoDivision(double periodMillis) {
         return Arrays.stream(Tempo.Division.values())
                 .min((lhs, rhs) -> {
-                    double period = lx.engine.tempo.period.getValue();
-                    double lDiff = Math.abs((periodMillis / lhs.multiplier) - period);
-                    double rDiff = Math.abs((periodMillis / rhs.multiplier) - period);
+                    double lDiff = Math.abs(periodOf(lhs) - periodMillis);
+                    double rDiff = Math.abs(periodOf(rhs) - periodMillis);
                     return (int) (lDiff - rDiff);
                 }).orElseThrow();
     }
@@ -167,12 +171,11 @@ public class Audio implements Tempo.Listener {
     }
 
     public static double periodOf(Tempo.Division division) {
-        return Audio.get().period / division.multiplier;
+        return divisionAppliedToPeriod(Audio.get().period, division);
     }
 
-    private void refresh() {
-        LX.log("DEBUG Audio refresh");
-        updateFromPeriod();
+    public static double divisionAppliedToPeriod(double periodMs, Tempo.Division division) {
+        return periodMs / division.multiplier;
     }
 
     public boolean bassHit() {
@@ -203,10 +206,8 @@ public class Audio implements Tempo.Listener {
     }
 
     private void updateFromPeriod() {
-        // Allow the beat detect to only trigger as fast as the tempo division
-        // bassRetriggerMs =  15./16 * lx.engine.tempo.period.getValue() / tempoDivision.getObject().multiplier;
-        // teEngine.bassRetriggerMs = 15./16 * period / beat.tempoDivision.getObject().multiplier;
-        teEngine.bassRetriggerMs = 15./16 * period / Tempo.Division.QUARTER.multiplier;
+        // Allow the beat detect to only trigger as fast as one beat
+        teEngine.bassRetriggerMs = 15./16 * divisionAppliedToPeriod(period, Tempo.Division.QUARTER);
     }
 
     // Any NA near beers brah?
@@ -221,18 +222,6 @@ public class Audio implements Tempo.Listener {
     public void onNudgeDown(LXParameter nudgeDown) {
 
     }
-
-//    @Override
-//    protected void onEnable() {
-//        LX.log("Audio Engine Init");
-//        refresh();
-//        super.onEnable();
-//    }
-//
-//    @Override
-//    protected void onDisable() {
-//        super.onDisable();
-//    }
 
     public static long now() {
         return instance.lx.engine.nowMillis;

@@ -2,10 +2,7 @@ package org.iqe;
 
 import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
-import heronarts.lx.parameter.CompoundParameter;
-import heronarts.lx.parameter.LXParameter;
-import heronarts.lx.parameter.LXParameterListener;
-import heronarts.lx.parameter.TriggerParameter;
+import heronarts.lx.parameter.*;
 import heronarts.lx.pattern.LXPattern;
 
 import java.lang.reflect.Method;
@@ -38,6 +35,8 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     // We might want multiple patterns to re-use same sync objects?
     private final Set<String> components = new HashSet<>();
 
+    public final FunctionalParameter periodMs;
+
     // todo: Builder pattern, easy constructors
     public Sync(LXPattern pattern) {
         this(pattern, null, true, true);
@@ -46,6 +45,13 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         super("sync", 0, 1);
         this.staticSteps = staticSteps;
         this.tempoLock = tempoLock;
+        this.variableDivision = variableDivision;
+        this.periodMs = new FunctionalParameter() {
+            @Override
+            public double getValue() {
+                return Audio.periodOf(division);
+            }
+        };
         components.add(pattern.getLabel());
         pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
         // todo: unify these, static, one forever task
@@ -89,8 +95,10 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         LOG.debug("Sync onTrigger");
         advance();
         long now = Audio.now();
+        double diff = now - lastTrigger;
+
         if (lastTrigger > 0 && variableDivision) {
-            Tempo.Division division = Audio.get().closestTempoDivision(now - lastTrigger);
+            Tempo.Division division = Audio.get().closestTempoDivision(diff);
             // todo: Might not want to update this if manually triggered (click or midi/osc message), but
             //      also don't want to clutter the UI
             if (division != this.division) {

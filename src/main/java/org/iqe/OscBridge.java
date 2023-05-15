@@ -46,6 +46,19 @@ public class OscBridge {
         listeners.get(path).add(listener);
     }
 
+    public void onTrigger(String path, LXOscListener listener) {
+        on(path, msg -> {
+            if (msg.getFloat() > 0) listener.oscMessage(msg);
+        });
+    }
+
+    public boolean toggle(String path) {
+        double val = state.getOrDefault(path, new OscMessage().add(0.)).getFloat();
+        val = val > 0 ? 0. : 1.0;
+        command(path, val);
+        return val > 0;
+    }
+
     public void fire(String path) {
         OscMessage lastMessage = state.get(path);
         if (lastMessage == null) {

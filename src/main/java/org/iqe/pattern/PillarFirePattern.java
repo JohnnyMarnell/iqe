@@ -1,8 +1,9 @@
-package org.iqe;
+package org.iqe.pattern;
 
 import heronarts.lx.LX;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.pattern.LXPattern;
+import org.iqe.Sync;
 
 import static org.iqe.Geometry.colorize;
 
@@ -16,7 +17,6 @@ public class PillarFirePattern extends LXPattern {
     // todo: figure out color blending to simplify this and all patterns
     @Override
     protected void run(double v) {
-        colorize(this, point -> LXColor.WHITE);
         if (sync.stale()) return;
 
         // todo: trying different ease / ramp functions for "fire" motion upward
@@ -26,10 +26,9 @@ public class PillarFirePattern extends LXPattern {
 
         int fireColor = LXColor.rgba(255, 255, 255, (int) fireHeight * 255);
 
-        // Ceiling stays as is / do nothing (white), darken pillar above fire, and light fire
+        // Ceiling stays as is / do nothing, darken pillar above fire, and light fire
         colorize(this, point ->
-                point.yn == 1. ? LXColor.WHITE :
-                point.yn > fireHeight ? LXColor.BLACK :
+                point.yn < 1. && point.yn > fireHeight ? LXColor.BLACK :
                 fireColor
         );
     }

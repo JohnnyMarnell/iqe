@@ -2,7 +2,7 @@
  * Taken from amazing Titanic's End repo!
  * https://github.com/titanicsend/LXStudio-TE
  */
-package org.iqe;
+package titanicsend;
 
 import java.util.ArrayList;
 import java.util.Arrays;

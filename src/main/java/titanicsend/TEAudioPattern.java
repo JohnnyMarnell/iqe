@@ -3,7 +3,7 @@
  * https://github.com/titanicsend/LXStudio-TE
  */
 
-package org.iqe;
+package titanicsend;
 
 import heronarts.lx.LX;
 import heronarts.lx.audio.GraphicMeter;
@@ -26,9 +26,9 @@ public class TEAudioPattern {
     // Fractions in 0..1 for the instantaneous frequency level this frame.
     // If we find this useful and track many more bands, a collection of ratio
     // tracker objects would make sense.
-    protected double volumeLevel;
-    protected double bassLevel;
-    protected double trebleLevel;
+    public double volumeLevel;
+    public double bassLevel;
+    public double trebleLevel;
 
     // One of the demo patterns allows the VJ to vary how many bass bands
     // are tracked.
@@ -36,9 +36,9 @@ public class TEAudioPattern {
 
     // Accumulate recent frequency band measurements into an exponentially
     // weighted moving average.
-    protected TEMath.EMA avgVolume = new TEMath.EMA(0.5, .01);
-    protected TEMath.EMA avgBass = new TEMath.EMA(0.2, .01);
-    protected TEMath.EMA avgTreble = new TEMath.EMA(0.2, .01);
+    public TEMath.EMA avgVolume = new TEMath.EMA(0.5, .01);
+    public TEMath.EMA avgBass = new TEMath.EMA(0.2, .01);
+    public TEMath.EMA avgTreble = new TEMath.EMA(0.2, .01);
 
     /* Ratios of the instantaneous frequency levels in bands to their recent
      * running average. Using a ratio like this helps auto-scale to various
@@ -52,16 +52,16 @@ public class TEAudioPattern {
      *
      * Values depend greatly on the audio content, but 0.2 to 3 are common.
      */
-    protected double volumeRatio = .2;
-    protected double bassRatio = .2;
-    protected double trebleRatio = .2;
+    public double volumeRatio = .2;
+    public double bassRatio = .2;
+    public double trebleRatio = .2;
 
-    protected double bassRetriggerMs;
+    public double bassRetriggerMs;
     private double msSinceBassRise = 0;
     // Whether we suspect this frame represents a steep rise in bass level
-    protected boolean bassHit = false;
+    public boolean bassHit = false;
 
-    protected TEAudioPattern(LX lx) {
+    public TEAudioPattern(LX lx) {
 //        super(lx);
         this.lx = lx;
         this.eq = lx.engine.audio.meter;
