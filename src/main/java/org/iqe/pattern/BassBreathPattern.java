@@ -1,4 +1,4 @@
-package org.iqe;
+package org.iqe.pattern;
 
 import heronarts.lx.LX;
 import heronarts.lx.audio.GraphicMeter;
@@ -10,7 +10,7 @@ import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.pattern.LXPattern; import heronarts.lx.utils.LXUtils; import java.util.List;
 
 /**
- * Mostly from ChatGPT. Though Audio device seems to be broken in Chromatik, unfortunately.
+ * Mostly from ChatGPT, not really useful
  */
 public class BassBreathPattern extends LXPattern {
     // Audio input
@@ -30,10 +30,10 @@ public class BassBreathPattern extends LXPattern {
         addParameter(brightness);
         addParameter(minBand);
         addParameter(numBands);
-        }
+    }
 
         @Override public void run(double deltaMs) {
-        // Get the bass levels from the audio input
+            // Get the bass levels from the audio input
             // double bassLevel = this.audioInput.getBuffer().getFFT().getBand(0);
             // double bassLevel = this.audioInput.getBand(0);
             double bassLevel = this.audioInput.getAverage((int) this.minBand.getValue(), (int) this.numBands.getValue());
@@ -47,7 +47,7 @@ public class BassBreathPattern extends LXPattern {
             mappedBrightness *= this.brightness.getValue();
 
             // Initialize the colors array
-//            int[] colors = new int[model.size];
+            // int[] colors = new int[model.size];
 
             // Get all the points in the model
             //

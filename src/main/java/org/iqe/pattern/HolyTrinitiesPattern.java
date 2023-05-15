@@ -1,9 +1,10 @@
-package org.iqe;
+package org.iqe.pattern;
 
 import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.pattern.LXPattern;
+import org.iqe.Sync;
 
 import java.util.ArrayList;
 import java.util.List;

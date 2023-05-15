@@ -7,6 +7,11 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+/**
+ * Here is where we can orchestrate actions, controls, and settings.
+ * Uses OSC hooks, so we have easy, up-to-date info about the running project state,
+ * plus ensures we can build easy clients.
+ */
 public class Orchestrator {
     private final OscBridge osc;
     private final LX lx;
@@ -20,6 +25,8 @@ public class Orchestrator {
     }
 
     // todo: Need exclusivity
+    // todo: LFO ramp control
+    // todo: optimize
     public void bindActions() {
         LOG.info("Binding Orchestrator OSC actions");
 
@@ -27,10 +34,13 @@ public class Orchestrator {
                 Audio.periodOf(Tempo.Division.EIGHT)));
         osc.on("/lx/mixer/master/effect/1/highIntensity", e -> rampParameterDown("Sparkle", "amount",
                 Audio.periodOf(Tempo.Division.HALF)));
+
+        osc.on("/lx/mixer/master/effect/1/pFire", e -> setParam("PillarFire", "syncTrigger", e.getFloat()));
+        osc.on("/lx/mixer/master/effect/1/bassBnc", e -> setParam("Hue + Saturation", "enabled", e.getFloat()));
     }
 
     public void setParam(String component, String param, double value) {
-        paths(component).forEach(p -> osc.command(p + "/" + param, value));
+        osc.command(path(component, param), value);
     }
 
     public void ramp(Consumer<Double> action, double periodMillis) {
@@ -67,6 +77,10 @@ public class Orchestrator {
     // todo: cache, make fast
     public String path(String componentLabel) {
         return paths(componentLabel).findAny().orElseThrow();
+    }
+
+    public String path(String componentLabel, String parameter) {
+        return path(componentLabel) + "/" + parameter;
     }
 
     public Stream<String> paths(String componentLabel) {

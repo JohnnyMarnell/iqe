@@ -1,22 +1,28 @@
-package org.iqe;
+package org.iqe.pattern;
 
 import heronarts.lx.LX;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.model.LXModel;
 import heronarts.lx.model.LXPoint;
+import heronarts.lx.modulator.SinLFO;
 import heronarts.lx.pattern.LXPattern;
+import org.iqe.Sync;
 
 public class BouncingDotsPattern extends LXPattern {
-    private final Sync sync;
+    protected final Sync sync;
+    protected final SinLFO phase;
+
     public BouncingDotsPattern(LX lx) {
         super(lx);
         sync = new Sync(this);
+        phase = new SinLFO(0, 1, sync.periodMs);
+        startModulator(phase);
     }
 
     @Override
     protected void run(double v) {
         if (sync.stale()) return;
-        double phase = Math.sin(2 * Math.PI * sync.basis()) / 2;
+        double phase = this.phase.getValue();
 
         int dotColor = LXColor.WHITE;
         int dotWidth = 10;

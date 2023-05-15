@@ -4,29 +4,20 @@ import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
-import heronarts.lx.effect.LXEffect;
 import heronarts.lx.modulator.*;
 import heronarts.lx.parameter.*;
 import heronarts.lx.utils.LXUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import static org.iqe.AudioModulators.Controls.BASS;
-import static org.iqe.AudioModulators.Controls.TEMPO;
+import static org.iqe.GlobalControls.BASS;
+import static org.iqe.GlobalControls.TEMPO;
 
 /**
- * Work in Progress.
- *
  * The goal of this is to have easy project-wide modulators available in the UI, and non duplicated across
  * patterns and other components. They also tie into the Audio engine's computations, ones borrowed from Titanic's End
  * and ones we've created.
- *
- * I think there's minor hiccup with click jump, can see it in ZipStripPattern sometimes.
- * And, sadly, I can't figure out how to properly wire any of the click type modulation to work with our
- * "step" approach.
- * Also would like to add these automatically, but I don't know LX internals enough, especially the UI code parts.
+ * They're re-using some UI from LX, rather than have to figure that out.
  */
 public class AudioModulators {
     private static LX lx;
@@ -50,7 +41,7 @@ public class AudioModulators {
 
     public static BootsClick bootsClick;
 
-    public static Controls controls;
+    public static GlobalControls controls;
 
     public static void initialize(LX lx) {
         AudioModulators.lx = lx;
@@ -58,11 +49,11 @@ public class AudioModulators {
                 .filter(field -> LXModulator.class.isAssignableFrom(field.getType()))
                 .forEach(field -> lx.registry.addModulator(field.getType().asSubclass(LXModulator.class)));
         lx.registry.addModulator(Root.class);
-        lx.registry.addEffect(Controls.class);
+        lx.registry.addEffect(GlobalControls.class);
         lx.engine.addLoopTask(deltaMs -> Audio.get().engineLoop(deltaMs));
     }
 
-    private static void register(LXComponent component) {
+    public static void register(LXComponent component) {
         Arrays.stream(AudioModulators.class.getFields())
                 .filter(field -> field.getType().equals(component.getClass()))
                 .forEach(field -> {
@@ -94,55 +85,6 @@ public class AudioModulators {
         @Override
         protected double val() {
             return Audio.get().teEngine.volumeLevel;
-        }
-    }
-
-    /** A lot of the finagling and hacky stuff here is because I don't yet know about proper UI
-     *  and organization. Adding a global effect that I can throw controls into */
-    // todo: move to its own class, start leveraging OSC and adding actions with trigger buttons
-    //      like, 8 bar ramp up sparkles, quick off sparkles (or any other kind of dynamics)
-    // todo: random to-do, add to audio engine (and modulators? tho not sure I could "script" what I want thru UI)
-    //     a bass drop out and re-enter by counting hits
-    public static class Controls extends LXEffect {
-        public static final List<String> clicks = buildClicks();
-        public static final DiscreteParameter defaultClick =
-                new DiscreteParameter("syncMode", clicks.toArray(new String[0]))
-                        .setDescription("Tempo division (quantize) amount or triggering (e.g. from bass) that default / global setting uses.");
-        public static final BooleanParameter bassDynamics = new BooleanParameter("bassDynamics")
-                .setDescription("Whether or not overall mood / energy can respond to bass pattern changes (e.g. drop)")
-                .setValue(true);
-
-        public static final TriggerParameter build = new TriggerParameter("build")
-                .setDescription("Trigger a build up dynamic event");
-        public static final TriggerParameter highIntensity = new TriggerParameter("highIntensity")
-                .setDescription("Trigger a high intensity dynamic event");
-
-        public static final int BASS = 0;
-        public static final int TEMPO = 1;
-        public Controls(LX lx) {
-            super(lx);
-            this.label.setValue("Global Controls");
-            this.setDescription("Global / default control panel");
-            this.addParameter("defaultSyncMode", defaultClick);
-            this.addParameter("bassDynamics", bassDynamics);
-            this.addParameter("build", build);
-            this.addParameter("highIntensity", highIntensity);
-
-            defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
-
-            register(this);
-        }
-
-        @Override
-        protected void run(double deltaMs, double dampedAmount) {
-            Audio.get().engineLoopEnd(deltaMs);
-        }
-
-        private static List<String> buildClicks() {
-            List<String> clicks = new ArrayList<>();
-            clicks.add(BASS, "BASS");
-            Arrays.stream(Tempo.Division.values()).forEach(div -> clicks.add(div.toString()));
-            return clicks;
         }
     }
 
@@ -188,7 +130,7 @@ public class AudioModulators {
         }
 
         protected double period() {
-            return this.chance.getValue() / 100. * Audio.periodOf(Tempo.Division.WHOLE);
+            return this.chance.getValue() / 100. * Audio.periodOf(Tempo.Division.EIGHT);
         }
 
         protected double elapsedBasis() {
@@ -232,6 +174,12 @@ public class AudioModulators {
             return Audio.get().basis(division);
         }
     }
+
+    /**
+     * There is a default / global click setting (Patterns and components can override, optionally),
+     * so this modulator modulates whatever that setting is courrently.
+     */
+    // todo: Make it actually delegate to the other Trigger instances
     @LXCategory("Rhythm") @LXModulator.Global("GlobalClick") @LXModulator.Device("GlobalClick")
     public static class GlobalClick extends Trigger {
 
@@ -239,11 +187,10 @@ public class AudioModulators {
         protected boolean shouldTrigger(double val) {
             LOG.debug("Global click tick");
             boolean triggering = false;
-            int option = Controls.defaultClick.getValuei();
+            int option = GlobalControls.defaultClick.getValuei();
             if (option == BASS) {
                 triggering = bootsClick.shouldTrigger(val);
             } else if (option >= TEMPO) {
-                // todo: use global modulator, even though would be same
                 triggering = Audio.get().click(Tempo.Division.values()[option - TEMPO]);
             }
             return triggering;
@@ -252,11 +199,10 @@ public class AudioModulators {
         @Override
         protected double val() {
             double val = 0.0;
-            int option = Controls.defaultClick.getValuei();
+            int option = GlobalControls.defaultClick.getValuei();
             if (option == BASS) {
                 val = bootsClick.val();
             } else if (option >= TEMPO) {
-                // todo: use global modulator, even though would be same
                 val = Audio.get().basis(Tempo.Division.values()[option - TEMPO]);
             }
             return val;
@@ -264,13 +210,18 @@ public class AudioModulators {
     }
 
     /**
-     * A hit is not sync-locked to tempo, it is triggered and ramps for some duration
-     * (usually one beat / quarter note), and can limit re-triggering
+     * A "hit" is not sync-locked to tempo, it is triggered and ramps for some duration
+     * (usually one beat / quarter note), and can limit re-triggering. So far BootsClick is
+     * a modulator for bass "hit".
      */
-
-
+    // todo: hooboy... this and basically anything else that does tempo / period math needs to obviously
+    //    be updated with tempo changes (so, a wire listener)
     @LXCategory("Rhythm") @LXModulator.Global("BootsClick") @LXModulator.Device("BootsClick")
     public static class BootsClick extends Trigger {
+        public BootsClick() {
+            setPeriodFrom(Tempo.Division.QUARTER);
+        }
+
         @Override
         protected boolean shouldTrigger(double val) {
             return Audio.get().bassHit();
