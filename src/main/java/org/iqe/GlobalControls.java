@@ -35,6 +35,12 @@ public class GlobalControls extends LXEffect {
     public static final TriggerParameter pFire = new TriggerParameter("pFire")
             .setDescription("Trigger a pillar fire event");
 
+    public static final TriggerParameter pattern = new TriggerParameter("pattern")
+            .setDescription("Cycle next pattern");
+
+    public static final TriggerParameter color = new TriggerParameter("color")
+            .setDescription("Cycle next color");
+
     public static final int BASS = 0;
     public static final int TEMPO = 1;
 
@@ -48,6 +54,8 @@ public class GlobalControls extends LXEffect {
         this.addParameter("build", build);
         this.addParameter("highIntensity", highIntensity);
         this.addParameter("pFire", pFire);
+        this.addParameter("pattern", pattern);
+        this.addParameter("color", color);
 
         defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
 

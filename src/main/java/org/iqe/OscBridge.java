@@ -69,10 +69,10 @@ public class OscBridge {
     }
 
     public void command(String path) {
-        command(new OscMessage(path).add(1.));
+        command(path, 1.);
     }
     public void command(String path, float data) {
-        command(new OscMessage(path).add(data));
+        command(path, (double) data);
     }
     public void command(String path, double data) {
         command(new OscMessage(path).add(data));
