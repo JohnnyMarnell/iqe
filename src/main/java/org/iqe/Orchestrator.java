@@ -37,6 +37,9 @@ public class Orchestrator {
 
         osc.on("/lx/mixer/master/effect/1/pFire", e -> setParam("PillarFire", "syncTrigger", e.getFloat()));
         osc.on("/lx/mixer/master/effect/1/bassBnc", e -> setParam("Hue + Saturation", "enabled", e.getFloat()));
+        osc.onTrigger("/lx/mixer/master/effect/1/color", e -> osc.command("/lx/palette/triggerSwatchCycle"));
+        osc.onTrigger("/lx/mixer/master/effect/1/pattern", e -> osc.command("/lx/mixer/channel/1/triggerPatternCycle"));
+
     }
 
     public void setParam(String component, String param, double value) {
