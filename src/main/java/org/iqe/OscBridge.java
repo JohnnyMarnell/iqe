@@ -12,24 +12,27 @@ import java.util.*;
 
 /**
  * Still more private inheritance hoops to jump through, create chained TX/RX OSC bridge,
- * so we can receive clients and listen to output
+ * so we can receive clients and listen to and store output
  */
 public class OscBridge {
+    public static final String QUERY = "/lx/osc-query";
     private final LX lx;
-    public final LXOscEngine.Transmitter txToOscClients;
-    public final LXOscEngine.Receiver rxFromOscClients;
+    public final LXOscEngine.Transmitter txToClients;
+    public final LXOscEngine.Receiver rxFromClients;
     public final LXOscEngine.Receiver rxFromLxLoopback;
 
     public final Map<String, OscMessage> state = new HashMap<>();
     public final Map<String, Set<LXOscListener>> listeners = new HashMap<>();
+
+    private boolean listeningToEvents = true;
 
     public OscBridge(LX lx) {
         this.lx = lx;
 
         try {
             int txToCP = 3333, rxFromCP = 3232, rxFromLoopbackP = lx.engine.osc.transmitPort.getValuei();
-            txToOscClients = lx.engine.osc.transmitter("0.0.0.0", txToCP);
-            rxFromOscClients = lx.engine.osc.receiver(rxFromCP);
+            txToClients = lx.engine.osc.transmitter("0.0.0.0", txToCP);
+            rxFromClients = lx.engine.osc.receiver(rxFromCP);
             rxFromLxLoopback = lx.engine.osc.receiver(rxFromLoopbackP);
 
             LOG.info("Initialized OSC ports, TX to Clients: {}, RX From Clients: {}, Internal RX Loopback {}",
@@ -60,6 +63,7 @@ public class OscBridge {
     }
 
     public void fire(String path) {
+        if (!listeningToEvents) return;
         OscMessage lastMessage = state.get(path);
         if (lastMessage == null) {
             lastMessage = new OscMessage(path);
@@ -78,8 +82,11 @@ public class OscBridge {
         command(new OscMessage(path).add(data));
     }
 
+    /** Obviously forward this on to the main LX OSC engine (via handleOscMessage method), but also
+          store this last state, and fire our event listeners */
     public void command(OscMessage msg) {
         String path = msg.getAddressPattern().toString();
+        if (QUERY.equals(path)) temporarilyDisableListeners();
         state.put(path, msg);
         boolean handled = lx.engine.handleOscMessage(msg, path.split("/"), 2);
         fire(path);
@@ -95,17 +102,32 @@ public class OscBridge {
         lx.engine.osc.sendMessage(path, data);
     }
 
+    private void temporarilyDisableListeners() {
+        listeningToEvents = false;
+        Orchestrator.schedule(() -> listeningToEvents = true, 500);
+    }
 
-    public void wire() {
+    public void refresh() {
+        command(QUERY);
+    }
+
+    private void wire() {
+        // todo: Wish this did something, or there were some other hook to not have to chain Tx/Rx ?
         lx.engine.osc.addListener(msg -> LX.log("***** \n\n\n\n ***** Never works? OSC msg: " + msg));
-        rxFromOscClients.addListener(this::command);
+
+        // If a client sends a message, we should handle it and treat it as a command like we'd do
+        rxFromClients.addListener(this::command);
+
+        // If LX is sending out [VALUABLE] state over OSC, store the last state, fire the event
+        //   which will also use that last state (and trigger our event handlers), and, ofc, forward
+        //   on to any clients
         rxFromLxLoopback.addListener(msg -> {
             LOG.debug("Forwarding OUTGOING OSC msg: {}", msg);
             String path = msg.getAddressPattern().toString();
             state.put(path, msg);
             fire(path);
             try {
-                txToOscClients.send(msg);
+                txToClients.send(msg);
             } catch (IOException e) {
                 LX.error(e, "Error forwarding outgoing OSC message " + msg);
             }

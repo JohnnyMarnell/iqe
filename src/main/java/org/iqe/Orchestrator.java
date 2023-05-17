@@ -7,6 +7,8 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static org.iqe.Audio.bars;
+
 /**
  * Here is where we can orchestrate actions, controls, and settings.
  * Uses OSC hooks, so we have easy, up-to-date info about the running project state,
@@ -15,13 +17,12 @@ import java.util.stream.Stream;
 public class Orchestrator {
     private final OscBridge osc;
     private final LX lx;
-    private static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+    public static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(4);
 
     public Orchestrator(LX lx, OscBridge osc) {
         this.lx = lx;
         this.osc = osc;
-        // haaaaax, the first OSC wiring dumps project state (super helpful), but don't want to fire events yet
-         executorService.schedule(this::bindActions, 5, TimeUnit.SECONDS);
+        bindActions();
     }
 
     // todo: Need exclusivity
@@ -39,6 +40,7 @@ public class Orchestrator {
         osc.on("/lx/mixer/master/effect/1/bassBnc", e -> setParam("Hue + Saturation", "enabled", e.getFloat()));
         osc.onTrigger("/lx/mixer/master/effect/1/color", e -> osc.command("/lx/palette/triggerSwatchCycle"));
         osc.onTrigger("/lx/mixer/master/effect/1/pattern", e -> osc.command("/lx/mixer/channel/1/triggerPatternCycle"));
+        osc.onTrigger("/lx/mixer/master/effect/1/freeBass", e -> freeBass());
 
     }
 
@@ -46,6 +48,18 @@ public class Orchestrator {
         osc.command(path(component, param), value);
     }
 
+    // todo: again need exclusivity, and time extension behavior?
+    /* For some period of time, allow the bass hit detects to re-trigger fastur hardur strongur */
+    public void freeBass() {
+        Audio.get().limitBassRetrigger.setValue(false);
+        schedule(() -> Audio.get().limitBassRetrigger.setValue(true), bars(2));
+    }
+
+    public static void schedule(Runnable task, double millis) {
+        executorService.schedule(task, (long) millis, TimeUnit.MILLISECONDS);
+    }
+
+    // todo: use LFO (modulator added somewhere and removed when done?)
     public void ramp(Consumer<Double> action, double periodMillis) {
         Audio.get().addStartTask(new RampingLoopTask(action, periodMillis));
     }

@@ -6,6 +6,7 @@ import org.iqe.pattern.*;
 import java.util.stream.Stream;
 
 public class LXPluginIQE implements LXPlugin {
+    public static final String INTERNAL = "NO_TOUCHY";
     protected LX lx;
 
     @Override
@@ -30,7 +31,7 @@ public class LXPluginIQE implements LXPlugin {
         lx.addProjectListener((file, change) -> {
             if (change == LX.ProjectListener.Change.OPEN) {
                 LOG.info("Project open, dumping OSC state for clients");
-                Audio.get().osc.command("/lx/osc-query");
+                Audio.get().osc.refresh();
             }
         });
     }

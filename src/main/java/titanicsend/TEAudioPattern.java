@@ -7,6 +7,8 @@ package titanicsend;
 
 import heronarts.lx.LX;
 import heronarts.lx.audio.GraphicMeter;
+import heronarts.lx.parameter.FunctionalParameter;
+import heronarts.lx.parameter.LXParameter;
 
 /**
  * Patterns should inherit from this if they wish to make use of live audio
@@ -56,7 +58,8 @@ public class TEAudioPattern {
     public double bassRatio = .2;
     public double trebleRatio = .2;
 
-    public double bassRetriggerMs;
+    // public double bassRetriggerMs;
+    public LXParameter bassRetriggerMs;
     private double msSinceBassRise = 0;
     // Whether we suspect this frame represents a steep rise in bass level
     public boolean bassHit = false;
@@ -67,7 +70,13 @@ public class TEAudioPattern {
         this.eq = lx.engine.audio.meter;
         bassBandCount = 2;
         // By default, 80% of a tempo-defined eighth note must have passed to bassHit
-        bassRetriggerMs = .8 * (lx.engine.tempo.period.getValue() / 2);
+        // bassRetriggerMs = .8 * (lx.engine.tempo.period.getValue() / 2);
+        bassRetriggerMs = new FunctionalParameter() {
+            @Override
+            public double getValue() {
+                return .8 * (lx.engine.tempo.period.getValue() / 2);
+            }
+        };
     }
 
 //    @Override
@@ -108,7 +117,7 @@ public class TEAudioPattern {
         // mark the frame as a bassHit().
         if (bassLevel > 1.2 * avgBass.getValue()
                 && bassLevel > lastBassLevel
-                && msSinceBassRise > bassRetriggerMs) {
+                && msSinceBassRise > bassRetriggerMs.getValue()) {
             bassHit = true;
             msSinceBassRise = 0;
         }

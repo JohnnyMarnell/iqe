@@ -8,10 +8,16 @@ import heronarts.lx.modulator.*;
 import heronarts.lx.parameter.*;
 import heronarts.lx.utils.LXUtils;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static org.iqe.GlobalControls.BASS;
 import static org.iqe.GlobalControls.TEMPO;
+import static org.iqe.LXPluginIQE.INTERNAL;
+import static org.iqe.Audio.GlobalParams;
 
 /**
  * The goal of this is to have easy project-wide modulators available in the UI, and non duplicated across
@@ -43,37 +49,52 @@ public class AudioModulators {
 
     public static GlobalControls controls;
 
+    public static Root rootModulator;
+    public static GlobalParams globalParams;
+
     public static void initialize(LX lx) {
         AudioModulators.lx = lx;
-        Arrays.stream(AudioModulators.class.getFields())
-                .filter(field -> LXModulator.class.isAssignableFrom(field.getType()))
-                .forEach(field -> lx.registry.addModulator(field.getType().asSubclass(LXModulator.class)));
-        lx.registry.addModulator(Root.class);
+        addFieldsToLXRegistry(LXModulator.class, lx.registry::addModulator);
         lx.registry.addEffect(GlobalControls.class);
+        lx.registry.addEffect(Audio.NO_TOUCHY.class);
         lx.engine.addLoopTask(deltaMs -> Audio.get().engineLoop(deltaMs));
     }
 
     public static void register(LXComponent component) {
+        List<Field> fields = Arrays.stream(AudioModulators.class.getFields())
+                .filter(field -> field.getType().equals(component.getClass())).toList();
+        if (fields.size() == 1) bind(component, fields.get(0));
+        else {
+            fields = Arrays.stream(AudioModulators.class.getFields())
+                    .filter(field -> field.getType().isAssignableFrom(component.getClass())).toList();
+            if (fields.size() != 1) throw new IllegalStateException("None of this was worth it");
+            bind(component, fields.get(0));
+        }
+    }
+
+    private static void bind(LXComponent component, Field field) {
+        try {
+            if (field.get(AudioModulators.class) == null) {
+                LX.log("Binding Audio Component %s of type %s".formatted(field.getName(), field.getType().getSimpleName()));
+                field.set(AudioModulators.class, component);
+            } else {
+                throw new IllegalStateException("There should only be one, but multiple components for " + field.getType());
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static <T> void addFieldsToLXRegistry(Class<T> clazz, Consumer<Class<T>> adder) {
         Arrays.stream(AudioModulators.class.getFields())
-                .filter(field -> field.getType().equals(component.getClass()))
-                .forEach(field -> {
-                    try {
-                        if (field.get(AudioModulators.class) == null) {
-                            LX.log("Binding Audio Modulator %s of type %s".formatted(field.getName(), field.getType().getSimpleName()));
-                            field.set(AudioModulators.class, component);
-                        } else {
-                            LX.log("WARNING: multiple modulators for" + field.getType());
-                        }
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
-                    }
-            });
+                .filter(field -> clazz.isAssignableFrom(field.getType()))
+                .forEach(field -> adder.accept((Class<T>) field.getType()));
     }
 
     /** Tempo syncing is tricky, we want it centralized and uniform.
      *  The modulators seem to come first, so adding this "Root" to tick the Audio engine,
      *  main entry point for us */
-    @LXCategory("NO_TOUCHY") @LXModulator.Global("NO_TOUCHY") @LXModulator.Device("Root")
+    @LXCategory(INTERNAL) @LXModulator.Global(INTERNAL) @LXModulator.Device(INTERNAL) @LXComponent.Hidden
     public static class Root extends Trigger {
         @Override
         protected double computeValue(double deltaMs, double basis) {
@@ -85,6 +106,21 @@ public class AudioModulators {
         @Override
         protected double val() {
             return Audio.get().teEngine.volumeLevel;
+        }
+    }
+
+    /** I want to be able to use lambdurz */
+    public static class FuncParam extends FunctionalParameter {
+        private Supplier<Double> calc;
+
+        public FuncParam(String label, Supplier<Double> calc) {
+            super(label);
+            this.calc = calc;
+        }
+
+        @Override
+        public double getValue() {
+            return calc.get();
         }
     }
 

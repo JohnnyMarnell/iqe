@@ -1,7 +1,11 @@
 package org.iqe;
 
 import heronarts.lx.LX;
+import heronarts.lx.LXCategory;
+import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
+import heronarts.lx.effect.LXEffect;
+import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.utils.LXUtils;
 import titanicsend.TEAudioPattern;
@@ -13,9 +17,15 @@ import java.util.List;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.sin;
+import static org.iqe.AudioModulators.FuncParam;
+import static org.iqe.AudioModulators.register;
+import static org.iqe.LXPluginIQE.INTERNAL;
 
 /**
+ * <p>
  * Main Audio engine class and logic.
+ *
+ * </p>
  * todo: Also has become a bit more than that, entry point to a lot of classes, change that?
  */
 
@@ -28,39 +38,42 @@ public class Audio implements Tempo.Listener {
     // todo: barves.
     private static Audio instance = null;
 
-    public final LX lx;
+    private static LX lx;
+    private static Tempo tempo;
     public final OscBridge osc;
     public final Orchestrator orchestrator;
 
     public final TEAudioPattern teEngine;
     public long lastBassHit = 0;
 
-    public double bpm = 120.0d;
-    /* period is millis of 1 beat */
-    public double period = 60.0d / bpm * 1_000d;
-
     public interface Task { void run(double deltaMs); }
     private final List<Task> startTasks = new ArrayList<>();
     private final List<Task> endTasks = new ArrayList<>();
     final TempoClick[] clicks = new TempoClick[Tempo.Division.values().length];
 
-    private Audio(LX lx) {
-        this.lx = lx;
+    public static final BooleanParameter limitBassRetrigger = new BooleanParameter("limitBassRetrigger", true)
+            .setDescription("Whether to suppress bass hit detection by frequency");
+
+    private Audio() {
         osc = new OscBridge(lx);
         orchestrator = new Orchestrator(lx, osc);
-
-        teEngine = new TEAudioPattern(lx);
 
         for (Tempo.Division division : Tempo.Division.values()) {
             this.clicks[division.ordinal()] = new TempoClick(lx, division);
         }
 
-        lx.engine.tempo.addListener(this);
-        lx.engine.tempo.tap.addListener(this::onTap, true);
-        lx.engine.tempo.nudgeUp.addListener(this::onNudgeUp, true);
-        lx.engine.tempo.nudgeDown.addListener(this::onNudgeDown, true);
-        lx.engine.tempo.period.addListener(this::onPeriod, true);
-        lx.engine.tempo.bpm.addListener(this::onBpm, true);
+        tempo.addListener(this);
+        tempo.tap.addListener(this::onTap, true);
+        tempo.nudgeUp.addListener(this::onNudgeUp, true);
+        tempo.nudgeDown.addListener(this::onNudgeDown, true);
+        tempo.period.addListener(this::onPeriod, true);
+        tempo.bpm.addListener(this::onBpm, true);
+
+
+        teEngine = new TEAudioPattern(lx);
+        // When limiting bass re-triggers, do it by 94% of a beat
+        teEngine.bassRetriggerMs = new FuncParam("bassRetriggerMs",
+                () -> !limitBassRetrigger.getValueb() ? 0. : 15./16 * periodOf(Tempo.Division.QUARTER));
     }
 
     public Tempo.Division closestTempoDivision(double periodMillis) {
@@ -85,7 +98,7 @@ public class Audio implements Tempo.Listener {
         }
 
         void tick() {
-            int clicks = ((int) lx.engine.tempo.getBasis(division, false)) + 1;
+            int clicks = ((int) tempo.getBasis(division, false)) + 1;
             if (clicks != this.clicks) {
                 isOn = true;
                 this.clicks = clicks;
@@ -111,11 +124,11 @@ public class Audio implements Tempo.Listener {
         double squaredScaledTrebleRatio = Math.pow(scaledTrebleRatio, 2);
         energyNormalized = .6;
         double bassHeightNormalized = (teEngine.getBassRatio() - .5) / (1.01 - energyNormalized) / 3 - .2;
-        double beats = lx.engine.tempo.getCompositeBasis();
+        double beats = tempo.getCompositeBasis();
         double sinPhaseBeat = .5 * sin(PI * beats) + .5;
         // actually, this should use time sig right? and be "8 'bars / measures'"?
         double phrase = beats / 32 % 1.0D;
-        double beatsPerMeasure = lx.engine.tempo.beatsPerMeasure.getValue();
+        double beatsPerMeasure = tempo.beatsPerMeasure.getValue();
         double measure = (beats % beatsPerMeasure) / beatsPerMeasure;
         // interesting mention of swing in Tempo Reactive, idk if I agree with this calc / def
         double swingBeat = TEMath.easeOutPow(basis(Tempo.Division.QUARTER), energyNormalized);
@@ -167,11 +180,31 @@ public class Audio implements Tempo.Listener {
     }
 
     public double basis(Tempo.Division division) {
-        return lx.engine.tempo.getBasis(division);
+        return tempo.getBasis(division);
+    }
+
+    public static double period() {
+        return tempo.period.getValue();
+    }
+
+    public static double beatsInBar() {
+        return tempo.beatsPerMeasure.getValuei();
+    }
+
+    public static double beatsInBar(Tempo.Division division) {
+        return division.multiplier * beatsInBar();
     }
 
     public static double periodOf(Tempo.Division division) {
-        return divisionAppliedToPeriod(Audio.get().period, division);
+        return divisionAppliedToPeriod(period(), division);
+    }
+
+    public static double bar() {
+        return periodOf(Tempo.Division.WHOLE);
+    }
+
+    public static double bars(int numBars) {
+        return numBars * bar();
     }
 
     public static double divisionAppliedToPeriod(double periodMs, Tempo.Division division) {
@@ -193,21 +226,13 @@ public class Audio implements Tempo.Listener {
     }
 
     public void onBpm(LXParameter bpm) {
-        this.bpm = bpm.getValue();
         LOG.debug("Tempo bpm changed");
-        LOG.info("Tempo BPM: {}", this.bpm);
+        LOG.info("Tempo BPM: {}", bpm);
     }
 
     public void onPeriod(LXParameter period) {
-        this.period = period.getValue();
-        updateFromPeriod();
         LOG.debug("Tempo period changed");
-        LOG.info("Tempo period (ms of 1 beat): {}", this.period);
-    }
-
-    private void updateFromPeriod() {
-        // Allow the beat detect to only trigger as fast as one beat
-        teEngine.bassRetriggerMs = 15./16 * divisionAppliedToPeriod(period, Tempo.Division.QUARTER);
+        LOG.info("Tempo period (ms of 1 beat): {}", period);
     }
 
     // Any NA near beers brah?
@@ -224,15 +249,40 @@ public class Audio implements Tempo.Listener {
     }
 
     public static long now() {
-        return instance.lx.engine.nowMillis;
+        return lx.engine.nowMillis;
     }
     public static Audio get() {
         return instance;
     }
+    public static LX lx() {
+        return lx;
+    }
+    public static Tempo tempo() {
+        return tempo;
+    }
+
+    /** Just a place to register select parameters, so they get OSC read/write capability */
+    public static class GlobalParams extends LXEffect {
+
+        public GlobalParams(LX lx) {
+            super(lx);
+            addParameter(limitBassRetrigger.getLabel(), limitBassRetrigger);
+            register(this);
+        }
+
+        @Override
+        protected void run(double v, double v1) {
+
+        }
+    }
+    @LXCategory(INTERNAL) @LXComponent.Hidden
+    public static class NO_TOUCHY extends GlobalParams { public NO_TOUCHY(LX lx) { super(lx); } }
 
     public static void initialize(LX lx) {
         if (instance != null) throw new IllegalStateException("HighlanderException, there can only be one, "
                     + "who would've ever thought static singletons were a bad idea...");
-        instance = new Audio(lx);
+        Audio.lx = lx;
+        Audio.tempo = Audio.lx.engine.tempo;
+        instance = new Audio();
     }
 }
