@@ -1,7 +1,6 @@
 package org.iqe;
 
-import heronarts.lx.LX;
-import heronarts.lx.Tempo;
+import heronarts.lx.*;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.parameter.DiscreteParameter;
@@ -11,10 +10,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.iqe.LXPluginIQE.INTERNAL;
+
 /**
  * A lot of the finagling and hacky stuff here is because I don't yet know about proper UI
  * and organization. Adding a global effect that I can throw controls into
  */
+@LXCategory(INTERNAL) @LXComponent.Hidden
 public class GlobalControls extends LXEffect {
     public static final List<String> clicks = buildClicks();
     public static final DiscreteParameter defaultClick =
@@ -29,6 +31,9 @@ public class GlobalControls extends LXEffect {
 
     public static final TriggerParameter build = new TriggerParameter("build")
             .setDescription("Trigger a build up dynamic event");
+
+    public static final TriggerParameter freeBass = new TriggerParameter("freeBass")
+            .setDescription("Temporarily allow bass hits unlimited re-triggering");
     public static final TriggerParameter highIntensity = new TriggerParameter("highIntensity")
             .setDescription("Trigger a high intensity dynamic event");
 
@@ -52,6 +57,7 @@ public class GlobalControls extends LXEffect {
         this.addParameter("bassDynamics", bassDynamics);
         this.addParameter("bassBnc", bassBounce);
         this.addParameter("build", build);
+        this.addParameter("freeBass", freeBass);
         this.addParameter("highIntensity", highIntensity);
         this.addParameter("pFire", pFire);
         this.addParameter("pattern", pattern);

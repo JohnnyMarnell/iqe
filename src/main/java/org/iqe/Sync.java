@@ -9,6 +9,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.iqe.Audio.*;
+
 /**
  * Basically a one-shot / click type of parameter / synchronization system,
  * mappable from Tempo or Hit detect type modulators.
@@ -38,6 +40,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     public final FunctionalParameter periodMs;
 
     // todo: Builder pattern, easy constructors
+    // todo: Use LXParameters, and probably functional, so it's up to date and better controllable
     public Sync(LXPattern pattern) {
         this(pattern, null, true, true);
     }
@@ -105,8 +108,8 @@ public class Sync extends CompoundParameter implements LXParameterListener {
                 LOG.info("Sync division {} for {}, prev: {}", this.division, components, division);
                 this.division = division;
                 // Allow re-triggers with about 2 sixteenth notes tolerance
-                minTriggerWaveDetectDelayMs = (long) (Audio.get().period / division.multiplier
-                        - 1.8 * (Audio.get().period / Tempo.Division.SIXTEENTH.multiplier));
+                minTriggerWaveDetectDelayMs = (long) (period() / division.multiplier
+                        - 1.8 * (period() / Tempo.Division.SIXTEENTH.multiplier));
             }
         }
         lastTrigger = now;
@@ -125,10 +128,8 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     public int advance() {
         if (staticSteps != null) return advance(staticSteps);
 
-        // this is probably wrong
-        double timeSignatureNumerator = Audio.get().lx.engine.tempo.beatsPerMeasure.getValue();
-        int steps = (int) (division.multiplier * timeSignatureNumerator);
-        if (steps == 0) steps = 4;
+        // todo: this is probably wrong
+        int steps = (int) Math.ceil(beatsInBar(division));
         return advance(steps);
     }
 
@@ -145,7 +146,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     }
 
     public double basis() {
-        return tempoLock ? Audio.get().lx.engine.tempo.getBasis(division) : (Audio.now() - lastTrigger) / Audio.periodOf(division);
+        return tempoLock ? Audio.tempo().getBasis(division) : (Audio.now() - lastTrigger) / Audio.periodOf(division);
     }
 
     @Override
