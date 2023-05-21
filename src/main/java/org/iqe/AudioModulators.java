@@ -78,7 +78,9 @@ public class AudioModulators {
                 LX.log("Binding Audio Component %s of type %s".formatted(field.getName(), field.getType().getSimpleName()));
                 field.set(AudioModulators.class, component);
             } else {
-                throw new IllegalStateException("There should only be one, but multiple components for " + field.getType());
+                // todo rm allll of this static hack garbage
+//                LX.log("TODO Reusing already bound " + field.getName());
+                 throw new IllegalStateException("Highlander exception, there should only be one, but multiple components for " + field.getType());
             }
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
