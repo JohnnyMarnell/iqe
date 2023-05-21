@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1684269815784,
+  "timestamp": 1684431517729,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -40,7 +40,7 @@
         },
         "parameters": {
           "label": "Pillar 1; #0",
-          "tags": "strip pillar f0 pc4 ps4 po6 sq3.4",
+          "tags": "strip pillar f0 pc4 pc4-s3 ps ps-e4 po po-cw6 sq3 sq3-cw4",
           "x": 0,
           "y": 700,
           "z": 0,
@@ -82,7 +82,7 @@
         },
         "parameters": {
           "label": "Pillar 2; #1",
-          "tags": "strip pillar f1 pc4 pm7 po5 sq3.3",
+          "tags": "strip pillar f1 pc4 pc4-s2 pm pm-e7 po po-cw5 sq3 sq3-cw3",
           "x": 1050,
           "y": 700,
           "z": 0,
@@ -124,7 +124,7 @@
         },
         "parameters": {
           "label": "Pillar 3; #2",
-          "tags": "strip pillar f2 pc4 pn4 po4 sq3.2",
+          "tags": "strip pillar f2 pc4 pc4-s1 pn pn-e4 po po-cw4 sq3 sq3-cw2",
           "x": 2100,
           "y": 700,
           "z": 0,
@@ -166,7 +166,7 @@
         },
         "parameters": {
           "label": "Pillar 4; #3",
-          "tags": "strip pillar f3 pc3 ps3 po7 sq3.5 sq2.4",
+          "tags": "strip pillar f3 pc3 pc3-s3 ps ps-e3 po po-cw7 sq3 sq3-cw5 sq2 sq2-cw4",
           "x": 0,
           "y": 700,
           "z": 2100,
@@ -208,7 +208,7 @@
         },
         "parameters": {
           "label": "Pillar 5; #4",
-          "tags": "strip pillar f4 pc3 pm5 pi4 sq3.6 sq2.3",
+          "tags": "strip pillar f4 pc3 pc3-s2 pm pm-e5 pi pi-e4 sq3 sq3-cw6 sq2 sq2-cw3",
           "x": 1050,
           "y": 700,
           "z": 2100,
@@ -250,7 +250,7 @@
         },
         "parameters": {
           "label": "Pillar 6; #5",
-          "tags": "strip pillar f5 pc3 pn3 po3 sq3.1 sq2.2",
+          "tags": "strip pillar f5 pc3 pc3-s1 pn pn-e3 po po-cw3 sq3 sq3-cw1 sq2 sq2-cw2",
           "x": 2100,
           "y": 700,
           "z": 2100,
@@ -292,7 +292,7 @@
         },
         "parameters": {
           "label": "Pillar 7; #6",
-          "tags": "strip pillar f6 pc2 pc4 ps2 sq2.5 sq1.4 po8",
+          "tags": "strip pillar f6 pc2 pc2-s3 ps ps-e4 po po-cw8 sq2 sq2-cw5 sq1 sq1-cw4",
           "x": 0,
           "y": 700,
           "z": 4200,
@@ -334,7 +334,7 @@
         },
         "parameters": {
           "label": "Pillar 8; #7",
-          "tags": "strip pillar f7 pc2 pm3 pi2 sq2.6 sq1.3",
+          "tags": "strip pillar f7 pc2 pc2-s2 pm pm-e3 pi pi-e2 sq2 sq2-cw6 sq1 sq1-cw3",
           "x": 1050,
           "y": 700,
           "z": 4200,
@@ -376,7 +376,7 @@
         },
         "parameters": {
           "label": "Pillar 9; #8",
-          "tags": "strip pillar f8 pc2 pn2 po2 sq2.1 sq1.2",
+          "tags": "strip pillar f8 pc2 pc2-s1 pn pn-e2 po po-cw2 sq2 sq2-cw1 sq1 sq1-cw2",
           "x": 2100,
           "y": 700,
           "z": 4200,
@@ -418,7 +418,7 @@
         },
         "parameters": {
           "label": "Pillar 10; #9",
-          "tags": "strip pillar f9 pc1 ps1 po9 sq1.5",
+          "tags": "strip pillar f9 pc1 pc1-s3 ps ps-e1 po po-cw9 sq1 sq1-cw5",
           "x": 0,
           "y": 700,
           "z": 6300,
@@ -460,7 +460,7 @@
         },
         "parameters": {
           "label": "Pillar 11; #10",
-          "tags": "strip pillar f10 pc1 pm1 po10 sq1.6",
+          "tags": "strip pillar f10 pc1 pc1-s2 pm pm-e1 po po-cw10 sq1 sq1-cw6",
           "x": 1050,
           "y": 700,
           "z": 6300,
@@ -502,7 +502,7 @@
         },
         "parameters": {
           "label": "Pillar 12; #11",
-          "tags": "strip pillar f11 pc1 pn1 po1 sq1.1",
+          "tags": "strip pillar f11 pc1 pc1-s1 pn pn-e1 po po-cw1 sq1 sq1-cw1",
           "x": 2100,
           "y": 700,
           "z": 6300,
@@ -544,7 +544,7 @@
         },
         "parameters": {
           "label": "Pillar 13; #12",
-          "tags": "strip pillar f12 pm6 pi5 sq3",
+          "tags": "strip pillar f12 pm pm-e6 pi pi-e5 sq3",
           "x": 1050,
           "y": 700,
           "z": 1050,
@@ -586,7 +586,7 @@
         },
         "parameters": {
           "label": "Pillar 14; #13",
-          "tags": "strip pillar f13 pm4 pi3 sq2",
+          "tags": "strip pillar f13 pm pm-e4 pi pi-e3 sq2",
           "x": 1050,
           "y": 700,
           "z": 3150,
@@ -628,7 +628,7 @@
         },
         "parameters": {
           "label": "Pillar 15; #14",
-          "tags": "strip pillar f14 pm2 pi1 sq1",
+          "tags": "strip pillar f14 pm pm-e2 pi pi-e1 sq1",
           "x": 1050,
           "y": 700,
           "z": 5250,
@@ -670,7 +670,7 @@
         },
         "parameters": {
           "label": "Rafter 1; #15",
-          "tags": "strip rafter f15",
+          "tags": "strip rafter f15 rn-e9 ro-cw9 sq3 sq3-cw3",
           "x": 0,
           "y": 700,
           "z": 700,
@@ -712,7 +712,7 @@
         },
         "parameters": {
           "label": "Rafter 2; #16",
-          "tags": "strip rafter f16",
+          "tags": "strip rafter f16 rn-e8 ro-cw8 sq3 sq3-cw2",
           "x": 0,
           "y": 700,
           "z": 1400,
@@ -754,7 +754,7 @@
         },
         "parameters": {
           "label": "Rafter 3; #17",
-          "tags": "strip rafter f17",
+          "tags": "strip rafter f17 rn-e7 ro-cw7 sq3 sq3-cw1",
           "x": 0,
           "y": 700,
           "z": 2100,
@@ -796,7 +796,7 @@
         },
         "parameters": {
           "label": "Rafter 4; #18",
-          "tags": "strip rafter f18",
+          "tags": "strip rafter f18 rn-e6 ro-cw6 sq2 sq2-cw3",
           "x": 0,
           "y": 700,
           "z": 2800,
@@ -838,7 +838,7 @@
         },
         "parameters": {
           "label": "Rafter 5; #19",
-          "tags": "strip rafter f19",
+          "tags": "strip rafter f19 rn-e5 ro-cw5 sq2 sq2-cw2",
           "x": 0,
           "y": 700,
           "z": 3500,
@@ -880,7 +880,7 @@
         },
         "parameters": {
           "label": "Rafter 6; #20",
-          "tags": "strip rafter f20",
+          "tags": "strip rafter f20 rn-e4 ro-cw4 sq2 sq2-cw1",
           "x": 0,
           "y": 700,
           "z": 4200,
@@ -922,7 +922,7 @@
         },
         "parameters": {
           "label": "Rafter 7; #21",
-          "tags": "strip rafter f21",
+          "tags": "strip rafter f21 rn-e3 ro-cw3 sq1 sq1-cw3",
           "x": 0,
           "y": 700,
           "z": 4900,
@@ -964,7 +964,7 @@
         },
         "parameters": {
           "label": "Rafter 8; #22",
-          "tags": "strip rafter f22",
+          "tags": "strip rafter f22 rn-e2 ro-cw2 sq1 sq1-cw2",
           "x": 0,
           "y": 700,
           "z": 5600,
@@ -1006,7 +1006,7 @@
         },
         "parameters": {
           "label": "Rafter 9; #23",
-          "tags": "strip rafter f23",
+          "tags": "strip rafter f23 rn-e1 ro-cw1 sq1 sq1-cw1",
           "x": 0,
           "y": 700,
           "z": 6300,
@@ -1048,7 +1048,7 @@
         },
         "parameters": {
           "label": "Rafter 10; #24",
-          "tags": "strip rafter f24",
+          "tags": "strip rafter f24 rs-e9 ro-cw13 sq3 sq3-cw7",
           "x": 2100,
           "y": 700,
           "z": 700,
@@ -1090,7 +1090,7 @@
         },
         "parameters": {
           "label": "Rafter 11; #25",
-          "tags": "strip rafter f25",
+          "tags": "strip rafter f25 rs-e8 ro-cw14 sq3 sq3-cw8",
           "x": 2100,
           "y": 700,
           "z": 1400,
@@ -1132,7 +1132,7 @@
         },
         "parameters": {
           "label": "Rafter 12; #26",
-          "tags": "strip rafter f26",
+          "tags": "strip rafter f26 rs-e7 ro-cw15 sq3 sq3-cw9",
           "x": 2100,
           "y": 700,
           "z": 2100,
@@ -1174,7 +1174,7 @@
         },
         "parameters": {
           "label": "Rafter 13; #27",
-          "tags": "strip rafter f27",
+          "tags": "strip rafter f27 rs-e6 ro-cw16 sq2 sq2-cw7",
           "x": 2100,
           "y": 700,
           "z": 2800,
@@ -1216,7 +1216,7 @@
         },
         "parameters": {
           "label": "Rafter 14; #28",
-          "tags": "strip rafter f28",
+          "tags": "strip rafter f28 rs-e5 ro-cw17 sq2 sq2-cw8",
           "x": 2100,
           "y": 700,
           "z": 3500,
@@ -1258,7 +1258,7 @@
         },
         "parameters": {
           "label": "Rafter 15; #29",
-          "tags": "strip rafter f29",
+          "tags": "strip rafter f29 rs-e4 ro-cw18 sq2 sq2-cw9",
           "x": 2100,
           "y": 700,
           "z": 4200,
@@ -1300,7 +1300,7 @@
         },
         "parameters": {
           "label": "Rafter 16; #30",
-          "tags": "strip rafter f30",
+          "tags": "strip rafter f30 rs-e3 ro-cw19 sq1 sq1-cw7",
           "x": 2100,
           "y": 700,
           "z": 4900,
@@ -1342,7 +1342,7 @@
         },
         "parameters": {
           "label": "Rafter 17; #31",
-          "tags": "strip rafter f31",
+          "tags": "strip rafter f31 rs-e2 ro-cw20 sq1 sq1-cw8",
           "x": 2100,
           "y": 700,
           "z": 5600,
@@ -1384,7 +1384,7 @@
         },
         "parameters": {
           "label": "Rafter 18; #32",
-          "tags": "strip rafter f32",
+          "tags": "strip rafter f32 rs-e1 ro-cw21 sq1 sq1-cw9",
           "x": 2100,
           "y": 700,
           "z": 6300,
@@ -1426,7 +1426,7 @@
         },
         "parameters": {
           "label": "Rafter 19; #33",
-          "tags": "strip rafter f33",
+          "tags": "strip rafter f33 rc4 rc4-s3 sq3 sq3-cw6",
           "x": 700,
           "y": 700,
           "z": 0,
@@ -1468,7 +1468,7 @@
         },
         "parameters": {
           "label": "Rafter 20; #34",
-          "tags": "strip rafter f34",
+          "tags": "strip rafter f34 rc4 rc4-s2 sq3 sq3-cw5",
           "x": 1400,
           "y": 700,
           "z": 0,
@@ -1510,7 +1510,7 @@
         },
         "parameters": {
           "label": "Rafter 21; #35",
-          "tags": "strip rafter f35",
+          "tags": "strip rafter f35 rc4 rc4-s1 sq3 sq3-cw4",
           "x": 2100,
           "y": 700,
           "z": 0,
@@ -1552,7 +1552,7 @@
         },
         "parameters": {
           "label": "Rafter 22; #36",
-          "tags": "strip rafter f36",
+          "tags": "strip rafter f36 rc3 rc1-s3 sq2 sq2-cw6 sq3 sq3-cw10",
           "x": 700,
           "y": 700,
           "z": 2100,
@@ -1594,7 +1594,7 @@
         },
         "parameters": {
           "label": "Rafter 23; #37",
-          "tags": "strip rafter f37",
+          "tags": "strip rafter f37 rc3 rc1-s2 sq2 sq2-cw5 sq3 sq3-cw11",
           "x": 1400,
           "y": 700,
           "z": 2100,
@@ -1636,7 +1636,7 @@
         },
         "parameters": {
           "label": "Rafter 24; #38",
-          "tags": "strip rafter f38",
+          "tags": "strip rafter f38 rc3 rc1-s1 sq2 sq2-cw4 sq3 sq3-cw12",
           "x": 2100,
           "y": 700,
           "z": 2100,
@@ -1678,7 +1678,7 @@
         },
         "parameters": {
           "label": "Rafter 25; #39",
-          "tags": "strip rafter f39",
+          "tags": "strip rafter f39 rc2 rc1-s3 sq1 sq1-cw6 sq2 sq2-cw10",
           "x": 700,
           "y": 700,
           "z": 4200,
@@ -1720,7 +1720,7 @@
         },
         "parameters": {
           "label": "Rafter 26; #40",
-          "tags": "strip rafter f40",
+          "tags": "strip rafter f40 rc2 rc1-s2 sq1 sq1-cw5 sq2 sq2-cw11",
           "x": 1400,
           "y": 700,
           "z": 4200,
@@ -1762,7 +1762,7 @@
         },
         "parameters": {
           "label": "Rafter 27; #41",
-          "tags": "strip rafter f41",
+          "tags": "strip rafter f41 rc2 rc1-s1 sq1 sq1-cw4 sq2 sq2-cw12",
           "x": 2100,
           "y": 700,
           "z": 4200,
@@ -1804,7 +1804,7 @@
         },
         "parameters": {
           "label": "Rafter 28; #42",
-          "tags": "strip rafter f42",
+          "tags": "strip rafter f42 rc1 rc1-s3 sq1 sq1-cw10",
           "x": 700,
           "y": 700,
           "z": 6300,
@@ -1846,7 +1846,7 @@
         },
         "parameters": {
           "label": "Rafter 29; #43",
-          "tags": "strip rafter f43",
+          "tags": "strip rafter f43 rc1 rc1-s2 sq1 sq1-cw11",
           "x": 1400,
           "y": 700,
           "z": 6300,
@@ -1888,7 +1888,7 @@
         },
         "parameters": {
           "label": "Rafter 30; #44",
-          "tags": "strip rafter f44",
+          "tags": "strip rafter f44 rc1 rc1-s1 sq1 sq1-cw12",
           "x": 2100,
           "y": 700,
           "z": 6300,
@@ -1930,7 +1930,7 @@
         },
         "parameters": {
           "label": "Rafter 31; #45",
-          "tags": "strip rafter f45",
+          "tags": "strip rafter f45 x3-3 sq3 sq3-se4 x xo xo-cw3",
           "x": 0,
           "y": 700,
           "z": 0,
@@ -1972,7 +1972,7 @@
         },
         "parameters": {
           "label": "Rafter 32; #46",
-          "tags": "strip rafter f46",
+          "tags": "strip rafter f46 x3-3 sq3 sq3-se3 x xi xi-cw3",
           "x": 525,
           "y": 700,
           "z": 525,
@@ -2014,7 +2014,7 @@
         },
         "parameters": {
           "label": "Rafter 33; #47",
-          "tags": "strip rafter f47",
+          "tags": "strip rafter f47 x4-3 sq3 sq3-nw1 x xo xo-cw4",
           "x": 0,
           "y": 700,
           "z": 2100,
@@ -2056,7 +2056,7 @@
         },
         "parameters": {
           "label": "Rafter 34; #48",
-          "tags": "strip rafter f48",
+          "tags": "strip rafter f48 x4-3 sq3 sq3-nw2 x xi xi-cw4",
           "x": 525,
           "y": 700,
           "z": 1575,
@@ -2098,7 +2098,7 @@
         },
         "parameters": {
           "label": "Rafter 35; #49",
-          "tags": "strip rafter f49",
+          "tags": "strip rafter f49 x2-3 sq3 sq3-nw4 x xo xo-cw2",
           "x": 2100,
           "y": 700,
           "z": 0,
@@ -2140,7 +2140,7 @@
         },
         "parameters": {
           "label": "Rafter 36; #50",
-          "tags": "strip rafter f50",
+          "tags": "strip rafter f50 x2-3 sq3 sq3-nw3 x xi xi-cw2",
           "x": 1575,
           "y": 700,
           "z": 525,
@@ -2182,7 +2182,7 @@
         },
         "parameters": {
           "label": "Rafter 37; #51",
-          "tags": "strip rafter f51",
+          "tags": "strip rafter f51 x1-3 sq3 sq3-se1 x xo xo-cw1",
           "x": 2100,
           "y": 700,
           "z": 2100,
@@ -2224,7 +2224,7 @@
         },
         "parameters": {
           "label": "Rafter 38; #52",
-          "tags": "strip rafter f52",
+          "tags": "strip rafter f52 x1-3 sq3 sq3-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
           "z": 1575,
@@ -2266,7 +2266,7 @@
         },
         "parameters": {
           "label": "Rafter 39; #53",
-          "tags": "strip rafter f53",
+          "tags": "strip rafter f53 x3-2 sq2 sq2-se4 x xo xo-cw3",
           "x": 0,
           "y": 700,
           "z": 2100,
@@ -2308,7 +2308,7 @@
         },
         "parameters": {
           "label": "Rafter 40; #54",
-          "tags": "strip rafter f54",
+          "tags": "strip rafter f54 x3-2 sq2 sq2-se3 x xi xi-cw3",
           "x": 525,
           "y": 700,
           "z": 2625,
@@ -2350,7 +2350,7 @@
         },
         "parameters": {
           "label": "Rafter 41; #55",
-          "tags": "strip rafter f55",
+          "tags": "strip rafter f55 x4-2 sq2 sq2-nw1 x xo xo-cw4",
           "x": 0,
           "y": 700,
           "z": 4200,
@@ -2392,7 +2392,7 @@
         },
         "parameters": {
           "label": "Rafter 42; #56",
-          "tags": "strip rafter f56",
+          "tags": "strip rafter f56 x4-2 sq2 sq2-nw2 x xi xi-cw4",
           "x": 525,
           "y": 700,
           "z": 3675,
@@ -2434,7 +2434,7 @@
         },
         "parameters": {
           "label": "Rafter 43; #57",
-          "tags": "strip rafter f57",
+          "tags": "strip rafter f57 x2-2 sq2 sq2-nw4 x xo xo-cw2",
           "x": 2100,
           "y": 700,
           "z": 2100,
@@ -2476,7 +2476,7 @@
         },
         "parameters": {
           "label": "Rafter 44; #58",
-          "tags": "strip rafter f58",
+          "tags": "strip rafter f58 x2-2 sq2 sq2-nw3 x xi xi-cw2",
           "x": 1575,
           "y": 700,
           "z": 2625,
@@ -2518,7 +2518,7 @@
         },
         "parameters": {
           "label": "Rafter 45; #59",
-          "tags": "strip rafter f59",
+          "tags": "strip rafter f59 x1-2 sq2 sq2-se1 x xo xo-cw1",
           "x": 2100,
           "y": 700,
           "z": 4200,
@@ -2560,7 +2560,7 @@
         },
         "parameters": {
           "label": "Rafter 46; #60",
-          "tags": "strip rafter f60",
+          "tags": "strip rafter f60 x1-2 sq2 sq2-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
           "z": 3675,
@@ -2602,7 +2602,7 @@
         },
         "parameters": {
           "label": "Rafter 47; #61",
-          "tags": "strip rafter f61",
+          "tags": "strip rafter f61 x3-1 sq1 sq1-se4 x xo xo-cw3",
           "x": 0,
           "y": 700,
           "z": 4200,
@@ -2644,7 +2644,7 @@
         },
         "parameters": {
           "label": "Rafter 48; #62",
-          "tags": "strip rafter f62",
+          "tags": "strip rafter f62 x3-1 sq1 sq1-se3 x xi xi-cw3",
           "x": 525,
           "y": 700,
           "z": 4725,
@@ -2686,7 +2686,7 @@
         },
         "parameters": {
           "label": "Rafter 49; #63",
-          "tags": "strip rafter f63",
+          "tags": "strip rafter f63 x4-1 sq1 sq1-nw1 x xo xo-cw4",
           "x": 0,
           "y": 700,
           "z": 6300,
@@ -2728,7 +2728,7 @@
         },
         "parameters": {
           "label": "Rafter 50; #64",
-          "tags": "strip rafter f64",
+          "tags": "strip rafter f64 x4-1 sq1 sq1-nw2 x xi xi-cw4",
           "x": 525,
           "y": 700,
           "z": 5775,
@@ -2770,7 +2770,7 @@
         },
         "parameters": {
           "label": "Rafter 51; #65",
-          "tags": "strip rafter f65",
+          "tags": "strip rafter f65 x2-1 sq1 sq1-nw4 x xo xo-cw2",
           "x": 2100,
           "y": 700,
           "z": 4200,
@@ -2812,7 +2812,7 @@
         },
         "parameters": {
           "label": "Rafter 52; #66",
-          "tags": "strip rafter f66",
+          "tags": "strip rafter f66 x2-1 sq1 sq1-nw3 x xi xi-cw2",
           "x": 1575,
           "y": 700,
           "z": 4725,
@@ -2854,7 +2854,7 @@
         },
         "parameters": {
           "label": "Rafter 53; #67",
-          "tags": "strip rafter f67",
+          "tags": "strip rafter f67 x1-1 sq1 sq1-se1 x xo xo-cw1",
           "x": 2100,
           "y": 700,
           "z": 6300,
@@ -2896,7 +2896,7 @@
         },
         "parameters": {
           "label": "Rafter 54; #68",
-          "tags": "strip rafter f68",
+          "tags": "strip rafter f68 x1-1 sq1 sq1-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
           "z": 5775,
@@ -4054,7 +4054,7 @@
                           "exp": 0
                         },
                         "children": {},
-                        "basis": 0.01204418214203297
+                        "basis": 0.7797533891256717
                       },
                       {
                         "id": 53133,
@@ -4082,7 +4082,7 @@
                           "exp": 0
                         },
                         "children": {},
-                        "basis": 0.01204418214203297
+                        "basis": 0.7797533891256717
                       }
                     ],
                     "modulations": [
@@ -5610,7 +5610,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9193333333483474
+            "basis": 0.21733333334859706
           },
           {
             "id": 54255,
@@ -5657,7 +5657,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2963333333485923
+            "basis": 0.5943333333488379
           },
           {
             "id": 56980,
@@ -5685,7 +5685,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2963333333485923
+            "basis": 0.5943333333488379
           },
           {
             "id": 56981,
@@ -5713,7 +5713,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2963333333485923
+            "basis": 0.5943333333488379
           },
           {
             "id": 56982,
@@ -5741,7 +5741,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2963333333485923
+            "basis": 0.5943333333488379
           },
           {
             "id": 56983,
@@ -5769,7 +5769,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2963333333485923
+            "basis": 0.5943333333488379
           },
           {
             "id": 57307,
@@ -5797,7 +5797,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8393333333461038
+            "basis": 0.13733333334635267
           },
           {
             "id": 57308,
@@ -5825,7 +5825,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8393333333461038
+            "basis": 0.13733333334635267
           },
           {
             "id": 62913,
@@ -5853,7 +5853,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04533333334524367
+            "basis": 0.34333333334549065
           },
           {
             "id": 66458,
@@ -5881,7 +5881,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5243333333409548
+            "basis": 0.8223333333412056
           },
           {
             "id": 63635,
@@ -5909,7 +5909,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5773333333445131
+            "basis": 0.8753333333447605
           },
           {
             "id": 64644,
@@ -5993,7 +5993,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5263333333414222
+            "basis": 0.8243333333416721
           }
         ],
         "modulations": [
@@ -6357,7 +6357,7 @@
           "receiveHost": "0.0.0.0",
           "receivePort": 3030,
           "receiveActive": true,
-          "transmitHost": "localhost",
+          "transmitHost": "0.0.0.0",
           "transmitPort": 3131,
           "transmitActive": true,
           "logInput": false,
@@ -6381,7 +6381,7 @@
         "depth": 1,
         "camera": {
           "active": true,
-          "radius": 2136.2209900699086,
+          "radius": 2137.1497818245084,
           "theta": 315.63208980485797,
           "phi": 30.501945501659065,
           "x": 805.591323940549,
@@ -6400,7 +6400,7 @@
           },
           {
             "active": true,
-            "radius": 2136.2209900699086,
+            "radius": 2137.1497818245084,
             "theta": 315.63208980485797,
             "phi": 30.501945501659065,
             "x": 805.591323940549,
