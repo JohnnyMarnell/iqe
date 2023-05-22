@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1684431517729,
+  "timestamp": 1684718947347,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -40,7 +40,7 @@
         },
         "parameters": {
           "label": "Pillar 1; #0",
-          "tags": "strip pillar f0 pc4 pc4-s3 ps ps-e4 po po-cw6 sq3 sq3-cw4",
+          "tags": "strip pillar f0 pc7 pc7-s3 ps ps-e7 po po-cw9 sq3 sq3-cw5",
           "x": 0,
           "y": 700,
           "z": 0,
@@ -82,7 +82,7 @@
         },
         "parameters": {
           "label": "Pillar 2; #1",
-          "tags": "strip pillar f1 pc4 pc4-s2 pm pm-e7 po po-cw5 sq3 sq3-cw3",
+          "tags": "strip pillar f1 pc7 pc7-s2 pm pm-e7 po po-cw8 sq3 sq3-cw4",
           "x": 1050,
           "y": 700,
           "z": 0,
@@ -124,7 +124,7 @@
         },
         "parameters": {
           "label": "Pillar 3; #2",
-          "tags": "strip pillar f2 pc4 pc4-s1 pn pn-e4 po po-cw4 sq3 sq3-cw2",
+          "tags": "strip pillar f2 pc7 pc7-s1 pn pn-e7 po po-cw7 sq3 sq3-cw3",
           "x": 2100,
           "y": 700,
           "z": 0,
@@ -166,10 +166,10 @@
         },
         "parameters": {
           "label": "Pillar 4; #3",
-          "tags": "strip pillar f3 pc3 pc3-s3 ps ps-e3 po po-cw7 sq3 sq3-cw5 sq2 sq2-cw4",
+          "tags": "strip pillar f3 pc6 pc6-s3 ps ps-e6 po po-cw10 sq3 sq3-cw6",
           "x": 0,
           "y": 700,
-          "z": 2100,
+          "z": 1050,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -208,10 +208,10 @@
         },
         "parameters": {
           "label": "Pillar 5; #4",
-          "tags": "strip pillar f4 pc3 pc3-s2 pm pm-e5 pi pi-e4 sq3 sq3-cw6 sq2 sq2-cw3",
+          "tags": "strip pillar f4 pc6 pc6-s2 pm pm-e6 pi pi-e5 sq3 ",
           "x": 1050,
           "y": 700,
-          "z": 2100,
+          "z": 1050,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -250,10 +250,10 @@
         },
         "parameters": {
           "label": "Pillar 6; #5",
-          "tags": "strip pillar f5 pc3 pc3-s1 pn pn-e3 po po-cw3 sq3 sq3-cw1 sq2 sq2-cw2",
+          "tags": "strip pillar f5 pc6 pc6-s1 pn pn-e6 po po-cw6 sq3 sq3-cw2",
           "x": 2100,
           "y": 700,
-          "z": 2100,
+          "z": 1050,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -292,10 +292,10 @@
         },
         "parameters": {
           "label": "Pillar 7; #6",
-          "tags": "strip pillar f6 pc2 pc2-s3 ps ps-e4 po po-cw8 sq2 sq2-cw5 sq1 sq1-cw4",
+          "tags": "strip pillar f6 pc5 pc5-s3 ps ps-e5 po po-cw11 sq3 sq3-cw7 sq2 sq2-cw5",
           "x": 0,
           "y": 700,
-          "z": 4200,
+          "z": 2100,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -334,10 +334,10 @@
         },
         "parameters": {
           "label": "Pillar 8; #7",
-          "tags": "strip pillar f7 pc2 pc2-s2 pm pm-e3 pi pi-e2 sq2 sq2-cw6 sq1 sq1-cw3",
+          "tags": "strip pillar f7 pc5 pc5-s2 pm pm-e5 pi pi-e4 sq3 sq3-cw8 sq2 sq2-cw4",
           "x": 1050,
           "y": 700,
-          "z": 4200,
+          "z": 2100,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -376,10 +376,10 @@
         },
         "parameters": {
           "label": "Pillar 9; #8",
-          "tags": "strip pillar f8 pc2 pc2-s1 pn pn-e2 po po-cw2 sq2 sq2-cw1 sq1 sq1-cw2",
+          "tags": "strip pillar f8 pc5 pc5-s1 pn pn-e5 po po-cw5 sq3 sq3-cw1 sq2 sq2-cw3",
           "x": 2100,
           "y": 700,
-          "z": 4200,
+          "z": 2100,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -418,10 +418,10 @@
         },
         "parameters": {
           "label": "Pillar 10; #9",
-          "tags": "strip pillar f9 pc1 pc1-s3 ps ps-e1 po po-cw9 sq1 sq1-cw5",
+          "tags": "strip pillar f9 pc4 pc4-s3 ps ps-e4 po po-cw12 sq2 sq2-cw6",
           "x": 0,
           "y": 700,
-          "z": 6300,
+          "z": 3150,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -460,10 +460,10 @@
         },
         "parameters": {
           "label": "Pillar 11; #10",
-          "tags": "strip pillar f10 pc1 pc1-s2 pm pm-e1 po po-cw10 sq1 sq1-cw6",
+          "tags": "strip pillar f10 pc4 pc4-s2 pm pm-e4 pi pi-e3 sq2 ",
           "x": 1050,
           "y": 700,
-          "z": 6300,
+          "z": 3150,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -502,10 +502,10 @@
         },
         "parameters": {
           "label": "Pillar 12; #11",
-          "tags": "strip pillar f11 pc1 pc1-s1 pn pn-e1 po po-cw1 sq1 sq1-cw1",
+          "tags": "strip pillar f11 pc4 pc4-s1 pn pn-e4 po po-cw4 sq2 sq2-cw2",
           "x": 2100,
           "y": 700,
-          "z": 6300,
+          "z": 3150,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -544,10 +544,10 @@
         },
         "parameters": {
           "label": "Pillar 13; #12",
-          "tags": "strip pillar f12 pm pm-e6 pi pi-e5 sq3",
-          "x": 1050,
+          "tags": "strip pillar f12 pc3 pc3-s3 ps ps-e3 po po-cw13 sq2 sq2-cw7 sq1 sq1-cw5",
+          "x": 0,
           "y": 700,
-          "z": 1050,
+          "z": 4200,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -586,10 +586,10 @@
         },
         "parameters": {
           "label": "Pillar 14; #13",
-          "tags": "strip pillar f13 pm pm-e4 pi pi-e3 sq2",
+          "tags": "strip pillar f13 pc3 pc3-s2 pm pm-e3 pi pi-e2 sq2 sq2-cw8 sq1 sq1-cw4",
           "x": 1050,
           "y": 700,
-          "z": 3150,
+          "z": 4200,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -628,10 +628,10 @@
         },
         "parameters": {
           "label": "Pillar 15; #14",
-          "tags": "strip pillar f14 pm pm-e2 pi pi-e1 sq1",
-          "x": 1050,
+          "tags": "strip pillar f14 pc3 pc3-s1 pn pn-e3 po po-cw3 sq2 sq2-cw1 sq1 sq1-cw3",
+          "x": 2100,
           "y": 700,
-          "z": 5250,
+          "z": 4200,
           "yaw": 0,
           "pitch": 0,
           "roll": -90,
@@ -669,14 +669,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 1; #15",
-          "tags": "strip rafter f15 rn-e9 ro-cw9 sq3 sq3-cw3",
+          "label": "Pillar 16; #15",
+          "tags": "strip pillar f15 pc2 pc2-s3 ps ps-e2 po po-cw12 sq1 sq1-cw6",
           "x": 0,
           "y": 700,
-          "z": 700,
-          "yaw": 90,
+          "z": 5250,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -711,14 +711,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 2; #16",
-          "tags": "strip rafter f16 rn-e8 ro-cw8 sq3 sq3-cw2",
-          "x": 0,
+          "label": "Pillar 17; #16",
+          "tags": "strip pillar f16 pc2 pc2-s2 pm pm-e2 pi pi-e1 sq1 ",
+          "x": 1050,
           "y": 700,
-          "z": 1400,
-          "yaw": 90,
+          "z": 5250,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -753,14 +753,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 3; #17",
-          "tags": "strip rafter f17 rn-e7 ro-cw7 sq3 sq3-cw1",
-          "x": 0,
+          "label": "Pillar 18; #17",
+          "tags": "strip pillar f17 pc2 pc2-s1 pn pn-e2 po po-cw4 sq1 sq1-cw2",
+          "x": 2100,
           "y": 700,
-          "z": 2100,
-          "yaw": 90,
+          "z": 5250,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -795,14 +795,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 4; #18",
-          "tags": "strip rafter f18 rn-e6 ro-cw6 sq2 sq2-cw3",
+          "label": "Pillar 19; #18",
+          "tags": "strip pillar f18 pc1 pc1-s3 ps ps-e1 po po-cw15 sq1 sq1-cw7",
           "x": 0,
           "y": 700,
-          "z": 2800,
-          "yaw": 90,
+          "z": 6300,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -837,14 +837,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 5; #19",
-          "tags": "strip rafter f19 rn-e5 ro-cw5 sq2 sq2-cw2",
-          "x": 0,
+          "label": "Pillar 20; #19",
+          "tags": "strip pillar f19 pc1 pc1-s2 pm pm-e1 po po-cw16 sq1 sq1-cw8",
+          "x": 1050,
           "y": 700,
-          "z": 3500,
-          "yaw": 90,
+          "z": 6300,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -879,14 +879,14 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 6; #20",
-          "tags": "strip rafter f20 rn-e4 ro-cw4 sq2 sq2-cw1",
-          "x": 0,
+          "label": "Pillar 21; #20",
+          "tags": "strip pillar f20 pc1 pc1-s1 pn pn-e1 po po-cw1 sq1 sq1-cw1",
+          "x": 2100,
           "y": 700,
-          "z": 4200,
-          "yaw": 90,
+          "z": 6300,
+          "yaw": 0,
           "pitch": 0,
-          "roll": 0,
+          "roll": -90,
           "scale": 1,
           "selected": false,
           "deactivate": false,
@@ -921,11 +921,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 7; #21",
-          "tags": "strip rafter f21 rn-e3 ro-cw3 sq1 sq1-cw3",
+          "label": "Rafter 1; #21",
+          "tags": "strip rafter f21 rn-e9 ro-cw9 sq3 sq3-cw3",
           "x": 0,
           "y": 700,
-          "z": 4900,
+          "z": 700,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -963,11 +963,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 8; #22",
-          "tags": "strip rafter f22 rn-e2 ro-cw2 sq1 sq1-cw2",
+          "label": "Rafter 2; #22",
+          "tags": "strip rafter f22 rn-e8 ro-cw8 sq3 sq3-cw2",
           "x": 0,
           "y": 700,
-          "z": 5600,
+          "z": 1400,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1005,11 +1005,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 9; #23",
-          "tags": "strip rafter f23 rn-e1 ro-cw1 sq1 sq1-cw1",
+          "label": "Rafter 3; #23",
+          "tags": "strip rafter f23 rn-e7 ro-cw7 sq3 sq3-cw1",
           "x": 0,
           "y": 700,
-          "z": 6300,
+          "z": 2100,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1047,11 +1047,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 10; #24",
-          "tags": "strip rafter f24 rs-e9 ro-cw13 sq3 sq3-cw7",
-          "x": 2100,
+          "label": "Rafter 4; #24",
+          "tags": "strip rafter f24 rn-e6 ro-cw6 sq2 sq2-cw3",
+          "x": 0,
           "y": 700,
-          "z": 700,
+          "z": 2800,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1089,11 +1089,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 11; #25",
-          "tags": "strip rafter f25 rs-e8 ro-cw14 sq3 sq3-cw8",
-          "x": 2100,
+          "label": "Rafter 5; #25",
+          "tags": "strip rafter f25 rn-e5 ro-cw5 sq2 sq2-cw2",
+          "x": 0,
           "y": 700,
-          "z": 1400,
+          "z": 3500,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1131,11 +1131,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 12; #26",
-          "tags": "strip rafter f26 rs-e7 ro-cw15 sq3 sq3-cw9",
-          "x": 2100,
+          "label": "Rafter 6; #26",
+          "tags": "strip rafter f26 rn-e4 ro-cw4 sq2 sq2-cw1",
+          "x": 0,
           "y": 700,
-          "z": 2100,
+          "z": 4200,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1173,11 +1173,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 13; #27",
-          "tags": "strip rafter f27 rs-e6 ro-cw16 sq2 sq2-cw7",
-          "x": 2100,
+          "label": "Rafter 7; #27",
+          "tags": "strip rafter f27 rn-e3 ro-cw3 sq1 sq1-cw3",
+          "x": 0,
           "y": 700,
-          "z": 2800,
+          "z": 4900,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1215,11 +1215,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 14; #28",
-          "tags": "strip rafter f28 rs-e5 ro-cw17 sq2 sq2-cw8",
-          "x": 2100,
+          "label": "Rafter 8; #28",
+          "tags": "strip rafter f28 rn-e2 ro-cw2 sq1 sq1-cw2",
+          "x": 0,
           "y": 700,
-          "z": 3500,
+          "z": 5600,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1257,11 +1257,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 15; #29",
-          "tags": "strip rafter f29 rs-e4 ro-cw18 sq2 sq2-cw9",
-          "x": 2100,
+          "label": "Rafter 9; #29",
+          "tags": "strip rafter f29 rn-e1 ro-cw1 sq1 sq1-cw1",
+          "x": 0,
           "y": 700,
-          "z": 4200,
+          "z": 6300,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1299,11 +1299,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 16; #30",
-          "tags": "strip rafter f30 rs-e3 ro-cw19 sq1 sq1-cw7",
+          "label": "Rafter 10; #30",
+          "tags": "strip rafter f30 rs-e9 ro-cw13 sq3 sq3-cw7",
           "x": 2100,
           "y": 700,
-          "z": 4900,
+          "z": 700,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1341,11 +1341,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 17; #31",
-          "tags": "strip rafter f31 rs-e2 ro-cw20 sq1 sq1-cw8",
+          "label": "Rafter 11; #31",
+          "tags": "strip rafter f31 rs-e8 ro-cw14 sq3 sq3-cw8",
           "x": 2100,
           "y": 700,
-          "z": 5600,
+          "z": 1400,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1383,11 +1383,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 18; #32",
-          "tags": "strip rafter f32 rs-e1 ro-cw21 sq1 sq1-cw9",
+          "label": "Rafter 12; #32",
+          "tags": "strip rafter f32 rs-e7 ro-cw15 sq3 sq3-cw9",
           "x": 2100,
           "y": 700,
-          "z": 6300,
+          "z": 2100,
           "yaw": 90,
           "pitch": 0,
           "roll": 0,
@@ -1425,12 +1425,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 19; #33",
-          "tags": "strip rafter f33 rc4 rc4-s3 sq3 sq3-cw6",
-          "x": 700,
+          "label": "Rafter 13; #33",
+          "tags": "strip rafter f33 rs-e6 ro-cw16 sq2 sq2-cw7",
+          "x": 2100,
           "y": 700,
-          "z": 0,
-          "yaw": 180,
+          "z": 2800,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1467,12 +1467,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 20; #34",
-          "tags": "strip rafter f34 rc4 rc4-s2 sq3 sq3-cw5",
-          "x": 1400,
+          "label": "Rafter 14; #34",
+          "tags": "strip rafter f34 rs-e5 ro-cw17 sq2 sq2-cw8",
+          "x": 2100,
           "y": 700,
-          "z": 0,
-          "yaw": 180,
+          "z": 3500,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1509,12 +1509,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 21; #35",
-          "tags": "strip rafter f35 rc4 rc4-s1 sq3 sq3-cw4",
+          "label": "Rafter 15; #35",
+          "tags": "strip rafter f35 rs-e4 ro-cw18 sq2 sq2-cw9",
           "x": 2100,
           "y": 700,
-          "z": 0,
-          "yaw": 180,
+          "z": 4200,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1551,12 +1551,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 22; #36",
-          "tags": "strip rafter f36 rc3 rc1-s3 sq2 sq2-cw6 sq3 sq3-cw10",
-          "x": 700,
+          "label": "Rafter 16; #36",
+          "tags": "strip rafter f36 rs-e3 ro-cw19 sq1 sq1-cw7",
+          "x": 2100,
           "y": 700,
-          "z": 2100,
-          "yaw": 180,
+          "z": 4900,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1593,12 +1593,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 23; #37",
-          "tags": "strip rafter f37 rc3 rc1-s2 sq2 sq2-cw5 sq3 sq3-cw11",
-          "x": 1400,
+          "label": "Rafter 17; #37",
+          "tags": "strip rafter f37 rs-e2 ro-cw20 sq1 sq1-cw8",
+          "x": 2100,
           "y": 700,
-          "z": 2100,
-          "yaw": 180,
+          "z": 5600,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1635,12 +1635,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 24; #38",
-          "tags": "strip rafter f38 rc3 rc1-s1 sq2 sq2-cw4 sq3 sq3-cw12",
+          "label": "Rafter 18; #38",
+          "tags": "strip rafter f38 rs-e1 ro-cw21 sq1 sq1-cw9",
           "x": 2100,
           "y": 700,
-          "z": 2100,
-          "yaw": 180,
+          "z": 6300,
+          "yaw": 90,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1677,11 +1677,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 25; #39",
-          "tags": "strip rafter f39 rc2 rc1-s3 sq1 sq1-cw6 sq2 sq2-cw10",
+          "label": "Rafter 19; #39",
+          "tags": "strip rafter f39 rc4 rc4-s3 sq3 sq3-cw6",
           "x": 700,
           "y": 700,
-          "z": 4200,
+          "z": 0,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1719,11 +1719,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 26; #40",
-          "tags": "strip rafter f40 rc2 rc1-s2 sq1 sq1-cw5 sq2 sq2-cw11",
+          "label": "Rafter 20; #40",
+          "tags": "strip rafter f40 rc4 rc4-s2 sq3 sq3-cw5",
           "x": 1400,
           "y": 700,
-          "z": 4200,
+          "z": 0,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1761,11 +1761,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 27; #41",
-          "tags": "strip rafter f41 rc2 rc1-s1 sq1 sq1-cw4 sq2 sq2-cw12",
+          "label": "Rafter 21; #41",
+          "tags": "strip rafter f41 rc4 rc4-s1 sq3 sq3-cw4",
           "x": 2100,
           "y": 700,
-          "z": 4200,
+          "z": 0,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1803,11 +1803,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 28; #42",
-          "tags": "strip rafter f42 rc1 rc1-s3 sq1 sq1-cw10",
+          "label": "Rafter 22; #42",
+          "tags": "strip rafter f42 rc3 rc1-s3 sq2 sq2-cw6 sq3 sq3-cw10",
           "x": 700,
           "y": 700,
-          "z": 6300,
+          "z": 2100,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1845,11 +1845,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 29; #43",
-          "tags": "strip rafter f43 rc1 rc1-s2 sq1 sq1-cw11",
+          "label": "Rafter 23; #43",
+          "tags": "strip rafter f43 rc3 rc1-s2 sq2 sq2-cw5 sq3 sq3-cw11",
           "x": 1400,
           "y": 700,
-          "z": 6300,
+          "z": 2100,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1887,11 +1887,11 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 30; #44",
-          "tags": "strip rafter f44 rc1 rc1-s1 sq1 sq1-cw12",
+          "label": "Rafter 24; #44",
+          "tags": "strip rafter f44 rc3 rc1-s1 sq2 sq2-cw4 sq3 sq3-cw12",
           "x": 2100,
           "y": 700,
-          "z": 6300,
+          "z": 2100,
           "yaw": 180,
           "pitch": 0,
           "roll": 0,
@@ -1929,12 +1929,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 31; #45",
-          "tags": "strip rafter f45 x3-3 sq3 sq3-se4 x xo xo-cw3",
-          "x": 0,
+          "label": "Rafter 25; #45",
+          "tags": "strip rafter f45 rc2 rc1-s3 sq1 sq1-cw6 sq2 sq2-cw10",
+          "x": 700,
           "y": 700,
-          "z": 0,
-          "yaw": -45,
+          "z": 4200,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -1971,12 +1971,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 32; #46",
-          "tags": "strip rafter f46 x3-3 sq3 sq3-se3 x xi xi-cw3",
-          "x": 525,
+          "label": "Rafter 26; #46",
+          "tags": "strip rafter f46 rc2 rc1-s2 sq1 sq1-cw5 sq2 sq2-cw11",
+          "x": 1400,
           "y": 700,
-          "z": 525,
-          "yaw": -45,
+          "z": 4200,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2013,12 +2013,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 33; #47",
-          "tags": "strip rafter f47 x4-3 sq3 sq3-nw1 x xo xo-cw4",
-          "x": 0,
+          "label": "Rafter 27; #47",
+          "tags": "strip rafter f47 rc2 rc1-s1 sq1 sq1-cw4 sq2 sq2-cw12",
+          "x": 2100,
           "y": 700,
-          "z": 2100,
-          "yaw": 45,
+          "z": 4200,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2055,12 +2055,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 34; #48",
-          "tags": "strip rafter f48 x4-3 sq3 sq3-nw2 x xi xi-cw4",
-          "x": 525,
+          "label": "Rafter 28; #48",
+          "tags": "strip rafter f48 rc1 rc1-s3 sq1 sq1-cw10",
+          "x": 700,
           "y": 700,
-          "z": 1575,
-          "yaw": 45,
+          "z": 6300,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2097,12 +2097,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 35; #49",
-          "tags": "strip rafter f49 x2-3 sq3 sq3-nw4 x xo xo-cw2",
-          "x": 2100,
+          "label": "Rafter 29; #49",
+          "tags": "strip rafter f49 rc1 rc1-s2 sq1 sq1-cw11",
+          "x": 1400,
           "y": 700,
-          "z": 0,
-          "yaw": -135,
+          "z": 6300,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2139,12 +2139,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 36; #50",
-          "tags": "strip rafter f50 x2-3 sq3 sq3-nw3 x xi xi-cw2",
-          "x": 1575,
+          "label": "Rafter 30; #50",
+          "tags": "strip rafter f50 rc1 rc1-s1 sq1 sq1-cw12",
+          "x": 2100,
           "y": 700,
-          "z": 525,
-          "yaw": -135,
+          "z": 6300,
+          "yaw": 180,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2181,12 +2181,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 37; #51",
-          "tags": "strip rafter f51 x1-3 sq3 sq3-se1 x xo xo-cw1",
-          "x": 2100,
+          "label": "Rafter 31; #51",
+          "tags": "strip rafter f51 x3-3 sq3 sq3-se4 x xo xo-cw3",
+          "x": 0,
           "y": 700,
-          "z": 2100,
-          "yaw": 135,
+          "z": 0,
+          "yaw": -45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2223,12 +2223,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 38; #52",
-          "tags": "strip rafter f52 x1-3 sq3 sq3-se2 x xi xi-cw1",
-          "x": 1575,
+          "label": "Rafter 32; #52",
+          "tags": "strip rafter f52 x3-3 sq3 sq3-se3 x xi xi-cw3",
+          "x": 525,
           "y": 700,
-          "z": 1575,
-          "yaw": 135,
+          "z": 525,
+          "yaw": -45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2265,12 +2265,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 39; #53",
-          "tags": "strip rafter f53 x3-2 sq2 sq2-se4 x xo xo-cw3",
+          "label": "Rafter 33; #53",
+          "tags": "strip rafter f53 x4-3 sq3 sq3-nw1 x xo xo-cw4",
           "x": 0,
           "y": 700,
           "z": 2100,
-          "yaw": -45,
+          "yaw": 45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2307,12 +2307,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 40; #54",
-          "tags": "strip rafter f54 x3-2 sq2 sq2-se3 x xi xi-cw3",
+          "label": "Rafter 34; #54",
+          "tags": "strip rafter f54 x4-3 sq3 sq3-nw2 x xi xi-cw4",
           "x": 525,
           "y": 700,
-          "z": 2625,
-          "yaw": -45,
+          "z": 1575,
+          "yaw": 45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2349,12 +2349,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 41; #55",
-          "tags": "strip rafter f55 x4-2 sq2 sq2-nw1 x xo xo-cw4",
-          "x": 0,
+          "label": "Rafter 35; #55",
+          "tags": "strip rafter f55 x2-3 sq3 sq3-nw4 x xo xo-cw2",
+          "x": 2100,
           "y": 700,
-          "z": 4200,
-          "yaw": 45,
+          "z": 0,
+          "yaw": -135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2391,12 +2391,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 42; #56",
-          "tags": "strip rafter f56 x4-2 sq2 sq2-nw2 x xi xi-cw4",
-          "x": 525,
+          "label": "Rafter 36; #56",
+          "tags": "strip rafter f56 x2-3 sq3 sq3-nw3 x xi xi-cw2",
+          "x": 1575,
           "y": 700,
-          "z": 3675,
-          "yaw": 45,
+          "z": 525,
+          "yaw": -135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2433,12 +2433,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 43; #57",
-          "tags": "strip rafter f57 x2-2 sq2 sq2-nw4 x xo xo-cw2",
+          "label": "Rafter 37; #57",
+          "tags": "strip rafter f57 x1-3 sq3 sq3-se1 x xo xo-cw1",
           "x": 2100,
           "y": 700,
           "z": 2100,
-          "yaw": -135,
+          "yaw": 135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2475,12 +2475,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 44; #58",
-          "tags": "strip rafter f58 x2-2 sq2 sq2-nw3 x xi xi-cw2",
+          "label": "Rafter 38; #58",
+          "tags": "strip rafter f58 x1-3 sq3 sq3-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
-          "z": 2625,
-          "yaw": -135,
+          "z": 1575,
+          "yaw": 135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2517,12 +2517,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 45; #59",
-          "tags": "strip rafter f59 x1-2 sq2 sq2-se1 x xo xo-cw1",
-          "x": 2100,
+          "label": "Rafter 39; #59",
+          "tags": "strip rafter f59 x3-2 sq2 sq2-se4 x xo xo-cw3",
+          "x": 0,
           "y": 700,
-          "z": 4200,
-          "yaw": 135,
+          "z": 2100,
+          "yaw": -45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2559,12 +2559,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 46; #60",
-          "tags": "strip rafter f60 x1-2 sq2 sq2-se2 x xi xi-cw1",
-          "x": 1575,
+          "label": "Rafter 40; #60",
+          "tags": "strip rafter f60 x3-2 sq2 sq2-se3 x xi xi-cw3",
+          "x": 525,
           "y": 700,
-          "z": 3675,
-          "yaw": 135,
+          "z": 2625,
+          "yaw": -45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2601,12 +2601,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 47; #61",
-          "tags": "strip rafter f61 x3-1 sq1 sq1-se4 x xo xo-cw3",
+          "label": "Rafter 41; #61",
+          "tags": "strip rafter f61 x4-2 sq2 sq2-nw1 x xo xo-cw4",
           "x": 0,
           "y": 700,
           "z": 4200,
-          "yaw": -45,
+          "yaw": 45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2643,12 +2643,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 48; #62",
-          "tags": "strip rafter f62 x3-1 sq1 sq1-se3 x xi xi-cw3",
+          "label": "Rafter 42; #62",
+          "tags": "strip rafter f62 x4-2 sq2 sq2-nw2 x xi xi-cw4",
           "x": 525,
           "y": 700,
-          "z": 4725,
-          "yaw": -45,
+          "z": 3675,
+          "yaw": 45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2685,12 +2685,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 49; #63",
-          "tags": "strip rafter f63 x4-1 sq1 sq1-nw1 x xo xo-cw4",
-          "x": 0,
+          "label": "Rafter 43; #63",
+          "tags": "strip rafter f63 x2-2 sq2 sq2-nw4 x xo xo-cw2",
+          "x": 2100,
           "y": 700,
-          "z": 6300,
-          "yaw": 45,
+          "z": 2100,
+          "yaw": -135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2727,12 +2727,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 50; #64",
-          "tags": "strip rafter f64 x4-1 sq1 sq1-nw2 x xi xi-cw4",
-          "x": 525,
+          "label": "Rafter 44; #64",
+          "tags": "strip rafter f64 x2-2 sq2 sq2-nw3 x xi xi-cw2",
+          "x": 1575,
           "y": 700,
-          "z": 5775,
-          "yaw": 45,
+          "z": 2625,
+          "yaw": -135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2769,12 +2769,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 51; #65",
-          "tags": "strip rafter f65 x2-1 sq1 sq1-nw4 x xo xo-cw2",
+          "label": "Rafter 45; #65",
+          "tags": "strip rafter f65 x1-2 sq2 sq2-se1 x xo xo-cw1",
           "x": 2100,
           "y": 700,
           "z": 4200,
-          "yaw": -135,
+          "yaw": 135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2811,12 +2811,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 52; #66",
-          "tags": "strip rafter f66 x2-1 sq1 sq1-nw3 x xi xi-cw2",
+          "label": "Rafter 46; #66",
+          "tags": "strip rafter f66 x1-2 sq2 sq2-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
-          "z": 4725,
-          "yaw": -135,
+          "z": 3675,
+          "yaw": 135,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2853,12 +2853,12 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 53; #67",
-          "tags": "strip rafter f67 x1-1 sq1 sq1-se1 x xo xo-cw1",
-          "x": 2100,
+          "label": "Rafter 47; #67",
+          "tags": "strip rafter f67 x3-1 sq1 sq1-se4 x xo xo-cw3",
+          "x": 0,
           "y": 700,
-          "z": 6300,
-          "yaw": 135,
+          "z": 4200,
+          "yaw": -45,
           "pitch": 0,
           "roll": 0,
           "scale": 1,
@@ -2895,8 +2895,260 @@
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 54; #68",
-          "tags": "strip rafter f68 x1-1 sq1 sq1-se2 x xi xi-cw1",
+          "label": "Rafter 48; #68",
+          "tags": "strip rafter f68 x3-1 sq1 sq1-se3 x xi xi-cw3",
+          "x": 525,
+          "y": 700,
+          "z": 4725,
+          "yaw": -45,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 170,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 49; #69",
+          "tags": "strip rafter f69 x4-1 sq1 sq1-nw1 x xo xo-cw4",
+          "x": 0,
+          "y": 700,
+          "z": 6300,
+          "yaw": 45,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 171,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 50; #70",
+          "tags": "strip rafter f70 x4-1 sq1 sq1-nw2 x xi xi-cw4",
+          "x": 525,
+          "y": 700,
+          "z": 5775,
+          "yaw": 45,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 172,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 51; #71",
+          "tags": "strip rafter f71 x2-1 sq1 sq1-nw4 x xo xo-cw2",
+          "x": 2100,
+          "y": 700,
+          "z": 4200,
+          "yaw": -135,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 173,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 52; #72",
+          "tags": "strip rafter f72 x2-1 sq1 sq1-nw3 x xi xi-cw2",
+          "x": 1575,
+          "y": 700,
+          "z": 4725,
+          "yaw": -135,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 174,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 53; #73",
+          "tags": "strip rafter f73 x1-1 sq1 sq1-se1 x xo xo-cw1",
+          "x": 2100,
+          "y": 700,
+          "z": 6300,
+          "yaw": 135,
+          "pitch": 0,
+          "roll": 0,
+          "scale": 1,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.10",
+          "port": 7890,
+          "dmxChannel": 420,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5
+        },
+        "children": {}
+      },
+      {
+        "id": 175,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 54; #74",
+          "tags": "strip rafter f74 x1-1 sq1 sq1-se2 x xi xi-cw1",
           "x": 1575,
           "y": 700,
           "z": 5775,
@@ -2963,7 +3215,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 0,
           "autoCycleTimeSecs": 60,
-          "autoCycleCursor": 1,
+          "autoCycleCursor": 0,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -2976,7 +3228,7 @@
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "Swatch-2",
+              "label": "Swatch-1",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -2995,7 +3247,7 @@
                   "period": 30,
                   "primary/brightness": 100,
                   "primary/saturation": 100,
-                  "primary/hue": 178.81640625,
+                  "primary/hue": 0,
                   "secondary/brightness": 100,
                   "secondary/saturation": 100,
                   "secondary/hue": 120
@@ -3015,7 +3267,7 @@
                   "period": 30,
                   "primary/brightness": 100,
                   "primary/saturation": 100,
-                  "primary/hue": 91.1953125,
+                  "primary/hue": 35.28515625,
                   "secondary/brightness": 100,
                   "secondary/saturation": 100,
                   "secondary/hue": 120
@@ -3035,7 +3287,7 @@
                   "period": 30,
                   "primary/brightness": 100,
                   "primary/saturation": 100,
-                  "primary/hue": 214.53515625,
+                  "primary/hue": 301.875,
                   "secondary/brightness": 100,
                   "secondary/saturation": 100,
                   "secondary/hue": 120
@@ -3210,8 +3462,8 @@
         "parameters": {
           "label": "Tempo",
           "clockSource": 0,
-          "period": 495.22222222222223,
-          "bpm": 121.1577294144043,
+          "period": 1000,
+          "bpm": 60,
           "tap": false,
           "nudgeUp": false,
           "nudgeDown": false,
@@ -3479,7 +3731,7 @@
           "label": "Mixer",
           "crossfader": 0.5,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 3,
+          "focusedChannel": 2,
           "focusedChannelAux": 2,
           "cueA": false,
           "cueB": false,
@@ -3501,7 +3753,7 @@
               "label": "Master",
               "fader": 1,
               "arm": false,
-              "selected": true,
+              "selected": false,
               "previewMode": 0
             },
             "children": {},
@@ -4054,7 +4306,7 @@
                           "exp": 0
                         },
                         "children": {},
-                        "basis": 0.7797533891256717
+                        "basis": 0.016248123310754106
                       },
                       {
                         "id": 53133,
@@ -4082,7 +4334,7 @@
                           "exp": 0
                         },
                         "children": {},
-                        "basis": 0.7797533891256717
+                        "basis": 0.016248123310754106
                       }
                     ],
                     "modulations": [
@@ -5058,7 +5310,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -5356,7 +5608,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -5500,14 +5752,14 @@
             },
             "parameters": {
               "label": "FX",
-              "fader": 1,
+              "fader": 0,
               "arm": false,
-              "selected": false,
+              "selected": true,
               "enabled": true,
               "cue": false,
               "aux": false,
               "crossfadeGroup": 0,
-              "blendMode": 1,
+              "blendMode": 4,
               "midiMonitor": false,
               "midiChannel": 16,
               "viewEnabled": false,
@@ -5522,13 +5774,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 5,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 60878,
@@ -5552,6 +5804,44 @@
                 "children": {
                   "modulation": {
                     "id": 60879,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 69561,
+                "class": "org.iqe.pattern.DiagnosticsPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "Diagnostics",
+                  "enabled": false,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1,
+                  "syncTrigger": false
+                },
+                "children": {
+                  "modulation": {
+                    "id": 69562,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -5610,7 +5900,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.21733333334859706
+            "basis": 0.4946666666845977
           },
           {
             "id": 54255,
@@ -5657,7 +5947,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5943333333488379
+            "basis": 0.8716666666848336
           },
           {
             "id": 56980,
@@ -5685,7 +5975,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5943333333488379
+            "basis": 0.8716666666848336
           },
           {
             "id": 56981,
@@ -5713,7 +6003,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5943333333488379
+            "basis": 0.8716666666848336
           },
           {
             "id": 56982,
@@ -5741,7 +6031,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5943333333488379
+            "basis": 0.8716666666848336
           },
           {
             "id": 56983,
@@ -5769,7 +6059,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5943333333488379
+            "basis": 0.8716666666848336
           },
           {
             "id": 57307,
@@ -5797,7 +6087,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13733333334635267
+            "basis": 0.41466666668234264
           },
           {
             "id": 57308,
@@ -5825,7 +6115,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13733333334635267
+            "basis": 0.41466666668234264
           },
           {
             "id": 62913,
@@ -5853,7 +6143,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.34333333334549065
+            "basis": 0.6206666666814951
           },
           {
             "id": 66458,
@@ -5881,7 +6171,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8223333333412056
+            "basis": 0.0996666666771993
           },
           {
             "id": 63635,
@@ -5909,7 +6199,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8753333333447605
+            "basis": 0.1526666666807611
           },
           {
             "id": 64644,
@@ -5993,7 +6283,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8243333333416721
+            "basis": 0.10166666667766959
           }
         ],
         "modulations": [
@@ -6236,6 +6526,32 @@
               "path": "/mixer/channel/1/pattern/10/syncTrigger"
             },
             "id": 67061,
+            "class": "heronarts.lx.modulation.LXTriggerModulation",
+            "internal": {
+              "modulationColor": 0,
+              "modulationControlsExpanded": true
+            },
+            "parameters": {
+              "label": "LX",
+              "enabled": true,
+              "toggleMode": 0,
+              "momentaryToggleMode": 0,
+              "toggleMomentaryMode": 0
+            },
+            "children": {}
+          },
+          {
+            "source": {
+              "componentId": 65252,
+              "parameterPath": "triggerOut",
+              "path": "/modulation/modulator/15/triggerOut"
+            },
+            "target": {
+              "componentId": 69561,
+              "parameterPath": "syncTrigger",
+              "path": "/mixer/channel/3/pattern/2/syncTrigger"
+            },
+            "id": 69948,
             "class": "heronarts.lx.modulation.LXTriggerModulation",
             "internal": {
               "modulationColor": 0,
