@@ -8,7 +8,8 @@ const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
 const numRafters = 54
 const numPillars = 0
-const controllerIP = "192.168.0.10"
+// const controllerIP = "192.168.0.10"
+const controllerIP = "169.254.250.112"
 const mapStripToArtnetPair = index => index * 3
 
 const s = defaultNagBugglerSaberOfLight
