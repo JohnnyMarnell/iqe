@@ -7,9 +7,9 @@ const numLedsPerStrip = 140
 const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
 const numRafters = 54
-const numPillars = 21
+const numPillars = 0
 const controllerIP = "192.168.0.10"
-const mapStripToArtnetPair = index => index
+const mapStripToArtnetPair = index => index * 3
 
 const s = defaultNagBugglerSaberOfLight
 const sl = stripLenMultiplier => stripLenMultiplier * stripLen
@@ -27,12 +27,24 @@ const sl = stripLenMultiplier => stripLenMultiplier * stripLen
 const universeHyperspaceWarp = [2, 0, 1], channelingus = [0, 420, 330]
 let universe = -1
 const fArtNetPairs = []
-for (let i = 0; i < numPillars + numRafters; i++) {
+for (let i = 0; i < 128; i++) {
     universe += universeHyperspaceWarp[i % 3]
     fArtNetPairs.push( [universe, channelingus[i % 3] ] )
 }
 
 function buildNagBugglerSaberOfLightFixtures() {
+    return [
+        {...s({yaw: -90, x: sl(7 * .1), y: sl(1), z: 0}, 'r-v2-7')},
+        {...s({yaw: -90, x: sl(6 * .1), y: sl(1), z: 0}, 'r-v2-6')},
+        {...s({yaw: -90, x: sl(5 * .1), y: sl(1), z: 0}, 'r-v2-5')},
+        {...s({yaw: -90, x: sl(4 * .1), y: sl(1), z: 0}, 'r-v2-4')},
+        {...s({yaw: -90, x: sl(3 * .1), y: sl(1), z: 0}, 'r-v2-3')},
+        {...s({yaw: -90, x: sl(2 * .1), y: sl(1), z: 0}, 'r-v2-2')},
+        {...s({yaw: -90, x: sl(1 * .1), y: sl(1), z: 0}, 'r-v2-1')},
+    ]
+}
+
+function buildNagBugglerSaberOfLightFixtures_v1() {
     return [
         /* 
             Tags for membership (shapes/outlines/sets), and directional order progression therein
@@ -199,8 +211,8 @@ function defaultNagBugglerSaberOfLight(params, tags) {
             reverse: false,
             host: controllerIP,
             port: 7890,
-            artNetUniverse: mapStripToArtnetPair(i)[0],
-            dmxChannel: mapStripToArtnetPair(i)[1],
+            artNetUniverse: fArtNetPairs[mapStripToArtnetPair(i)][0],
+            dmxChannel: fArtNetPairs[mapStripToArtnetPair(i)][1],
             artNetSequenceEnabled: false,
             opcChannel: 0,
             opcOffset: 0,
