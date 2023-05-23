@@ -162,4 +162,9 @@ public class OscBridge {
             }
         });
     }
+
+    void dispose() {
+        rxFromLxLoopback.stop();
+        rxFromClients.stop();
+    }
 }

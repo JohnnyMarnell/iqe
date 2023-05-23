@@ -107,4 +107,8 @@ public class Orchestrator {
                 .filter(e -> e.getValue().get(0).toString().equals(componentLabel))
                 .map(e -> e.getKey().substring(0, e.getKey().length() - 6));
     }
+
+    void dispose() {
+        executorService.shutdownNow();
+    }
 }

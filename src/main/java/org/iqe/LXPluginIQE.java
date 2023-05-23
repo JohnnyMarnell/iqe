@@ -10,9 +10,14 @@ import java.util.stream.Stream;
 public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, LXModel.Listener {
     public static final String INTERNAL = "NO_TOUCHY";
     protected LX lx;
+    protected boolean running = false;
 
     @Override
     public void dispose() {
+        if (!running) return;
+        running = false;
+        LOG.info("IQE Shutting down");
+        Audio.get().dispose();
         LXPlugin.super.dispose();
     }
 
@@ -30,9 +35,13 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 HolyTrinitiesPattern.class,
                 PillarFirePattern.class,
                 BouncingDotsPattern.class,
+                MindLikeWaterPattern.class,
                 DiagnosticsPattern.class,
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(this::dispose));
+        running = true;
     }
 
     @Override
