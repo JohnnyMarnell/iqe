@@ -31,7 +31,7 @@ public class HolyTrinitiesPattern extends LXPattern
 
         // Then highlight active group
         int highlightAlpha = LXColor.WHITE;
-        List<Integer> stripIndexes = groups.get(order.get(sync.step()));
+        List<Integer> stripIndexes = groups.get(order.get(sync.step(true)));
         stripIndexes.stream()
                 .flatMap(stripIndex -> childPoints(this, stripIndex))
                 .forEach(point -> colors[point.index] = highlightAlpha);
@@ -44,23 +44,23 @@ public class HolyTrinitiesPattern extends LXPattern
         int o1, o2;
 
         // triangles with x-axis-3-strip length bases, pointing z+ up, in near to far order
-        o1 = 0; o2 = 0;  groups.add(List.of(33 + o1, 34 + o1, 35 + o1, 45 + o2, 46 + o2, 49 + o2, 50 + o2));
-        o1 = 3; o2 = 8;  groups.add(List.of(33 + o1, 34 + o1, 35 + o1, 45 + o2, 46 + o2, 49 + o2, 50 + o2));
-        o1 = 6; o2 = 16;  groups.add(List.of(33 + o1, 34 + o1, 35 + o1, 45 + o2, 46 + o2, 49 + o2, 50 + o2));
+        o1 = 0; o2 = 0;  groups.add(List.of(39 + o1, 40 + o1, 41 + o1, 51 + o2, 52 + o2, 55 + o2, 56 + o2));
+        o1 = 3; o2 = 8;  groups.add(List.of(39 + o1, 40 + o1, 41 + o1, 51 + o2, 52 + o2, 55 + o2, 56 + o2));
+        o1 = 6; o2 = 16; groups.add(List.of(39 + o1, 40 + o1, 41 + o1, 51 + o2, 52 + o2, 55 + o2, 56 + o2));
 
         // triangles with x-axis-3-strip length bases, pointing z- down, in near to far order
-        o1 = 0; o2 = 0;  groups.add(List.of(36 + o1, 37 + o1, 38 + o1, 47 + o2, 48 + o2, 51 + o2, 52 + o2));
-        o1 = 3; o2 = 8;  groups.add(List.of(36 + o1, 37 + o1, 38 + o1, 47 + o2, 48 + o2, 51 + o2, 52 + o2));
-        o1 = 6; o2 = 16;  groups.add(List.of(36 + o1, 37 + o1, 38 + o1, 47 + o2, 48 + o2, 51 + o2, 52 + o2));
+        o1 = 0; o2 = 0;  groups.add(List.of(42 + o1, 43 + o1, 44 + o1, 53 + o2, 54 + o2, 57 + o2, 58 + o2));
+        o1 = 3; o2 = 8;  groups.add(List.of(42 + o1, 43 + o1, 44 + o1, 53 + o2, 54 + o2, 57 + o2, 58 + o2));
+        o1 = 6; o2 = 16; groups.add(List.of(42 + o1, 43 + o1, 44 + o1, 53 + o2, 54 + o2, 57 + o2, 58 + o2));
 
         // triangles with z-axis-3-strip length bases, in 2x near to far order
-        o1 = 0; o2 = 0;  groups.add(List.of(15 + o1, 16 + o1, 17 + o1, 45 + o2, 46 + o2, 47 + o2, 48 + o2));
-        o1 = 3; o2 = 8;  groups.add(List.of(15 + o1, 16 + o1, 17 + o1, 45 + o2, 46 + o2, 47 + o2, 48 + o2));
-        o1 = 6; o2 = 16; groups.add(List.of(15 + o1, 16 + o1, 17 + o1, 45 + o2, 46 + o2, 47 + o2, 48 + o2));
+        o1 = 0; o2 = 0;  groups.add(List.of(21 + o1, 22 + o1, 23 + o1, 51 + o2, 52 + o2, 53 + o2, 54 + o2));
+        o1 = 3; o2 = 8;  groups.add(List.of(21 + o1, 22 + o1, 23 + o1, 51 + o2, 52 + o2, 53 + o2, 54 + o2));
+        o1 = 6; o2 = 16; groups.add(List.of(21 + o1, 22 + o1, 23 + o1, 51 + o2, 52 + o2, 53 + o2, 54 + o2));
 
-        o1 = 0; o2 = 0;  groups.add(List.of(24 + o1, 25 + o1, 26 + o1, 49 + o2, 50 + o2, 51 + o2, 52 + o2));
-        o1 = 3; o2 = 8;  groups.add(List.of(24 + o1, 25 + o1, 26 + o1, 49 + o2, 50 + o2, 51 + o2, 52 + o2));
-        o1 = 6; o2 = 16; groups.add(List.of(24 + o1, 25 + o1, 26 + o1, 49 + o2, 50 + o2, 51 + o2, 52 + o2));
+        o1 = 0; o2 = 0;  groups.add(List.of(30 + o1, 31 + o1, 32 + o1, 55 + o2, 56 + o2, 57 + o2, 58 + o2));
+        o1 = 3; o2 = 8;  groups.add(List.of(30 + o1, 31 + o1, 32 + o1, 55 + o2, 56 + o2, 57 + o2, 58 + o2));
+        o1 = 6; o2 = 16; groups.add(List.of(30 + o1, 31 + o1, 32 + o1, 55 + o2, 56 + o2, 57 + o2, 58 + o2));
 
         // add the 3 square orderings of its triangles
         int o3;

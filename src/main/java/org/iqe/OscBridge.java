@@ -15,6 +15,9 @@ import java.util.*;
  * so we can receive clients and listen to and store output
  */
 public class OscBridge {
+    public enum Event {
+        DIAGNOSTIC
+    }
     public static final String QUERY = "/lx/osc-query";
     private final LX lx;
     public final LXOscEngine.Transmitter txToClients;
@@ -100,6 +103,32 @@ public class OscBridge {
 
     public void sendMessage(String path, int data) {
         lx.engine.osc.sendMessage(path, data);
+    }
+
+    public void event(Event eventType, Object ... args) {
+        Object[] full = new Object[args.length + 1];
+        int index = 0;
+        full[index++] = eventType.name();
+        for (Object arg : args) full[index++] = arg;
+        sendOutgoing("/iqe/event", full);
+    }
+
+    public void sendOutgoing(String path, Object ... args) {
+        try {
+            OscMessage msg = new OscMessage(path);
+            for (Object arg : args) {
+                if      (arg instanceof Integer) msg.add((int) arg);
+                else if (arg instanceof Boolean) msg.add((Boolean) arg ? 1. : 0.);
+                else if (arg instanceof Number)  msg.add(((Number) arg).doubleValue());
+                else if (arg instanceof String)  msg.add((String) arg);
+                else                             msg.add(arg.toString());
+
+            }
+            LOG.info("Sending outgoing OSC: {}", msg);
+            txToClients.send(msg);
+        } catch (IOException e) {
+            LX.error(e, "Failure sending client outbound OSC message");
+        }
     }
 
     private void temporarilyDisableListeners() {
