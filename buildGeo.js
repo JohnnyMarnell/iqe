@@ -3,10 +3,34 @@ const fs = require('fs')
 // yaw, pitch, roll, (0,0,0) => along x axis, (0,90,0) => no visual change (so x axis?),
 //      (0,0,90) vertical up (y+) (so z axis?)
 let id = 100
-const stripLen = 700 // 5 spacing * 140 LED pixels / "numPoints"
+const numLedsPerStrip = 140
+const ledSpacing = 5
+const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
+const numRafters = 54
+const numPillars = 21
+const controllerIP = "192.168.0.10"
+const mapStripToArtnetPair = index => index
+
 const s = defaultNagBugglerSaberOfLight
 const sl = stripLenMultiplier => stripLenMultiplier * stripLen
-const numPillars = 21
+
+/** Notes on fArtNet. The Advatek PixLite E16-s mk3 has 32 outputs, for which we configure start + ends for 
+ * universe and channel. A channel represents one of 3 color components (RGB) of an actual LED pixel, thus
+ * for 140 LEDs, we need 3 * 140 == 420 (blaze that shit, brah) channels. At each output, the channel start
+ * and end is 1 to 510, thus the pixel channels need to be striped, since 510 is a limit of the controller
+ * in "expanded/non-expanded modes". Because of this striping, fArtNet start and end universes will look like
+ * 1-3, 4-6, 7-9 etc, and the start and end channel will always be full 1-510. So each actual NagBuggler LED
+ * Saber of Light Strip Fixture in LX must be mapped to the correct channel position in the
+ * current output stripe (which should repeat as 0, 420, 330, 0 ...), and universes follow pattern
+ *  (N, N, N + 1,   N + 3, N + 3, N + 4,   ), or (repeat last, up by 1, up by 2)
+ */
+const universeHyperspaceWarp = [2, 0, 1], channelingus = [0, 420, 330]
+let universe = -1
+const fArtNetPairs = []
+for (let i = 0; i < numPillars + numRafters; i++) {
+    universe += universeHyperspaceWarp[i % 3]
+    fArtNetPairs.push( [universe, channelingus[i % 3] ] )
+}
 
 function buildNagBugglerSaberOfLightFixtures() {
     return [
@@ -142,6 +166,7 @@ fs.writeFileSync(path, JSON.stringify(project, null, 2))
 
 function defaultNagBugglerSaberOfLight(params, tags) {
     id++
+    const i = id - 101
     let fixtureTags = `strip ${id - 100 <= numPillars ? 'pillar' : 'rafter'} f${id - 101}`
     if (tags) fixtureTags += ' ' + tags.split(/\s+/ig).join(' ')
     return {
@@ -152,7 +177,7 @@ function defaultNagBugglerSaberOfLight(params, tags) {
             modulationControlsExpanded: true
         },
         parameters: {
-            label: (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + (id - 101),
+            label: (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + i,
             tags: fixtureTags,
             x: 0,
             y: stripLen, // most (all) strips have origin in ceiling
@@ -172,17 +197,17 @@ function defaultNagBugglerSaberOfLight(params, tags) {
             byteOrder: 0,
             transport: 0,
             reverse: false,
-            host: "192.168.0.10",
+            host: controllerIP,
             port: 7890,
-            dmxChannel: 420,
-            artNetUniverse: 1,
+            artNetUniverse: mapStripToArtnetPair(i)[0],
+            dmxChannel: mapStripToArtnetPair(i)[1],
             artNetSequenceEnabled: false,
             opcChannel: 0,
             opcOffset: 0,
             ddpDataOffset: 0,
             kinetPort: 1,
-            numPoints: 140,
-            spacing: 5,
+            numPoints: numLedsPerStrip,
+            spacing: ledSpacing,
             
             // overlay any overriding params from above!
             ...params

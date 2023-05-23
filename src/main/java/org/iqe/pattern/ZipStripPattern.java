@@ -34,7 +34,7 @@ public class ZipStripPattern extends LXPattern {
         double beat = sync.basis();
         double pulseWidthFrac = energy.getNormalized() * 3 / 8;
         double swingBeat = TEMath.easeOutPow(beat, energy.getNormalized());
-        double pulseHeadFrac = (sync.step() + swingBeat) / 4 * (1 + pulseWidthFrac);
+        double pulseHeadFrac = (sync.step(true) + swingBeat) / 4 * (1 + pulseWidthFrac);
         double pulseTailFrac = pulseHeadFrac - pulseWidthFrac;
 
         for (LXModel child : model.children) {

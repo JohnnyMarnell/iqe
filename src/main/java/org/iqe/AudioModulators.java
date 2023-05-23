@@ -125,6 +125,9 @@ public class AudioModulators {
             return calc.get();
         }
     }
+    public static FuncParam funcParam(String label, Supplier<Double> calc) {
+        return new FuncParam(label, calc);
+    }
 
     /**
      * This modulator is mappable / provides automation as both trigger event and parameter output (the latter

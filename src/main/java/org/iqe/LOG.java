@@ -24,7 +24,7 @@ public class LOG {
     }
 
     // Don't worry, it's already slow
-    private static String format(String msg, Object ... args) {
+    public static String format(String msg, Object ... args) {
         return msg.replaceAll("\\{}", "%s").formatted(args);
     }
 
@@ -33,8 +33,8 @@ public class LOG {
         if (now != lastTickMs) {
             lastTickMs = now;
             ++loop;
-            msg = 1;
-            System.out.printf("%4d %2d %s %s%n", loop, msg, "DEBUG", "New tick");
+            msg = 0;
+            debug("New tick");
         }
         ++msg;
         System.out.printf("%4d %2d %s %s%n", loop, msg, level, text);

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.iqe.Audio.*;
+import static org.iqe.AudioModulators.funcParam;
 
 /**
  * Basically a one-shot / click type of parameter / synchronization system,
@@ -41,6 +42,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
 
     // todo: Builder pattern, easy constructors
     // todo: Use LXParameters, and probably functional, so it's up to date and better controllable
+    // todo: Deactive / don't fire when pattern is not active
     public Sync(LXPattern pattern) {
         this(pattern, null, true, true);
     }
@@ -49,15 +51,11 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         this.staticSteps = staticSteps;
         this.tempoLock = tempoLock;
         this.variableDivision = variableDivision;
-        this.periodMs = new FunctionalParameter() {
-            @Override
-            public double getValue() {
-                return Audio.periodOf(division);
-            }
-        };
+        this.periodMs = funcParam("periodMs", () -> periodOf(division));
+
         components.add(pattern.getLabel());
-        pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
         // todo: unify these, static, one forever task
+        pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
         Audio.get().addEndTask(deltaMs -> triggering = false);
         trigger.onTrigger(this::markTriggering);
 
@@ -116,21 +114,21 @@ public class Sync extends CompoundParameter implements LXParameterListener {
     }
 
     public int step() {
-        return step;
+        return step(false);
     }
 
-    /* If triggering, increment the current step within bounds and return it */
-    public int advance(int steps) {
-        return (step = ((isTriggering() ? step + 1 : step) % steps));
+    public int step(boolean mod) {
+        return mod ? step % stepsSize() : step;
     }
 
     /* Assume number of beats in bar if not explicit */
-    public int advance() {
-        if (staticSteps != null) return advance(staticSteps);
+    public int stepsSize() {
+        // todo: this is probably wrong?
+        return staticSteps != null ? staticSteps : (int) Math.ceil(beatsInBar(division));
+    }
 
-        // todo: this is probably wrong
-        int steps = (int) Math.ceil(beatsInBar(division));
-        return advance(steps);
+    public int advance() {
+        return ++step;
     }
 
     public void markTriggering() {
