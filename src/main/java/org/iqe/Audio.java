@@ -6,14 +6,14 @@ import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.parameter.BooleanParameter;
+import heronarts.lx.parameter.LXListenableParameter;
 import heronarts.lx.parameter.LXParameter;
+import heronarts.lx.parameter.LXParameterListener;
 import heronarts.lx.utils.LXUtils;
 import titanicsend.TEAudioPattern;
 import titanicsend.TEMath;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.sin;
@@ -51,6 +51,8 @@ public class Audio implements Tempo.Listener {
     private final List<Task> endTasks = new ArrayList<>();
     final TempoClick[] clicks = new TempoClick[Tempo.Division.values().length];
 
+    private final Map<LXListenableParameter, LXParameterListener> listeners = new HashMap<>();
+
     public static final BooleanParameter limitBassRetrigger = new BooleanParameter("limitBassRetrigger", true)
             .setDescription("Whether to suppress bass hit detection by frequency");
 
@@ -59,15 +61,17 @@ public class Audio implements Tempo.Listener {
         orchestrator = new Orchestrator(lx, osc);
 
         for (Tempo.Division division : Tempo.Division.values()) {
-            this.clicks[division.ordinal()] = new TempoClick(lx, division);
+            this.clicks[division.ordinal()] = new TempoClick(division);
         }
 
         tempo.addListener(this);
-        tempo.tap.addListener(this::onTap, true);
-        tempo.nudgeUp.addListener(this::onNudgeUp, true);
-        tempo.nudgeDown.addListener(this::onNudgeDown, true);
-        tempo.period.addListener(this::onPeriod, true);
-        tempo.bpm.addListener(this::onBpm, true);
+        listeners.put(tempo.tap, this::onTap);
+        listeners.put(tempo.tap, this::onTap);
+        listeners.put(tempo.nudgeUp, this::onNudgeUp);
+        listeners.put(tempo.nudgeDown, this::onNudgeDown);
+        listeners.put(tempo.period, this::onPeriod);
+        listeners.put(tempo.bpm, this::onBpm);
+        listeners.forEach(LXListenableParameter::addListener);
 
 
         teEngine = new TEAudioPattern(lx);
@@ -87,18 +91,16 @@ public class Audio implements Tempo.Listener {
 
     /** I think this is tempo sync + locked clicking */
     public static class TempoClick {
-        private final LX lx;
         public int clicks = 0;
         public boolean isOn = false;
         public Tempo.Division division;
 
-        public TempoClick(LX lx, Tempo.Division division) {
-            this.lx = lx;
+        public TempoClick(Tempo.Division division) {
             this.division = division;
         }
 
         void tick() {
-            int clicks = ((int) tempo.getBasis(division, false)) + 1;
+            int clicks = ((int) totalBasis(division)) + 1;
             if (clicks != this.clicks) {
                 isOn = true;
                 this.clicks = clicks;
@@ -179,8 +181,11 @@ public class Audio implements Tempo.Listener {
         return clicks[division.ordinal()].isOn;
     }
 
-    public double basis(Tempo.Division division) {
+    public static double basis(Tempo.Division division) {
         return tempo.getBasis(division);
+    }
+    public static double totalBasis(Tempo.Division division) {
+        return tempo.getBasis(division, false);
     }
 
     public static double period() {
@@ -195,6 +200,9 @@ public class Audio implements Tempo.Listener {
         return division.multiplier * beatsInBar();
     }
 
+//    public static double basis(Tempo.Division division) {
+//        return tempo.getBasis(division);
+//    }
     public static double periodOf(Tempo.Division division) {
         return divisionAppliedToPeriod(period(), division);
     }
@@ -277,6 +285,14 @@ public class Audio implements Tempo.Listener {
     }
     @LXCategory(INTERNAL) @LXComponent.Hidden
     public static class NO_TOUCHY extends GlobalParams { public NO_TOUCHY(LX lx) { super(lx); } }
+
+    void dispose() {
+        tempo.removeListener(this);
+        listeners.forEach(LXListenableParameter::removeListener);
+
+        orchestrator.dispose();
+        osc.dispose();
+    }
 
     public static void initialize(LX lx) {
         if (instance != null) throw new IllegalStateException("HighlanderException, there can only be one, "
