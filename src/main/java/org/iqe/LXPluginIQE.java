@@ -35,6 +35,7 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 HolyTrinitiesPattern.class,
                 PillarFirePattern.class,
                 BouncingDotsPattern.class,
+                PianoRollPattern.class,
                 MindLikeWaterPattern.class,
                 DiagnosticsPattern.class,
                 BassBreathPattern.class

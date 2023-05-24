@@ -91,7 +91,7 @@ public class OscBridge {
         String path = msg.getAddressPattern().toString();
         if (QUERY.equals(path)) temporarilyDisableListeners();
         state.put(path, msg);
-        boolean handled = lx.engine.handleOscMessage(msg, path.split("/"), 2);
+        boolean handled = path.startsWith("/iqe") || lx.engine.handleOscMessage(msg, path.split("/"), 2);
         fire(path);
         LOG.debug("Forwarded INCOMING OSC, handled {}, msg: {}", handled, msg);
         if (!handled) throw new UnsupportedOperationException("Couldn't handle OSC message: " + msg);

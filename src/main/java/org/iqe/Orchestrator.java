@@ -108,6 +108,13 @@ public class Orchestrator {
                 .map(e -> e.getKey().substring(0, e.getKey().length() - 6));
     }
 
+    public void addCustomOscMidiListener(Consumer<int[]> listener) {
+        osc.on("/iqe/midi", msg -> {
+            int[] data = new int[] { msg.getInt(0), msg.getInt(1), msg.getInt(2) };
+            listener.accept(data);
+        });
+    }
+
     void dispose() {
         executorService.shutdownNow();
     }

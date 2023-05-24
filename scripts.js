@@ -1,5 +1,6 @@
 const OSC = require('osc-js')
 const express = require('express')
+const {MidiIn, MidiOut, Midi} = require('j5-midi')
 
 function bridge(webPort = 80, wsPort = 8080, appTo = 3030, appFrom = 3131, exclude = null) {
     // Open port for receiving OSC messages from APP
@@ -24,6 +25,16 @@ function bridge(webPort = 80, wsPort = 8080, appTo = 3030, appFrom = 3131, exclu
     expressApp.use('/', express.static('./dist'))
     expressApp.use('/state', (req, res) => res.json(last))
     expressApp.listen(webPort, () => console.log('Web server listening on port', webPort))
+
+    wireMidi(app)
+}
+
+function wireMidi(app) {
+    const mac = require('os').platform() === 'darwin'
+    const input = mac ? new MidiIn({pattern: 'Launchkey Mini MK3 MIDI Port', virtual: true}) :
+        // new MidiIn({pattern: /Launchkey.*(MIDI 1|MIDI Port$)/ig}) // todo
+        new MidiIn({pattern: /Launchkey/ig}) // todo
+    input.on('midi.note', msg => app.send(new OSC.Message('/iqe/midi', msg.type, msg.data, msg.value)))
 }
 
 function bridgeSend(path, data) {
