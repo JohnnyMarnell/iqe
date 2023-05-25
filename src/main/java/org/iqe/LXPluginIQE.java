@@ -3,6 +3,10 @@ package org.iqe;
 import heronarts.lx.*;
 import heronarts.lx.model.LXModel;
 import org.iqe.pattern.*;
+import org.iqe.pattern.pixelblaze.PixelblazePatterns;
+import titanicsend.pattern.pixelblaze.PBAudio1;
+import titanicsend.pattern.pixelblaze.PBFireworkNova;
+import titanicsend.pattern.pixelblaze.PBXorcery;
 
 import java.io.File;
 import java.util.stream.Stream;
@@ -37,6 +41,13 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 BouncingDotsPattern.class,
                 PianoRollPattern.class,
                 MindLikeWaterPattern.class,
+
+                PBXorcery.class,
+                PBAudio1.class,
+                PBFireworkNova.class,
+                PixelblazePatterns.Fireflies.class,
+                PixelblazePatterns.RegenBogenDrogenMyBrogans.class,
+
                 DiagnosticsPattern.class,
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
