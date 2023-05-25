@@ -1,9 +1,12 @@
 # In Queso Emergency
 
 Mainly LX Studio / Chromatik project and Java code for Burning Man IQE HQ shade structure LEDznutz.
+
 Also contains python code and Jupyter notebooks for audio analysis with
 [Librosa](https://librosa.org/doc/latest/index.html),
 e.g. real time beat detection and sync.
+
+Plus Node.JS OSC backed web app control system.
 
 ![Chromatik](audio-tooling/chromatik-project-screenshot.png)
 
@@ -43,3 +46,11 @@ And visit [localhost:8888](http://localhost:8888) for locally running Jupyter La
 (Or point an IDE (like
 [VS Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server), tested)
 to Jupyter server and python kernel with URL: `http://localhost:8889?token=a`).
+
+# Special Thanks
+
+Big thank you to kind souls, especially of Titanic's End, who've helped us!
+- [Mark Slee](https://heronarts.com/)
+- [Ben Hencke](https://www.bhencke.com/)
+- [Jeff Vyduna](https://ngnr.org/)
+- [Justin K Belcher](https://www.instagram.com/jkb_studio)
