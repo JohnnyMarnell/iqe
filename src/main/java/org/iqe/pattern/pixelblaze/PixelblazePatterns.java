@@ -9,9 +9,9 @@ import titanicsend.pattern.pixelblaze.Wrapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 /**
  * I'm all inheritance / .class'd out y'all...
@@ -56,10 +56,15 @@ public class PixelblazePatterns {
         Path resourcePath = Path.of(
                 path.toString().replaceAll("resources/", "")
                         .replaceAll("^.*classes/", "")
+                        .replaceAll("^/tmp/", "")
         );
         URL url = Wrapper.class.getClassLoader().getResource(resourcePath.toString());
+        InputStream is = Wrapper.class.getClassLoader().getResourceAsStream(resourcePath.toString());
+        Path tmpFile = Path.of("/tmp/" + resourcePath);
+        Files.createDirectories(tmpFile.getParent());
+        Files.write(tmpFile, is.readAllBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         try {
-            return new File(Paths.get(url.toURI()).toAbsolutePath().toString());
+            return new File(tmpFile.toAbsolutePath().toString());
         } catch (Throwable e) {
             throw new IOException(e);
         }
