@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1684966585236,
+  "timestamp": 1684979598528,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -40,7 +40,7 @@
         },
         "parameters": {
           "label": "Rafter 1; #0",
-          "x": 490.00000000000006,
+          "x": 1155.0,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -54,49 +54,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f0 r-v2-7",
-          "protocol": 1,
-          "byteOrder": 0,
-          "transport": 0,
-          "reverse": false,
-          "host": "169.254.250.112",
-          "port": 7890,
-          "dmxChannel": 0,
-          "artNetUniverse": 1,
-          "artNetSequenceEnabled": false,
-          "opcChannel": 0,
-          "opcOffset": 0,
-          "ddpDataOffset": 0,
-          "kinetPort": 1,
-          "numPoints": 140,
-          "spacing": 5.0
-        },
-        "children": {}
-      },
-      {
-        "id": 102,
-        "class": "org.iqe.NagBugglerSaberOfLightFixture",
-        "internal": {
-          "modulationColor": 0,
-          "modulationControlsExpanded": true
-        },
-        "parameters": {
-          "label": "Rafter 2; #1",
-          "x": 420.00000000000006,
-          "y": 700.0,
-          "z": 0.0,
-          "yaw": -90.0,
-          "pitch": 0.0,
-          "roll": 0.0,
-          "scale": 1.0,
-          "selected": false,
-          "deactivate": false,
-          "enabled": true,
-          "brightness": 1.0,
-          "identify": false,
-          "mute": false,
-          "solo": false,
-          "tags": "strip rafter f1 r-v2-6",
+          "tags": "strip rafter f0 r-v2-11 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -116,15 +74,15 @@
         "children": {}
       },
       {
-        "id": 103,
+        "id": 102,
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 3; #2",
-          "x": 350.0,
+          "label": "Rafter 2; #1",
+          "x": 1050.0,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -138,7 +96,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f2 r-v2-5",
+          "tags": "strip rafter f1 r-v2-10 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -158,15 +116,15 @@
         "children": {}
       },
       {
-        "id": 104,
+        "id": 103,
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 4; #3",
-          "x": 280.0,
+          "label": "Rafter 3; #2",
+          "x": 944.9999999999999,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -180,7 +138,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f3 r-v2-4",
+          "tags": "strip rafter f2 r-v2-9 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -200,15 +158,15 @@
         "children": {}
       },
       {
-        "id": 105,
+        "id": 104,
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 5; #4",
-          "x": 210.00000000000003,
+          "label": "Rafter 4; #3",
+          "x": 840.0,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -222,7 +180,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f4 r-v2-3",
+          "tags": "strip rafter f3 r-v2-8 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -242,15 +200,15 @@
         "children": {}
       },
       {
-        "id": 106,
+        "id": 105,
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true
         },
         "parameters": {
-          "label": "Rafter 6; #5",
-          "x": 140.0,
+          "label": "Rafter 5; #4",
+          "x": 735.0,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -264,7 +222,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f5 r-v2-2",
+          "tags": "strip rafter f4 r-v2-7 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -284,6 +242,48 @@
         "children": {}
       },
       {
+        "id": 106,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 6; #5",
+          "x": 629.9999999999999,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": -90.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip rafter f5 r-v2-6 sq2",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "169.254.250.112",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 19,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
         "id": 107,
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
@@ -292,7 +292,175 @@
         },
         "parameters": {
           "label": "Rafter 7; #6",
-          "x": 70.0,
+          "x": 525.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": -90.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip rafter f6 r-v2-5 sq2",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "169.254.250.112",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 22,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 108,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 8; #7",
+          "x": 420.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": -90.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip rafter f7 r-v2-4 sq2",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "169.254.250.112",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 25,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 109,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 9; #8",
+          "x": 314.99999999999994,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": -90.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip rafter f8 r-v2-3 sq2",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "169.254.250.112",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 28,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 110,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 10; #9",
+          "x": 210.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": -90.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip rafter f9 r-v2-2 sq2",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "169.254.250.112",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 31,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 140,
+          "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 111,
+        "class": "org.iqe.NagBugglerSaberOfLightFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true
+        },
+        "parameters": {
+          "label": "Rafter 11; #10",
+          "x": 105.0,
           "y": 700.0,
           "z": 0.0,
           "yaw": -90.0,
@@ -306,7 +474,7 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip rafter f6 r-v2-1",
+          "tags": "strip rafter f10 r-v2-1 sq2",
           "protocol": 1,
           "byteOrder": 0,
           "transport": 0,
@@ -314,7 +482,7 @@
           "host": "169.254.250.112",
           "port": 7890,
           "dmxChannel": 0,
-          "artNetUniverse": 19,
+          "artNetUniverse": 34,
           "artNetSequenceEnabled": false,
           "opcChannel": 0,
           "opcOffset": 0,
@@ -359,7 +527,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 0,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 1,
+          "autoCycleCursor": 0,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -372,7 +540,7 @@
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "Swatch-2",
+              "label": "Swatch-1",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -391,7 +559,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 178.81640625,
+                  "primary/hue": 0.0,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -411,7 +579,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 91.1953125,
+                  "primary/hue": 35.28515625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -431,7 +599,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 214.53515625,
+                  "primary/hue": 301.875,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -606,8 +774,8 @@
         "parameters": {
           "label": "Tempo",
           "clockSource": 0,
-          "period": 500.0,
-          "bpm": 120.0,
+          "period": 668.8333333333334,
+          "bpm": 89.7084475454772,
           "tap": false,
           "nudgeUp": false,
           "nudgeDown": false,
@@ -875,7 +1043,7 @@
           "label": "Mixer",
           "crossfader": 0.5,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 2,
+          "focusedChannel": 0,
           "focusedChannelAux": 2,
           "cueA": false,
           "cueB": false,
@@ -916,7 +1084,7 @@
                 "parameters": {
                   "label": "Global Controls",
                   "enabled": true,
-                  "defaultSyncMode": 6,
+                  "defaultSyncMode": 9,
                   "bassDynamics": true,
                   "bassBnc": false,
                   "build": false,
@@ -1000,7 +1168,7 @@
               "label": "Form",
               "fader": 1.0,
               "arm": false,
-              "selected": false,
+              "selected": true,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -1014,19 +1182,19 @@
               "compositeMode": 0,
               "compositeDampingEnabled": true,
               "compositeDampingTimeSecs": 0.1,
-              "autoCycleEnabled": false,
+              "autoCycleEnabled": true,
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 45.0,
-              "transitionEnabled": true,
+              "transitionEnabled": false,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 3,
+              "focusedPattern": 15,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 3,
+            "patternIndex": 15,
             "patterns": [
               {
                 "id": 52632,
@@ -1171,7 +1339,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.34849598062751547
+                        "basis": 0.5786532276393958
                       }
                     ],
                     "modulations": [
@@ -1287,7 +1455,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9179730295300601
+                        "basis": 0.45430358772277873
                       },
                       {
                         "id": 52865,
@@ -1315,7 +1483,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9377975151540608
+                        "basis": 0.3331658417725296
                       }
                     ],
                     "modulations": [
@@ -1450,7 +1618,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6207814020686165
+                        "basis": 0.5317360724069369
                       },
                       {
                         "id": 53133,
@@ -1478,7 +1646,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6207814020686165
+                        "basis": 0.5317360724069369
                       }
                     ],
                     "modulations": [
@@ -1593,7 +1761,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.767633100164481
+                        "basis": 0.26449774255985564
                       },
                       {
                         "id": 53174,
@@ -1621,7 +1789,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3583884875192049
+                        "basis": 0.3544044333898346
                       },
                       {
                         "id": 53194,
@@ -1649,7 +1817,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.44008872608210026
+                        "basis": 0.6204800375592561
                       },
                       {
                         "id": 53196,
@@ -1677,7 +1845,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5192103312157275
+                        "basis": 0.06305413534740392
                       },
                       {
                         "id": 53198,
@@ -1705,7 +1873,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20749951564100816
+                        "basis": 0.8629665115305107
                       },
                       {
                         "id": 53200,
@@ -1733,7 +1901,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7626487462005951
+                        "basis": 0.4906661436402244
                       }
                     ],
                     "modulations": [
@@ -2148,28 +2316,28 @@
                   "compositeLevel": 1.0,
                   "minChunk": 99,
                   "maxChunk": 400,
-                  "chunkSize": 84.26171864848584,
+                  "chunkSize": 25.117187418800313,
                   "shift": 0.0,
                   "shiftRange": 100.0,
-                  "alternate": true,
-                  "waveshape": 1,
+                  "alternate": false,
+                  "waveshape": 0,
                   "skew": 0.0,
                   "exp": 0.0,
                   "speed": 63.36718776728958,
                   "speedRange": 0.1,
                   "tempoSync": false,
-                  "tempoDivision": 5,
+                  "tempoDivision": 10,
                   "reverse": false,
                   "wrap": 0,
-                  "size": 37.43749981804285,
-                  "fade": 14.921874867286533,
+                  "size": 53.01562498207204,
+                  "fade": 89.83984374790452,
                   "invert": 0.0,
                   "swarmOn": false,
                   "swarmX": 0.5,
                   "swarmY": 0.5,
                   "swarmSize": 0.7854352660942823,
-                  "swarmFade": 40.48437517340062,
-                  "swarmBrightness": 3.140623669605702,
+                  "swarmFade": 100.0,
+                  "swarmBrightness": 100.0,
                   "swarmPolarity": 0.0
                 },
                 "children": {
@@ -2268,7 +2436,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8574241379077588
+                        "basis": 0.036140414371701915
                       }
                     ],
                     "modulations": [
@@ -2451,8 +2619,8 @@
                   "wrapMode": 3,
                   "antiAlias": true,
                   "sinShaping": true,
-                  "translateX": 0.0,
-                  "translateY": 0.0,
+                  "translateX": 0.3757812560070306,
+                  "translateY": 0.004062497057020664,
                   "zoom": 1.0,
                   "expand": 1.0,
                   "shearX": 0.0,
@@ -2635,6 +2803,84 @@
                   }
                 },
                 "deviceVersion": -1
+              },
+              {
+                "id": 72637,
+                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$Fireflies",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "Fireflies",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true
+                },
+                "children": {
+                  "modulation": {
+                    "id": 72638,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 72648,
+                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$RegenBogenDrogenMyBrogans",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "RegenBogenDrogenMyBrogans",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true
+                },
+                "children": {
+                  "modulation": {
+                    "id": 72649,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
               }
             ]
           },
@@ -2673,7 +2919,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -2904,7 +3150,7 @@
                   "label": "Strobe",
                   "enabled": true,
                   "speed": 0.5,
-                  "depth": 0.34406250818574335,
+                  "depth": 0.2771875135949813,
                   "bias": 0.0,
                   "waveshape": 0,
                   "tempoSync": true,
@@ -2971,7 +3217,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 52574,
@@ -3117,7 +3363,7 @@
               "label": "FX",
               "fader": 1.0,
               "arm": false,
-              "selected": true,
+              "selected": false,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -3131,19 +3377,19 @@
               "compositeMode": 0,
               "compositeDampingEnabled": true,
               "compositeDampingTimeSecs": 0.1,
-              "autoCycleEnabled": false,
+              "autoCycleEnabled": true,
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 60.0,
               "transitionEnabled": false,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 5,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 5,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 60878,
@@ -3294,84 +3540,6 @@
                   }
                 },
                 "deviceVersion": -1
-              },
-              {
-                "id": 71740,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$Fireflies",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "Fireflies",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "enableEdges": true,
-                  "enablePanels": true
-                },
-                "children": {
-                  "modulation": {
-                    "id": 71741,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 72152,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$RegenBogenDrogenMyBrogans",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "RegenBogenDrogenMyBrogans",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "enableEdges": true,
-                  "enablePanels": true
-                },
-                "children": {
-                  "modulation": {
-                    "id": 72153,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
               }
             ]
           }
@@ -3415,7 +3583,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4246666666930663
+            "basis": 0.7736666666952373
           },
           {
             "id": 54255,
@@ -3462,7 +3630,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8016666666933003
+            "basis": 0.15066666669546447
           },
           {
             "id": 56980,
@@ -3490,7 +3658,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8016666666933003
+            "basis": 0.15066666669546447
           },
           {
             "id": 56981,
@@ -3518,7 +3686,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8016666666933003
+            "basis": 0.15066666669546447
           },
           {
             "id": 56982,
@@ -3546,7 +3714,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8016666666933003
+            "basis": 0.15066666669546447
           },
           {
             "id": 56983,
@@ -3574,7 +3742,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8016666666933003
+            "basis": 0.15066666669546447
           },
           {
             "id": 57307,
@@ -3602,7 +3770,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.34466666669084095
+            "basis": 0.6936666666930041
           },
           {
             "id": 57308,
@@ -3630,7 +3798,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.34466666669084095
+            "basis": 0.6936666666930041
           },
           {
             "id": 62913,
@@ -3658,7 +3826,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5506666666899592
+            "basis": 0.899666666692122
           },
           {
             "id": 66458,
@@ -3686,7 +3854,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.029666666685663298
+            "basis": 0.37866666668782506
           },
           {
             "id": 63635,
@@ -3714,7 +3882,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.08266666668923367
+            "basis": 0.43166666669138276
           },
           {
             "id": 64644,
@@ -3798,7 +3966,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.03166666668613226
+            "basis": 0.38066666668828647
           }
         ],
         "modulations": [
@@ -4228,7 +4396,7 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 680.4489262981272,
+          "radius": 1211.6295949941184,
           "theta": 271.29323130170815,
           "phi": -38.66215839458164,
           "x": 208.0854835215723,
@@ -4247,7 +4415,7 @@
           },
           {
             "active": true,
-            "radius": 680.4489262981272,
+            "radius": 1211.6295949941184,
             "theta": 271.29323130170815,
             "phi": -38.66215839458164,
             "x": 208.0854835215723,

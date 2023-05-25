@@ -6,11 +6,12 @@ let id = 100
 const numLedsPerStrip = 140
 const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
-const numRafters = 54
+const numRafters = 72
 const numPillars = 0
 // const controllerIP = "192.168.0.10"
 const controllerIP = "169.254.250.112"
-const mapStripToArtnetPair = index => index * 3
+// const mapStripToArtnetPair = index => index * 3
+const mapStripToArtnetPair = index => (index + 1) * 3
 
 const s = defaultNagBugglerSaberOfLight
 const sl = stripLenMultiplier => stripLenMultiplier * stripLen
@@ -34,14 +35,23 @@ for (let i = 0; i < 128; i++) {
 }
 
 function buildNagBugglerSaberOfLightFixtures() {
+    const vSpace = .15, hSpace = .1
     return [
-        {...s({yaw: -90, x: sl(7 * .1), y: sl(1), z: 0}, 'r-v2-7')},
-        {...s({yaw: -90, x: sl(6 * .1), y: sl(1), z: 0}, 'r-v2-6')},
-        {...s({yaw: -90, x: sl(5 * .1), y: sl(1), z: 0}, 'r-v2-5')},
-        {...s({yaw: -90, x: sl(4 * .1), y: sl(1), z: 0}, 'r-v2-4')},
-        {...s({yaw: -90, x: sl(3 * .1), y: sl(1), z: 0}, 'r-v2-3')},
-        {...s({yaw: -90, x: sl(2 * .1), y: sl(1), z: 0}, 'r-v2-2')},
-        {...s({yaw: -90, x: sl(1 * .1), y: sl(1), z: 0}, 'r-v2-1')},
+        {...s({yaw: -90, x: sl(11 * vSpace), y: sl(1), z: 0}, 'r-v2-11 sq2')},
+        {...s({yaw: -90, x: sl(10 * vSpace), y: sl(1), z: 0}, 'r-v2-10 sq2')},
+        {...s({yaw: -90, x: sl(9  * vSpace), y: sl(1), z: 0}, 'r-v2-9  sq2')},
+        {...s({yaw: -90, x: sl(8  * vSpace), y: sl(1), z: 0}, 'r-v2-8  sq2')},
+        {...s({yaw: -90, x: sl(7  * vSpace), y: sl(1), z: 0}, 'r-v2-7  sq2')},
+        {...s({yaw: -90, x: sl(6  * vSpace), y: sl(1), z: 0}, 'r-v2-6  sq2')},
+        {...s({yaw: -90, x: sl(5  * vSpace), y: sl(1), z: 0}, 'r-v2-5  sq2')},
+        {...s({yaw: -90, x: sl(4  * vSpace), y: sl(1), z: 0}, 'r-v2-4  sq2')},
+        {...s({yaw: -90, x: sl(3  * vSpace), y: sl(1), z: 0}, 'r-v2-3  sq2')},
+        {...s({yaw: -90, x: sl(2  * vSpace), y: sl(1), z: 0}, 'r-v2-2  sq2')},
+        {...s({yaw: -90, x: sl(1  * vSpace), y: sl(1), z: 0}, 'r-v2-1  sq2')},
+
+        // {...s({yaw: -90, x: sl(0  * vSpace), y: sl(1), z: sl(-(1 + hSpace))}, 'r-v2-t1 sq1')},
+        // {...s({yaw: -90, x: sl(0  * vSpace), y: sl(1), z: sl(0)},             'r-v2-t2 sq2')},
+        // {...s({yaw: -90, x: sl(0  * vSpace), y: sl(1), z: sl(+(1 + hSpace))}, 'r-v2-t3 sq3')},
     ]
 }
 
@@ -175,6 +185,7 @@ const path = `${__dirname}/iqe.lxp`
 const project = JSON.parse(fs.readFileSync(path))
 project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
 console.log(JSON.stringify(project, null, 2))
+console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
 fs.writeFileSync(path, JSON.stringify(project, null, 2))
 
 function defaultNagBugglerSaberOfLight(params, tags) {
