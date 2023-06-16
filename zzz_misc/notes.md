@@ -1,5 +1,9 @@
 # Notes / Scratchity Scratchy Scratch-Scratch
 
+Glue script functions:
+```bash
+for fn in setPalette resetTransform setPerlinWrap perlinRidge scale translate clockYear clockMonth clockDay clockHour clockMinute clockSecond clockWeekday ; do echo "function $fn(a,b,c,d,e,f,g) { return __pattern.$fn(a,b,c,d,e,f,g); }" ; done
+```
 
 JSON to add a bunch of modulators (copied field lines in AudioModulators.java)
 ```shell

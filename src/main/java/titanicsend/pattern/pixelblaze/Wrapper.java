@@ -15,10 +15,9 @@ import java.util.HashMap;
 
 import heronarts.lx.LX;
 import heronarts.lx.model.LXPoint;
-import org.iqe.pattern.pixelblaze.PixelblazePatterns;
 import org.openjdk.nashorn.api.scripting.JSObject;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
-import titanicsend.pattern.PortFacade_TEPerformancePattern;
+import titanicsend.pattern.TEPerformancePattern;
 
 public class Wrapper {
 
@@ -45,8 +44,10 @@ public class Wrapper {
   public static synchronized CompiledScript compile(Path path) throws ScriptException, IOException {
     CachedScript cachedScript = scripts.get(path);
     File file = path.toFile();
+
     // Johnny Marnell port: see method
     file = org.iqe.pattern.pixelblaze.PixelblazePatterns.standardResource(path);
+
     if (cachedScript == null || cachedScript.lastModified != file.lastModified()) {
       String js = Files.readString(file.toPath());
       long lastModified = file.lastModified();
@@ -60,26 +61,20 @@ public class Wrapper {
     return cachedScript.compiledScript;
   }
 
-  public static Wrapper fromResource(String pbClass, PortFacade_TEPerformancePattern pattern, LXPoint[] points) throws Exception {
-    // Johnny Marnell port: see method
-    if (pattern instanceof org.iqe.pattern.pixelblaze.PixelblazePatterns.PixelBlazeBlowser)
-      return org.iqe.pattern.pixelblaze.PixelblazePatterns.wrapper(pbClass, pattern, points);
-    if (pattern instanceof org.iqe.pattern.pixelblaze.PixelblazePatterns.PBP) pbClass
-            = ((org.iqe.pattern.pixelblaze.PixelblazePatterns.PBP) pattern).getScriptName();
-    File file = org.iqe.pattern.pixelblaze.PixelblazePatterns.standardResource(Path.of("resources/pixelblaze/" + pbClass + ".js"));
-    return new Wrapper(file, pattern, points);
+  public static Wrapper fromResource(String pbClass, TEPerformancePattern pattern, LXPoint[] points) throws Exception {
+    return new Wrapper(new File("resources/pixelblaze/" + pbClass + ".js"), pattern, points);
   }
 
-  File file;
-  PortFacade_TEPerformancePattern pattern;
-  LXPoint[] points;
-  long lastModified;
-  Bindings bindings = engine.createBindings();
-  String renderName;
+  public File file;
+  public TEPerformancePattern pattern;
+  public LXPoint[] points;
+  public long lastModified;
+  public Bindings bindings = engine.createBindings();
+  public String renderName;
   boolean hasError = false;
 
-  public Wrapper(File file, PortFacade_TEPerformancePattern pattern, LXPoint[] points) throws ScriptException, IOException {
-    this.file = file;
+  public Wrapper(File file, TEPerformancePattern pattern, LXPoint[] points) {
+    this.file = org.iqe.pattern.pixelblaze.PixelblazePatterns.standardResource(file);
     this.pattern = pattern;
     this.points = points;
   }
@@ -91,15 +86,15 @@ public class Wrapper {
     }
   }
 
-  public void load() throws IOException, ScriptException, NoSuchMethodException {
+  public void
+
+
+  load() throws IOException, ScriptException, NoSuchMethodException {
     try {
 
       bindings = engine.createBindings();
 
-      // Johnny Marnell port: see method
-//      CompiledScript glueScript = compile(Path.of("resources/pixelblaze/glue.js"));
-      CompiledScript glueScript = compile(
-              org.iqe.pattern.pixelblaze.PixelblazePatterns.standardResource(Path.of("resources/pixelblaze/glue.js")).toPath());
+      CompiledScript glueScript = compile(Path.of("resources/pixelblaze/glue.js"));
 
       CompiledScript patternScript = compile(file.toPath());
       lastModified = file.lastModified();
@@ -109,6 +104,7 @@ public class Wrapper {
       bindings.put("__now", pattern.getTimeMs());
 
       glueScript.eval(bindings);
+      org.iqe.pattern.pixelblaze.PixelblazePatterns.onLoad(bindings, glueScript, patternScript, this);
       patternScript.eval(bindings);
       ((JSObject)bindings.get("glueRegisterControls")).call(null);
 
@@ -127,6 +123,7 @@ public class Wrapper {
     bindings.put("__now", pattern.getTimeMs());
     bindings.put("__points", points);
     bindings.put("__colors", colors);
+    org.iqe.pattern.pixelblaze.PixelblazePatterns.onRender(bindings, deltaMs, colors, this);
 
     JSObject glueBeforeRender = (JSObject) bindings.get("glueBeforeRender");
     if (glueBeforeRender != null)

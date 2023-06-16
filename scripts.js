@@ -31,10 +31,20 @@ function bridge(webPort = 80, wsPort = 8080, appTo = 3030, appFrom = 3131, exclu
 
 function wireMidi(app) {
     const mac = require('os').platform() === 'darwin'
+    const out = new MidiOut({pattern: mac ? /IAC/ig : /Thru/ig })
     const input = mac ? new MidiIn({pattern: 'Launchkey Mini MK3 MIDI Port', virtual: true}) :
         // new MidiIn({pattern: /Launchkey.*(MIDI 1|MIDI Port$)/ig}) // todo
         new MidiIn({pattern: /Launchkey/ig}) // todo
-    input.on('midi.note', msg => app.send(new OSC.Message('/iqe/midi', msg.type, msg.data, msg.value)))
+    input.on('midi.note', msg => {
+        const oscMsg = new OSC.Message('/iqe/midi', msg.type, msg.data, msg.value)
+        app.send(oscMsg)
+        console.log(oscMsg.address, ...oscMsg.args)
+    })
+    input.on('midi.cc', msg => {
+        msg.value = 64 + Math.floor(msg.value / 128 * 12)
+        Midi.setChannel(msg, 15)
+        out.send(msg)
+    })
 }
 
 function bridgeSend(path, data) {

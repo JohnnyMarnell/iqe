@@ -12,12 +12,15 @@ import heronarts.lx.pattern.LXPattern;
 import heronarts.lx.utils.LXUtils;
 import titanicsend.pattern.pixelblaze.TEShaderView;
 
-public abstract class PortFacade_TEPerformancePattern extends LXPattern {
-    public PortFacade_TEPerformancePattern(LX lx) {
+/**
+ * This class is one of the most wrapped, light facade implemented in porting
+ */
+public abstract class TEPerformancePattern extends LXPattern {
+    public TEPerformancePattern(LX lx) {
         super(lx);
     }
 
-    public PortFacade_TEPerformancePattern(LX lx, TEShaderView foo) {
+    public TEPerformancePattern(LX lx, TEShaderView foo) {
         this(lx);
     }
 

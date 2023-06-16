@@ -11,6 +11,7 @@ import java.util.Set;
 
 import static org.iqe.Audio.*;
 import static org.iqe.AudioModulators.funcParam;
+import static org.iqe.LXUtils.addParameter;
 
 /**
  * Basically a one-shot / click type of parameter / synchronization system,
@@ -58,18 +59,7 @@ public class Sync extends CompoundParameter implements LXParameterListener {
         pattern.getLX().engine.addLoopTask(deltaMs -> detectAndFireTrigger());
         Audio.get().addEndTask(deltaMs -> triggering = false);
         trigger.onTrigger(this::markTriggering);
-
-        // todo: damn, inheritance problems again, verify security manager all platforms
-        try {
-            Method adder = LXComponent.class.getDeclaredMethod("addParameter", String.class, LXParameter.class);
-            adder.setAccessible(true);
-            adder.invoke(pattern, "syncTrigger", trigger);
-
-            // shouldn't need this parameter anymore, trigger approach has been working
-            // adder.invoke(pattern, "sync", this);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        addParameter(pattern, "syncTrigger", trigger);
     }
 
     private void detectAndFireTrigger() {

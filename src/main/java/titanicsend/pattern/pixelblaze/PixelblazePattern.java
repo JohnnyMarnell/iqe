@@ -12,13 +12,12 @@ import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.parameter.LXParameterListener;
-import titanicsend.pattern.PortFacade_TEPerformancePattern;
+import titanicsend.pattern.TEPerformancePattern;
 
 import javax.script.ScriptException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class PixelblazePattern extends PortFacade_TEPerformancePattern {
+public abstract class PixelblazePattern extends TEPerformancePattern {
   public static final int RENDER_ERROR_LOG_INTERVAL_MS = 5_000;
   public Wrapper wrapper;
   long lastLogMs = 0; //to prevent spamming the logs with script errors
@@ -134,7 +133,7 @@ public abstract class PixelblazePattern extends PortFacade_TEPerformancePattern 
     } catch (ScriptException | NoSuchMethodException sx) {
       //the show must go on, and we don't want to spam the logs.
       if (System.currentTimeMillis() - lastLogMs > RENDER_ERROR_LOG_INTERVAL_MS) {
-        LX.log("Error rendering Pixelblaze script:" + sx.getMessage());
+        LX.log("Error rendering Pixelblaze script, " + wrapper.file + ":" + sx.getMessage());
         lastLogMs = System.currentTimeMillis();
       }
     } catch (Exception e) {

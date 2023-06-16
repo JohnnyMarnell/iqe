@@ -9,8 +9,13 @@ import heronarts.lx.LX;
 import heronarts.lx.audio.GraphicMeter;
 import heronarts.lx.parameter.FunctionalParameter;
 import heronarts.lx.parameter.LXParameter;
+import org.iqe.AudioModulators;
 
 /**
+ * PORTED: No longer to be used as redundant based class, the audio analysis
+ * logic portions are used as part of audio engine of Audio.java class
+ *
+ *
  * Patterns should inherit from this if they wish to make use of live audio
  * data and several useful derived audio attributes, such as normalized
  * bass or treble levels.
@@ -23,7 +28,7 @@ import heronarts.lx.parameter.LXParameter;
 public class TEAudioPattern {
     // The GraphicMeter holds the analyzed frequency content for the audio input
     private final LX lx;
-    protected final GraphicMeter eq;
+    public final GraphicMeter eq;
 
     // Fractions in 0..1 for the instantaneous frequency level this frame.
     // If we find this useful and track many more bands, a collection of ratio
@@ -67,16 +72,13 @@ public class TEAudioPattern {
     public TEAudioPattern(LX lx) {
 //        super(lx);
         this.lx = lx;
-        this.eq = lx.engine.audio.meter;
-        bassBandCount = 2;
+//        this.eq = lx.engine.audio.meter;
+        this.eq = new GraphicMeter("Meter", lx.engine.audio.input.mix, 32);
+        bassBandCount = (int) Math.ceil(eq.numBands / 8.);
         // By default, 80% of a tempo-defined eighth note must have passed to bassHit
         // bassRetriggerMs = .8 * (lx.engine.tempo.period.getValue() / 2);
-        bassRetriggerMs = new FunctionalParameter() {
-            @Override
-            public double getValue() {
-                return .8 * (lx.engine.tempo.period.getValue() / 2);
-            }
-        };
+        bassRetriggerMs = new AudioModulators.FuncParam("bassRetriggerMs",
+                () -> .8 * (lx.engine.tempo.period.getValue() / 2));
     }
 
 //    @Override

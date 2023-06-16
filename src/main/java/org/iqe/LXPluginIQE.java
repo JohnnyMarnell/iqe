@@ -45,8 +45,8 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 PBXorcery.class,
                 PBAudio1.class,
                 PBFireworkNova.class,
-                PixelblazePatterns.Fireflies.class,
-                PixelblazePatterns.RegenBogenDrogenMyBrogans.class,
+                PixelblazePatterns.PixelBlazeBlowser.class,
+                PixelblazePatterns.PBTemp.class,
 
                 DiagnosticsPattern.class,
                 BassBreathPattern.class
