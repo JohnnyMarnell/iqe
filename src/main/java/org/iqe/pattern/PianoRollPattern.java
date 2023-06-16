@@ -37,7 +37,7 @@ public class PianoRollPattern extends LXPattern {
         for (LXPoint p : model.points) colors[p.index] = LXColor.CLEAR;
 
         long now = getLX().engine.nowMillis;
-        double window = bars(2);
+        double window = bars(4);
 
         // Draw notes that started in the past (still on [playing] or off [finished] and started within window)
         for (Note event : notes) {

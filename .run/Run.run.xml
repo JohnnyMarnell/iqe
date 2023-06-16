@@ -2,7 +2,7 @@
   <configuration default="false" name="Run" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="temurin-17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="heronarts.lx.studio.Chromatik" />
+    <option name="MAIN_CLASS_NAME" value="heronarts.lx.studio.ChromatikIQE" />
     <module name="iqe" />
     <option name="PROGRAM_PARAMETERS" value="iqe.lxp --classpath-plugin org.iqe.LXPluginIQE" />
     <option name="VM_PARAMETERS" value="-XstartOnFirstThread -XX:-OmitStackTraceInFastThrow" />
