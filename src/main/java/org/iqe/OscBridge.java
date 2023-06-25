@@ -82,6 +82,10 @@ public class OscBridge {
         command(path, (double) data);
     }
     public void command(String path, double data) {
+        if (path == null) {
+            LOG.error("Warning, no OSC command path found for: {}, val {}", path, data);
+            return;
+        }
         command(new OscMessage(path).add(data));
     }
 
@@ -94,7 +98,9 @@ public class OscBridge {
         boolean handled = path.startsWith("/iqe") || lx.engine.handleOscMessage(msg, path.split("/"), 2);
         fire(path);
         LOG.debug("Forwarded INCOMING OSC, handled {}, msg: {}", handled, msg);
-        if (!handled) throw new UnsupportedOperationException("Couldn't handle OSC message: " + msg);
+        if (!handled) {
+            LOG.error("Warning, Couldn't handle OSC message: {}", msg);
+        }
     }
 
     public void sendMessage(String path, float data) {

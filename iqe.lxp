@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1686933633714,
+  "timestamp": 1687714329236,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -2551,44 +2551,6 @@
                 "deviceVersion": -1
               },
               {
-                "id": 53635,
-                "class": "org.iqe.pattern.HolyTrinitiesPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "HolyTrinities",
-                  "enabled": false,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "syncTrigger": false
-                },
-                "children": {
-                  "modulation": {
-                    "id": 53636,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
                 "id": 56344,
                 "class": "org.iqe.pattern.ZipStripPattern",
                 "internal": {
@@ -2896,6 +2858,13 @@
                   "modulationExpanded": false
                 },
                 "parameters": {
+                  "label": "PixelBlazeBlowser",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
                   "script": 19
                 },
                 "children": {
@@ -2934,7 +2903,7 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "enableEdges": true,
+                  "enableEdges": false,
                   "enablePanels": true,
                   "sliderAngularDensity": 0.5,
                   "sliderRadialDensity": 0.5,
@@ -2997,7 +2966,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -3295,7 +3264,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -3661,7 +3630,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.905666666699138
+            "basis": 0.10466666669919392
           },
           {
             "id": 54255,
@@ -3708,7 +3677,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2826666666993569
+            "basis": 0.4816666666994106
           },
           {
             "id": 56980,
@@ -3736,7 +3705,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2826666666993569
+            "basis": 0.4816666666994106
           },
           {
             "id": 56981,
@@ -3764,7 +3733,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2826666666993569
+            "basis": 0.4816666666994106
           },
           {
             "id": 56982,
@@ -3792,7 +3761,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2826666666993569
+            "basis": 0.4816666666994106
           },
           {
             "id": 56983,
@@ -3820,7 +3789,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2826666666993569
+            "basis": 0.4816666666994106
           },
           {
             "id": 57307,
@@ -3848,7 +3817,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8256666666968858
+            "basis": 0.02466666669694094
           },
           {
             "id": 57308,
@@ -3876,7 +3845,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8256666666968858
+            "basis": 0.02466666669694094
           },
           {
             "id": 62913,
@@ -3904,7 +3873,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.031666666696004694
+            "basis": 0.230666666696059
           },
           {
             "id": 66458,
@@ -3932,7 +3901,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5106666666917012
+            "basis": 0.7096666666917562
           },
           {
             "id": 76378,
@@ -3988,7 +3957,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5636666666952641
+            "basis": 0.7626666666953195
           },
           {
             "id": 64644,
@@ -4072,7 +4041,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5126666666921671
+            "basis": 0.711666666692222
           }
         ],
         "modulations": [
@@ -4284,35 +4253,9 @@
             "target": {
               "componentId": 56344,
               "parameterPath": "syncTrigger",
-              "path": "/mixer/channel/1/pattern/9/syncTrigger"
-            },
-            "id": 66058,
-            "class": "heronarts.lx.modulation.LXTriggerModulation",
-            "internal": {
-              "modulationColor": 0,
-              "modulationControlsExpanded": true
-            },
-            "parameters": {
-              "label": "LX",
-              "enabled": true,
-              "toggleMode": 0,
-              "momentaryToggleMode": 0,
-              "toggleMomentaryMode": 0
-            },
-            "children": {}
-          },
-          {
-            "source": {
-              "componentId": 65252,
-              "parameterPath": "triggerOut",
-              "path": "/modulation/modulator/16/triggerOut"
-            },
-            "target": {
-              "componentId": 53635,
-              "parameterPath": "syncTrigger",
               "path": "/mixer/channel/1/pattern/8/syncTrigger"
             },
-            "id": 66059,
+            "id": 66058,
             "class": "heronarts.lx.modulation.LXTriggerModulation",
             "internal": {
               "modulationColor": 0,
@@ -4336,7 +4279,7 @@
             "target": {
               "componentId": 65641,
               "parameterPath": "syncTrigger",
-              "path": "/mixer/channel/1/pattern/10/syncTrigger"
+              "path": "/mixer/channel/1/pattern/9/syncTrigger"
             },
             "id": 67061,
             "class": "heronarts.lx.modulation.LXTriggerModulation",

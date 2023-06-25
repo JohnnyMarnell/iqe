@@ -21,7 +21,7 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
   public static final int RENDER_ERROR_LOG_INTERVAL_MS = 5_000;
   public Wrapper wrapper;
   long lastLogMs = 0; //to prevent spamming the logs with script errors
-  HashMap<String, LXParameter> patternParameters = new HashMap<>();
+  public HashMap<String, LXParameter> patternParameters = new HashMap<>();
 
   // JKB note: these could be retired and replaced by views
   protected BooleanParameter enableEdges;

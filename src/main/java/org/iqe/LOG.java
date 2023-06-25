@@ -23,6 +23,10 @@ public class LOG {
         out("DEBUG", format(msg, args));
     }
 
+    public static void error(String msg, Object ... args) {
+        out("ERROR", format(msg, args));
+    }
+
     // Don't worry, it's already slow
     public static String format(String msg, Object ... args) {
         return msg.replaceAll("\\{}", "%s").formatted(args);
@@ -37,6 +41,10 @@ public class LOG {
             debug("New tick");
         }
         ++msg;
-        System.out.printf("%4d %2d %s %s%n", loop, msg, level, text);
+        if ("ERROR".equals(level)) {
+            System.out.printf("\033[1;31m %4d %2d %s %s \033[0m %n", loop, msg, level, text);
+        } else {
+            System.out.printf("%4d %2d %s %s%n", loop, msg, level, text);
+        }
     }
 }

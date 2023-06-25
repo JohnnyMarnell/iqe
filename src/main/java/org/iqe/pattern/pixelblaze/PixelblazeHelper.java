@@ -3,6 +3,7 @@ package org.iqe.pattern.pixelblaze;
 import heronarts.lx.LX;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.model.LXPoint;
+import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.transform.LXMatrix;
 import heronarts.lx.utils.LXUtils;
 import org.iqe.LOG;
@@ -125,6 +126,7 @@ public class PixelblazeHelper extends PixelblazePattern {
 
     @Override
     public void addSlider(String key, String label) {
+        LOG.info("Add slider called for key '{}', label '{}'", key, label);
         super.addSlider(key, label);
     }
 

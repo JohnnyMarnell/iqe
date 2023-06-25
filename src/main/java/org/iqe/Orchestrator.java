@@ -3,6 +3,7 @@ package org.iqe;
 import heronarts.lx.LX;
 import heronarts.lx.Tempo;
 
+import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -45,7 +46,12 @@ public class Orchestrator {
     }
 
     public void setParam(String component, String param, double value) {
-        osc.command(path(component, param), value);
+        String path = path(component, param);
+        if (path == null) {
+            LOG.error("Warning, no OSC command path found for: component {} param {}, val {}", component, param, value);
+            return;
+        }
+        osc.command(path, value);
     }
 
     // todo: again need exclusivity, and time extension behavior?
@@ -93,7 +99,13 @@ public class Orchestrator {
 
     // todo: cache, make fast
     public String path(String componentLabel) {
-        return paths(componentLabel).findAny().orElseThrow();
+        Optional<String> path = paths(componentLabel).findAny();
+        if (path.isEmpty()) {
+            LOG.error("Warning, no OSC path found for: {}", componentLabel);
+            return null;
+        } else {
+            return path.get();
+        }
     }
 
     public String path(String componentLabel, String parameter) {
