@@ -108,6 +108,7 @@ public class Wrapper {
       patternScript.eval(bindings);
       ((JSObject)bindings.get("glueRegisterControls")).call(null);
 
+      org.iqe.pattern.pixelblaze.PixelblazePatterns.onPostLoad(bindings, glueScript, patternScript, this, this.pattern);
       LX.log("Pattern loaded, ready:" + file.getName());
 
       hasError = false;

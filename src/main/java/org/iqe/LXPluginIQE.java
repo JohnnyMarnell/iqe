@@ -1,14 +1,21 @@
 package org.iqe;
 
+import heronarts.glx.ui.UI;
 import heronarts.lx.*;
 import heronarts.lx.model.LXModel;
+import heronarts.lx.studio.ChromatikIQE;
+import heronarts.lx.studio.LXStudio;
+import heronarts.lx.studio.ui.device.UIDevice;
+import heronarts.lx.studio.ui.device.UIDeviceControls;
 import org.iqe.pattern.*;
 import org.iqe.pattern.pixelblaze.PixelblazePatterns;
+import org.iqe.pattern.pixelblaze.UIPixelblazePattern;
 import titanicsend.pattern.pixelblaze.PBAudio1;
 import titanicsend.pattern.pixelblaze.PBFireworkNova;
 import titanicsend.pattern.pixelblaze.PBXorcery;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.stream.Stream;
 
 public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, LXModel.Listener {
@@ -54,6 +61,17 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::dispose));
         running = true;
+    }
+
+    public static void hack(UI ui) {
+        try {
+            Field field = LXStudio.UI.class.getDeclaredField("registry");
+            field.setAccessible(true);
+            LXStudio.Registry registry = (LXStudio.Registry) field.get(ui);
+            registry.addUIDeviceControls(UIPixelblazePattern.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
