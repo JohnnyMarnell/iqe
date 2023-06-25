@@ -7,7 +7,9 @@ import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.parameter.DiscreteParameter;
 import heronarts.lx.parameter.LXParameter;
+import heronarts.lx.parameter.LXParameterListener;
 import org.iqe.Audio;
+import org.iqe.LOG;
 import org.iqe.LXUtils;
 import titanicsend.pattern.pixelblaze.Wrapper;
 
@@ -40,12 +42,19 @@ public class PixelblazePatterns {
     @LXCategory("PixelBlaze")
     public static class PixelBlazeBlowser extends PixelblazeHelper {
         public final DiscreteParameter script;
+        protected final LXParameterListener scriptListener;
 
         public PixelBlazeBlowser(LX lx) {
             super(lx);
             script = new DiscreteParameter("script", patternData.keySet().toArray(new String[0]));
             addParameter("script", script);
-            script.addListener(p -> this.setScript(), true);
+            this.scriptListener = p -> this.setScript();
+            script.addListener(scriptListener, true);
+        }
+
+        @Override
+        public void dispose() {
+            script.removeListener(scriptListener);
         }
 
         @Override
@@ -63,9 +72,12 @@ public class PixelblazePatterns {
                 // make sure we first remove any previously loaded
                 // todo: Based on logs, the PB parameters seem to be removed and re-added, however UI doesn't update with knobs
                 List<String> paths = getParameters().stream()
-                        .filter(p -> !"script".equals(p.getPath()))
+                        .peek(p -> LOG.info("Param present path {}, label {}", p.getPath(), p.getLabel()))
+                        .filter(p -> p.getPath().startsWith("slider"))
                         .map(LXParameter::getPath).toList();
+                LOG.info("Removing pixelblaze parameters {}", paths);
                 paths.forEach(this::removeParameter);
+                paths.forEach(p -> patternParameters.remove(p));
                 wrapper.file = standardResource(placeholder);
                 wrapper.lastModified = -1;
             }
