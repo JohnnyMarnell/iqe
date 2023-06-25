@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1687714329236,
+  "timestamp": 1687732982739,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -1011,12 +1011,12 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.0,
-              "band-2": 0.0,
-              "band-3": 0.0,
-              "band-4": 0.0,
-              "band-5": 0.0,
-              "band-6": 0.0,
+              "band-1": 0.17105882381613213,
+              "band-2": 0.2442300557364684,
+              "band-3": 0.2207319501139935,
+              "band-4": 0.15865594322566678,
+              "band-5": 0.1183293684331117,
+              "band-6": 0.03936380629035163,
               "band-7": 0.0,
               "band-8": 0.0,
               "band-9": 0.0,
@@ -1268,13 +1268,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 14,
+              "focusedPattern": 13,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 14,
+            "patternIndex": 13,
             "patterns": [
               {
                 "id": 52632,
@@ -2865,7 +2865,13 @@
                   "compositeLevel": 1.0,
                   "enableEdges": true,
                   "enablePanels": true,
-                  "script": 19
+                  "script": 27,
+                  "scriptName": "__pbb_Bouncer3D",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderBalls": 0.22784213442355394,
+                  "sliderSize": 0.9123114286048803,
+                  "sliderSpeed": 0.11008216498885304
                 },
                 "children": {
                   "modulation": {
@@ -2966,7 +2972,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -3264,7 +3270,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 52574,
@@ -3630,7 +3636,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.10466666669919392
+            "basis": 0.6646666666996605
           },
           {
             "id": 54255,
@@ -3647,7 +3653,12 @@
               "macro2": 0.11023622047244094,
               "macro3": 0.6435937660644413,
               "macro4": 0.0,
-              "macro5": 0.0
+              "macro5": 0.0,
+              "label1": "-",
+              "label2": "-",
+              "label3": "-",
+              "label4": "-",
+              "label5": "-"
             },
             "children": {}
           },
@@ -3677,7 +3688,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4816666666994106
+            "basis": 0.04166666669987493
           },
           {
             "id": 56980,
@@ -3705,7 +3716,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4816666666994106
+            "basis": 0.04166666669987493
           },
           {
             "id": 56981,
@@ -3733,7 +3744,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4816666666994106
+            "basis": 0.04166666669987493
           },
           {
             "id": 56982,
@@ -3761,7 +3772,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4816666666994106
+            "basis": 0.04166666669987493
           },
           {
             "id": 56983,
@@ -3789,7 +3800,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4816666666994106
+            "basis": 0.04166666669987493
           },
           {
             "id": 57307,
@@ -3817,7 +3828,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.02466666669694094
+            "basis": 0.5846666666974082
           },
           {
             "id": 57308,
@@ -3845,7 +3856,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.02466666669694094
+            "basis": 0.5846666666974082
           },
           {
             "id": 62913,
@@ -3873,7 +3884,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.230666666696059
+            "basis": 0.7906666666965243
           },
           {
             "id": 66458,
@@ -3901,7 +3912,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7096666666917562
+            "basis": 0.26966666669222045
           },
           {
             "id": 76378,
@@ -3957,7 +3968,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7626666666953195
+            "basis": 0.32266666669578026
           },
           {
             "id": 64644,
@@ -4041,7 +4052,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.711666666692222
+            "basis": 0.27166666669268674
           }
         ],
         "modulations": [
@@ -4496,8 +4507,8 @@
         "camera": {
           "active": true,
           "radius": 1277.1797416092631,
-          "theta": 177.85855407151394,
-          "phi": -9.52973834425211,
+          "theta": 177.80183138209395,
+          "phi": -9.473015654832125,
           "x": 518.1478655424144,
           "y": 426.69396901212167,
           "z": 417.7241303457413
@@ -4515,8 +4526,8 @@
           {
             "active": true,
             "radius": 1277.1797416092631,
-            "theta": 177.85855407151394,
-            "phi": -9.52973834425211,
+            "theta": 177.80183138209395,
+            "phi": -9.473015654832125,
             "x": 518.1478655424144,
             "y": 426.69396901212167,
             "z": 417.7241303457413
@@ -4578,6 +4589,99 @@
         },
         "axes": {
           "visible": true
+        }
+      },
+      "previewAux": {
+        "animation": false,
+        "animationTime": 1000.0,
+        "projection": 0,
+        "perspective": 60.0,
+        "depth": 2.0,
+        "camera": {
+          "active": false,
+          "radius": 2100.0,
+          "theta": 0.0,
+          "phi": 0.0,
+          "x": 630.0,
+          "y": 700.0,
+          "z": 347.5
+        },
+        "cue": [
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          {
+            "active": false,
+            "radius": 120.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        ],
+        "focus": 0,
+        "pointCloud": {
+          "pointSize": 16.1,
+          "depthTest": true,
+          "ledStyle": 0
+        },
+        "grid": {
+          "visible": false,
+          "spacing": 100.0,
+          "size": 10,
+          "plane": 0,
+          "planes": 1,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "neg1": false,
+          "neg2": false
+        },
+        "axes": {
+          "visible": false
         }
       }
     }

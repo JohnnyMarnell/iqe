@@ -2,51 +2,44 @@
 Attempt adding some missing Pixelblaze pattern functions
 */
 
-function mod(x, y) {
-    var modulo = x % y;
-    return Math.sign(y) == Math.sign(modulo) ? modulo : y + modulo;
-}
+// auto generated delegators (see notes.md and PixelblazeHelper.java):
+function resetTransform() { __pattern.resetTransform() ; }
+function scale(x,y,z) { __pattern.scale(x,y,z) ; }
+function translate(x,y,z) { __pattern.translate(x,y,z) ; }
+function perlinRidge(x,y,z,lacunarity,gain,offset,octaves) { __pattern.perlinRidge(x,y,z,lacunarity,gain,offset,octaves) ; }
+function perlinTurbulence(x,y,z,lacunarity,gain,octaves) { __pattern.perlinTurbulence(x,y,z,lacunarity,gain,octaves) ; }
+function setPerlinWrap(x,y,z) { __pattern.setPerlinWrap(x,y,z) ; }
+function smoothstep(min,max,val) { __pattern.smoothstep(min,max,val) ; }
+function setPalette(array) { __pattern.setPalette(array) ; }
+function getGradientColor(lerp) { __pattern.getGradientColor(lerp) ; }
+function paint(lerp,brightness) { __pattern.paint(lerp,brightness) ; }
+function clockYear() { __pattern.clockYear() ; }
+function clockMonth() { __pattern.clockMonth() ; }
+function clockDay() { __pattern.clockDay() ; }
+function clockWeekday() { __pattern.clockWeekday() ; }
+function clockHour() { __pattern.clockHour() ; }
+function clockMinute() { __pattern.clockMinute() ; }
+function clockSecond() { __pattern.clockSecond() ; }
+function log(msg) { __pattern.log(msg) ; }
 
-// auto generated delegators:
-function setPalette(a,b,c,d,e,f,g) { return __pattern.setPalette(a,b,c,d,e,f,g); }
-function resetTransform(a,b,c,d,e,f,g) { return __pattern.resetTransform(a,b,c,d,e,f,g); }
-function setPerlinWrap(a,b,c,d,e,f,g) { return __pattern.setPerlinWrap(a,b,c,d,e,f,g); }
-function perlinRidge(a,b,c,d,e,f,g) { return __pattern.perlinRidge(a,b,c,d,e,f,g); }
-function scale(a,b,c,d,e,f,g) { return __pattern.scale(a,b,c,d,e,f,g); }
-function translate(a,b,c,d,e,f,g) { return __pattern.translate(a,b,c,d,e,f,g); }
-// no args
-function clockYear() { return __pattern.clockYear(); }
-function clockMonth() { return __pattern.clockMonth(); }
-function clockDay() { return __pattern.clockDay(); }
-function clockHour() { return __pattern.clockHour(); }
-function clockMinute() { return __pattern.clockMinute(); }
-function clockSecond() { return __pattern.clockSecond(); }
-function clockWeekday() { return __pattern.clockWeekday(); }
-
-function setPalette(array) {
-    return __pattern.setPalette(array);
-}
 
 function paint(value, brightness = 1) {
   return (__color = __pattern.paint(value, brightness));
 }
 
-function setPerlinWrap(x, y, z) {
-    return __pattern.setPerlinWrap(x, y, z);
+function mod(x, y) {
+    var modulo = x % y;
+    return Math.sign(y) == Math.sign(modulo) ? modulo : y + modulo;
 }
 
-function perlinRidge(x, y, z, lacunarity, gain, offset, octaves) {
-    return __pattern.perlinRidge(x, y, z, lacunarity, gain, offset, octaves);
+function square(v) {
+  v = v % 1;
+  return v < 0.5 ? 1 : 0;
 }
 
-function resetTransform() {
-    return __pattern.resetTransform();
-}
+// fake io
+var INPUT = 0, INPUT_PULLUP = 1, INPUT_PULLDOWN = 2, OUTPUT = 3, OUTPUT_OPEN_DRAIN = 4, ANALOG = 5;
 
-function scale(x, y, z) {
-    return __pattern.scale(x, y, z);
-}
-
-function translate(x, y, z) {
-    return __pattern.translate(x, y, z);
-}
+// what could go wrong?
+Array.prototype.sum = function() { return this.reduce((partialSum, v) => partialSum + v, 0); }
+Math.sign = function(v) { return v > 0.0 ? 1.0 : v < 0.0 ? -1.0 : 0.0 ; }

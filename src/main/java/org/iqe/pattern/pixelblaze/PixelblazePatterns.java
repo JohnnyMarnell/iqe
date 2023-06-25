@@ -5,12 +5,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
-import heronarts.lx.parameter.DiscreteParameter;
-import heronarts.lx.parameter.LXParameter;
-import heronarts.lx.parameter.LXParameterListener;
+import heronarts.lx.parameter.*;
+import heronarts.lx.pattern.LXPattern;
 import org.iqe.Audio;
 import org.iqe.LOG;
-import org.iqe.LXUtils;
 import titanicsend.pattern.pixelblaze.Wrapper;
 
 import javax.script.Bindings;
@@ -23,13 +21,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
-
-import static org.iqe.LXUtils.removeAllParameters;
 
 /**
  * I'm all inheritance / .class'd out y'all...
@@ -41,6 +38,17 @@ public class PixelblazePatterns {
 
     @LXCategory("PixelBlaze")
     public static class PixelBlazeBlowser extends PixelblazeHelper {
+
+        public final StringParameter scriptName = new StringParameter("Script Name", "test.js").setDescription("Path to the Pixelblaze script");
+
+        public final BooleanParameter reset =
+                new BooleanParameter("Reset", false)
+                        .setMode(BooleanParameter.Mode.MOMENTARY)
+                        .setDescription("Resets the Pixelblaze JS engine for this script");
+
+        public final MutableParameter onReload = new MutableParameter("Reload");
+        public final StringParameter error = new StringParameter("Error", "");
+
         public final DiscreteParameter script;
         protected final LXParameterListener scriptListener;
 
@@ -48,8 +56,12 @@ public class PixelblazePatterns {
             super(lx);
             script = new DiscreteParameter("script", patternData.keySet().toArray(new String[0]));
             addParameter("script", script);
+            addParameter("scriptName", scriptName);
+            addParameter("reload", onReload);
+            addParameter("error", error);
             this.scriptListener = p -> this.setScript();
             script.addListener(scriptListener, true);
+            onReload.bang();
         }
 
         @Override
@@ -61,6 +73,11 @@ public class PixelblazePatterns {
         protected String getScriptName() {
             return "__pbb_" + (script == null ? patternData.keySet().iterator().next() : script.getOption());
         }
+
+        public Collection<CompoundParameter> getSliders() {
+            return patternParameters.values().stream().map(p -> (CompoundParameter) p).toList();
+        }
+
 
         public void setScript() {
             String path = "resources/pixelblaze/" + getScriptName() + ".js";
@@ -126,6 +143,16 @@ public class PixelblazePatterns {
             PixelblazePatterns.extraGlueScript.eval(bindings);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void onPostLoad(Bindings bindings, CompiledScript glue, CompiledScript patternScript, Wrapper wrapper, LXPattern lxPattern) {
+        if (lxPattern instanceof PixelBlazeBlowser) {
+            PixelBlazeBlowser pattern = ((PixelBlazeBlowser) lxPattern);
+            if (pattern.onReload != null) {
+                pattern.onReload.bang();
+                pattern.scriptName.setValue(pattern.getScriptName(), true);
+            }
         }
     }
 

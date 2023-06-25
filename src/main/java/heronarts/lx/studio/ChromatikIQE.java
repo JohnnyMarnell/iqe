@@ -1,6 +1,8 @@
 package heronarts.lx.studio;
 
 import heronarts.lx.LX;
+import org.iqe.LXPluginIQE;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +20,11 @@ import java.util.Calendar;
 /**
  * TODO: Temporarily using decompiled Main until I get toolchain correctly setup
  *      Additionally, this helps with showing available CLI args and their code paths.
+ *
+ * TODO: I also need this because I can't follow how to hook into the UI otherwise?
  */
 public final class ChromatikIQE extends LXStudio {
+
     public static final String APP_NAME = "Chromatik";
     private static final String FLAG_HEADLESS = "--headless";
     private static final String FLAG_OPENGL = "--opengl";
@@ -36,6 +41,14 @@ public final class ChromatikIQE extends LXStudio {
 
     private ChromatikIQE(LXStudio.Flags flags) throws IOException {
         super(flags);
+    }
+
+    public static UI ui;
+    @Override
+    protected UI buildUI() throws IOException {
+        ChromatikIQE.ui = super.buildUI();
+        LXPluginIQE.hack(ChromatikIQE.ui);
+        return ChromatikIQE.ui;
     }
 
     private static LX.Permissions createPermissions() {

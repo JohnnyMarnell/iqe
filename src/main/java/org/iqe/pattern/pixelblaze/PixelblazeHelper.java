@@ -6,7 +6,9 @@ import heronarts.lx.model.LXPoint;
 import heronarts.lx.parameter.LXParameter;
 import heronarts.lx.transform.LXMatrix;
 import heronarts.lx.utils.LXUtils;
+import heronarts.lx.utils.Noise;
 import org.iqe.LOG;
+import titanicsend.TEMath;
 import titanicsend.pattern.pixelblaze.PixelblazePattern;
 
 import java.time.LocalDateTime;
@@ -61,23 +63,6 @@ public class PixelblazeHelper extends PixelblazePattern {
         perlinWrapX = perlinWrapY = perlinWrapZ = 256;
     }
 
-
-
-    public void resetTransform() {
-        transform.identity();
-        transformNeeded = true;
-    }
-
-    public void scale(float x, float y, float z) {
-        transform.scale(x, y, z);
-        transformNeeded = true;
-    }
-
-    public void translate(float x, float y, float z) {
-        transform.translate(x, y, z);
-        transformNeeded = true;
-    }
-
     @Override
     protected String getScriptName() {
         throw new UnsupportedOperationException("This part of functionality shouldn't be used.");
@@ -95,10 +80,43 @@ public class PixelblazeHelper extends PixelblazePattern {
         return transformedPoints;
     }
 
-    public double perlinRidge(float x, float y, float z,
-                              float lacunarity, float gain, float offset, int octaves) {
+    @Override
+    public void addSlider(String key, String label) {
+        LOG.info("Add slider called for key '{}', label '{}'", key, label);
+        super.addSlider(key, label);
+    }
+
+    @Override
+    public double getSlider(String key) {
+        return super.getSlider(key);
+    }
+
+    public void resetTransform() {
+        transform.identity();
+        transformNeeded = true;
+    }
+
+    public void scale(float x, float y, float z) {
+        transform.scale(x, y, z);
+        transformNeeded = true;
+    }
+
+    public void translate(float x, float y, float z) {
+        transform.translate(x, y, z);
+        transformNeeded = true;
+    }
+
+    public double perlinRidge(float x, float y, float z, float lacunarity, float gain, float offset, int octaves) {
+
         return LXNoisePorted.stb_perlin_ridge_noise3(x, y, z,
                 lacunarity, gain, offset, octaves,
+                perlinWrapX, perlinWrapY, perlinWrapZ);
+
+    }
+
+    public double perlinTurbulence(float x, float y, float z, float lacunarity, float gain, int octaves) {
+        return LXNoisePorted.stb_perlin_turbulence_noise3(
+                x, y, z, lacunarity, gain, octaves,
                 perlinWrapX, perlinWrapY, perlinWrapZ);
     }
 
@@ -106,6 +124,10 @@ public class PixelblazeHelper extends PixelblazePattern {
         perlinWrapX = x;
         perlinWrapY = y;
         perlinWrapZ = z;
+    }
+
+    public double smoothstep(double min, double max, double val) {
+        return TEMath.smoothstep(min, max, val);
     }
 
     // todo: impl and use the PB script setPalette()
@@ -122,17 +144,6 @@ public class PixelblazeHelper extends PixelblazePattern {
     // todo: impl and use the PB script setGradient()
     public int paint(float lerp, float brightness) {
         return getGradientColor(lerp);
-    }
-
-    @Override
-    public void addSlider(String key, String label) {
-        LOG.info("Add slider called for key '{}', label '{}'", key, label);
-        super.addSlider(key, label);
-    }
-
-    @Override
-    public double getSlider(String key) {
-        return super.getSlider(key);
     }
 
     public int clockYear() {
@@ -164,7 +175,12 @@ public class PixelblazeHelper extends PixelblazePattern {
         return LocalDateTime.now().getSecond();
     }
 
-    public void log(String msg, Object ... args) {
-        LOG.info(msg, args);
+    public void log(String msg) {
+        LOG.info(msg);
+    }
+
+    // idk what to do for these:
+    public void pinMode(int pin, int mode) {
+
     }
 }

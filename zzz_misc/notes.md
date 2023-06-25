@@ -2,7 +2,12 @@
 
 Glue script functions:
 ```bash
-for fn in setPalette resetTransform setPerlinWrap perlinRidge scale translate clockYear clockMonth clockDay clockHour clockMinute clockSecond clockWeekday ; do echo "function $fn(a,b,c,d,e,f,g) { return __pattern.$fn(a,b,c,d,e,f,g); }" ; done
+cat ./src/main/java/org/iqe/pattern/pixelblaze/PixelblazeHelper.java \
+  | grep -o 'public\s+\S+\s+\S+\(.*?\)' \
+  | perl -ple 's/[^(,]+\s+(\S+[,)])/\1/g' \
+  | perl -ple 's/public\s+\S+\s+//g' \
+  | grep -v '^(reset|getSlider|addSlider|getModelPoints|beforeRender|paint)\(' \
+  | perl -ple 's/(.*?)(\(.*?\))/function $1$2 { __pattern.$1$2 ; }/g'
 ```
 
 JSON to add a bunch of modulators (copied field lines in AudioModulators.java)
