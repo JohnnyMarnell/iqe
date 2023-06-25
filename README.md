@@ -13,8 +13,7 @@ Plus Node.JS OSC backed web app control system.
 # Use
 
 Prerequisites:
-1. Chromatik alpha build zip is downloaded and unzipped to your `~/Downloads` folder
-     ("Downloads" sidebar / in "Home" of Finder).
+1. Temp: Until annoying maven is sorted, run this once, in Terminal or click in Finder: `./src/scripts/download_chromatik.sh`
 2. Java 17 Temurin / Eclipse is installed from here: https://adoptium.net/
 
 Then double-click the `IQE.command` here in this repo / folder.

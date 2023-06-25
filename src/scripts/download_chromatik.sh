@@ -1,4 +1,6 @@
 #!/bin/bash
+cd "$(dirname "$0")"
+cd ../../
 
 if [[ -f ./vendor/glxstudio.jar ]] ; then
     echo "Chromatik already installed."
