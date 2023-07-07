@@ -3,7 +3,8 @@ cd "$(dirname "$0")"
 cd ../../
 
 if [[ -f ./vendor/glxstudio.jar ]] ; then
-    echo "Chromatik already installed."
+    echo "Chromatik already installed:"
+    find ./vendor
 else
     platform=$(uname)
     if [[ "$platform" == 'Linux' ]]; then
