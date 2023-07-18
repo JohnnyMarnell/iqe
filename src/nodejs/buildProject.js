@@ -29,7 +29,7 @@ const sl = stripLenMultiplier => stripLenMultiplier * stripLen
 const universeHyperspaceWarp = [2, 0, 1], channelingus = [0, 420, 330]
 let universe = -1
 const fArtNetPairs = []
-for (let i = 0; i < 128; i++) {
+for (let i = 0; i < 1024; i++) {
     universe += universeHyperspaceWarp[i % 3]
     fArtNetPairs.push( [universe, channelingus[i % 3] ] )
 }
@@ -37,17 +37,80 @@ for (let i = 0; i < 128; i++) {
 function buildNagBugglerSaberOfLightFixtures() {
     const vSpace = .15, hSpace = .1
     return [
-        {...s({yaw: -90, x: sl(11 * vSpace), y: sl(1), z: 0}, 'r-v2-11 sq2')},
-        {...s({yaw: -90, x: sl(10 * vSpace), y: sl(1), z: 0}, 'r-v2-10 sq2')},
-        {...s({yaw: -90, x: sl(9  * vSpace), y: sl(1), z: 0}, 'r-v2-9  sq2')},
-        {...s({yaw: -90, x: sl(8  * vSpace), y: sl(1), z: 0}, 'r-v2-8  sq2')},
-        {...s({yaw: -90, x: sl(7  * vSpace), y: sl(1), z: 0}, 'r-v2-7  sq2')},
-        {...s({yaw: -90, x: sl(6  * vSpace), y: sl(1), z: 0}, 'r-v2-6  sq2')},
-        {...s({yaw: -90, x: sl(5  * vSpace), y: sl(1), z: 0}, 'r-v2-5  sq2')},
-        {...s({yaw: -90, x: sl(4  * vSpace), y: sl(1), z: 0}, 'r-v2-4  sq2')},
-        {...s({yaw: -90, x: sl(3  * vSpace), y: sl(1), z: 0}, 'r-v2-3  sq2')},
-        {...s({yaw: -90, x: sl(2  * vSpace), y: sl(1), z: 0}, 'r-v2-2  sq2')},
-        {...s({yaw: -90, x: sl(1  * vSpace), y: sl(1), z: 0}, 'r-v2-1  sq2')},
+        {...s({yaw: -90, x: sl(24 * vSpace), y: sl(1), z: 0}, 'r-v2-24 sq2 col1')},
+        {...s({yaw: -90, x: sl(23 * vSpace), y: sl(1), z: 0}, 'r-v2-23 sq2 col1')},
+        {...s({yaw: -90, x: sl(22 * vSpace), y: sl(1), z: 0}, 'r-v2-22 sq2 col1')},
+        {...s({yaw: -90, x: sl(21 * vSpace), y: sl(1), z: 0}, 'r-v2-21 sq2 col1')},
+        {...s({yaw: -90, x: sl(20 * vSpace), y: sl(1), z: 0}, 'r-v2-20 sq2 col1')},
+        {...s({yaw: -90, x: sl(19 * vSpace), y: sl(1), z: 0}, 'r-v2-19 sq2 col1')},
+        {...s({yaw: -90, x: sl(18 * vSpace), y: sl(1), z: 0}, 'r-v2-18 sq2 col1')},
+        {...s({yaw: -90, x: sl(17 * vSpace), y: sl(1), z: 0}, 'r-v2-17 sq2 col1')},
+        {...s({yaw: -90, x: sl(16 * vSpace), y: sl(1), z: 0}, 'r-v2-16 sq2 col1')},
+        {...s({yaw: -90, x: sl(15 * vSpace), y: sl(1), z: 0}, 'r-v2-15 sq2 col1')},
+        {...s({yaw: -90, x: sl(14 * vSpace), y: sl(1), z: 0}, 'r-v2-14 sq2 col1')},
+        {...s({yaw: -90, x: sl(13 * vSpace), y: sl(1), z: 0}, 'r-v2-13 sq2 col1')},
+        {...s({yaw: -90, x: sl(12 * vSpace), y: sl(1), z: 0}, 'r-v2-12 sq2 col1')},
+        {...s({yaw: -90, x: sl(11 * vSpace), y: sl(1), z: 0}, 'r-v2-11 sq2 col1')},
+        {...s({yaw: -90, x: sl(10 * vSpace), y: sl(1), z: 0}, 'r-v2-10 sq2 col1')},
+        {...s({yaw: -90, x: sl(9  * vSpace), y: sl(1), z: 0}, 'r-v2-9  sq2 col1')},
+        {...s({yaw: -90, x: sl(8  * vSpace), y: sl(1), z: 0}, 'r-v2-8  sq2 col1')},
+        {...s({yaw: -90, x: sl(7  * vSpace), y: sl(1), z: 0}, 'r-v2-7  sq2 col1')},
+        {...s({yaw: -90, x: sl(6  * vSpace), y: sl(1), z: 0}, 'r-v2-6  sq2 col1')},
+        {...s({yaw: -90, x: sl(5  * vSpace), y: sl(1), z: 0}, 'r-v2-5  sq2 col1')},
+        {...s({yaw: -90, x: sl(4  * vSpace), y: sl(1), z: 0}, 'r-v2-4  sq2 col1')},
+        {...s({yaw: -90, x: sl(3  * vSpace), y: sl(1), z: 0}, 'r-v2-3  sq2 col1')},
+        {...s({yaw: -90, x: sl(2  * vSpace), y: sl(1), z: 0}, 'r-v2-2  sq2 col1')},
+        {...s({yaw: -90, x: sl(1  * vSpace), y: sl(1), z: 0}, 'r-v2-1  sq2 col1')},
+
+        {...s({yaw: -90, x: sl(24 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-24 sq2 col2')},
+        {...s({yaw: -90, x: sl(23 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-23 sq2 col2')},
+        {...s({yaw: -90, x: sl(22 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-22 sq2 col2')},
+        {...s({yaw: -90, x: sl(21 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-21 sq2 col2')},
+        {...s({yaw: -90, x: sl(20 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-20 sq2 col2')},
+        {...s({yaw: -90, x: sl(19 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-19 sq2 col2')},
+        {...s({yaw: -90, x: sl(18 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-18 sq2 col2')},
+        {...s({yaw: -90, x: sl(17 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-17 sq2 col2')},
+        {...s({yaw: -90, x: sl(16 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-16 sq2 col2')},
+        {...s({yaw: -90, x: sl(15 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-15 sq2 col2')},
+        {...s({yaw: -90, x: sl(14 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-14 sq2 col2')},
+        {...s({yaw: -90, x: sl(13 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-13 sq2 col2')},
+        {...s({yaw: -90, x: sl(12 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-12 sq2 col2')},
+        {...s({yaw: -90, x: sl(11 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-11 sq2 col2')},
+        {...s({yaw: -90, x: sl(10 * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-10 sq2 col2')},
+        {...s({yaw: -90, x: sl(9  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-9  sq2 col2')},
+        {...s({yaw: -90, x: sl(8  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-8  sq2 col2')},
+        {...s({yaw: -90, x: sl(7  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-7  sq2 col2')},
+        {...s({yaw: -90, x: sl(6  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-6  sq2 col2')},
+        {...s({yaw: -90, x: sl(5  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-5  sq2 col2')},
+        {...s({yaw: -90, x: sl(4  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-4  sq2 col2')},
+        {...s({yaw: -90, x: sl(3  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-3  sq2 col2')},
+        {...s({yaw: -90, x: sl(2  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-2  sq2 col2')},
+        {...s({yaw: -90, x: sl(1  * vSpace), y: sl(1), z: sl(1 + 1 * hSpace)}, 'r-v2-1  sq2 col2')},
+
+        {...s({yaw: -90, x: sl(24 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-24 sq2 col3')},
+        {...s({yaw: -90, x: sl(23 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-23 sq2 col3')},
+        {...s({yaw: -90, x: sl(22 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-22 sq2 col3')},
+        {...s({yaw: -90, x: sl(21 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-21 sq2 col3')},
+        {...s({yaw: -90, x: sl(20 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-20 sq2 col3')},
+        {...s({yaw: -90, x: sl(19 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-19 sq2 col3')},
+        {...s({yaw: -90, x: sl(18 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-18 sq2 col3')},
+        {...s({yaw: -90, x: sl(17 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-17 sq2 col3')},
+        {...s({yaw: -90, x: sl(16 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-16 sq2 col3')},
+        {...s({yaw: -90, x: sl(15 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-15 sq2 col3')},
+        {...s({yaw: -90, x: sl(14 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-14 sq2 col3')},
+        {...s({yaw: -90, x: sl(13 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-13 sq2 col3')},
+        {...s({yaw: -90, x: sl(12 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-12 sq2 col3')},
+        {...s({yaw: -90, x: sl(11 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-11 sq2 col3')},
+        {...s({yaw: -90, x: sl(10 * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-10 sq2 col3')},
+        {...s({yaw: -90, x: sl(9  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-9  sq2 col3')},
+        {...s({yaw: -90, x: sl(8  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-8  sq2 col3')},
+        {...s({yaw: -90, x: sl(7  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-7  sq2 col3')},
+        {...s({yaw: -90, x: sl(6  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-6  sq2 col3')},
+        {...s({yaw: -90, x: sl(5  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-5  sq2 col3')},
+        {...s({yaw: -90, x: sl(4  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-4  sq2 col3')},
+        {...s({yaw: -90, x: sl(3  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-3  sq2 col3')},
+        {...s({yaw: -90, x: sl(2  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-2  sq2 col3')},
+        {...s({yaw: -90, x: sl(1  * vSpace), y: sl(1), z: sl(2 + 2 * hSpace)}, 'r-v2-1  sq2 col3')},
 
         // {...s({yaw: -90, x: sl(0  * vSpace), y: sl(1), z: sl(-(1 + hSpace))}, 'r-v2-t1 sq1')},
         // {...s({yaw: -90, x: sl(0  * vSpace), y: sl(1), z: sl(0)},             'r-v2-t2 sq2')},
@@ -181,7 +244,7 @@ function buildNagBugglerSaberOfLightFixtures_v1() {
 }
 
 // Load project file, overwrite fixtures, re-write file.
-const path = `${__dirname}/iqe.lxp`
+const path = `${__dirname}/../../iqe.lxp`
 const project = JSON.parse(fs.readFileSync(path))
 project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
 console.log(JSON.stringify(project, null, 2))
