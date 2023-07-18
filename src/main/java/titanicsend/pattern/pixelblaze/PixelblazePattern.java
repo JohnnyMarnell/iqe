@@ -134,6 +134,7 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
       //the show must go on, and we don't want to spam the logs.
       if (System.currentTimeMillis() - lastLogMs > RENDER_ERROR_LOG_INTERVAL_MS) {
         LX.log("Error rendering Pixelblaze script, " + wrapper.file + ":" + sx.getMessage());
+        sx.printStackTrace();
         lastLogMs = System.currentTimeMillis();
       }
     } catch (Exception e) {
