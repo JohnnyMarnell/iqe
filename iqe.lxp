@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1687732982739,
+  "timestamp": 1689095514274,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -527,7 +527,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 0,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 1,
+          "autoCycleCursor": 0,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -559,7 +559,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 178.81640625,
+                  "primary/hue": 71.52940368652344,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -579,7 +579,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 91.1953125,
+                  "primary/hue": 57.64706039428711,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -599,7 +599,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 214.53515625,
+                  "primary/hue": 267.0588073730469,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -1011,17 +1011,17 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.17105882381613213,
-              "band-2": 0.2442300557364684,
-              "band-3": 0.2207319501139935,
-              "band-4": 0.15865594322566678,
-              "band-5": 0.1183293684331117,
-              "band-6": 0.03936380629035163,
-              "band-7": 0.0,
-              "band-8": 0.0,
-              "band-9": 0.0,
-              "band-10": 0.0,
-              "band-11": 0.0,
+              "band-1": 0.49709086582096085,
+              "band-2": 0.5247861768561319,
+              "band-3": 0.5491381941292501,
+              "band-4": 0.6231112868194704,
+              "band-5": 0.5916410036676938,
+              "band-6": 0.55684433905225,
+              "band-7": 0.5000371436639499,
+              "band-8": 0.4545740017729002,
+              "band-9": 0.3875774022480475,
+              "band-10": 0.16670065359546082,
+              "band-11": 0.03756562144333364,
               "band-12": 0.0,
               "band-13": 0.0,
               "band-14": 0.0,
@@ -1262,7 +1262,7 @@
               "compositeMode": 0,
               "compositeDampingEnabled": true,
               "compositeDampingTimeSecs": 0.1,
-              "autoCycleEnabled": true,
+              "autoCycleEnabled": false,
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 45.0,
               "transitionEnabled": false,
@@ -2865,13 +2865,10 @@
                   "compositeLevel": 1.0,
                   "enableEdges": true,
                   "enablePanels": true,
-                  "script": 27,
-                  "scriptName": "__pbb_Bouncer3D",
+                  "script": 58,
+                  "scriptName": "__pbb_millipede",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderBalls": 0.22784213442355394,
-                  "sliderSize": 0.9123114286048803,
-                  "sliderSpeed": 0.11008216498885304
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -3636,7 +3633,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6646666666996605
+            "basis": 0.8446666666999396
           },
           {
             "id": 54255,
@@ -3688,7 +3685,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04166666669987493
+            "basis": 0.22166666670015778
           },
           {
             "id": 56980,
@@ -3716,7 +3713,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04166666669987493
+            "basis": 0.22166666670015778
           },
           {
             "id": 56981,
@@ -3744,7 +3741,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04166666669987493
+            "basis": 0.22166666670015778
           },
           {
             "id": 56982,
@@ -3772,7 +3769,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04166666669987493
+            "basis": 0.22166666670015778
           },
           {
             "id": 56983,
@@ -3800,7 +3797,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04166666669987493
+            "basis": 0.22166666670015778
           },
           {
             "id": 57307,
@@ -3828,7 +3825,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5846666666974082
+            "basis": 0.7646666666976898
           },
           {
             "id": 57308,
@@ -3856,7 +3853,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5846666666974082
+            "basis": 0.7646666666976898
           },
           {
             "id": 62913,
@@ -3884,7 +3881,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7906666666965243
+            "basis": 0.9706666666968095
           },
           {
             "id": 66458,
@@ -3912,7 +3909,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.26966666669222045
+            "basis": 0.4496666666925055
           },
           {
             "id": 76378,
@@ -3968,7 +3965,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.32266666669578026
+            "basis": 0.5026666666960637
           },
           {
             "id": 64644,
@@ -4052,7 +4049,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.27166666669268674
+            "basis": 0.4516666666929718
           }
         ],
         "modulations": [

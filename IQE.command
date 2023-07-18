@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "$(pwd)"
 cd "$(dirname $0)"
+echo "$(pwd)"
 
-bash ./RUN.sh
+bash "$(pwd)/RUN.sh"

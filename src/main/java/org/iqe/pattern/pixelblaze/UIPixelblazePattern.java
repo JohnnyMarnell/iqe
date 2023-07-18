@@ -19,6 +19,8 @@
 package org.iqe.pattern.pixelblaze;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import heronarts.glx.ui.UIColor;
 import heronarts.glx.ui.vg.VGraphics;
@@ -33,6 +35,8 @@ import heronarts.glx.ui.UI2dContainer;
 import heronarts.glx.ui.component.UIButton;
 import heronarts.glx.ui.component.UILabel;
 import heronarts.glx.ui.component.UISlider;
+import org.apache.commons.lang3.tuple.Pair;
+
 public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.PixelBlazeBlowser>  {
 
 
@@ -40,6 +44,8 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.
     private UIButton openButton;
 
     private UIDeviceControls.Default defaultRenderer = new UIDeviceControls.Default();
+
+    private List<Pair<UISlider, CompoundParameter>> uiSliders = new ArrayList<>();
 
     @Override
     public void buildDeviceControls(UI ui, UIDevice uiDevice, PixelblazePatterns.PixelBlazeBlowser pattern) {
@@ -98,13 +104,20 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.
 
         // Add sliders to container on every reload
         pattern.onReload.addListener(p -> {
+            // TODO: sigh, yet another hack... dispose from removeAllChildren fails, trying to remove non-existent
+            //    listener, so adding here beforehand?
+            uiSliders.forEach(pair -> pair.getRight().addListener(pair.getLeft()));
+            uiSliders.clear();
+
             sliders.removeAllChildren();
             for (CompoundParameter slider : pattern.getSliders()) {
-                new UISlider(UISlider.Direction.VERTICAL, 40, sliders.getContentHeight() - 14, slider)
-                        .addToContainer(sliders);
+                UISlider uiSlider = new UISlider(UISlider.Direction.VERTICAL, 40, sliders.getContentHeight() - 14, slider);
+                uiSlider.addToContainer(sliders);
+                uiSliders.add(Pair.of(uiSlider, slider));
             }
 //            float contentWidth = LXUtils.maxf(140, sliders.getContentWidth());
-            float contentWidth = LXUtils.maxf(200, sliders.getContentWidth());
+//            float contentWidth = LXUtils.maxf(200, sliders.getContentWidth());
+            float contentWidth = 600;
             uiDevice.setContentWidth(contentWidth);
             resetButton.setX(contentWidth - resetButton.getWidth());
             this.openButton.setX(resetButton.getX() - 2 - this.openButton.getWidth());

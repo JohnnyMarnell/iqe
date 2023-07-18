@@ -38,8 +38,10 @@ function square(v) {
 }
 
 // fake io
-var INPUT = 0, INPUT_PULLUP = 1, INPUT_PULLDOWN = 2, OUTPUT = 3, OUTPUT_OPEN_DRAIN = 4, ANALOG = 5;
+var INPUT = 0, INPUT_PULLUP = 1, INPUT_PULLDOWN = 2, OUTPUT = 3, OUTPUT_OPEN_DRAIN = 4, ANALOG = 5, HIGH = 6;
+var pinMode = INPUT;
 
 // what could go wrong?
 Array.prototype.sum = function() { return this.reduce((partialSum, v) => partialSum + v, 0); }
 Math.sign = function(v) { return v > 0.0 ? 1.0 : v < 0.0 ? -1.0 : 0.0 ; }
+//function array(len) { return new Array(len) ; }
