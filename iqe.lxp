@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1689699490150,
+  "timestamp": 1689774521062,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3605,7 +3605,7 @@
           "label": "Mixer",
           "crossfader": 0.5,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 0,
+          "focusedChannel": 2,
           "focusedChannelAux": 2,
           "cueA": false,
           "cueB": false,
@@ -3810,7 +3810,7 @@
               "label": "Form",
               "fader": 1.0,
               "arm": false,
-              "selected": true,
+              "selected": false,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -3830,13 +3830,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 13,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 13,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 52632,
@@ -3981,7 +3981,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.07274397793832718
+                        "basis": 0.5995817496596919
                       }
                     ],
                     "modulations": [
@@ -4403,7 +4403,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.38223800348844006
+                        "basis": 0.626593869543114
                       },
                       {
                         "id": 53174,
@@ -4431,7 +4431,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6272442662692872
+                        "basis": 0.12168274946059798
                       },
                       {
                         "id": 53194,
@@ -4459,7 +4459,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5677008436929121
+                        "basis": 0.019475768830926367
                       },
                       {
                         "id": 53196,
@@ -4487,7 +4487,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9483367007814312
+                        "basis": 0.31034794115911124
                       },
                       {
                         "id": 53198,
@@ -4515,7 +4515,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5719410857527938
+                        "basis": 0.21350325730958214
                       },
                       {
                         "id": 53200,
@@ -4543,7 +4543,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3849641749125303
+                        "basis": 0.20822274836721202
                       }
                     ],
                     "modulations": [
@@ -5531,7 +5531,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -5829,7 +5829,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 52574,
@@ -5975,7 +5975,7 @@
               "label": "FX",
               "fader": 1.0,
               "arm": false,
-              "selected": false,
+              "selected": true,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -5995,13 +5995,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 4,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 4,
             "patterns": [
               {
                 "id": 60878,
@@ -6152,6 +6152,43 @@
                   }
                 },
                 "deviceVersion": -1
+              },
+              {
+                "id": 78377,
+                "class": "org.iqe.pattern.EqVisualizerPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "EqVisualizer",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0
+                },
+                "children": {
+                  "modulation": {
+                    "id": 78378,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
               }
             ]
           }
@@ -6195,7 +6232,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7576666667002847
+            "basis": 0.6206666667012551
           },
           {
             "id": 54255,
@@ -6247,14 +6284,14 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13466666670050698
+            "basis": 0.9976666667014693
           },
           {
             "id": 56980,
             "class": "org.iqe.AudioModulators$BassLevel",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": false
             },
             "parameters": {
               "label": "BassLevel",
@@ -6275,14 +6312,14 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13466666670050698
+            "basis": 0.9976666667014693
           },
           {
             "id": 56981,
             "class": "org.iqe.AudioModulators$TrebleLevel",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": true
             },
             "parameters": {
               "label": "TrebleLevel",
@@ -6303,7 +6340,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13466666670050698
+            "basis": 0.18300000000029915
           },
           {
             "id": 56982,
@@ -6331,7 +6368,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13466666670050698
+            "basis": 0.9976666667014693
           },
           {
             "id": 56983,
@@ -6359,7 +6396,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13466666670050698
+            "basis": 0.9976666667014693
           },
           {
             "id": 57307,
@@ -6387,7 +6424,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.677666666698039
+            "basis": 0.5406666666990023
           },
           {
             "id": 57308,
@@ -6415,7 +6452,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.677666666698039
+            "basis": 0.5406666666990023
           },
           {
             "id": 62913,
@@ -6443,7 +6480,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8836666666971569
+            "basis": 0.7466666666981154
           },
           {
             "id": 66458,
@@ -6471,7 +6508,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3626666666928535
+            "basis": 0.2256666666938117
           },
           {
             "id": 76378,
@@ -6527,7 +6564,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4156666666964103
+            "basis": 0.2786666666973623
           },
           {
             "id": 64644,
@@ -6611,7 +6648,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3646666666933194
+            "basis": 0.2276666666942762
           }
         ],
         "modulations": [
