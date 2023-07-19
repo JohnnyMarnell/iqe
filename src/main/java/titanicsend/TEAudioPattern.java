@@ -11,6 +11,8 @@ import heronarts.lx.parameter.FunctionalParameter;
 import heronarts.lx.parameter.LXParameter;
 import org.iqe.AudioModulators;
 
+import java.awt.*;
+
 /**
  * PORTED: No longer to be used as redundant based class, the audio analysis
  * logic portions are used as part of audio engine of Audio.java class
@@ -72,8 +74,13 @@ public class TEAudioPattern {
     public TEAudioPattern(LX lx) {
 //        super(lx);
         this.lx = lx;
-//        this.eq = lx.engine.audio.meter;
-        this.eq = new GraphicMeter("Meter", lx.engine.audio.input.mix, 32);
+
+        this.eq = lx.engine.audio.meter;
+        // goddamnit, this doesnt work
+//        this.eq = new GraphicMeter("Meter", lx.engine.audio.input.mix, 32);
+//        lx.engine.audio.addModulator(this.eq);
+
+
         bassBandCount = (int) Math.ceil(eq.numBands / 8.);
         // By default, 80% of a tempo-defined eighth note must have passed to bassHit
         // bassRetriggerMs = .8 * (lx.engine.tempo.period.getValue() / 2);

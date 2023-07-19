@@ -3,11 +3,9 @@ package org.iqe;
 import heronarts.glx.ui.UI;
 import heronarts.lx.*;
 import heronarts.lx.model.LXModel;
-import heronarts.lx.studio.ChromatikIQE;
 import heronarts.lx.studio.LXStudio;
-import heronarts.lx.studio.ui.device.UIDevice;
-import heronarts.lx.studio.ui.device.UIDeviceControls;
 import org.iqe.pattern.*;
+import org.iqe.pattern.EqVisualizerPattern;
 import org.iqe.pattern.pixelblaze.PixelblazePatterns;
 import org.iqe.pattern.pixelblaze.UIPixelblazePattern;
 import titanicsend.pattern.pixelblaze.PBAudio1;
@@ -48,6 +46,7 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 BouncingDotsPattern.class,
                 PianoRollPattern.class,
                 MindLikeWaterPattern.class,
+                EqVisualizerPattern.class,
 
                 PBXorcery.class,
                 PBAudio1.class,

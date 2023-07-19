@@ -4,6 +4,7 @@ import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.LXComponent;
 import heronarts.lx.Tempo;
+import heronarts.lx.audio.GraphicMeter;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.parameter.LXListenableParameter;
@@ -221,6 +222,10 @@ public class Audio implements Tempo.Listener {
 
     public boolean bassHit() {
         return teEngine.bassHit();
+    }
+
+    public GraphicMeter graphicMeter() {
+        return teEngine.eq;
     }
 
     @Override
