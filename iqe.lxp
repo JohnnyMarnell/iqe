@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1689774521062,
+  "timestamp": 1690321805793,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3336,8 +3336,8 @@
         "parameters": {
           "label": "Tempo",
           "clockSource": 0,
-          "period": 533.5,
-          "bpm": 112.46485473289597,
+          "period": 500.0,
+          "bpm": 120.0,
           "tap": false,
           "nudgeUp": false,
           "nudgeDown": false,
@@ -3830,13 +3830,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 13,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 13,
             "patterns": [
               {
                 "id": 52632,
@@ -3981,7 +3981,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5995817496596919
+                        "basis": 0.6057376218698461
                       }
                     ],
                     "modulations": [
@@ -4097,7 +4097,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2960368183839879
+                        "basis": 0.6088181192474287
                       },
                       {
                         "id": 52865,
@@ -4125,7 +4125,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3767058326535522
+                        "basis": 0.6072797159255393
                       }
                     ],
                     "modulations": [
@@ -4260,7 +4260,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4940842395437015
+                        "basis": 0.7995772934110005
                       },
                       {
                         "id": 53133,
@@ -4288,7 +4288,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4940842395437015
+                        "basis": 0.7995772934110005
                       }
                     ],
                     "modulations": [
@@ -4403,7 +4403,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.626593869543114
+                        "basis": 0.009356988494285031
                       },
                       {
                         "id": 53174,
@@ -4431,7 +4431,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.12168274946059798
+                        "basis": 0.888970532565052
                       },
                       {
                         "id": 53194,
@@ -4459,7 +4459,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.019475768830926367
+                        "basis": 0.15844146516184238
                       },
                       {
                         "id": 53196,
@@ -4487,7 +4487,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.31034794115911124
+                        "basis": 0.7293017827690752
                       },
                       {
                         "id": 53198,
@@ -4515,7 +4515,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.21350325730958214
+                        "basis": 0.7184467978816875
                       },
                       {
                         "id": 53200,
@@ -4543,7 +4543,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20822274836721202
+                        "basis": 0.769055993315565
                       }
                     ],
                     "modulations": [
@@ -5078,7 +5078,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09238318307111135
+                        "basis": 0.26023189504820826
                       }
                     ],
                     "modulations": [
@@ -5129,7 +5129,7 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "energy": 0.3984249986452051,
+                  "energy": 0.666976561283227,
                   "syncTrigger": false
                 },
                 "children": {
@@ -5995,13 +5995,13 @@
               "transitionEnabled": false,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 4,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 4,
+            "patternIndex": 2,
             "patterns": [
               {
                 "id": 60878,
@@ -6054,7 +6054,7 @@
                 },
                 "parameters": {
                   "label": "Diagnostics",
-                  "enabled": false,
+                  "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
@@ -6095,7 +6095,8 @@
                   "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
-                  "compositeLevel": 1.0
+                  "compositeLevel": 1.0,
+                  "running": false
                 },
                 "children": {
                   "modulation": {
@@ -6169,7 +6170,8 @@
                   "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
-                  "compositeLevel": 1.0
+                  "compositeLevel": 1.0,
+                  "running": true
                 },
                 "children": {
                   "modulation": {
@@ -6232,7 +6234,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6206666667012551
+            "basis": 0.3886666667019736
           },
           {
             "id": 54255,
@@ -6284,7 +6286,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9976666667014693
+            "basis": 0.7656666667021899
           },
           {
             "id": 56980,
@@ -6312,7 +6314,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9976666667014693
+            "basis": 0.7656666667021899
           },
           {
             "id": 56981,
@@ -6340,7 +6342,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.18300000000029915
+            "basis": 0.9510000000010177
           },
           {
             "id": 56982,
@@ -6368,7 +6370,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9976666667014693
+            "basis": 0.7656666667021899
           },
           {
             "id": 56983,
@@ -6396,7 +6398,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9976666667014693
+            "basis": 0.7656666667021899
           },
           {
             "id": 57307,
@@ -6424,7 +6426,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5406666666990023
+            "basis": 0.30866666669972176
           },
           {
             "id": 57308,
@@ -6452,14 +6454,14 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5406666666990023
+            "basis": 0.30866666669972176
           },
           {
             "id": 62913,
             "class": "org.iqe.AudioModulators$BarClick",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": false
             },
             "parameters": {
               "label": "BarClick",
@@ -6480,7 +6482,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7466666666981154
+            "basis": 0.5146666666988343
           },
           {
             "id": 66458,
@@ -6508,7 +6510,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2256666666938117
+            "basis": 0.9936666666945307
           },
           {
             "id": 76378,
@@ -6564,7 +6566,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2786666666973623
+            "basis": 0.04666666669808292
           },
           {
             "id": 64644,
@@ -6592,7 +6594,7 @@
               "exp": -0.41914062364958227
             },
             "children": {},
-            "basis": 1.0
+            "basis": 0.11474999999999992
           },
           {
             "id": 64808,
@@ -6648,7 +6650,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.2276666666942762
+            "basis": 0.9956666666949959
           }
         ],
         "modulations": [
@@ -7102,9 +7104,9 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 2865.2262583053384,
-          "theta": 274.50869863817934,
-          "phi": 31.473674906184897,
+          "radius": 4626.761333385048,
+          "theta": 274.2144496628316,
+          "phi": 26.927651884034276,
           "x": 730.7889177289035,
           "y": 406.5708494045539,
           "z": 1490.8084799780045
@@ -7121,9 +7123,9 @@
           },
           {
             "active": true,
-            "radius": 2865.2262583053384,
-            "theta": 274.50869863817934,
-            "phi": 31.473674906184897,
+            "radius": 4626.761333385048,
+            "theta": 274.2144496628316,
+            "phi": 26.927651884034276,
             "x": 730.7889177289035,
             "y": 406.5708494045539,
             "z": 1490.8084799780045
