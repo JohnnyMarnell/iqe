@@ -4,6 +4,7 @@ import heronarts.lx.LX;
 import heronarts.lx.Tempo;
 import heronarts.lx.color.LXColor;
 import heronarts.lx.model.LXPoint;
+import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.pattern.LXPattern;
 import heronarts.lx.utils.LXUtils;
 import org.iqe.Audio;
@@ -11,13 +12,16 @@ import org.iqe.Audio;
 import static org.iqe.Audio.basis;
 
 public class MindLikeWaterPattern extends LXPattern {
+    final BooleanParameter enabled = new BooleanParameter("running",true);
     public MindLikeWaterPattern(LX lx) {
         super(lx);
+        addParameter(enabled);
     }
 
     @Override
     protected void run(double v) {
         for (LXPoint p : model.points) colors[p.index] = LXColor.CLEAR;
+        if (!enabled.getValueb()) return;
         double radius = basis(Tempo.Division.WHOLE) * 2.;
         double borderWidth = .2;
 
