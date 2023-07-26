@@ -7,7 +7,11 @@ function bridge(webPort = 80, wsPort = 8080, appTo = 3030, appFrom = 3131, exclu
     if (exclude) exclude = new RegExp(exclude, "gi")
     const last = {}
     const app = new OSC({plugin: new OSC.DatagramPlugin({ port: appFrom, send: { port: appTo } })})
-    app.on('open', () => console.log('OSC listening from server', exclude, app.options.plugin.options))
+    app.on('open', () => {
+        console.log('OSC listening from server, excluding logs that match regEx:', exclude)
+        console.log('Started with these options def (osc js lib used is cryptic, idk if all are correct/used):')
+        console.log(app.options.plugin.options)
+    })
     app.on('*', msg => last[msg.address] = msg)
     app.on('*', msg => (!exclude || !msg.address.match(exclude)) && console.log('APP', msg.address, ...msg.args))
     app.open({ port: appFrom })

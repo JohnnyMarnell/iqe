@@ -2,6 +2,8 @@ import RangeTouch from '/rangetouch/dist/rangetouch.mjs'
 import '/osc-js/lib/osc.min.js'
 import XYPad from '/xy.mjs'
 
+// !!! TODO !!!
+// ah, fiddlesticks, I think these ports + IPs need to be fixed / configurable / correct / automatic etc, sigh.
 const ranges = RangeTouch.setup('input[type="range"]:not([data-raw])', { })
 const osc = new OSC({plugin: new OSC.WebsocketClientPlugin({ port: 8080, host: '192.168.1.249' }) })
 osc.on('open', () => console.log('OSC Connected'))
