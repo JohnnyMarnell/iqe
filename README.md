@@ -8,6 +8,7 @@ e.g. real time beat detection and sync.
 
 Plus Node.JS OSC backed web app control system.
 
+Outdated screenshart:
 ![Chromatik](src/audio-tooling/chromatik-project-screenshot.png)
 
 # Use
@@ -40,12 +41,55 @@ a `script` knob. Changing it will cycle some PB patterns, some with controls / s
 Much of this is twerk-in-brogress and needs vetting for what is potentially useful. As with a lot of the code
 and intent here, it would be great if we could get more "stock" /  crowdsourced patterns working given time constraints. 
 
-# Web / Controls
+# Controls / Web
 
-TODO: these docs and notes.
+TODO: polish these docs and notes (more).
+TODO: refactor all my node + OSC ideas to separate, licensed, NDA [🥴] lib
 
-Node.JS app from [./src/nodejs](./src/nodejs). Able to control LX via OSC, from any device (e.g. mobile phone
-connected to Playa RaspberryPi ad hoc wifi network).
+There is a Node.JS app in [./src/nodejs](./src/nodejs).
+It's able to control LX via OSC, from any device (e.g. mobile phone
+connected to Playa RaspberryPi ad hoc wifi network ...damn, cool right?).
+
+Instructions:
+```bash
+cd ./src/nodejs # change dir to nodejs web app dir
+
+# do once-ish:
+nvm use # requires (the great) nvm installed (node version manager)
+npm install # standard... as much as Node has standards, amirite?
+
+# Now run, first starting nodeJs bridge + web app
+npm start
+```
+
+Next start / open LX / Chromatik (TODO: shouldn't need this ordering) ...
+
+Now load web UI at this URL in blowser, either on craptop 
+(or scan camp QR code on camp wifi and control with
+phone / any device / we're such a fun camp!!!!):
+
+[http://localhost:8181](http://localhost:8181)
+
+Moving knobs in LX renders webapp controls moving + feedback.
+And, ofc, moving web UI controls, controls LX.
+(Look at "Knobs" in global Modulator section in LX as [early] example).
+
+Lots of potentch + power here (e.g. custom/admin controls,
+party mode, Orchestrator buttons / actions)...
+
+# Project File
+
+We can (of course) make edits to the project in LX Studio / Chromatik, and save it
+to persist these changes.
+
+Rarely to never, one can (of course) edit the [iqe.lxp](./iqe.lxp) JSON directly.
+
+There is a NodeJS script that will parse the `.lxp` JSON, and rebuild only the fixtures part,
+and re-write the `.lxp` file with it. Put another way, we generate and update the fixture geometry via simple
+script. Run it via:
+```bash
+(cd ./src/nodejs ; npm run lxp )
+```
 
 # Audio analysis
 
