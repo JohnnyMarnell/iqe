@@ -18,7 +18,7 @@ else
         arch='aarch64'
     fi
 
-    release_date="2023-05-22"
+    release_date="$(cat ./VERSION.chromatik)"
     chromatik="Chromatik-alpha-${release_date}-${platform}-${arch}"
 
     url="https://github.com/heronarts/Chromatik/releases/download/${release_date}/${chromatik}.zip"
