@@ -106,98 +106,16 @@ public final class ChromatikIQE extends LXStudio {
 
     }
 
-    private static boolean bootstrapExampleMedia(String[] args, File media) {
-        boolean installExamples = false;
-        String[] var6 = args;
-        int var5 = args.length;
-
-        for(int var4 = 0; var4 < var5; ++var4) {
-            String arg = var6[var4];
-            if ("--install-examples".equals(arg)) {
-                installExamples = true;
-                break;
-            }
-        }
-
-        bootstrapExampleMedia(media, LX.Media.FIXTURES, installExamples, "/fixtures/", "Cube.lxf", "1", "Fan.lxf", "2", "Square.lxf", "3");
-        bootstrapExampleMedia(media, LX.Media.MODELS, installExamples, "/models/", "Cubes.lxm", "1");
-        return installExamples;
-    }
-
-    private static void bootstrapExampleMedia(File mediaDir, LX.Media mediaType, boolean overwrite, String resourcePrefix, String... paths) {
-        try {
-            File media = new File(mediaDir, mediaType.getDirName());
-            File examples = new File(media, "Examples");
-            if (!examples.exists()) {
-                examples.mkdir();
-            }
-
-            int existingVersion = 0;
-            int maxVersion = 0;
-            File versionFile = new File(examples, ".version");
-            if (!overwrite && versionFile.exists()) {
-                existingVersion = Integer.parseInt((new String(Files.readAllBytes(versionFile.toPath()))).trim());
-            }
-
-            for(int i = 0; i < paths.length; i += 2) {
-                String path = paths[i];
-                int version = Integer.parseInt(paths[i + 1]);
-                if (version > maxVersion) {
-                    maxVersion = version;
-                }
-
-                if (version > existingVersion) {
-                    String urlString = resourcePrefix + path;
-                    URL url = ChromatikIQE.class.getResource(urlString);
-                    if (url == null) {
-                        error("Example media resource does not exist: " + urlString);
-                    } else {
-                        Throwable var15 = null;
-                        Object var16 = null;
-
-                        try {
-                            InputStream is = url.openConnection().getInputStream();
-
-                            try {
-                                Path output = (new File(examples, path)).toPath();
-                                log("Installing example file: " + output);
-                                Files.copy(is, output, new CopyOption[]{StandardCopyOption.REPLACE_EXISTING});
-                            } finally {
-                                if (is != null) {
-                                    is.close();
-                                }
-
-                            }
-                        } catch (Throwable var26) {
-                            if (var15 == null) {
-                                var15 = var26;
-                            } else if (var15 != var26) {
-                                var15.addSuppressed(var26);
-                            }
-
-                            throw new RuntimeException(var15);
-                        }
-                    }
-                }
-            }
-
-            Files.write(versionFile.toPath(), String.valueOf(maxVersion).getBytes("UTF-8"), new OpenOption[]{StandardOpenOption.CREATE});
-        } catch (Exception var27) {
-            error(var27, "Could not install example media: " + var27.getMessage());
-        }
-
-    }
-
     public static void log(String message) {
-        LX._log("Chromatik", message);
+        LX._log(CHROMATIK_PREFIX, message);
     }
 
     public static void error(Exception x, String message) {
-        LX._error("Chromatik", x, message);
+        LX._error(CHROMATIK_PREFIX, x, message);
     }
 
     public static void error(String message) {
-        LX._error("Chromatik", message);
+        LX._error(CHROMATIK_PREFIX, message);
     }
 
     public static void main(String[] args) {
@@ -207,11 +125,7 @@ public final class ChromatikIQE extends LXStudio {
             }
 
             LXStudio.Flags flags = new LXStudio.Flags();
-            File media = bootstrapMediaPath(flags, "Chromatik");
-            if (bootstrapExampleMedia(args, media)) {
-                log("Re-installed example content.");
-                return;
-            }
+            bootstrapMediaPath(flags, "Chromatik");
 
             String logFileName = LOG_FILENAME_FORMAT.format(Calendar.getInstance().getTime());
             setLogFile(new File(flags.mediaPath, LX.Media.LOGS.getDirName() + File.separator + logFileName));
