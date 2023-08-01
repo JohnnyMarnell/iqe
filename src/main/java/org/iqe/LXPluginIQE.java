@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.stream.Stream;
 
 @LXPlugin.Name("IQE")
-public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, LXModel.Listener {
+public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.Listener, LXModel.Listener {
     public static final String INTERNAL = "NO_TOUCHY";
     protected LX lx;
     protected boolean running = false;
@@ -62,10 +62,12 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
         running = true;
     }
 
+    @Override
     public void initializeUI(LXStudio lx, LXStudio.UI ui) {
       ((LXStudio.Registry)lx.registry).addUIDeviceControls(UIPixelblazePattern.class);
     }
 
+    @Override
     public void onUIReady(LXStudio lx, LXStudio.UI ui) {
 
     }
