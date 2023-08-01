@@ -1,6 +1,5 @@
 package org.iqe;
 
-import heronarts.glx.ui.UI;
 import heronarts.lx.*;
 import heronarts.lx.model.LXModel;
 import heronarts.lx.studio.LXStudio;
@@ -13,13 +12,17 @@ import titanicsend.pattern.pixelblaze.PBFireworkNova;
 import titanicsend.pattern.pixelblaze.PBXorcery;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.stream.Stream;
 
+@LXPlugin.Name("IQE")
 public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, LXModel.Listener {
     public static final String INTERNAL = "NO_TOUCHY";
     protected LX lx;
     protected boolean running = false;
+
+    public LXPluginIQE(LX lx) {
+      this.lx = lx;
+    }
 
     @Override
     public void dispose() {
@@ -27,12 +30,10 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
         running = false;
         LOG.info("IQE Shutting down");
         Audio.get().dispose();
-        LXPlugin.super.dispose();
     }
 
     @Override
     public void initialize(LX lx) {
-        this.lx = lx;
         lx.getModel().addListener(this);
         lx.addListener(this);
         lx.addProjectListener(this);
@@ -58,19 +59,15 @@ public class LXPluginIQE implements LXPlugin, LX.ProjectListener, LX.Listener, L
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(this::dispose));
         running = true;
     }
 
-    public static void hack(UI ui) {
-        try {
-            Field field = LXStudio.UI.class.getDeclaredField("registry");
-            field.setAccessible(true);
-            LXStudio.Registry registry = (LXStudio.Registry) field.get(ui);
-            registry.addUIDeviceControls(UIPixelblazePattern.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void initializeUI(LXStudio lx, LXStudio.UI ui) {
+      ((LXStudio.Registry)lx.registry).addUIDeviceControls(UIPixelblazePattern.class);
+    }
+
+    public void onUIReady(LXStudio lx, LXStudio.UI ui) {
+
     }
 
     @Override
