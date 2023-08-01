@@ -30,8 +30,7 @@ Or examples with sperminal:
 # and run
 eval "java $( [[ $(uname) == 'Darwin' ]] && echo "-XstartOnFirstThread" ) \
     -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar \
-    heronarts.lx.studio.ChromatikIQE iqe.lxp \
-    --classpath-plugin org.iqe.LXPluginIQE"
+    heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```
 # PixelBlaze
 

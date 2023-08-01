@@ -1,7 +1,10 @@
 {
-  "version": "0.4.1",
+  "version": "0.4.2-SNAPSHOT",
+  "projectFileName": "iqe.lxp",
   "windowWidth": 1280,
   "windowHeight": 755,
+  "windowPosX": -3407,
+  "windowPosY": 167,
   "uiZoom": 100,
   "focusChannelOnCue": false,
   "focusActivePattern": false,
@@ -10,6 +13,11 @@
   "schedulerEnabled": false,
   "showCpuLoad": false,
   "registry": {
-    "plugins": []
+    "plugins": [
+      {
+        "class": "org.iqe.LXPluginIQE",
+        "enabled": true
+      }
+    ]
   }
 }
