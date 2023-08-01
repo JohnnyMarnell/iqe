@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1690321805793,
+  "timestamp": 1690899842417,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3603,7 +3603,7 @@
         },
         "parameters": {
           "label": "Mixer",
-          "crossfader": 0.5,
+          "crossfader": 0.0,
           "crossfaderBlendMode": 0,
           "focusedChannel": 2,
           "focusedChannelAux": 2,
@@ -5531,7 +5531,7 @@
               "transitionEnabled": true,
               "transitionTimeSecs": 1.0,
               "transitionBlendMode": 0,
-              "focusedPattern": 1,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -5829,7 +5829,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 52574,
@@ -6234,7 +6234,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3886666667019736
+            "basis": 0.856666666701999
           },
           {
             "id": 54255,
@@ -6286,7 +6286,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7656666667021899
+            "basis": 0.23366666670221536
           },
           {
             "id": 56980,
@@ -6314,7 +6314,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7656666667021899
+            "basis": 0.23366666670221536
           },
           {
             "id": 56981,
@@ -6342,7 +6342,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9510000000010177
+            "basis": 0.4190000000010424
           },
           {
             "id": 56982,
@@ -6370,7 +6370,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7656666667021899
+            "basis": 0.23366666670221536
           },
           {
             "id": 56983,
@@ -6398,7 +6398,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7656666667021899
+            "basis": 0.23366666670221536
           },
           {
             "id": 57307,
@@ -6426,7 +6426,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.30866666669972176
+            "basis": 0.7766666666997469
           },
           {
             "id": 57308,
@@ -6454,7 +6454,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.30866666669972176
+            "basis": 0.7766666666997469
           },
           {
             "id": 62913,
@@ -6482,7 +6482,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5146666666988343
+            "basis": 0.9826666666988594
           },
           {
             "id": 66458,
@@ -6510,7 +6510,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9936666666945307
+            "basis": 0.46166666669455597
           },
           {
             "id": 76378,
@@ -6566,7 +6566,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04666666669808292
+            "basis": 0.5146666666981083
           },
           {
             "id": 64644,
@@ -6650,7 +6650,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9956666666949959
+            "basis": 0.46366666669502116
           }
         ],
         "modulations": [
@@ -7020,6 +7020,12 @@
         "children": {},
         "inputs": [
           {
+            "name": "APC40 mkII",
+            "channel": false,
+            "control": false,
+            "sync": false
+          },
+          {
             "name": "Launchkey Mini MK3 MIDI Port",
             "channel": false,
             "control": true,
@@ -7032,7 +7038,15 @@
             "sync": false
           }
         ],
-        "surfaces": [],
+        "surfaces": [
+          {
+            "name": "APC40 mkII",
+            "settings": {
+              "masterFaderEnabled": true,
+              "crossfaderEnabled": true
+            }
+          }
+        ],
         "mapping": [
           {
             "channel": 0,
