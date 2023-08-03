@@ -31,8 +31,12 @@ public class AutopilotIQE extends Autopilot {
   public AutopilotIQE(LX lx) {
     super(lx);
 
-    addUserParameter("audio", this.audio);
-    addUserParameter("audioPercent", this.percentAudioReactive);
+    // Add our parameters and make them visible in UI
+    addVisibleParameter("audio", this.audio);
+    addVisibleParameter("audioPercent", this.percentAudioReactive);
+
+    // Add other class' parameters to UI for convenience
+    setParameterVisible(this.lx.engine.speed);
   }
 
   /**

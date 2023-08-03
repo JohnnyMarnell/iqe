@@ -90,8 +90,8 @@ public class Autopilot extends LXComponent implements LX.ProjectListener {
       })
       .setDescription("Clear objects created by Autopilot.  Will result in new modulators being created on the next run.  Only works when Autopilot is disabled.");
 
-  private final List<LXNormalizedParameter> mutableUserParameters = new ArrayList<LXNormalizedParameter>();
-  public final List<LXNormalizedParameter> userParameters = Collections.unmodifiableList(this.mutableUserParameters);
+  private final List<LXNormalizedParameter> mutableVisibleParameters = new ArrayList<LXNormalizedParameter>();
+  public final List<LXNormalizedParameter> visibleParameters = Collections.unmodifiableList(this.mutableVisibleParameters);
 
   private LXGlobalSnapshot before;
   private LXGlobalSnapshot running;
@@ -103,8 +103,8 @@ public class Autopilot extends LXComponent implements LX.ProjectListener {
 
     lx.addProjectListener(this);
 
-    addUserParameter("enabled", this.enabled);
-    addUserParameter("reset", this.reset);
+    addVisibleParameter("enabled", this.enabled);
+    addVisibleParameter("reset", this.reset);
 
     this.enabled.addListener(this.enabledListener);
 
@@ -117,9 +117,17 @@ public class Autopilot extends LXComponent implements LX.ProjectListener {
    * Subclasses can register a parameter with this method 
    * instead of addParameter() to include it in the UI.
    */
-  protected Autopilot addUserParameter(String path, LXNormalizedParameter parameter) {
+  protected Autopilot addVisibleParameter(String path, LXNormalizedParameter parameter) {
     addParameter(path, parameter);
-    this.mutableUserParameters.add(parameter);
+    setParameterVisible(parameter);
+    return this;
+  }
+
+  /**
+   * Adding a parameter here will make it show up in the Autopilot UI
+   */
+  protected Autopilot setParameterVisible(LXNormalizedParameter parameter) {
+    this.mutableVisibleParameters.add(parameter);
     return this;
   }
 

@@ -40,7 +40,7 @@ public class UIAutopilot extends UICollapsibleSection {
     UI2dContainer row = createRow();
 
     int col = 0;
-    for (LXNormalizedParameter param : autopilot.userParameters) {
+    for (LXNormalizedParameter param : autopilot.visibleParameters) {
       if (col++ == 4) {
         col = 0;
         y += row.getHeight();
