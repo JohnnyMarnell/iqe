@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1691075201944,
+  "timestamp": 1691076117257,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3089,7 +3089,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 1,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 4,
+          "autoCycleCursor": 2,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3102,7 +3102,7 @@
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "Sunset",
+              "label": "Rainbow1",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -3120,8 +3120,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 84.248046875,
-                  "primary/hue": 32.8359375,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 0.0,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3140,8 +3140,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 85.9765625,
-                  "primary/hue": 61.34765625,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 65.84765625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3159,9 +3159,49 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 78.37569427490234,
-                  "primary/saturation": 92.23958587646484,
-                  "primary/hue": 316.546875,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 138.4453125,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 86009,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 200.88282775878906,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 86011,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 274.44140625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -10136,7 +10176,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.39881515510628757
+            "basis": 0.9328151551063015
           },
           {
             "id": 54255,
@@ -10188,7 +10228,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7758151551065133
+            "basis": 0.3098151551065263
           },
           {
             "id": 56980,
@@ -10216,7 +10256,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7758151551065133
+            "basis": 0.3098151551065263
           },
           {
             "id": 56981,
@@ -10244,7 +10284,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9611484884053295
+            "basis": 0.49514848840534276
           },
           {
             "id": 56982,
@@ -10272,7 +10312,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7758151551065133
+            "basis": 0.3098151551065263
           },
           {
             "id": 56983,
@@ -10300,7 +10340,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7758151551065133
+            "basis": 0.3098151551065263
           },
           {
             "id": 57307,
@@ -10328,7 +10368,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3188151551040341
+            "basis": 0.8528151551040474
           },
           {
             "id": 57308,
@@ -10356,7 +10396,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3188151551040341
+            "basis": 0.8528151551040474
           },
           {
             "id": 62913,
@@ -10384,7 +10424,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5248151551031522
+            "basis": 0.05881515510316544
           },
           {
             "id": 66458,
@@ -10412,7 +10452,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.003815155098834788
+            "basis": 0.5378151550988479
           },
           {
             "id": 76378,
@@ -10468,7 +10508,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.05681515510238873
+            "basis": 0.5908151551024019
           },
           {
             "id": 64644,
@@ -10552,7 +10592,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.0058151550993004175
+            "basis": 0.5398151550993135
           }
         ],
         "modulations": [
