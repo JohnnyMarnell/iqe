@@ -24,7 +24,7 @@ public class AutopilotIQE extends Autopilot {
       .setDescription("Level of audio reactivity in the IQE Autopilot");
 
   public final CompoundParameter percentAudioReactive =
-      new CompoundParameter("%Audio", 10, 0, 100)
+      new CompoundParameter("%Audio", 15, 0, 100)
       .setDescription("Percentage of modulators that are audio reactive.  Must be set before first run of Autopilot.")
       .setUnits(Units.PERCENT);
 
@@ -67,6 +67,7 @@ public class AutopilotIQE extends Autopilot {
       // Change modulator to tempo quarter beats
       modulator.tempoDivision.setValue(Tempo.Division.QUARTER);
       modulator.clockMode.setValue(ClockMode.SYNC);
+      modulator.label.setValue(modulator.getLabel() + "_AUDIO");
 
       // Discard previous modulation amount
       double previousRange = modulation.range.getValue();
