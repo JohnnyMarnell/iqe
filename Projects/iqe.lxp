@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1691035126767,
+  "timestamp": 1691075201944,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3089,7 +3089,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 1,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 2,
+          "autoCycleCursor": 4,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3102,7 +3102,7 @@
               "modulationControlsExpanded": true
             },
             "parameters": {
-              "label": "Rainbow1",
+              "label": "Sunset",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -3120,8 +3120,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 0.0,
+                  "primary/saturation": 84.248046875,
+                  "primary/hue": 32.8359375,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3140,8 +3140,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 65.84765625,
+                  "primary/saturation": 85.9765625,
+                  "primary/hue": 61.34765625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3159,49 +3159,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 138.4453125,
-                  "secondary/brightness": 100.0,
-                  "secondary/saturation": 100.0,
-                  "secondary/hue": 120.0
-                },
-                "children": {}
-              },
-              {
-                "id": 83779,
-                "class": "heronarts.lx.color.LXDynamicColor",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true
-                },
-                "parameters": {
-                  "label": "LX",
-                  "mode": 0,
-                  "period": 30.0,
-                  "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 200.88282775878906,
-                  "secondary/brightness": 100.0,
-                  "secondary/saturation": 100.0,
-                  "secondary/hue": 120.0
-                },
-                "children": {}
-              },
-              {
-                "id": 83781,
-                "class": "heronarts.lx.color.LXDynamicColor",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true
-                },
-                "parameters": {
-                  "label": "LX",
-                  "mode": 0,
-                  "period": 30.0,
-                  "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 274.44140625,
+                  "primary/brightness": 78.37569427490234,
+                  "primary/saturation": 92.23958587646484,
+                  "primary/hue": 316.546875,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -5575,6 +5535,7 @@
                 },
                 "children": {
                   "modulation": {
+                    "id": 84168,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -5617,6 +5578,7 @@
                 },
                 "children": {
                   "modulation": {
+                    "id": 84179,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -8572,6 +8534,7 @@
                 },
                 "children": {
                   "modulation": {
+                    "id": 84709,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -8614,6 +8577,7 @@
                 },
                 "children": {
                   "modulation": {
+                    "id": 84720,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -10172,7 +10136,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5303333333736258
+            "basis": 0.39881515510628757
           },
           {
             "id": 54255,
@@ -10224,7 +10188,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9073333333738492
+            "basis": 0.7758151551065133
           },
           {
             "id": 56980,
@@ -10252,7 +10216,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9073333333738492
+            "basis": 0.7758151551065133
           },
           {
             "id": 56981,
@@ -10280,7 +10244,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.0926666666726667
+            "basis": 0.9611484884053295
           },
           {
             "id": 56982,
@@ -10308,7 +10272,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9073333333738492
+            "basis": 0.7758151551065133
           },
           {
             "id": 56983,
@@ -10336,7 +10300,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9073333333738492
+            "basis": 0.7758151551065133
           },
           {
             "id": 57307,
@@ -10364,7 +10328,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4503333333713709
+            "basis": 0.3188151551040341
           },
           {
             "id": 57308,
@@ -10392,7 +10356,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4503333333713709
+            "basis": 0.3188151551040341
           },
           {
             "id": 62913,
@@ -10420,7 +10384,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6563333333704875
+            "basis": 0.5248151551031522
           },
           {
             "id": 66458,
@@ -10448,7 +10412,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13533333336617182
+            "basis": 0.003815155098834788
           },
           {
             "id": 76378,
@@ -10504,7 +10468,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.18833333336972669
+            "basis": 0.05681515510238873
           },
           {
             "id": 64644,
@@ -10588,7 +10552,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.13733333336663722
+            "basis": 0.0058151550993004175
           }
         ],
         "modulations": [
@@ -10811,7 +10775,7 @@
           {
             "name": "APC40 mkII",
             "channel": false,
-            "control": false,
+            "control": true,
             "sync": false
           },
           {
@@ -10868,6 +10832,14 @@
             "componentId": 62523,
             "parameterPath": "amount",
             "cc": 28
+          },
+          {
+            "channel": 0,
+            "type": "CONTROL_CHANGE",
+            "path": "/lx/autopilot/audio",
+            "componentId": 31,
+            "parameterPath": "audio",
+            "cc": 48
           }
         ]
       },
