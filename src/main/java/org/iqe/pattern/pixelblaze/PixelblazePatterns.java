@@ -52,6 +52,8 @@ public class PixelblazePatterns {
         public final DiscreteParameter script;
         protected final LXParameterListener scriptListener;
 
+        protected JsonObject json = null;
+
         public PixelBlazeBlowser(LX lx) {
             super(lx);
             script = new DiscreteParameter("script", patternData.keySet().toArray(new String[0]));
@@ -97,6 +99,33 @@ public class PixelblazePatterns {
                 paths.forEach(p -> patternParameters.remove(p));
                 wrapper.file = standardResource(placeholder);
                 wrapper.lastModified = -1;
+            }
+        }
+
+        @Override
+        public void load(LX lx, JsonObject obj) {
+            super.load(lx, obj);
+            this.json = obj.deepCopy();
+        }
+
+        @Override
+        public void save(LX lx, JsonObject obj) {
+            super.save(lx, obj);
+            this.json = obj.deepCopy();
+        }
+
+        @Override
+        public void addSlider(String key, String label) {
+            super.addSlider(key, label);
+
+            // after this slider is added, set its initial value to whatever was saved last in this pattern def,
+            // if available
+            if (this.json != null && this.json.has("parameters")) {
+                ((JsonObject) this.json.get("parameters"))
+                    .entrySet().stream()
+                    .filter(e -> e.getKey().equals(key))
+                    .map(e -> e.getValue().getAsDouble())
+                    .forEach(val -> getParameter(key).setValue(val));
             }
         }
     }

@@ -36,6 +36,7 @@ import heronarts.glx.ui.component.UIButton;
 import heronarts.glx.ui.component.UILabel;
 import heronarts.glx.ui.component.UISlider;
 import org.apache.commons.lang3.tuple.Pair;
+import org.iqe.LOG;
 
 public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.PixelBlazeBlowser>  {
 
@@ -106,7 +107,17 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.
         pattern.onReload.addListener(p -> {
             // TODO: sigh, yet another hack... dispose from removeAllChildren fails, trying to remove non-existent
             //    listener, so adding here beforehand?
-            uiSliders.forEach(pair -> pair.getRight().addListener(pair.getLeft()));
+            uiSliders.forEach(pair -> {
+                try {
+                    pair.getRight().addListener(pair.getLeft());
+                } catch (IllegalStateException e) {
+                    if (e.getMessage().contains("Cannot add duplicate")) {
+                        LOG.info("IlegalStateEx, probably [hopefully] param already present {}", pair);
+                    } else {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
             uiSliders.clear();
 
             sliders.removeAllChildren();
