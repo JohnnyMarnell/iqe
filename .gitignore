@@ -21,6 +21,12 @@ node_modules
 out/
 local.properties
 
+# Eclipse IDE #
+###############
+.settings/
+.project
+.classpath
+
 # Generic Android ignores #
 ###########################
 bin/
