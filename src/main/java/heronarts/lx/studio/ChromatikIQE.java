@@ -1,27 +1,15 @@
 package heronarts.lx.studio;
 
 import heronarts.lx.LX;
-import org.iqe.LXPluginIQE;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * TODO: Temporarily using decompiled Main until I get toolchain correctly setup
- *      Additionally, this helps with showing available CLI args and their code paths.
- *
- * TODO: I also need this because I can't follow how to hook into the UI otherwise?
+ * TODO: Temporary measures in place until I get toolchain correctly setup
+ *       Additionally, this helps with showing available CLI args and their code paths.
  */
 public final class ChromatikIQE extends LXStudio {
 
@@ -41,14 +29,6 @@ public final class ChromatikIQE extends LXStudio {
 
     private ChromatikIQE(LXStudio.Flags flags) throws IOException {
         super(flags);
-    }
-
-    public static UI ui;
-    @Override
-    protected UI buildUI() throws IOException {
-        ChromatikIQE.ui = super.buildUI();
-        LXPluginIQE.hack(ChromatikIQE.ui);
-        return ChromatikIQE.ui;
     }
 
     private static LX.Permissions createPermissions() {
@@ -106,98 +86,16 @@ public final class ChromatikIQE extends LXStudio {
 
     }
 
-    private static boolean bootstrapExampleMedia(String[] args, File media) {
-        boolean installExamples = false;
-        String[] var6 = args;
-        int var5 = args.length;
-
-        for(int var4 = 0; var4 < var5; ++var4) {
-            String arg = var6[var4];
-            if ("--install-examples".equals(arg)) {
-                installExamples = true;
-                break;
-            }
-        }
-
-        bootstrapExampleMedia(media, LX.Media.FIXTURES, installExamples, "/fixtures/", "Cube.lxf", "1", "Fan.lxf", "2", "Square.lxf", "3");
-        bootstrapExampleMedia(media, LX.Media.MODELS, installExamples, "/models/", "Cubes.lxm", "1");
-        return installExamples;
-    }
-
-    private static void bootstrapExampleMedia(File mediaDir, LX.Media mediaType, boolean overwrite, String resourcePrefix, String... paths) {
-        try {
-            File media = new File(mediaDir, mediaType.getDirName());
-            File examples = new File(media, "Examples");
-            if (!examples.exists()) {
-                examples.mkdir();
-            }
-
-            int existingVersion = 0;
-            int maxVersion = 0;
-            File versionFile = new File(examples, ".version");
-            if (!overwrite && versionFile.exists()) {
-                existingVersion = Integer.parseInt((new String(Files.readAllBytes(versionFile.toPath()))).trim());
-            }
-
-            for(int i = 0; i < paths.length; i += 2) {
-                String path = paths[i];
-                int version = Integer.parseInt(paths[i + 1]);
-                if (version > maxVersion) {
-                    maxVersion = version;
-                }
-
-                if (version > existingVersion) {
-                    String urlString = resourcePrefix + path;
-                    URL url = ChromatikIQE.class.getResource(urlString);
-                    if (url == null) {
-                        error("Example media resource does not exist: " + urlString);
-                    } else {
-                        Throwable var15 = null;
-                        Object var16 = null;
-
-                        try {
-                            InputStream is = url.openConnection().getInputStream();
-
-                            try {
-                                Path output = (new File(examples, path)).toPath();
-                                log("Installing example file: " + output);
-                                Files.copy(is, output, new CopyOption[]{StandardCopyOption.REPLACE_EXISTING});
-                            } finally {
-                                if (is != null) {
-                                    is.close();
-                                }
-
-                            }
-                        } catch (Throwable var26) {
-                            if (var15 == null) {
-                                var15 = var26;
-                            } else if (var15 != var26) {
-                                var15.addSuppressed(var26);
-                            }
-
-                            throw new RuntimeException(var15);
-                        }
-                    }
-                }
-            }
-
-            Files.write(versionFile.toPath(), String.valueOf(maxVersion).getBytes("UTF-8"), new OpenOption[]{StandardOpenOption.CREATE});
-        } catch (Exception var27) {
-            error(var27, "Could not install example media: " + var27.getMessage());
-        }
-
-    }
-
     public static void log(String message) {
-        LX._log("Chromatik", message);
+        LX._log(CHROMATIK_PREFIX, message);
     }
 
     public static void error(Exception x, String message) {
-        LX._error("Chromatik", x, message);
+        LX._error(CHROMATIK_PREFIX, x, message);
     }
 
     public static void error(String message) {
-        LX._error("Chromatik", message);
+        LX._error(CHROMATIK_PREFIX, message);
     }
 
     public static void main(String[] args) {
@@ -207,15 +105,20 @@ public final class ChromatikIQE extends LXStudio {
             }
 
             LXStudio.Flags flags = new LXStudio.Flags();
-            File media = bootstrapMediaPath(flags, "Chromatik");
-            if (bootstrapExampleMedia(args, media)) {
-                log("Re-installed example content.");
-                return;
-            }
+            flags.windowTitle = CHROMATIK_PREFIX + " - IQE";
+            flags.classpathPlugins.add("org.iqe.LXPluginIQE");
+
+            // Commented out to use relative media paths. Uncomment if causes issues on pi.
+            // bootstrapMediaPath(flags, "Chromatik");
 
             String logFileName = LOG_FILENAME_FORMAT.format(Calendar.getInstance().getTime());
-            setLogFile(new File(flags.mediaPath, LX.Media.LOGS.getDirName() + File.separator + logFileName));
-            log("Starting Chromatik version 0.4.2-SNAPSHOT");
+            File logs = new File(LX.Media.LOGS.getDirName());
+            if (!logs.exists()) {
+              logs.mkdir();
+            }
+            setLogFile(new File(LX.Media.LOGS.getDirName(), logFileName));
+
+            log("Starting Chromatik version " + Chromatik.VERSION);
             log("Running java " + System.getProperty("java.version") + " " + System.getProperty("java.vendor") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch"));
             License.everyone_knows_that_java_is_easy_to_decompile__so_i_decided_not_to_needlessly_obfuscate_this_software__but_i_have_spent_a_lot_of_time_working_on_it___if_you_want_to_modify_it_or_have_a_problem_with_the_licensing_i_will_be_happy_to_hear_from_you_directly__please_dont_break_the_eula__instead_just_contact_me__mark_at_chromatik_dot_co();
             File projectFile = null;
@@ -259,7 +162,10 @@ public final class ChromatikIQE extends LXStudio {
                         error("Multiple project/schedule files specified on CLI, ignoring " + projectFile.getName());
                     }
 
-                    projectFile = new File(arg);
+                    // JKB note: Possible LX inconsistency, here it's looking under top level path but
+                    // but later loadInitialProject() uses Projects media path.
+                    // Adding Projects folder here to keep it cleaner.
+                    projectFile = new File(LX.Media.PROJECTS.getDirName() + File.separator + arg);
                     if (!projectFile.exists()) {
                         error("Project file: " + projectFile.getName() + " not found");
                         projectFile = null;
@@ -284,8 +190,10 @@ public final class ChromatikIQE extends LXStudio {
                 headless(flags, projectFile);
             } else {
                 ChromatikIQE lx = new ChromatikIQE(flags);
-                boolean isSchedule = projectFile != null ? projectFile.getName().endsWith(".lxs") : false;
+
+                // Schedule a task to load the initial project file at launch
                 final File projectFileFinal = projectFile;
+                boolean isSchedule = projectFile != null ? projectFile.getName().endsWith(".lxs") : false;
                 lx.engine.addTask(() -> {
                     if (isSchedule) {
                         lx.preferences.schedulerEnabled.setValue(true);

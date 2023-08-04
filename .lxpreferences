@@ -1,15 +1,23 @@
 {
-  "version": "0.4.1",
-  "windwWidth": 1280,
-  "windowHeight": 755,
+  "version": "0.4.2-SNAPSHOT",
+  "projectFileName": "iqe.lxp",
+  "windowWidth": 1315,
+  "windowHeight": 827,
+  "windowPosX": -3447,
+  "windowPosY": 160,
   "uiZoom": 100,
-  "focusChannelOnCue": false,
-  "focusActivePattern": false,
+  "focusChannelOnCue": true,
+  "focusActivePattern": true,
   "sendCueToOutput": false,
   "showHelpBar": true,
   "schedulerEnabled": false,
   "showCpuLoad": false,
   "registry": {
-    "plugins": []
+    "plugins": [
+      {
+        "class": "org.iqe.LXPluginIQE",
+        "enabled": true
+      }
+    ]
   }
 }
