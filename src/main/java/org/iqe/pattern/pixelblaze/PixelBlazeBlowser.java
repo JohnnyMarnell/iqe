@@ -14,7 +14,12 @@ import java.util.List;
 @LXCategory("PixelBlaze")
 public class PixelBlazeBlowser extends PixelblazeHelper {
 
-    public final StringParameter scriptName = new StringParameter("Script Name", "test.js").setDescription("Path to the Pixelblaze script");
+    public final DiscreteParameter script;
+
+    public final BoundedParameter speed = new BoundedParameter("timeShift", 1.0, 0.001, 1.0);
+
+    public final StringParameter scriptName = new StringParameter("Script Name", "test.js")
+            .setDescription("Path to the Pixelblaze script");
 
     public final BooleanParameter reset =
             new BooleanParameter("Reset", false)
@@ -23,16 +28,18 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
 
     public final MutableParameter onReload = new MutableParameter("Reload");
     public final StringParameter error = new StringParameter("Error", "");
-
-    public final DiscreteParameter script;
     protected final LXParameterListener scriptListener;
 
     protected JsonObject json = null;
+    protected double elapsedMs = 0.0d;
 
     public PixelBlazeBlowser(LX lx) {
         super(lx);
         script = new DiscreteParameter("script", PixelblazePatterns.patternData.keySet().toArray(new String[0]));
         addParameter("script", script);
+        addParameter("speed", speed);
+
+        removeParameter("enablePanels");
         addParameter("scriptName", scriptName);
         addParameter("reload", onReload);
         addParameter("error", error);
@@ -64,7 +71,6 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
         } else {
             // When pattern JS is loaded via glue.js + Wrapper.load(), it will add parameters dynamically,
             // make sure we first remove any previously loaded
-            // todo: Based on logs, the PB parameters seem to be removed and re-added, however UI doesn't update with knobs
             List<String> paths = getParameters().stream()
                     .peek(p -> LOG.info("Param present path {}, label {}", p.getPath(), p.getLabel()))
                     .filter(p -> p.getPath().startsWith("slider"))
@@ -102,5 +108,26 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
                     .map(e -> e.getValue().getAsDouble())
                     .forEach(val -> getParameter(key).setValue(val));
         }
+    }
+
+    /** Apply stretch / shrink to the elapsed delta change of milliseconds, plus keep the running clock */
+    @Override
+    protected void run(double deltaMs) {
+        deltaMs = deltaMs * this.speed.getValue();
+        if (elapsedMs == 0) elapsedMs = lx.engine.nowMillis;
+        elapsedMs = elapsedMs + deltaMs;
+        super.run(deltaMs);
+    }
+
+    @Override
+    public double getTime() {
+        return elapsedMs;
+    }
+
+    /** TE code had a separate approach for "getTime" vs "getTimeMs", but I'm keeping them
+     *  the same, hopefully it won't matter. */
+    @Override
+    public long getTimeMs() {
+        return (long) elapsedMs;
     }
 }
