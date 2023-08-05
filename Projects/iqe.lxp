@@ -5939,7 +5939,7 @@
               },
               {
                 "id": 76816,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$PixelBlazeBlowser",
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
@@ -6623,7 +6623,7 @@
               },
               {
                 "id": 90603,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$PixelBlazeBlowser",
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
@@ -6672,7 +6672,7 @@
               },
               {
                 "id": 90614,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$PixelBlazeBlowser",
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
@@ -9214,7 +9214,7 @@
               },
               {
                 "id": 82291,
-                "class": "org.iqe.pattern.pixelblaze.PixelblazePatterns$PixelBlazeBlowser",
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
