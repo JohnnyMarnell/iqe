@@ -25,12 +25,10 @@ import java.util.List;
 import heronarts.glx.ui.UIColor;
 import heronarts.glx.ui.vg.VGraphics;
 import heronarts.lx.LX;
-import heronarts.lx.command.LXCommand;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.studio.LXStudio.UI;
 import heronarts.lx.studio.ui.device.UIDevice;
 import heronarts.lx.studio.ui.device.UIDeviceControls;
-import heronarts.lx.utils.LXUtils;
 import heronarts.glx.ui.UI2dContainer;
 import heronarts.glx.ui.component.UIButton;
 import heronarts.glx.ui.component.UILabel;
@@ -38,10 +36,10 @@ import heronarts.glx.ui.component.UISlider;
 import org.apache.commons.lang3.tuple.Pair;
 import org.iqe.LOG;
 
-public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.PixelBlazeBlowser>  {
+public class UIPixelblazePattern implements UIDeviceControls<PixelBlazeBlowser>  {
 
 
-    private PixelblazePatterns.PixelBlazeBlowser pattern;
+    private PixelBlazeBlowser pattern;
     private UIButton openButton;
 
     private UIDeviceControls.Default defaultRenderer = new UIDeviceControls.Default();
@@ -49,7 +47,7 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelblazePatterns.
     private List<Pair<UISlider, CompoundParameter>> uiSliders = new ArrayList<>();
 
     @Override
-    public void buildDeviceControls(UI ui, UIDevice uiDevice, PixelblazePatterns.PixelBlazeBlowser pattern) {
+    public void buildDeviceControls(UI ui, UIDevice uiDevice, PixelBlazeBlowser pattern) {
         defaultRenderer.buildDeviceControls(ui, uiDevice, pattern);
 
         this.pattern = pattern;
