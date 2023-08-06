@@ -25,10 +25,15 @@ import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
 /**
+ * This used to be more of a junk drawer, maybe it's a little better now.
+ * Mainly (IIRC), static methods that I might call elsewhere while porting
+ * (e.g. in "Wrapper", to find / resolve PixelBlaze JavaScript source files)
+ *
  * I'm all inheritance / .class'd out y'all...
  */
 
 public class PixelblazePatterns {
+    public static CompiledScript extraGlueScript = null;
     private static final Gson gson = new Gson();
     public static final Map<String, String> patternData = loadPatternData();
 
@@ -67,7 +72,6 @@ public class PixelblazePatterns {
         return standardResource(file.toPath());
     }
 
-    public static CompiledScript extraGlueScript = null;
     public static void onLoad(Bindings bindings, CompiledScript glue, CompiledScript pattern, Wrapper wrapper) {
         try {
             PixelblazePatterns.extraGlueScript = Wrapper.compile(Path.of("resources/pixelblaze/moarPaste.js"));

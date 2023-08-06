@@ -36,6 +36,12 @@ import heronarts.glx.ui.component.UISlider;
 import org.apache.commons.lang3.tuple.Pair;
 import org.iqe.LOG;
 
+/**
+ * UI Device / View / Look n Feel of PixelBlaze Device / Patterns
+ * Taken from stock Mark Slee work long time ago (namely sliders), slightly modified,
+ * but tried to keep hacks elsewhere (e.g. adding getSliders() )
+ */
+
 public class UIPixelblazePattern implements UIDeviceControls<PixelBlazeBlowser>  {
 
 
