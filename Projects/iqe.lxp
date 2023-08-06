@@ -1,16 +1,19 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1691080660596,
+  "timestamp": 1691333469433,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
     "internal": {
       "modulationColor": 0,
-      "modulationControlsExpanded": true
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true
     },
     "parameters": {
       "label": "LX",
-      "syncModelFile": false
+      "syncModelFile": false,
+      "allWhite": false,
+      "mute": false
     },
     "children": {},
     "output": {
@@ -18,7 +21,8 @@
       "class": "heronarts.lx.structure.LXStructure$Output",
       "internal": {
         "modulationColor": 0,
-        "modulationControlsExpanded": true
+        "modulationControlsExpanded": true,
+        "modulationsExpanded": true
       },
       "parameters": {
         "label": "Output",
@@ -26,7 +30,11 @@
         "brightness": 1.0,
         "fps": 0.0,
         "gamma": 1.0,
-        "gammaMode": 1
+        "gammaMode": 1,
+        "whitePointRed": 255,
+        "whitePointGreen": 255,
+        "whitePointBlue": 255,
+        "whitePointWhite": 255
       },
       "children": {}
     },
@@ -36,7 +44,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 1; #0",
@@ -78,7 +87,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 2; #1",
@@ -120,7 +130,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 3; #2",
@@ -162,7 +173,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 4; #3",
@@ -204,7 +216,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 5; #4",
@@ -246,7 +259,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 6; #5",
@@ -288,7 +302,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 7; #6",
@@ -330,7 +345,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 8; #7",
@@ -372,7 +388,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 9; #8",
@@ -414,7 +431,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 10; #9",
@@ -456,7 +474,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 11; #10",
@@ -498,7 +517,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 12; #11",
@@ -540,7 +560,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 13; #12",
@@ -582,7 +603,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 14; #13",
@@ -624,7 +646,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 15; #14",
@@ -666,7 +689,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 16; #15",
@@ -708,7 +732,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 17; #16",
@@ -750,7 +775,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 18; #17",
@@ -792,7 +818,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 19; #18",
@@ -834,7 +861,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 20; #19",
@@ -876,7 +904,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 21; #20",
@@ -918,7 +947,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 22; #21",
@@ -960,7 +990,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 23; #22",
@@ -1002,7 +1033,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 24; #23",
@@ -1044,7 +1076,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 25; #24",
@@ -1086,7 +1119,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 26; #25",
@@ -1128,7 +1162,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 27; #26",
@@ -1170,7 +1205,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 28; #27",
@@ -1212,7 +1248,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 29; #28",
@@ -1254,7 +1291,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 30; #29",
@@ -1296,7 +1334,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 31; #30",
@@ -1338,7 +1377,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 32; #31",
@@ -1380,7 +1420,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 33; #32",
@@ -1422,7 +1463,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 34; #33",
@@ -1464,7 +1506,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 35; #34",
@@ -1506,7 +1549,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 36; #35",
@@ -1548,7 +1592,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 37; #36",
@@ -1590,7 +1635,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 38; #37",
@@ -1632,7 +1678,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 39; #38",
@@ -1674,7 +1721,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 40; #39",
@@ -1716,7 +1764,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 41; #40",
@@ -1758,7 +1807,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 42; #41",
@@ -1800,7 +1850,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 43; #42",
@@ -1842,7 +1893,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 44; #43",
@@ -1884,7 +1936,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 45; #44",
@@ -1926,7 +1979,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 46; #45",
@@ -1968,7 +2022,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 47; #46",
@@ -2010,7 +2065,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 48; #47",
@@ -2052,7 +2108,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 49; #48",
@@ -2094,7 +2151,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 50; #49",
@@ -2136,7 +2194,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 51; #50",
@@ -2178,7 +2237,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 52; #51",
@@ -2220,7 +2280,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 53; #52",
@@ -2262,7 +2323,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 54; #53",
@@ -2304,7 +2366,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 55; #54",
@@ -2346,7 +2409,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 56; #55",
@@ -2388,7 +2452,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 57; #56",
@@ -2430,7 +2495,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 58; #57",
@@ -2472,7 +2538,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 59; #58",
@@ -2514,7 +2581,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 60; #59",
@@ -2556,7 +2624,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 61; #60",
@@ -2598,7 +2667,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 62; #61",
@@ -2640,7 +2710,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 63; #62",
@@ -2682,7 +2753,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 64; #63",
@@ -2724,7 +2796,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 65; #64",
@@ -2766,7 +2839,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 66; #65",
@@ -2808,7 +2882,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 67; #66",
@@ -2850,7 +2925,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 68; #67",
@@ -2892,7 +2968,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 69; #68",
@@ -2934,7 +3011,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 70; #69",
@@ -2976,7 +3054,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 71; #70",
@@ -3018,7 +3097,8 @@
         "class": "org.iqe.NagBugglerSaberOfLightFixture",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Rafter 72; #71",
@@ -3062,7 +3142,8 @@
     "class": "heronarts.lx.LXEngine",
     "internal": {
       "modulationColor": 0,
-      "modulationControlsExpanded": true
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true
     },
     "parameters": {
       "label": "Engine",
@@ -3079,7 +3160,8 @@
         "class": "heronarts.lx.color.LXPalette",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Color Palette",
@@ -3099,7 +3181,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Rainbow1",
@@ -3113,7 +3196,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3133,7 +3217,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3153,7 +3238,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3173,7 +3259,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3193,7 +3280,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3217,7 +3305,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Swatch-1",
@@ -3231,7 +3320,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3251,7 +3341,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3271,7 +3362,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3293,7 +3385,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Swatch-2",
@@ -3307,7 +3400,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3327,7 +3421,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3347,7 +3442,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3369,7 +3465,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Rainbow1",
@@ -3383,7 +3480,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3403,7 +3501,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3423,7 +3522,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3443,7 +3543,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3463,7 +3564,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3485,7 +3587,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Rainbow2",
@@ -3499,7 +3602,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3519,7 +3623,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3539,7 +3644,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3559,7 +3665,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3579,7 +3686,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3601,7 +3709,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Sunset",
@@ -3615,7 +3724,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3635,7 +3745,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3655,7 +3766,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3677,7 +3789,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Daytime",
@@ -3691,7 +3804,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3711,7 +3825,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3731,7 +3846,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3751,7 +3867,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3773,7 +3890,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Undersea",
@@ -3787,7 +3905,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3807,7 +3926,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3827,7 +3947,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3847,7 +3968,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3869,7 +3991,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Moody 1",
@@ -3883,7 +4006,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3903,7 +4027,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3923,7 +4048,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3945,7 +4071,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Moody 2",
@@ -3959,7 +4086,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3979,7 +4107,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -3999,7 +4128,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -4021,7 +4151,8 @@
             "class": "heronarts.lx.color.LXSwatch",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Moody 3",
@@ -4035,7 +4166,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -4055,7 +4187,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -4075,7 +4208,8 @@
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
-                  "modulationControlsExpanded": true
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
                 },
                 "parameters": {
                   "label": "LX",
@@ -4099,7 +4233,8 @@
         "class": "heronarts.lx.Tempo",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Tempo",
@@ -4119,7 +4254,8 @@
             "class": "heronarts.lx.modulator.LinearEnvelope",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "LENV",
@@ -4140,7 +4276,8 @@
         "class": "heronarts.lx.clip.LXClipEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "LX",
@@ -4287,6 +4424,7 @@
         "internal": {
           "modulationColor": 0,
           "modulationControlsExpanded": true,
+          "modulationsExpanded": true,
           "numSoundObjects": 0.0
         },
         "parameters": {
@@ -4301,7 +4439,8 @@
             "class": "heronarts.lx.audio.LXAudioInput",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Input",
@@ -4314,7 +4453,8 @@
             "class": "heronarts.lx.audio.LXAudioOutput",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Output",
@@ -4330,7 +4470,8 @@
             "class": "heronarts.lx.audio.GraphicMeter",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Meter",
@@ -4343,20 +4484,20 @@
               "slope": 4.5,
               "band-1": 0.0,
               "band-2": 0.0,
-              "band-3": 0.0,
-              "band-4": 0.0,
+              "band-3": 0.004431603210000801,
+              "band-4": 0.018951017191357722,
               "band-5": 0.0,
               "band-6": 0.0,
               "band-7": 0.0,
               "band-8": 0.0,
-              "band-9": 0.0,
-              "band-10": 0.0,
-              "band-11": 0.0,
-              "band-12": 0.0,
-              "band-13": 0.0,
-              "band-14": 0.0,
-              "band-15": 0.0,
-              "band-16": 0.0
+              "band-9": 0.011351529700538321,
+              "band-10": 0.102963192312019,
+              "band-11": 0.24471923888052294,
+              "band-12": 0.12438952566884465,
+              "band-13": 0.38400408142887965,
+              "band-14": 0.42845689958077193,
+              "band-15": 0.3257488354564728,
+              "band-16": 0.37046676482496965
             },
             "children": {}
           }
@@ -4367,7 +4508,8 @@
         "class": "heronarts.lx.mixer.LXMixerEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Mixer",
@@ -4388,6 +4530,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true
             },
@@ -4406,6 +4549,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4430,7 +4574,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4449,6 +4594,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4465,7 +4611,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4484,6 +4631,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4508,7 +4656,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4527,6 +4676,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4545,7 +4695,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4569,6 +4720,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true
             },
@@ -4598,6 +4750,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true,
               "controlsExpanded": true,
@@ -4641,6 +4794,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4688,7 +4842,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4707,6 +4862,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4734,6 +4890,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -4745,7 +4902,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4764,6 +4922,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4780,7 +4939,8 @@
                   "chunkSize": 50.0,
                   "shift": 0.0,
                   "shiftRange": 100.0,
-                  "alternate": false,
+                  "interlace": false,
+                  "alternateChunk": false,
                   "waveshape": 0,
                   "skew": 0.0,
                   "exp": 0.0,
@@ -4792,6 +4952,7 @@
                   "wrap": 0,
                   "size": 50.0,
                   "fade": 50.0,
+                  "level": 1.0,
                   "invert": 0.0,
                   "swarmOn": false,
                   "swarmX": 0.5,
@@ -4807,7 +4968,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4826,6 +4988,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4856,7 +5019,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -4864,7 +5028,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4883,6 +5048,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -4901,7 +5067,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -4913,7 +5080,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -4941,7 +5109,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -4969,7 +5138,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -4997,7 +5167,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -5025,7 +5196,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -5053,7 +5225,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -5092,7 +5265,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5116,7 +5290,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5140,7 +5315,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5164,7 +5340,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5188,7 +5365,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5212,7 +5390,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -5233,7 +5412,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5263,7 +5443,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5293,7 +5474,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5323,7 +5505,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5353,7 +5536,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5383,7 +5567,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5413,7 +5598,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5443,7 +5629,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -5476,6 +5663,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5492,7 +5680,8 @@
                   "chunkSize": 25.117187418800313,
                   "shift": 0.0,
                   "shiftRange": 100.0,
-                  "alternate": false,
+                  "interlace": false,
+                  "alternateChunk": false,
                   "waveshape": 0,
                   "skew": 0.0,
                   "exp": 0.0,
@@ -5504,6 +5693,7 @@
                   "wrap": 0,
                   "size": 53.01562498207204,
                   "fade": 89.83984374790452,
+                  "level": 1.0,
                   "invert": 0.0,
                   "swarmOn": false,
                   "swarmX": 0.5,
@@ -5519,7 +5709,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5538,6 +5729,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5565,6 +5757,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -5576,7 +5769,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5595,6 +5789,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5615,7 +5810,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5634,6 +5830,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5653,7 +5850,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5672,6 +5870,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5716,7 +5915,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5735,6 +5935,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5764,7 +5965,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5783,6 +5985,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5807,7 +6010,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5826,6 +6030,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5850,7 +6055,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5869,6 +6075,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5916,7 +6123,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5935,6 +6143,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -5954,7 +6163,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -5973,6 +6183,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6020,7 +6231,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6039,6 +6251,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6086,7 +6299,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6105,6 +6319,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6132,6 +6347,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -6143,7 +6359,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6162,6 +6379,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6189,6 +6407,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -6200,7 +6419,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6219,6 +6439,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6249,7 +6470,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -6257,7 +6479,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6276,6 +6499,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6306,7 +6530,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -6314,7 +6539,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6333,6 +6559,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6362,7 +6589,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6381,6 +6609,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6408,6 +6637,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -6419,7 +6649,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6441,6 +6672,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true,
               "controlsExpanded": true,
@@ -6484,6 +6716,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6503,7 +6736,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6522,6 +6756,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6541,7 +6776,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6560,6 +6796,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6579,7 +6816,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6598,6 +6836,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6616,7 +6855,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6638,6 +6878,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true,
               "controlsExpanded": true,
@@ -6678,6 +6919,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6707,7 +6949,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6726,6 +6969,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6745,7 +6989,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6764,6 +7009,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6782,7 +7028,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6801,6 +7048,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6827,7 +7075,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6839,7 +7088,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -6860,7 +7110,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.6670101988787415
+                        "basis": 0.6776598192774496
                       }
                     ],
                     "modulations": [
@@ -6878,7 +7128,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -6900,6 +7151,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6924,7 +7176,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6943,6 +7196,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6961,7 +7215,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6984,6 +7239,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7026,7 +7282,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7045,6 +7302,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7087,7 +7345,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7106,6 +7365,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7148,7 +7408,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7167,6 +7428,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7209,7 +7471,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7228,6 +7491,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7270,7 +7534,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7289,6 +7554,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7336,7 +7602,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7355,6 +7622,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7402,7 +7670,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7421,6 +7690,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7468,7 +7738,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7487,6 +7758,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7534,7 +7806,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7553,6 +7826,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7600,7 +7874,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7622,6 +7897,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true
             },
@@ -7651,6 +7927,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true,
               "controlsExpanded": true,
@@ -7694,6 +7971,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7741,7 +8019,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7760,6 +8039,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7787,6 +8067,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -7798,7 +8079,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7817,6 +8099,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7833,7 +8116,8 @@
                   "chunkSize": 50.0,
                   "shift": 0.0,
                   "shiftRange": 100.0,
-                  "alternate": false,
+                  "interlace": false,
+                  "alternateChunk": false,
                   "waveshape": 0,
                   "skew": 0.0,
                   "exp": 0.0,
@@ -7845,6 +8129,7 @@
                   "wrap": 0,
                   "size": 50.0,
                   "fade": 50.0,
+                  "level": 1.0,
                   "invert": 0.0,
                   "swarmOn": false,
                   "swarmX": 0.5,
@@ -7860,7 +8145,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7879,6 +8165,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7909,7 +8196,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -7917,7 +8205,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7936,6 +8225,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7954,7 +8244,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7966,7 +8257,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -7994,7 +8286,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -8022,7 +8315,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -8050,7 +8344,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -8078,7 +8373,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -8106,7 +8402,8 @@
                         "class": "heronarts.lx.modulator.VariableLFO",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LFO",
@@ -8145,7 +8442,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8169,7 +8467,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8193,7 +8492,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8217,7 +8517,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8241,7 +8542,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8265,7 +8567,8 @@
                         "class": "heronarts.lx.modulation.LXCompoundModulation",
                         "internal": {
                           "modulationColor": 0,
-                          "modulationControlsExpanded": true
+                          "modulationControlsExpanded": true,
+                          "modulationsExpanded": true
                         },
                         "parameters": {
                           "label": "LX",
@@ -8286,7 +8589,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8316,7 +8620,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8346,7 +8651,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8376,7 +8682,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8406,7 +8713,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8436,7 +8744,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8466,7 +8775,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8496,7 +8806,8 @@
                     "class": "heronarts.lx.pattern.form.PlanesPattern$Plane",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Plane",
@@ -8529,6 +8840,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8545,7 +8857,8 @@
                   "chunkSize": 25.117187418800313,
                   "shift": 0.0,
                   "shiftRange": 100.0,
-                  "alternate": false,
+                  "interlace": false,
+                  "alternateChunk": false,
                   "waveshape": 0,
                   "skew": 0.0,
                   "exp": 0.0,
@@ -8557,6 +8870,7 @@
                   "wrap": 0,
                   "size": 53.01562498207204,
                   "fade": 89.83984374790452,
+                  "level": 1.0,
                   "invert": 0.0,
                   "swarmOn": false,
                   "swarmX": 0.5,
@@ -8572,7 +8886,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8591,6 +8906,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8618,6 +8934,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -8629,7 +8946,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8648,6 +8966,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8668,7 +8987,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8687,6 +9007,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8706,7 +9027,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8725,6 +9047,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8769,7 +9092,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8788,6 +9112,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8817,7 +9142,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8836,6 +9162,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8860,7 +9187,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8879,6 +9207,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8903,7 +9232,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8922,6 +9252,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8969,7 +9300,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8988,6 +9320,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9007,7 +9340,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9026,6 +9360,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9073,7 +9408,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9092,6 +9428,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9139,7 +9476,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9158,6 +9496,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9185,6 +9524,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -9196,7 +9536,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9215,6 +9556,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9242,6 +9584,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -9253,7 +9596,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9272,6 +9616,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9302,7 +9647,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -9310,7 +9656,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9329,6 +9676,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9359,7 +9707,8 @@
                   "radius": 0.5817968688206747,
                   "width": 0.0500079087324407,
                   "fade": 0.6256156064979879,
-                  "invert": 0.0
+                  "invert": 0.0,
+                  "level": 1.0
                 },
                 "children": {
                   "modulation": {
@@ -9367,7 +9716,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9386,6 +9736,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9415,7 +9766,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9434,6 +9786,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9461,6 +9814,7 @@
                   "tempoDivision": 5,
                   "reverse": false,
                   "invert": 0.0,
+                  "level": 1.0,
                   "rotate": true,
                   "yaw": 0.0,
                   "pitch": 0.0,
@@ -9472,7 +9826,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9494,6 +9849,7 @@
             "internal": {
               "modulationColor": 0,
               "modulationControlsExpanded": true,
+              "modulationsExpanded": true,
               "controlsExpandedCue": true,
               "controlsExpandedAux": true,
               "controlsExpanded": true,
@@ -9534,6 +9890,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9563,7 +9920,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9582,6 +9940,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9601,7 +9960,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9620,6 +9980,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9638,7 +9999,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9657,6 +10019,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9683,7 +10046,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9702,6 +10066,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9726,7 +10091,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9745,6 +10111,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9763,7 +10130,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9786,6 +10154,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": false,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9828,7 +10197,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9847,6 +10217,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9894,7 +10265,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9913,6 +10285,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -9955,7 +10328,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -9974,6 +10348,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10016,7 +10391,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10035,6 +10411,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10077,7 +10454,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10096,6 +10474,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10138,7 +10517,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10157,6 +10537,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10204,7 +10585,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10223,6 +10605,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10270,7 +10653,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10289,6 +10673,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10336,7 +10721,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10355,6 +10741,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -10402,7 +10789,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -10425,7 +10813,8 @@
         "class": "heronarts.lx.modulation.LXModulationEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Modulation"
@@ -10437,7 +10826,8 @@
             "class": "org.iqe.AudioModulators$Root",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "NO_TOUCHY",
@@ -10447,6 +10837,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10455,17 +10846,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6328151551083275
+            "basis": 0.16581515510832934
           },
           {
             "id": 54255,
             "class": "heronarts.lx.modulator.MacroKnobs",
             "internal": {
               "modulationColor": 7,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Knobs",
@@ -10489,7 +10882,8 @@
             "class": "org.iqe.AudioModulators$VolumeLevel",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "VolumeLevel",
@@ -10499,6 +10893,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10507,17 +10902,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3098151551065263
+            "basis": 0.8428151551065283
           },
           {
             "id": 56980,
             "class": "org.iqe.AudioModulators$BassLevel",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "BassLevel",
@@ -10527,6 +10924,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10535,17 +10933,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3098151551065263
+            "basis": 0.8428151551065283
           },
           {
             "id": 56981,
             "class": "org.iqe.AudioModulators$TrebleLevel",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "TrebleLevel",
@@ -10555,6 +10955,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10563,17 +10964,19 @@
               "accel": 0.6415194634705356,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.49514848840534276
+            "basis": 0.02814848840534477
           },
           {
             "id": 56982,
             "class": "org.iqe.AudioModulators$BassRatio",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "BassRatio",
@@ -10583,6 +10986,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10591,17 +10995,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3098151551065263
+            "basis": 0.8428151551065283
           },
           {
             "id": 56983,
             "class": "org.iqe.AudioModulators$TrebleRatio",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "TrebleRatio",
@@ -10611,6 +11017,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10619,17 +11026,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3098151551065263
+            "basis": 0.8428151551065283
           },
           {
             "id": 57307,
             "class": "org.iqe.AudioModulators$QuarterClick",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "QuarterClick",
@@ -10639,6 +11048,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10647,17 +11057,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8528151551040474
+            "basis": 0.3858151551040493
           },
           {
             "id": 57308,
             "class": "org.iqe.AudioModulators$HalfClick",
             "internal": {
               "modulationColor": 1,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "HalfClick",
@@ -10667,6 +11079,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10675,17 +11088,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8528151551040474
+            "basis": 0.3858151551040493
           },
           {
             "id": 62913,
             "class": "org.iqe.AudioModulators$BarClick",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "BarClick",
@@ -10695,6 +11110,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10703,17 +11119,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.05881515510316544
+            "basis": 0.5918151551031673
           },
           {
             "id": 66458,
             "class": "org.iqe.AudioModulators$BootsClick",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "BootsClick",
@@ -10723,6 +11141,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 3.125,
@@ -10731,17 +11150,19 @@
               "accel": 5.0,
               "min": 0.5,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5378151550988479
+            "basis": 0.07081515509884967
           },
           {
             "id": 76378,
             "class": "heronarts.lx.modulator.VariableLFO",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "LFO 3",
@@ -10769,7 +11190,8 @@
             "class": "org.iqe.AudioModulators$BassAvg",
             "internal": {
               "modulationColor": 1,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "BassAvg",
@@ -10779,6 +11201,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 100.0,
@@ -10787,17 +11210,19 @@
               "accel": 5.0,
               "min": 0.0,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5908151551024019
+            "basis": 0.12381515510240361
           },
           {
             "id": 64644,
             "class": "heronarts.lx.modulator.VariableLFO",
             "internal": {
               "modulationColor": 2,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "8 bar ramp",
@@ -10825,7 +11250,8 @@
             "class": "heronarts.lx.modulator.VariableLFO",
             "internal": {
               "modulationColor": 3,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "Off fast",
@@ -10853,7 +11279,8 @@
             "class": "org.iqe.AudioModulators$GlobalClick",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": false
+              "modulationControlsExpanded": false,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "GlobalClick",
@@ -10863,6 +11290,7 @@
               "tempoSync": false,
               "tempoMultiplier": 5,
               "tempoLock": true,
+              "triggerMode": 0,
               "periodMs": 1000.0,
               "randomMs": 0.0,
               "chance": 3.125,
@@ -10871,10 +11299,11 @@
               "accel": 5.0,
               "min": 0.5,
               "max": 1.0,
+              "triggerIn": false,
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5398151550993135
+            "basis": 0.0728151550993153
           }
         ],
         "modulations": [
@@ -10892,7 +11321,8 @@
             "class": "heronarts.lx.modulation.LXCompoundModulation",
             "internal": {
               "modulationColor": 0,
-              "modulationControlsExpanded": true
+              "modulationControlsExpanded": true,
+              "modulationsExpanded": true
             },
             "parameters": {
               "label": "LX",
@@ -10910,7 +11340,8 @@
         "class": "heronarts.lx.LXEngine$Output",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Output",
@@ -10918,7 +11349,11 @@
           "brightness": 1.0,
           "fps": 0.0,
           "gamma": 1.0,
-          "gammaMode": 1
+          "gammaMode": 1,
+          "whitePointRed": 255,
+          "whitePointGreen": 255,
+          "whitePointBlue": 255,
+          "whitePointWhite": 255
         },
         "children": {}
       },
@@ -10927,7 +11362,8 @@
         "class": "heronarts.lx.snapshot.LXSnapshotEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "Snapshots",
@@ -10955,7 +11391,8 @@
         "class": "heronarts.lx.midi.LXMidiEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "LX",
@@ -11129,7 +11566,8 @@
         "class": "heronarts.lx.osc.LXOscEngine",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "OSC",
@@ -11149,7 +11587,8 @@
         "class": "org.iqe.AutopilotIQE",
         "internal": {
           "modulationColor": 0,
-          "modulationControlsExpanded": true
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
         },
         "parameters": {
           "label": "AutopilotIQE",
@@ -11168,6 +11607,7 @@
       "paletteExpanded": true,
       "cameraExpanded": true,
       "mixerCentered": false,
+      "fixtureInspectorExpanded": true,
       "preview": {
         "animation": false,
         "animationTime": 1000.0,
