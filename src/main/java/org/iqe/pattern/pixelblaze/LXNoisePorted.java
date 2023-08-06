@@ -2,6 +2,7 @@ package org.iqe.pattern.pixelblaze;
 
 import static org.iqe.pattern.pixelblaze.Port_LXNoise.stb_perlin_noise3_internal;
 
+/** PixelBlaze allow setting the perlin wraps, luckily this wasn't terrible to copy pasta add */
 public class LXNoisePorted {
     public static float stb_perlin_ridge_noise3(
             float x, float y, float z,
