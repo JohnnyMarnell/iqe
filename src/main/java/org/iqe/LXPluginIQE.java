@@ -19,6 +19,7 @@ import jkbstudio.autopilot.UIAutopilot;
 
 import org.iqe.pattern.*;
 import org.iqe.pattern.EqVisualizerPattern;
+import org.iqe.pattern.pixelblaze.PixelBlazeBlowser;
 import org.iqe.pattern.pixelblaze.PixelblazePatterns;
 import org.iqe.pattern.pixelblaze.UIPixelblazePattern;
 import titanicsend.pattern.pixelblaze.PBAudio1;
@@ -68,7 +69,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 PBXorcery.class,
                 PBAudio1.class,
                 PBFireworkNova.class,
-                PixelblazePatterns.PixelBlazeBlowser.class,
+                PixelBlazeBlowser.class,
                 PixelblazePatterns.PBTemp.class,
 
                 DiagnosticsPattern.class,

@@ -32,28 +32,6 @@ public final class ChromatikIQE extends LXStudio {
     }
 
     private static LX.Permissions createPermissions() {
-        // TODO: A hack until I get toolchain correctly setup, and re-auth problems fixed
-        if (1 == 1) return new LX.Permissions() {
-            @Override
-            public boolean canSave() {
-                return true;
-            }
-
-            @Override
-            public int getMaxPoints() {
-                return Integer.MAX_VALUE;
-            }
-
-            @Override
-            public boolean canRunPlugins() {
-                return true;
-            }
-
-            @Override
-            public boolean hasPackageLicense(String s) {
-                return true;
-            }
-        };
         return new LX.Permissions() {
             public boolean canSave() {
                 return License.get().canSave();
