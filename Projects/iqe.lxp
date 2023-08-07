@@ -3151,7 +3151,7 @@
       "channelMultithreaded": false,
       "networkMultithreaded": false,
       "framesPerSecond": 60.0,
-      "speed": 1.0,
+      "speed": 0.7997656562365592,
       "performanceMode": false
     },
     "children": {
@@ -3169,7 +3169,7 @@
           "transitionTimeSecs": 5.0,
           "transitionMode": 1,
           "autoCycleEnabled": true,
-          "autoCycleMode": 1,
+          "autoCycleMode": 0,
           "autoCycleTimeSecs": 60.0,
           "autoCycleCursor": 5,
           "triggerSwatchCycle": false,
@@ -4908,7 +4908,7 @@
                   "modulationExpanded": true
                 },
                 "parameters": {
-                  "label": "Chase",
+                  "label": "ChaseBG",
                   "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
@@ -5400,7 +5400,7 @@
                       "position": -0.05335937190102413,
                       "width": 0.3260546905454248,
                       "contrast": 0.75,
-                      "axis": 0,
+                      "axis": 4,
                       "tilt": 0.0,
                       "spin": 0.0,
                       "tiltPosition": -0.10509671227191575,
@@ -5529,7 +5529,7 @@
                       "spin": 0.0,
                       "tiltPosition": 0.0,
                       "spinPosition": 0.0,
-                      "active": false,
+                      "active": true,
                       "positionMin": 0.0,
                       "positionMax": 1.0,
                       "widthMin": 0.0,
@@ -5560,7 +5560,7 @@
                       "spin": 0.0,
                       "tiltPosition": 0.0,
                       "spinPosition": 0.0,
-                      "active": false,
+                      "active": true,
                       "positionMin": 0.0,
                       "positionMax": 1.0,
                       "widthMin": 0.0,
@@ -5591,7 +5591,7 @@
                       "spin": 0.0,
                       "tiltPosition": 0.0,
                       "spinPosition": 0.0,
-                      "active": false,
+                      "active": true,
                       "positionMin": 0.0,
                       "positionMax": 1.0,
                       "widthMin": 0.0,
@@ -5763,8 +5763,8 @@
                 "deviceVersion": -1
               },
               {
-                "id": 56344,
-                "class": "org.iqe.pattern.ZipStripPattern",
+                "id": 70487,
+                "class": "heronarts.lx.pattern.texture.SparklePattern",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
@@ -5772,20 +5772,29 @@
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
-                  "modulationExpanded": false
+                  "modulationExpanded": true
                 },
                 "parameters": {
-                  "label": "ZipStrip",
+                  "label": "Sparkle",
                   "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "energy": 0.666976561283227,
-                  "syncTrigger": false
+                  "density": 46.3675881503979,
+                  "speed": 0.5,
+                  "variation": 25.0,
+                  "duration": 100.0,
+                  "sharp": -0.09359375627536792,
+                  "waveshape": 0,
+                  "minInterval": 1.0,
+                  "maxInterval": 1.0,
+                  "baseLevel": 0.0,
+                  "minLevel": 75.0,
+                  "maxLevel": 100.0
                 },
                 "children": {
                   "modulation": {
-                    "id": 56345,
+                    "id": 70488,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -5926,21 +5935,16 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "density": 46.3675881503979,
-                  "speed": 0.5,
-                  "variation": 25.0,
-                  "duration": 100.0,
-                  "sharp": -0.09359375627536792,
-                  "waveshape": 0,
-                  "minInterval": 1.0,
-                  "maxInterval": 1.0,
-                  "baseLevel": 0.0,
-                  "minLevel": 75.0,
-                  "maxLevel": 100.0
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 223,
+                  "scriptName": "__pbb_sparks center",
+                  "reload": 0.0,
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
-                    "id": 70488,
+                    "id": 84168,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -5971,8 +5975,8 @@
                   "modulationExpanded": false
                 },
                 "parameters": {
-                  "label": "PixelBlazeBlowser",
-                  "enabled": false,
+                  "label": "PBcubefire3D",
+                  "enabled": true,
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
@@ -5985,7 +5989,7 @@
                 },
                 "children": {
                   "modulation": {
-                    "id": 84168,
+                    "id": 90764,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
@@ -6104,6 +6108,69 @@
                       "modulationColor": 0,
                       "modulationControlsExpanded": true,
                       "modulationsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 70422,
+                "class": "heronarts.lx.pattern.texture.LifePattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": true
+                },
+                "parameters": {
+                  "label": "Life",
+                  "enabled": false,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "width": 27,
+                  "height": 11,
+                  "spawnDensity": 0.7494531253469177,
+                  "speed": 0.879278271459043,
+                  "speedRange": 1.0,
+                  "tempoSync": false,
+                  "tempoDivision": 5,
+                  "smooth": 0.5,
+                  "shape": 0.0,
+                  "maxLoops": 6,
+                  "respawn": false,
+                  "minLevel": 0.0,
+                  "maxLevel": 1.0,
+                  "invert": 0.0,
+                  "wrapMode": 3,
+                  "antiAlias": true,
+                  "sinShaping": true,
+                  "translateX": 0.3757812560070306,
+                  "translateY": 0.004062497057020664,
+                  "zoom": 1.0,
+                  "expand": 1.0,
+                  "shearX": 0.0,
+                  "shearY": 0.0,
+                  "yaw": 0.0,
+                  "pitch": 0.0,
+                  "roll": 0.0
+                },
+                "children": {
+                  "modulation": {
+                    "id": 70423,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6400,6 +6467,83 @@
                       "modulationColor": 0,
                       "modulationControlsExpanded": true,
                       "modulationsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 56344,
+                "class": "org.iqe.pattern.ZipStripPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "ZipStrip",
+                  "enabled": false,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "energy": 0.666976561283227,
+                  "syncTrigger": false
+                },
+                "children": {
+                  "modulation": {
+                    "id": 56345,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 65641,
+                "class": "org.iqe.pattern.BouncingDotsPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "BouncingDots",
+                  "enabled": false,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "syncTrigger": false
+                },
+                "children": {
+                  "modulation": {
+                    "id": 65642,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6765,6 +6909,1319 @@
                       "modulationColor": 0,
                       "modulationControlsExpanded": true,
                       "modulationsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91277,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_fastpulse3D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 35,
+                  "scriptName": "__pbb_fast pulse 3d",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91278,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91099,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_regenbogendrogen",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 19,
+                  "scriptName": "__pbb_regenbogendrogen",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91100,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91266,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_sinpulse3D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 34,
+                  "scriptName": "__pbb_sinpulse 3D",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91267,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 90792,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_FireFlies",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 1,
+                  "scriptName": "__pbb_FireFlies",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderDecay": 0.5,
+                  "sliderFade": 0.5,
+                  "sliderNumSparks": 0.5,
+                  "sliderColor": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 90793,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 90829,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_Edgeburst",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 3,
+                  "scriptName": "__pbb_Edgeburst",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 90830,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 90888,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_rainbowmelt",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 20,
+                  "scriptName": "__pbb_rainbow melt",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 90889,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 90921,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_1DAuroraBorealis",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 22,
+                  "scriptName": "__pbb_1D Aurora Borealis",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderWidth": 0.5,
+                  "sliderPalette": 0.5,
+                  "sliderNumWaves": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 90922,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 90974,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_RealWorldLights",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 25,
+                  "scriptName": "__pbb_Real World Lights",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderLightType": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 90975,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91029,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_Halloweencolortwinkeles",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 9,
+                  "scriptName": "__pbb_Halloween color twinkles",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91030,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91066,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_LineDancer2D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 15,
+                  "scriptName": "__pbb_Line Dancer 2D",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderTwist": 0.5,
+                  "sliderReflections": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91067,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91310,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_slowcolorshhift",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 36,
+                  "scriptName": "__pbb_slow color shift",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91311,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91363,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_PerceptualHue",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 44,
+                  "scriptName": "__pbb_Utility: Perceptual hue",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91364,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91392,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_colourfulfireflies",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 52,
+                  "scriptName": "__pbb_colourful fireflies",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91393,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91429,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_millipede",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 58,
+                  "scriptName": "__pbb_millipede",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91430,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91466,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_3colorrotation",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 61,
+                  "scriptName": "__pbb_3 color rotation",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91467,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91499,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_ShimmerCRossfade2D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 70,
+                  "scriptName": "__pbb_Shimmer Crossfade 2D",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91500,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91532,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_twinklystars",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 76,
+                  "scriptName": "__pbb_twinkly stars",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91533,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91565,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_sound_spectromatrix",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 78,
+                  "scriptName": "__pbb_sound - spectromatrix agc",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91566,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91596,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_rainbowpinwheel",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 89,
+                  "scriptName": "__pbb_rainbow pinwheel",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91597,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91607,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_utilitycolortemp",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 95,
+                  "scriptName": "__pbb_UtilityColorTemp",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderColorTemperature": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91608,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91636,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_sound_spectro2",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 98,
+                  "scriptName": "__pbb_sound - spectromatrix render2D",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91637,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91673,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_sound_kalida",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 100,
+                  "scriptName": "__pbb_sound - spectro kalidastrip",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91674,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91684,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_Sunset",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 103,
+                  "scriptName": "__pbb_Sunset",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91685,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91721,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_RainbowV2",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 108,
+                  "scriptName": "__pbb_Rainbow v2",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderColorMod": 0.5,
+                  "sliderSpeed": 0.5,
+                  "sliderDirection": 0.5,
+                  "sliderSaturation": 0.5,
+                  "sliderLightness": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91722,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91818,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_sinus",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 126,
+                  "scriptName": "__pbb_sinus",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91819,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91847,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_fastpulse",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 135,
+                  "scriptName": "__pbb_fast pulse",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91848,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91932,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_plasma3D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 155,
+                  "scriptName": "__pbb_plasma 3D",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91933,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 91965,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_honeycomb3D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 156,
+                  "scriptName": "__pbb_honeycomb 3D",
+                  "reload": 0.0,
+                  "error": ""
+                },
+                "children": {
+                  "modulation": {
+                    "id": 91966,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 92062,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_spotlightsrotate3D",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 191,
+                  "scriptName": "__pbb_spotlights / rotation 3D",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderScaleMod": 0.5,
+                  "sliderSpeedMod": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 92063,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 92121,
+                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "PB_GoldenTix",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "enableEdges": true,
+                  "enablePanels": true,
+                  "script": 217,
+                  "scriptName": "__pbb_Golden Tix",
+                  "reload": 0.0,
+                  "error": "",
+                  "sliderSpeedShift": 0.5,
+                  "sliderSlideRightToReset": 0.5
+                },
+                "children": {
+                  "modulation": {
+                    "id": 92122,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8017,7 +9474,7 @@
             },
             "parameters": {
               "label": "Background",
-              "fader": 0.2125984251968504,
+              "fader": 0.0,
               "arm": false,
               "selected": false,
               "enabled": true,
