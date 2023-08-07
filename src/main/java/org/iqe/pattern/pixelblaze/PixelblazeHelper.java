@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
  * Further scaffolding to be able to render Pixelblaze animations in LX
  * Attempt to encapsulate any additional logic and state necessary (e.g. pertaining to transformations, gradients)
  * Favor moving / keeping things in this Java realm, over JS scripting like glue.js approach,
+ * and added "moarPaste.js" in this repo mostly delegates to these methods,
  * mainly for ability to debug, probably speed improvements as well?
  * Doesn't need to extend LXPattern or similar, but does at present since existing port sets up __pattern etc.
  *
- * todo: Based on logs, the PB parameters seem to be removed and re-added, however UI doesn't update with knobs
  * todo: impl palette / color / gradient
  * todo: how should transforms truly work (i.e. wouldn't LXPoint -> color buffer index need to change / re-map?)
- * todo: sinpulse 3D and fast pulse 3D aren't rendering anything, why?
+ * todo: e.g. sinpulse 3D and fast pulse 3D aren't rendering anything, why?
  */
 public class PixelblazeHelper extends PixelblazePattern {
     protected LXPoint[] originalPoints;
@@ -65,7 +65,7 @@ public class PixelblazeHelper extends PixelblazePattern {
 
     @Override
     protected String getScriptName() {
-        throw new UnsupportedOperationException("This part of functionality shouldn't be used.");
+        throw new UnsupportedOperationException("This part of functionality shouldn't be used at this level.");
     }
 
     @Override

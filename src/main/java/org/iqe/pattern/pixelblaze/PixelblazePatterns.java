@@ -5,10 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
-import heronarts.lx.parameter.*;
 import heronarts.lx.pattern.LXPattern;
 import org.iqe.Audio;
-import org.iqe.LOG;
 import titanicsend.pattern.pixelblaze.Wrapper;
 
 import javax.script.Bindings;
@@ -21,85 +19,23 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
 /**
+ * This used to be more of a junk drawer, maybe it's a little better now.
+ * Mainly (IIRC), static methods that I might call elsewhere while porting
+ * (e.g. in "Wrapper", to find / resolve PixelBlaze JavaScript source files)
+ *
  * I'm all inheritance / .class'd out y'all...
  */
 
 public class PixelblazePatterns {
+    public static CompiledScript extraGlueScript = null;
     private static final Gson gson = new Gson();
     public static final Map<String, String> patternData = loadPatternData();
-
-    @LXCategory("PixelBlaze")
-    public static class PixelBlazeBlowser extends PixelblazeHelper {
-
-        public final StringParameter scriptName = new StringParameter("Script Name", "test.js").setDescription("Path to the Pixelblaze script");
-
-        public final BooleanParameter reset =
-                new BooleanParameter("Reset", false)
-                        .setMode(BooleanParameter.Mode.MOMENTARY)
-                        .setDescription("Resets the Pixelblaze JS engine for this script");
-
-        public final MutableParameter onReload = new MutableParameter("Reload");
-        public final StringParameter error = new StringParameter("Error", "");
-
-        public final DiscreteParameter script;
-        protected final LXParameterListener scriptListener;
-
-        public PixelBlazeBlowser(LX lx) {
-            super(lx);
-            script = new DiscreteParameter("script", patternData.keySet().toArray(new String[0]));
-            addParameter("script", script);
-            addParameter("scriptName", scriptName);
-            addParameter("reload", onReload);
-            addParameter("error", error);
-            this.scriptListener = p -> this.setScript();
-            script.addListener(scriptListener, true);
-            onReload.bang();
-        }
-
-        @Override
-        public void dispose() {
-            script.removeListener(scriptListener);
-        }
-
-        @Override
-        protected String getScriptName() {
-            return "__pbb_" + (script == null ? patternData.keySet().iterator().next() : script.getOption());
-        }
-
-        public Collection<CompoundParameter> getSliders() {
-            return patternParameters.values().stream().map(p -> (CompoundParameter) p).toList();
-        }
-
-
-        public void setScript() {
-            String path = "resources/pixelblaze/" + getScriptName() + ".js";
-            File placeholder = new File(path);
-            if (wrapper == null) {
-                wrapper = new Wrapper(placeholder, this, getModelPoints());
-            } else {
-                // When pattern JS is loaded via glue.js + Wrapper.load(), it will add parameters dynamically,
-                // make sure we first remove any previously loaded
-                // todo: Based on logs, the PB parameters seem to be removed and re-added, however UI doesn't update with knobs
-                List<String> paths = getParameters().stream()
-                        .peek(p -> LOG.info("Param present path {}, label {}", p.getPath(), p.getLabel()))
-                        .filter(p -> p.getPath().startsWith("slider"))
-                        .map(LXParameter::getPath).toList();
-                LOG.info("Removing pixelblaze parameters {}", paths);
-                paths.forEach(this::removeParameter);
-                paths.forEach(p -> patternParameters.remove(p));
-                wrapper.file = standardResource(placeholder);
-                wrapper.lastModified = -1;
-            }
-        }
-    }
 
     /** Johnny Marnell port:
      * Much of the Pixelblaze code is File class heavy
@@ -136,7 +72,6 @@ public class PixelblazePatterns {
         return standardResource(file.toPath());
     }
 
-    public static CompiledScript extraGlueScript = null;
     public static void onLoad(Bindings bindings, CompiledScript glue, CompiledScript pattern, Wrapper wrapper) {
         try {
             PixelblazePatterns.extraGlueScript = Wrapper.compile(Path.of("resources/pixelblaze/moarPaste.js"));
@@ -201,6 +136,7 @@ public class PixelblazePatterns {
         }
     }
 
+    /** Maybe this was meant to set and  */
     @LXCategory("PixelBlaze") public static class PBTemp extends PixelblazeHelper
     { public PBTemp(LX lx) { super(lx); } public String getScriptName() { return "tmp"; } }
 }

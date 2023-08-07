@@ -9,7 +9,9 @@ const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixe
 const numRafters = 72
 const numPillars = 0
 // const controllerIP = "192.168.0.10"
-const controllerIP = "169.254.250.112"
+// const controllerIP = "169.254.250.112"
+const controllerIP = "127.0.0.1"
+
 // const mapStripToArtnetPair = index => index * 3
 const mapStripToArtnetPair = index => (index + 1) * 3
 
