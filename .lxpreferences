@@ -1,9 +1,9 @@
 {
   "version": "0.4.2-SNAPSHOT",
   "projectFileName": "iqe.lxp",
-  "windowWidth": 1065,
-  "windowHeight": 832,
-  "windowPosX": 0,
+  "windowWidth": 2029,
+  "windowHeight": 1320,
+  "windowPosX": 259,
   "windowPosY": 53,
   "uiZoom": 100,
   "focusChannelOnCue": true,
