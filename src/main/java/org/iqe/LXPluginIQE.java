@@ -215,12 +215,14 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
 
     @Override
     public void initializeUI(LXStudio lx, LXStudio.UI ui) {
-        ((LXStudio.Registry)lx.registry).addUIDeviceControls(UIPixelblazePattern.class);
+        LXStudio.Registry registry = (LXStudio.Registry) lx.registry;
+        registry.addUIDeviceControls(UIPixelblazePattern.class);
     }
 
     @Override
     public void onUIReady(LXStudio lx, LXStudio.UI ui) {
-        new UIAutopilot(ui, this.autopilot, ui.leftPane.global.getContentWidth()).addToContainer(ui.leftPane.global, 0);
+        new UIAutopilot(ui, this.autopilot, ui.leftPane.global.getContentWidth())
+                .addToContainer(ui.leftPane.global, 0);
     }
 
     @Override

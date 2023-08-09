@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1691353813804,
+  "timestamp": 1691613630748,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3171,7 +3171,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 0,
           "autoCycleTimeSecs": 60.0,
-          "autoCycleCursor": 5,
+          "autoCycleCursor": 1,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3185,7 +3185,7 @@
               "modulationsExpanded": true
             },
             "parameters": {
-              "label": "Daytime",
+              "label": "Swatch-2",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -3203,9 +3203,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 62.54233169555664,
+                  "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 114.43359375,
+                  "primary/hue": 178.81640625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3224,9 +3224,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 72.81845092773438,
+                  "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 182.85939025878906,
+                  "primary/hue": 91.1953125,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3247,28 +3247,7 @@
                   "period": 30.0,
                   "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 182.90322875976562,
-                  "secondary/brightness": 100.0,
-                  "secondary/saturation": 100.0,
-                  "secondary/hue": 120.0
-                },
-                "children": {}
-              },
-              {
-                "id": 96908,
-                "class": "heronarts.lx.color.LXDynamicColor",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true
-                },
-                "parameters": {
-                  "label": "LX",
-                  "mode": 0,
-                  "period": 30.0,
-                  "primary/brightness": 86.259765625,
-                  "primary/saturation": 97.939453125,
-                  "primary/hue": 105.97264862060547,
+                  "primary/hue": 214.53515625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -4461,21 +4440,21 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.2513656544153853,
-              "band-2": 0.2852796471135458,
-              "band-3": 0.2791804817190471,
-              "band-4": 0.28328541226327164,
-              "band-5": 0.28210659614403866,
-              "band-6": 0.2908671960877518,
-              "band-7": 0.27487355094025434,
-              "band-8": 0.30167351248311347,
-              "band-9": 0.25396593525257616,
-              "band-10": 0.1873345322646509,
-              "band-11": 0.15805296451260809,
-              "band-12": 0.1574633023447326,
-              "band-13": 0.26687518459541104,
-              "band-14": 0.26119762887719844,
-              "band-15": 0.06746718465964108,
+              "band-1": 0.0,
+              "band-2": 0.0,
+              "band-3": 0.0,
+              "band-4": 0.0,
+              "band-5": 0.0,
+              "band-6": 0.023545804672330584,
+              "band-7": 0.0,
+              "band-8": 0.0,
+              "band-9": 0.04802014336500182,
+              "band-10": 0.023076038856411407,
+              "band-11": 0.062326977013195006,
+              "band-12": 0.03463086387405101,
+              "band-13": 0.0,
+              "band-14": 0.0,
+              "band-15": 0.0,
               "band-16": 0.0
             },
             "children": {}
@@ -4494,7 +4473,7 @@
           "label": "Mixer",
           "crossfader": 0.0,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 1,
+          "focusedChannel": 7,
           "focusedChannelAux": 7,
           "cueA": false,
           "cueB": false,
@@ -4739,7 +4718,7 @@
               "label": "FG Pattern",
               "fader": 1.0,
               "arm": false,
-              "selected": true,
+              "selected": false,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -5918,7 +5897,7 @@
                 "deviceVersion": -1
               },
               {
-                "id": 70487,
+                "id": 97302,
                 "class": "heronarts.lx.pattern.texture.SparklePattern",
                 "internal": {
                   "modulationColor": 0,
@@ -5935,12 +5914,17 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "enableEdges": true,
-                  "enablePanels": true,
-                  "script": 223,
-                  "scriptName": "__pbb_sparks center",
-                  "reload": 0.0,
-                  "error": ""
+                  "density": 50.0,
+                  "speed": 0.5,
+                  "variation": 25.0,
+                  "duration": 100.0,
+                  "sharp": 0.0,
+                  "waveshape": 0,
+                  "minInterval": 1.0,
+                  "maxInterval": 1.0,
+                  "baseLevel": 0.0,
+                  "minLevel": 75.0,
+                  "maxLevel": 100.0
                 },
                 "children": {
                   "modulation": {
@@ -6121,11 +6105,12 @@
                 "deviceVersion": -1
               },
               {
-                "id": 70422,
+                "id": 97350,
                 "class": "heronarts.lx.pattern.texture.LifePattern",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6166,11 +6151,12 @@
                 },
                 "children": {
                   "modulation": {
-                    "id": 70423,
+                    "id": 97351,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6485,6 +6471,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6505,7 +6492,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6519,11 +6507,12 @@
                 "deviceVersion": -1
               },
               {
-                "id": 65641,
+                "id": 97435,
                 "class": "org.iqe.pattern.BouncingDotsPattern",
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6539,11 +6528,12 @@
                 },
                 "children": {
                   "modulation": {
-                    "id": 65642,
+                    "id": 97436,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6927,6 +6917,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6939,8 +6930,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 35,
+                  "speed": 1.0,
                   "scriptName": "__pbb_fast pulse 3d",
                   "reload": 0.0,
                   "error": ""
@@ -6951,7 +6942,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -6970,6 +6962,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -6982,8 +6975,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 19,
+                  "speed": 1.0,
                   "scriptName": "__pbb_regenbogendrogen",
                   "reload": 0.0,
                   "error": ""
@@ -6994,7 +6987,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7013,6 +7007,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7025,8 +7020,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 34,
+                  "speed": 1.0,
                   "scriptName": "__pbb_sinpulse 3D",
                   "reload": 0.0,
                   "error": ""
@@ -7037,7 +7032,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7056,6 +7052,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7068,16 +7065,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 1,
+                  "speed": 1.0,
                   "scriptName": "__pbb_FireFlies",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderSpeed": 0.5,
-                  "sliderDecay": 0.5,
-                  "sliderFade": 0.5,
-                  "sliderNumSparks": 0.5,
-                  "sliderColor": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7085,7 +7077,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7104,6 +7097,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7116,8 +7110,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 3,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Edgeburst",
                   "reload": 0.0,
                   "error": ""
@@ -7128,7 +7122,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7147,6 +7142,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7159,8 +7155,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 20,
+                  "speed": 1.0,
                   "scriptName": "__pbb_rainbow melt",
                   "reload": 0.0,
                   "error": ""
@@ -7171,7 +7167,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7190,6 +7187,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7202,15 +7200,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 22,
+                  "speed": 1.0,
                   "scriptName": "__pbb_1D Aurora Borealis",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderSpeed": 0.5,
-                  "sliderWidth": 0.5,
-                  "sliderPalette": 0.5,
-                  "sliderNumWaves": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7218,7 +7212,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7237,6 +7232,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7249,12 +7245,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 25,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Real World Lights",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderLightType": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7262,7 +7257,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7281,6 +7277,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7293,8 +7290,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 9,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Halloween color twinkles",
                   "reload": 0.0,
                   "error": ""
@@ -7305,7 +7302,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7324,6 +7322,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7336,14 +7335,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 15,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Line Dancer 2D",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderSpeed": 0.5,
-                  "sliderTwist": 0.5,
-                  "sliderReflections": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7351,7 +7347,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7370,6 +7367,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7382,8 +7380,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 36,
+                  "speed": 1.0,
                   "scriptName": "__pbb_slow color shift",
                   "reload": 0.0,
                   "error": ""
@@ -7394,7 +7392,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7413,6 +7412,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7425,8 +7425,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 44,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Utility: Perceptual hue",
                   "reload": 0.0,
                   "error": ""
@@ -7437,7 +7437,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7456,6 +7457,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7468,8 +7470,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 52,
+                  "speed": 1.0,
                   "scriptName": "__pbb_colourful fireflies",
                   "reload": 0.0,
                   "error": ""
@@ -7480,7 +7482,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7499,6 +7502,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7511,8 +7515,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 58,
+                  "speed": 1.0,
                   "scriptName": "__pbb_millipede",
                   "reload": 0.0,
                   "error": ""
@@ -7523,7 +7527,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7542,6 +7547,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7554,8 +7560,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 61,
+                  "speed": 1.0,
                   "scriptName": "__pbb_3 color rotation",
                   "reload": 0.0,
                   "error": ""
@@ -7566,7 +7572,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7585,6 +7592,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7597,8 +7605,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 70,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Shimmer Crossfade 2D",
                   "reload": 0.0,
                   "error": ""
@@ -7609,7 +7617,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7628,6 +7637,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7640,8 +7650,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 76,
+                  "speed": 1.0,
                   "scriptName": "__pbb_twinkly stars",
                   "reload": 0.0,
                   "error": ""
@@ -7652,7 +7662,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7671,6 +7682,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7683,8 +7695,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 78,
+                  "speed": 1.0,
                   "scriptName": "__pbb_sound - spectromatrix agc",
                   "reload": 0.0,
                   "error": ""
@@ -7695,7 +7707,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7714,6 +7727,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7726,8 +7740,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 89,
+                  "speed": 1.0,
                   "scriptName": "__pbb_rainbow pinwheel",
                   "reload": 0.0,
                   "error": ""
@@ -7738,7 +7752,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7757,6 +7772,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7769,12 +7785,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 95,
+                  "speed": 1.0,
                   "scriptName": "__pbb_UtilityColorTemp",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderColorTemperature": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7782,7 +7797,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7801,6 +7817,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7813,8 +7830,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 98,
+                  "speed": 1.0,
                   "scriptName": "__pbb_sound - spectromatrix render2D",
                   "reload": 0.0,
                   "error": ""
@@ -7825,7 +7842,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7844,6 +7862,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7856,8 +7875,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 100,
+                  "speed": 1.0,
                   "scriptName": "__pbb_sound - spectro kalidastrip",
                   "reload": 0.0,
                   "error": ""
@@ -7868,7 +7887,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7887,6 +7907,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7899,8 +7920,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 103,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Sunset",
                   "reload": 0.0,
                   "error": ""
@@ -7911,7 +7932,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7930,6 +7952,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7942,16 +7965,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 108,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Rainbow v2",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderColorMod": 0.5,
-                  "sliderSpeed": 0.5,
-                  "sliderDirection": 0.5,
-                  "sliderSaturation": 0.5,
-                  "sliderLightness": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -7959,7 +7977,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -7978,6 +7997,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -7990,8 +8010,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 126,
+                  "speed": 1.0,
                   "scriptName": "__pbb_sinus",
                   "reload": 0.0,
                   "error": ""
@@ -8002,7 +8022,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8021,6 +8042,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8033,8 +8055,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 135,
+                  "speed": 1.0,
                   "scriptName": "__pbb_fast pulse",
                   "reload": 0.0,
                   "error": ""
@@ -8045,7 +8067,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8064,6 +8087,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8076,8 +8100,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 155,
+                  "speed": 1.0,
                   "scriptName": "__pbb_plasma 3D",
                   "reload": 0.0,
                   "error": ""
@@ -8088,7 +8112,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8107,6 +8132,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8119,8 +8145,8 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 156,
+                  "speed": 1.0,
                   "scriptName": "__pbb_honeycomb 3D",
                   "reload": 0.0,
                   "error": ""
@@ -8131,7 +8157,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8150,6 +8177,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8162,13 +8190,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 191,
+                  "speed": 1.0,
                   "scriptName": "__pbb_spotlights / rotation 3D",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderScaleMod": 0.5,
-                  "sliderSpeedMod": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -8176,7 +8202,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8195,6 +8222,7 @@
                 "internal": {
                   "modulationColor": 0,
                   "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
                   "expanded": true,
                   "expandedCue": true,
                   "expandedAux": true,
@@ -8207,13 +8235,11 @@
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
                   "enableEdges": true,
-                  "enablePanels": true,
                   "script": 217,
+                  "speed": 1.0,
                   "scriptName": "__pbb_Golden Tix",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderSpeedShift": 0.5,
-                  "sliderSlideRightToReset": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -8221,7 +8247,8 @@
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0,
-                      "modulationControlsExpanded": true
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
                     },
                     "parameters": {
                       "label": "Modulation"
@@ -8681,7 +8708,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.7172347727881077
+                        "basis": 0.43366080478040464
                       }
                     ],
                     "modulations": [
@@ -12393,7 +12420,7 @@
               "label": "FX",
               "fader": 1.0,
               "arm": false,
-              "selected": false,
+              "selected": true,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -12465,6 +12492,46 @@
                   }
                 },
                 "deviceVersion": -1
+              },
+              {
+                "id": 98619,
+                "class": "org.iqe.pattern.MindLikeWaterPattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true,
+                  "expanded": true,
+                  "expandedCue": true,
+                  "expandedAux": true,
+                  "modulationExpanded": false
+                },
+                "parameters": {
+                  "label": "MindLikeWater",
+                  "enabled": true,
+                  "recall": false,
+                  "compositeMode": 0,
+                  "compositeLevel": 1.0,
+                  "running": true
+                },
+                "children": {
+                  "modulation": {
+                    "id": 98620,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0,
+                      "modulationControlsExpanded": true,
+                      "modulationsExpanded": true
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
               }
             ]
           }
@@ -12512,7 +12579,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8858151551107455
+            "basis": 0.5593731098350626
           },
           {
             "id": 54255,
@@ -12568,7 +12635,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5628151551089404
+            "basis": 0.23637310983325865
           },
           {
             "id": 56980,
@@ -12599,7 +12666,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5628151551089404
+            "basis": 0.23637310983325865
           },
           {
             "id": 56981,
@@ -12630,7 +12697,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7481484884077607
+            "basis": 0.42170644313207534
           },
           {
             "id": 56982,
@@ -12661,7 +12728,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5628151551089404
+            "basis": 0.23637310983325865
           },
           {
             "id": 56983,
@@ -12692,7 +12759,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5628151551089404
+            "basis": 0.23637310983325865
           },
           {
             "id": 57307,
@@ -12723,7 +12790,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.1058151551064618
+            "basis": 0.7793731098307753
           },
           {
             "id": 57308,
@@ -12754,7 +12821,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.1058151551064618
+            "basis": 0.7793731098307753
           },
           {
             "id": 62913,
@@ -12785,7 +12852,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.31181515510557883
+            "basis": 0.9853731098298956
           },
           {
             "id": 66458,
@@ -12816,7 +12883,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7908151551012587
+            "basis": 0.4643731098255744
           },
           {
             "id": 76378,
@@ -12876,7 +12943,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8438151551048232
+            "basis": 0.5173731098291406
           },
           {
             "id": 64644,
@@ -12965,7 +13032,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7928151551017236
+            "basis": 0.4663731098260413
           }
         ],
         "modulations": [
@@ -13279,8 +13346,8 @@
         "camera": {
           "active": true,
           "radius": 2886.785356765131,
-          "theta": 269.73122565832455,
-          "phi": 26.558049201965332,
+          "theta": 269.72758880641777,
+          "phi": 26.49804111942649,
           "x": 734.4430328991439,
           "y": 419.5840726949973,
           "z": 1218.1471760265995
@@ -13298,8 +13365,8 @@
           {
             "active": true,
             "radius": 2886.785356765131,
-            "theta": 269.73122565832455,
-            "phi": 26.558049201965332,
+            "theta": 269.72758880641777,
+            "phi": 26.49804111942649,
             "x": 734.4430328991439,
             "y": 419.5840726949973,
             "z": 1218.1471760265995
