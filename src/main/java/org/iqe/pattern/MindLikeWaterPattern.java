@@ -22,7 +22,8 @@ public class MindLikeWaterPattern extends LXPattern {
     protected void run(double v) {
         for (LXPoint p : model.points) colors[p.index] = LXColor.CLEAR;
         if (!enabled.getValueb()) return;
-        double radius = basis(Tempo.Division.WHOLE) * 2.;
+//        double radius = basis(Tempo.Division.WHOLE) * 2.;
+        double radius = basis(Tempo.Division.QUARTER) * 1.;
         double borderWidth = .2;
 
         for (LXPoint p : model.points) {
