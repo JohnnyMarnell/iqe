@@ -238,7 +238,7 @@ def debug_listen(path, time, num, size, keep_first=True, anchor='closestDiff', p
 def debug_predictions():
     path = '/Users/inquesoemergency/Documents/tmp/Monolink (live) - Mayan Warrior - Burning Man 2022 [AQURf3JqnJY].mp3'
     # Always choosing a beat from last sounds jittery
-    # debug_listen(path=path, time=42 * 60, num=5, size=5, keep_first=False)
+#     debug_listen(path=path, time=42 * 60, num=5, size=5, keep_first=False)
     # debug_listen(path=path, time=42 * 60 + 4 * 5, num=1, size=5, keep_first=False)
 
     # Keeping first beat happens to work, on the off-beat sound
