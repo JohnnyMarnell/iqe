@@ -28,7 +28,7 @@ Or examples with sperminal:
 ./mvnw clean package -DskipTests ; # to (re-)build
 
 # and run
-eval "java $( [[ $(uname) == 'Darwin' ]] && echo "-XstartOnFirstThread" ) \
+eval "java $( [[ $(uname) == 'Darwin' ]] && echo '-XstartOnFirstThread' ) \
     -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```

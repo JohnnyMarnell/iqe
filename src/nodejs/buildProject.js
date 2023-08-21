@@ -8,9 +8,9 @@ const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
 const numRafters = 72
 const numPillars = 0
-// const controllerIP = "192.168.0.10"
-// const controllerIP = "169.254.250.112"
-const controllerIP = "127.0.0.1"
+const controllerIP = "10.10.42.80"
+// const controllerIP = "127.0.0.1"
+// const controllerIP = "99.99.99.99"
 
 // const mapStripToArtnetPair = index => index * 3
 const mapStripToArtnetPair = index => (index + 1) * 3
@@ -246,7 +246,7 @@ function buildNagBugglerSaberOfLightFixtures_v1() {
 }
 
 // Load project file, overwrite fixtures, re-write file.
-const path = `${__dirname}/../../iqe.lxp`
+const path = `${__dirname}/../../Projects/iqe.lxp`
 const project = JSON.parse(fs.readFileSync(path))
 project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
 console.log(JSON.stringify(project, null, 2))
