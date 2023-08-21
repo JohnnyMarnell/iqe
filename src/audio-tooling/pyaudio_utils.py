@@ -110,17 +110,19 @@ class Audio:
             self.input_stream.close()
         p.terminate()
 
-# tmp
-try:
-    audio = Audio()
-    audio.listen('BlackHole 2ch')
 
-    def callback(_, frame_count, block_time, status):
-        return (audio.blocks[audio.num_blocks_written % audio.num_blocks].samples, pyaudio.paContinue)
-    out = audio.output('Speakers', callback)
-    
-    while audio.input_stream.is_active():
-        time.sleep(1)
+if __name__ == '__main__':
+    try:
+        print("Will look for and listen to Blackhole loopback'd audio and pipe to Speakers output")
+        audio = Audio()
+        audio.listen('BlackHole 2ch')
 
-except KeyboardInterrupt as err:
-    audio.shutdown()
+        def callback(_, frame_count, block_time, status):
+            return (audio.blocks[audio.num_blocks_written % audio.num_blocks].samples, pyaudio.paContinue)
+        out = audio.output('Speakers', callback)
+        
+        while audio.input_stream.is_active():
+            time.sleep(1)
+
+    except KeyboardInterrupt as err:
+        audio.shutdown()
