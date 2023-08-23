@@ -5,7 +5,7 @@ from typing import NamedTuple
 from dataclasses import dataclass
 
 @dataclass
-class Block: index: int; size: int; samples: bytes; wall_time: float; stream_time: float; \
+class Block: index: int; size: int; samples: bytearray; wall_time: float; stream_time: float; \
                          input_buffer_adc_time: float; current_time: float; output_buffer_dac_time: float;
 
 p = pyaudio.PyAudio()
@@ -15,15 +15,19 @@ class Audio:
         self.pyaudio = p
         self.block_size = block_size
         self.sample_rate = sample_rate
+        self.block_time = self.block_size / self.sample_rate
         self.num_blocks = math.ceil(seconds * sample_rate / block_size)
         self.devices = self.query_devices()
         self.blocks = list()
         for i in range(self.num_blocks):
-            self.blocks.append(Block(index=0, size=0, samples=None, wall_time=0, stream_time=0,
+            self.blocks.append(Block(index=0, size=0, samples=bytearray(2 * self.block_size), wall_time=0, stream_time=0,
                               input_buffer_adc_time=0, current_time=0, output_buffer_dac_time=0))
         self.num_blocks_read = 0
         self.num_blocks_written = 0
+        self.output_stream = None
         self.input_stream = None
+        self.input_channels = None
+        self.input_time = None
         
     def query_devices(self):
         devices = list()
@@ -45,16 +49,22 @@ class Audio:
     def find_input(self, name):
         return [d for d in self.devices if d["device"]["maxInputChannels"] > 0
                 and name in d["device"]["name"]][0]
-    
-    def listen(self, device_name, channels=None):
-        device = self.find_input(device_name)
-        channels = channels or device["device"]["maxInputChannels"]
         
-        def callback(data, frame_count, block_time, status):
+    def time(self):
+        return self.input_time
+    
+    def listen(self, device_name, callback, channels=None):
+        device = self.find_input(device_name)
+        self.input_channels = channels or device["device"]["maxInputChannels"]
+        
+        def wrapped_callback(data, frame_count, block_time, status):
             if status:
                 print("**** non zero status XRUN?", status)
             block = self.blocks[self.num_blocks_read % self.num_blocks]
-            block.samples = bytes(data)
+            if block.samples is None or len(block.samples) != len(data):
+                block.samples = bytearray(data)
+            else:
+                block.samples[:] = data
             block.index = self.num_blocks_read
             block.size = frame_count
             block.wall_time = time.time()
@@ -63,17 +73,21 @@ class Audio:
             block.current_time = block_time["current_time"]
             block.stream_time = self.input_stream.get_time()
             
+            self.input_time = block.input_buffer_adc_time + self.block_time
+            
+            callback(block)
+            
             self.num_blocks_read = self.num_blocks_read + 1
             return (None, pyaudio.paContinue)
         
         self.input_stream = p.open(
             rate=self.sample_rate,
-            channels=channels,
+            channels=self.input_channels,
             format=pyaudio.paInt16,
             input=True,
             frames_per_buffer=self.block_size,
             input_device_index=device["device"]["index"],
-            stream_callback=callback,
+            stream_callback=wrapped_callback,
             start=False
         )
         self.input_stream.start_stream()
@@ -85,9 +99,9 @@ class Audio:
         def wrapped_callback(_, frame_count, block_time, status):
             if status:
                 print("**** non zero status XRUN?", status)
-            result = callback(_, frame_count, block_time, status)
+            samples = callback(_, frame_count, block_time, status)
             self.num_blocks_written = self.num_blocks_written + 1
-            return result
+            return (samples, pyaudio.paContinue)
         
         self.output_stream = p.open(
             rate=self.sample_rate,
@@ -111,15 +125,19 @@ class Audio:
         p.terminate()
 
 
+# A Simple test
 if __name__ == '__main__':
     try:
         print("Will look for and listen to Blackhole loopback'd audio and pipe to Speakers output")
         audio = Audio()
-        audio.listen('BlackHole 2ch')
+        
+        def in_callback(block):
+            pass
+        audio.listen('BlackHole 2ch', in_callback)
 
-        def callback(_, frame_count, block_time, status):
-            return (audio.blocks[audio.num_blocks_written % audio.num_blocks].samples, pyaudio.paContinue)
-        out = audio.output('Speakers', callback)
+        def out_callback(_, frame_count, block_time, status):
+            return audio.blocks[audio.num_blocks_written % audio.num_blocks].samples
+        out = audio.output('Speakers', out_callback)
         
         while audio.input_stream.is_active():
             time.sleep(1)
