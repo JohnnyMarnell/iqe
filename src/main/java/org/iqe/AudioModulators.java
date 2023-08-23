@@ -37,6 +37,10 @@ public class AudioModulators {
     public static VolumeAvg volumeAvg;
     public static BassAvg bassAvg;
     public static TrebleAvg trebleAvg;
+    public static TrebleHeavy trebleHeavy;
+    public static TrebleToVolAvg trebleToVolAvg;
+    public static BassHeavy bassHeavy;
+    public static BassToVolAvg bassToVolAvg;
 
     public static GlobalClick globalClick;
     public static EighthClick eighthClick;
@@ -314,4 +318,33 @@ public class AudioModulators {
 
     @LXCategory("Anal-yzed") @LXModulator.Global("TrebleAvg") @LXModulator.Device("TrebleAvg")
     public static class TrebleAvg extends Trigger { protected double val() { return Audio.get().teEngine.avgTreble.getValue(); } }
+
+    @LXCategory("Anal-yzed") @LXModulator.Global("TrebleToVolAvg") @LXModulator.Device("TrebleToVolAvg")
+    public static class TrebleToVolAvg extends Trigger { protected double val() {
+        double fuck = Audio.get().teEngine.avgTrebleToVol.getValue();
+        return fuck;
+    } }
+
+    @LXCategory("Anal-yzed") @LXModulator.Global("BassToVolAvg") @LXModulator.Device("BassToVolAvg")
+    public static class BassToVolAvg extends Trigger { protected double val() { return Audio.get().teEngine.avgBassToVol.getValue(); } }
+
+    @LXCategory("Anal-yzed") @LXModulator.Global("BassHeavy") @LXModulator.Device("BassHeavy")
+    public static class BassHeavy extends Trigger { protected double val() { return Audio.get().teEngine.bassHeavy.getValue(); } }
+
+    @LXCategory("Anal-yzed") @LXModulator.Global("TrebleHeavy") @LXModulator.Device("TrebleHeavy")
+    public static class TrebleHeavy extends Trigger { protected double val() { return Audio.get().teEngine.trebleHeavy.getValue(); }}
+
+    public static BassBounce bassBounce;
+    @LXCategory("Anal-yzed") @LXModulator.Global("BassBounce") @LXModulator.Device("BassBounce")
+    public static class BassBounce extends VariableLFO {
+        @Override
+        public double compute(double basis) {
+            return super.compute(basis) * Audio.get().teEngine.bassHeavy.getValue();
+        }
+
+        @Override
+        public double computeBase(double basis) {
+            return super.computeBase(basis) * Audio.get().teEngine.bassHeavy.getValue();
+        }
+    }
 }

@@ -10,6 +10,7 @@ import heronarts.lx.audio.GraphicMeter;
 import heronarts.lx.parameter.FunctionalParameter;
 import heronarts.lx.parameter.LXParameter;
 import org.iqe.AudioModulators;
+import org.iqe.LOG;
 
 import java.awt.*;
 
@@ -46,8 +47,10 @@ public class TEAudioPattern {
     // Accumulate recent frequency band measurements into an exponentially
     // weighted moving average.
     public TEMath.EMA avgVolume = new TEMath.EMA(0.5, .01);
-    public TEMath.EMA avgBass = new TEMath.EMA(0.2, .01);
-    public TEMath.EMA avgTreble = new TEMath.EMA(0.2, .01);
+    public TEMath.EMA avgBass = new TEMath.EMA(0.0, .01);
+    public TEMath.EMA avgTreble = new TEMath.EMA(0.0, .01);
+    public TEMath.EMA trebleHeavy = new TEMath.EMA(0.0, .01);
+    public TEMath.EMA bassHeavy = new TEMath.EMA(0.0, .01);
 
     /* Ratios of the instantaneous frequency levels in bands to their recent
      * running average. Using a ratio like this helps auto-scale to various
@@ -64,6 +67,10 @@ public class TEAudioPattern {
     public double volumeRatio = .2;
     public double bassRatio = .2;
     public double trebleRatio = .2;
+
+    public TEMath.EMA avgBassToVol = new TEMath.EMA(0.2, .01);
+    public TEMath.EMA avgTrebleToVol = new TEMath.EMA(0.2, .01);
+    public double trebleVolumeRatio = 0.;
 
     // public double bassRetriggerMs;
     public LXParameter bassRetriggerMs;
@@ -118,6 +125,15 @@ public class TEAudioPattern {
         volumeRatio = volumeLevel / avgVolume.update(volumeLevel, deltaMs);
         bassRatio = bassLevel / avgBass.update(bassLevel, deltaMs);
         trebleRatio = trebleLevel / avgTreble.update(trebleLevel, deltaMs);
+
+//        LOG.info("bass level {}", bas sLevel);
+//        LOG.info("bass vol ratio {}", bassLevel / volumeLevel);
+        double bassV = avgBassToVol.update(volumeLevel == 0 ? 0 : Math.pow(bassLevel / volumeLevel, 2.0), deltaMs);
+        double trebleV = avgTrebleToVol.update(volumeLevel == 0 ? 0 : Math.pow(trebleLevel / volumeLevel, 2.0), deltaMs);
+
+        boolean bassHeavyNow = bassV > trebleV;
+        bassHeavy.update(bassHeavyNow ? bassV : 0., deltaMs);
+        trebleHeavy.update(bassHeavyNow ? 0. : trebleV, deltaMs);
 
         bassHit = false;
         // If bass is over 20% higher than recent average
