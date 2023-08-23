@@ -1,13 +1,16 @@
+.vscode
+
 # Node
 node_modules
 
-# Jupyter
+# Jupyter / python
 **/.cache/
 **/.ipython/
 **/.ipynb_checkpoints/
 **/.local/
 **/.jupyter/
 **/.config/
+*.pyc
 
 # Reaper DAW
 **/*.reapeaks
