@@ -26,6 +26,10 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
   // JKB note: these could be retired and replaced by views
   protected BooleanParameter enableEdges;
   protected BooleanParameter enablePanels;
+
+  // JM: see hack notes here and glue
+  protected BooleanParameter flipCoords;
+
   protected boolean clearNextFrame = false;
 
   /**
@@ -54,13 +58,15 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
 
     enableEdges = new BooleanParameter("Edges", true);
     enablePanels = new BooleanParameter("Panels", true);
+    flipCoords = new BooleanParameter("flipCoord", false);
 
-    enableEdges.addListener(modelPointsListener);
-    enablePanels.addListener(modelPointsListener);
+//    enableEdges.addListener(modelPointsListener);
+//    enablePanels.addListener(modelPointsListener);
     this.clearNextFrame = true;
 
     addParameter("enableEdges", enableEdges);
     addParameter("enablePanels", enablePanels);
+    addParameter("flipCoord", flipCoords);
 
     try {
       wrapper = Wrapper.fromResource(getScriptName(), this, getModelPoints());
@@ -72,8 +78,8 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
 
   @Override
   public void dispose() {
-    enableEdges.removeListener(modelPointsListener);
-    enablePanels.removeListener(modelPointsListener);
+//    enableEdges.removeListener(modelPointsListener);
+//    enablePanels.removeListener(modelPointsListener);
     super.dispose();
   }
 
@@ -142,5 +148,9 @@ public abstract class PixelblazePattern extends TEPerformancePattern {
 //      LX.error(e); //NOTE: this will crash the pattern and make it unusable now
       return;
     }
+  }
+
+  public boolean getFlipCoords() {
+    return flipCoords.getValueb();
   }
 }

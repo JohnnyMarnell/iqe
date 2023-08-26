@@ -276,7 +276,14 @@ function glueRender() {
   for (i = 0; i < __points.length; i++) {
     __color = 0;
     point = __points[i];
-    r(i, point.xn + xOffs, point.yn + yOffs, point.zn);
+
+    // hacking in this coord switch option
+    if (__pattern.getFlipCoords()) {
+        r(i, point.xn + xOffs, point.zn + yOffs, point.yn);
+    } else {
+        r(i, point.xn + xOffs, point.yn + yOffs, point.zn);
+    }
+
     __colors[point.index] = __color;
   }
 }

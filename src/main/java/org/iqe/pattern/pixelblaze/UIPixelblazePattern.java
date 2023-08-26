@@ -97,7 +97,7 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelBlazeBlowser> 
         final UI2dContainer sliders = (UI2dContainer)
                 UI2dContainer.newHorizontalContainer(uiDevice.getContentHeight() - 20, 2)
 //                        .setPosition(0, 20)
-                        .setPosition(50, 20)
+                        .setPosition(200, 20)
                         .addToContainer(uiDevice);
 
         final UILabel error = (UILabel)
@@ -132,7 +132,7 @@ public class UIPixelblazePattern implements UIDeviceControls<PixelBlazeBlowser> 
             }
 //            float contentWidth = LXUtils.maxf(140, sliders.getContentWidth());
 //            float contentWidth = LXUtils.maxf(200, sliders.getContentWidth());
-            float contentWidth = 600;
+            float contentWidth = 800;
             uiDevice.setContentWidth(contentWidth);
             resetButton.setX(contentWidth - resetButton.getWidth());
             this.openButton.setX(resetButton.getX() - 2 - this.openButton.getWidth());

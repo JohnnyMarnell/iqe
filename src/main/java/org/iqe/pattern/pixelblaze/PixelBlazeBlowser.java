@@ -16,7 +16,9 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
 
     public final DiscreteParameter script;
 
-    public final BoundedParameter speed = new BoundedParameter("timeShift", 1.0, 0.001, 1.0);
+    public final CompoundParameter speed = new CompoundParameter("timeShift", 1.0, 0.001, 1.0);
+    public final CompoundParameter timeDelta = new CompoundParameter("timeDelta", 0.0, -1., 1.);
+    public final CompoundParameter timeDeltaMax = new CompoundParameter("timeDMax", 0.0, 0., 1.5);
 
     public final StringParameter scriptName = new StringParameter("Script Name", "test.js")
             .setDescription("Path to the Pixelblaze script");
@@ -38,6 +40,8 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
         script = new DiscreteParameter("script", PixelblazePatterns.patternData.keySet().toArray(new String[0]));
         addParameter("script", script);
         addParameter("speed", speed);
+        addParameter("timeDelta", timeDelta);
+        addParameter("timeDMax", timeDeltaMax);
 
         removeParameter("enablePanels");
         addParameter("scriptName", scriptName);
@@ -114,6 +118,8 @@ public class PixelBlazeBlowser extends PixelblazeHelper {
     @Override
     protected void run(double deltaMs) {
         deltaMs = deltaMs * this.speed.getValue();
+        deltaMs = deltaMs + this.timeDelta.getValue() * this.timeDeltaMax.getValue();
+
         if (elapsedMs == 0) elapsedMs = lx.engine.nowMillis;
         elapsedMs = elapsedMs + deltaMs;
         super.run(deltaMs);
