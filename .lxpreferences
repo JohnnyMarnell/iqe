@@ -1,9 +1,9 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "projectFileName": "iqe.lxp",
-  "windowWidth": 1326,
-  "windowHeight": 727,
-  "windowPosX": 9,
+  "projectFileName": "pb coord tests.lxp",
+  "windowWidth": 1577,
+  "windowHeight": 794,
+  "windowPosX": -281,
   "windowPosY": 53,
   "uiZoom": 100,
   "focusChannelOnCue": true,

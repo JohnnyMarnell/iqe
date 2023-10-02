@@ -1,3 +1,4 @@
+import sys
 import time
 import threading
 import librosa
@@ -20,12 +21,28 @@ class BeatDetective():
         self.spb = 0
         self.last_beat = 0
         self.last_update = None
+        self.tempo_clear()
         
     def fire_beat(self):
         self.osc.send_message("/lx/tempo/beat", 1.0)
     
-    def send_tempo_update(self):
+    def tempo_update(self, bpm, beat_time, now):
+        # Set clock back to internal
         self.osc.send_message("/lx/tempo/bpm", self.bpm)
+        self.osc.send_message("/lx/tempo/clockSource", 0)
+        
+        self.bpm = bpm
+        self.spb = 60 / self.bpm
+        self.last_beat = beat_time + math.floor((now - beat_time) / self.spb) * self.spb
+        
+        print(f"Tempo update sent for {bpm:2f} bpm")
+
+    def tempo_clear(self):
+        self.bpm = 0
+        self.last_update = None
+        # Temporarily set clock source to OSC (2), so it doesn't auto tick
+        self.osc.send_message("/lx/tempo/clockSource", 2)
+        print("Tempo cleared, clock stopped.")
     
     def check_and_fire_beat(self):
         if not self.bpm:
@@ -36,7 +53,8 @@ class BeatDetective():
             self.last_beat = self.last_beat + self.spb
         
     def predict(self, secs_back=10, update=True):
-        start = time.time()
+        now = self.audio.time()
+        start = now
         window = self.window(secs_back_start=secs_back)
         bpm, beats = self.predict_beats(window.samples, sr=self.audio.sample_rate)
         
@@ -44,8 +62,7 @@ class BeatDetective():
             if update:
                 print("Skipping this prediction update...")
             elif self.last_update:
-                print("Quicker check is clearing last update")
-                self.last_update = None
+                self.tempo_clear()
             self.bpm = 0
             return
 
@@ -60,18 +77,14 @@ class BeatDetective():
         beat_time = window.start_block.input_buffer_adc_time + anchor
         
         if update or not self.last_update:
-            now = self.audio.time()
-            self.bpm = bpm
-            self.spb = spb
-            self.last_beat = beat_time + math.floor((now - beat_time) / self.spb) * self.spb
-            self.send_tempo_update()
+            self.tempo_update(bpm, beat_time, now)
         if update:
             self.last_update = now
             
         
         wsecs = len(window.samples) / self.audio.sample_rate
         avg_tempo = 60 / np.average(np.diff(beats))
-        run_time = time.time() - start
+        run_time = self.audio.time() - start
         print(f"Window secs: {wsecs:.2f}, returned tempo {bpm:.2f}, avg {avg_tempo:.2f}, # beats {len(beats)}, in {run_time:.2f} secs")
     
     """ Rounded to blocks, build a mono, [-1, 1] normalized numpy array window of near desired length """
@@ -166,10 +179,25 @@ class BeatDetective():
     def shutdown(self):
         self.running = False
         self.audio.shutdown()
+    
+    def dump_env_info(self):
+        self.log('Python version:' + sys.version)
+        self.log('****** Enumerating sys.modules:')
+        for module in sys.modules:
+            self.log(sys.modules[module])
+            self.log(module)
+        self.log('****** Package resources distros:')
+        for dist in __import__('pkg_resources').working_set:
+            self.log(dist.project_name.replace('Python', ''))
+    
+    def log(self, msg):
+        print(msg)
 
-        
+
 beat_detective = BeatDetective(block_size=64, sample_rate=48000, seconds=30)
+# beat_detective.dump_env_info()
 try:
-    beat_detective.run(predict_interval_secs=10, secs_back=10)
+    beat_detective.run(predict_interval_secs=10, secs_back=10,
+                        in_device='DUO')
 except KeyboardInterrupt as err:
     beat_detective.shutdown()

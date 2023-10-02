@@ -1,5 +1,43 @@
 const fs = require('fs')
 
+class ArtNetPair {
+    constructor(universe, channel) {
+        this.universe = universe
+        this.channel = channel
+    }
+}
+const artNetGrid = [
+    [ new ArtNetPair(1, 0), new ArtNetPair(1, 420), new ArtNetPair(2, 330) ],
+    [ new ArtNetPair(4, 0), new ArtNetPair(4, 420), new ArtNetPair(5, 330) ],
+    [ new ArtNetPair(7, 0), new ArtNetPair(7, 420), new ArtNetPair(8, 330) ],
+    [ new ArtNetPair(10, 0), new ArtNetPair(10, 420), new ArtNetPair(11, 330) ],
+    [ new ArtNetPair(13, 0), new ArtNetPair(13, 420), new ArtNetPair(14, 330) ],
+    [ new ArtNetPair(16, 0), new ArtNetPair(16, 420), new ArtNetPair(17, 330) ],
+    [ new ArtNetPair(19, 0), new ArtNetPair(19, 420), new ArtNetPair(20, 330) ],
+    [ new ArtNetPair(22, 0), new ArtNetPair(22, 420), new ArtNetPair(23, 330) ],
+    [ new ArtNetPair(25, 0), new ArtNetPair(25, 420), new ArtNetPair(26, 330) ],
+    [ new ArtNetPair(28, 0), new ArtNetPair(28, 420), new ArtNetPair(29, 330) ],
+    [ new ArtNetPair(31, 0), new ArtNetPair(31, 420), new ArtNetPair(32, 330) ],
+    [ new ArtNetPair(34, 0), new ArtNetPair(34, 420), new ArtNetPair(35, 330) ],
+
+    [ new ArtNetPair(37, 0), new ArtNetPair(37, 420), new ArtNetPair(38, 330) ],
+    [ new ArtNetPair(40, 0), new ArtNetPair(40, 420), new ArtNetPair(41, 330) ],
+    [ new ArtNetPair(43, 0), new ArtNetPair(43, 420), new ArtNetPair(44, 330) ],
+    
+    //  [ new ArtNetPair(46, 0), new ArtNetPair(46, 420), new ArtNetPair(47, 330) ],
+    [ new ArtNetPair(73, 0), new ArtNetPair(73, 420), new ArtNetPair(74, 330) ],
+
+    [ new ArtNetPair(49, 0), new ArtNetPair(49, 420), new ArtNetPair(50, 330) ],
+    [ new ArtNetPair(52, 0), new ArtNetPair(52, 420), new ArtNetPair(53, 330) ],
+    [ new ArtNetPair(55, 0), new ArtNetPair(55, 420), new ArtNetPair(56, 330) ],
+    [ new ArtNetPair(58, 0), new ArtNetPair(58, 420), new ArtNetPair(59, 330) ],
+    [ new ArtNetPair(61, 0), new ArtNetPair(61, 420), new ArtNetPair(62, 330) ],
+    [ new ArtNetPair(64, 0), new ArtNetPair(64, 420), new ArtNetPair(65, 330) ],
+    [ new ArtNetPair(67, 0), new ArtNetPair(67, 420), new ArtNetPair(68, 330) ],
+    [ new ArtNetPair(70, 0), new ArtNetPair(70, 420), new ArtNetPair(71, 330) ],
+
+]
+
 // yaw, pitch, roll, (0,0,0) => along x axis, (0,90,0) => no visual change (so x axis?),
 //      (0,0,90) vertical up (y+) (so z axis?)
 let id = 100
@@ -17,6 +55,16 @@ const mapStripToArtnetPair = index => (index + 1) * 3
 
 const s = defaultNagBugglerSaberOfLight
 const sl = stripLenMultiplier => stripLenMultiplier * stripLen
+
+
+let col, x, z
+const numRows = 24
+const spaceBetweenCols = .1 * stripLen
+const spaceBetweenRows = .15 * stripLen
+
+const fixtures = []
+
+
 
 /** Notes on fArtNet. The Advatek PixLite E16-s mk3 has 32 outputs, for which we configure start + ends for 
  * universe and channel. A channel represents one of 3 color components (RGB) of an actual LED pixel, thus
@@ -36,7 +84,24 @@ for (let i = 0; i < 1024; i++) {
     fArtNetPairs.push( [universe, channelingus[i % 3] ] )
 }
 
-function buildNagBugglerSaberOfLightFixtures() {
+for (let row = 0; row < 24; row++) {
+    x = (numRows - 1) - row * spaceBetweenRows
+    
+    col = 0
+    z = 0 - (3 * stripLen) + 2 * spaceBetweenCols
+    fixtures.push({...s({yaw: -90, x: x, y: sl(1), z: z}, ``, `Rafter ${row + 1}-${col + 1}`, artNetGrid[row][col] )})
+    
+    col = 1
+    z = 0 - (2 * stripLen) + 1 * spaceBetweenCols
+    fixtures.push({...s({yaw: -90, x: x, y: sl(1), z: z}, ``, `Rafter ${row + 1}-${col + 1}`, artNetGrid[row][col])})
+
+    col = 2
+    z = 0 - (1 * stripLen) + 0 * spaceBetweenCols
+    fixtures.push({...s({yaw: -90, x: x, y: sl(1), z: z}, ``, `Rafter ${row + 1}-${col + 1}`, artNetGrid[row][col])})
+}
+
+
+function buildNagBugglerSaberOfLightFixturesBM() {
     const vSpace = .15, hSpace = .1
     return [
         {...s({yaw: -90, x: sl(24 * vSpace), y: sl(1), z: 0}, 'r-v2-24 sq2 col1')},
@@ -248,12 +313,14 @@ function buildNagBugglerSaberOfLightFixtures_v1() {
 // Load project file, overwrite fixtures, re-write file.
 const path = `${__dirname}/../../Projects/iqe.lxp`
 const project = JSON.parse(fs.readFileSync(path))
-project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
+// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
+project.model.fixtures = fixtures
 console.log(JSON.stringify(project, null, 2))
 console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
+
 fs.writeFileSync(path, JSON.stringify(project, null, 2))
 
-function defaultNagBugglerSaberOfLight(params, tags) {
+function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
     id++
     const i = id - 101
     let fixtureTags = `strip ${id - 100 <= numPillars ? 'pillar' : 'rafter'} f${id - 101}`
@@ -266,7 +333,7 @@ function defaultNagBugglerSaberOfLight(params, tags) {
             modulationControlsExpanded: true
         },
         parameters: {
-            label: (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + i,
+            label: labelParam ? labelParam : (id - 100 <= numPillars ? `Pillar ${id - 100}` : `Rafter ${id - 100 - numPillars}`) + '; #' + i,
             tags: fixtureTags,
             x: 0,
             y: stripLen, // most (all) strips have origin in ceiling
@@ -288,8 +355,8 @@ function defaultNagBugglerSaberOfLight(params, tags) {
             reverse: false,
             host: controllerIP,
             port: 7890,
-            artNetUniverse: fArtNetPairs[mapStripToArtnetPair(i)][0],
-            dmxChannel: fArtNetPairs[mapStripToArtnetPair(i)][1],
+            artNetUniverse: artNetPair ? artNetPair.universe : fArtNetPairs[mapStripToArtnetPair(i)][0],
+            dmxChannel: artNetPair ? artNetPair.channel : fArtNetPairs[mapStripToArtnetPair(i)][1],
             artNetSequenceEnabled: false,
             opcChannel: 0,
             opcOffset: 0,
