@@ -1,12 +1,19 @@
 <html>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
     <head><link href="/tailwind.css" rel="stylesheet"></head>
+    <script src="/jquery-2.1.4.js"></script>
     
     <body data-path="/lx">
     <h3 class="title">IQE LED Command Staishe</h3> <hr>
 
+    <button id="cirqs" class="button">Cirqs</button>
+
+    <p> Bilbo Knobbins: </p>
     <div data-path="/modulation/Knobs"><p>
-        <p> Bilbo Knobbins: </p>
+
+
+
+
         <input class="slider vertical" data-path="/macro2" type="range" min="0" max="1.0" step="0.01">
     </p><p>
         <input class="slider vertical" data-path="/macro3" type="range" min="0" max="1.0" step="0.01">
@@ -49,5 +56,12 @@
     </div>
 
     <script src="/osc-controller.js" type="module"></script>
+    <script>
+        $(document).ready(() => {
+            $('#cirqs').on('click', e => {
+                alert('click')
+            })
+        })
+    </script>
     </body>
 </html>

@@ -88,3 +88,5 @@ async function run() {
     osc.open({ host: location.hostname, port: 8080 })
 }
 run()
+
+window.fuck = 1
