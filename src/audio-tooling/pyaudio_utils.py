@@ -1,7 +1,6 @@
 import pyaudio
 import time
 import math
-from typing import NamedTuple
 from dataclasses import dataclass
 
 @dataclass
@@ -28,6 +27,7 @@ class Audio:
         self.input_stream = None
         self.input_channels = None
         self.input_time = None
+        self.shutdown_called = False
         
     def query_devices(self):
         devices = list()
@@ -42,43 +42,54 @@ class Audio:
                 devices.append({"api": api_info, "device": dev_info})        
         return devices
 
-    def find_output(self, name):
-        return [d for d in self.devices if d["device"]["maxOutputChannels"] > 0
-                and name in d["device"]["name"]][0]
+    def find_output(self, name, require=True):
+        devices = [d for d in self.devices if d["device"]["maxOutputChannels"] > 0
+                and name in d["device"]["name"]]
+        if require and not devices:
+            raise ValueError(f"Output device {name} not found")
+        return devices[0]
 
-    def find_input(self, name):
-        return [d for d in self.devices if d["device"]["maxInputChannels"] > 0
-                and name in d["device"]["name"]][0]
+    def find_input(self, name, require=True):
+        devices = [d for d in self.devices if d["device"]["maxInputChannels"] > 0
+                and name in d["device"]["name"]]
+        if require and not devices:
+            raise ValueError(f"Input device {name} not found")
+        return devices[0]
         
     def time(self):
         return self.input_time
     
     def listen(self, device_name, callback, channels=None):
-        device = self.find_input(device_name)
+        device = self.find_input(device_name, require=True)
         self.input_channels = channels or device["device"]["maxInputChannels"]
+        print(f"Listening to input {device_name}, {self.input_channels} channels")
         
         def wrapped_callback(data, frame_count, block_time, status):
-            if status:
-                print("**** non zero status XRUN?", status)
-            block = self.blocks[self.num_blocks_read % self.num_blocks]
-            if block.samples is None or len(block.samples) != len(data):
-                block.samples = bytearray(data)
-            else:
-                block.samples[:] = data
-            block.index = self.num_blocks_read
-            block.size = frame_count
-            block.wall_time = time.time()
-            block.input_buffer_adc_time = block_time["input_buffer_adc_time"]
-            block.output_buffer_dac_time = block_time["output_buffer_dac_time"]
-            block.current_time = block_time["current_time"]
-            block.stream_time = self.input_stream.get_time()
-            
-            self.input_time = block.input_buffer_adc_time + self.block_time
-            
-            callback(block)
-            
-            self.num_blocks_read = self.num_blocks_read + 1
-            return (None, pyaudio.paContinue)
+            try:
+                if status:
+                    print("**** non zero status XRUN?", status)
+                block = self.blocks[self.num_blocks_read % self.num_blocks]
+                if block.samples is None or len(block.samples) != len(data):
+                    block.samples = bytearray(data)
+                else:
+                    block.samples[:] = data
+                block.index = self.num_blocks_read
+                block.size = frame_count
+                block.wall_time = time.time()
+                block.input_buffer_adc_time = block_time["input_buffer_adc_time"]
+                block.output_buffer_dac_time = block_time["output_buffer_dac_time"]
+                block.current_time = block_time["current_time"]
+                block.stream_time = self.input_stream.get_time()
+                
+                self.input_time = block.input_buffer_adc_time + self.block_time
+                
+                callback(block)
+                
+                self.num_blocks_read = self.num_blocks_read + 1
+                return (None, pyaudio.paContinue)
+            except Exception as err:
+                print("Error in input callback", err)
+                return (None, pyaudio.paAbort)
         
         self.input_stream = p.open(
             rate=self.sample_rate,
@@ -96,12 +107,20 @@ class Audio:
     def output(self, device_name, callback, channels=None):
         device = self.find_output(device_name)
         channels = channels or device["device"]["maxOutputChannels"]
+        print(f"Using output {device['device']['name']}, {channels} channels")
+        
         def wrapped_callback(_, frame_count, block_time, status):
-            if status:
-                print("**** non zero status XRUN?", status)
-            samples = callback(_, frame_count, block_time, status)
-            self.num_blocks_written = self.num_blocks_written + 1
-            return (samples, pyaudio.paContinue)
+            try:
+                if status:
+                    print("**** non zero status XRUN?", status)
+                samples = callback(_, frame_count, block_time, status)
+                self.num_blocks_written = self.num_blocks_written + 1
+                if isinstance(samples, bytearray):
+                    samples = bytes(samples)
+                return (samples, pyaudio.paContinue)
+            except Exception as err:
+                print("Error in output callback", err)
+                return (None, pyaudio.paAbort)        
         
         self.output_stream = p.open(
             rate=self.sample_rate,
@@ -115,8 +134,14 @@ class Audio:
         )
         self.output_stream.start_stream()
         return self.output_stream
+    
+    def latest_block_written(self):
+        return self.blocks[self.num_blocks_written % self.num_blocks]
         
     def shutdown(self):
+        if self.shutdown_called:
+            return
+        self.shutdown_called = True
         print("Shutting down audio...")
         if self.output_stream:
             self.output_stream.close()
@@ -128,7 +153,7 @@ class Audio:
 # A Simple test
 if __name__ == '__main__':
     try:
-        print("Will look for and listen to Blackhole loopback'd audio and pipe to Speakers output")
+        print("Will look for and listen to BlackHole loopback'd audio and pipe to Speakers output")
         audio = Audio()
         
         def in_callback(block):
@@ -136,11 +161,13 @@ if __name__ == '__main__':
         audio.listen('BlackHole 2ch', in_callback)
 
         def out_callback(_, frame_count, block_time, status):
-            return audio.blocks[audio.num_blocks_written % audio.num_blocks].samples
+            return audio.latest_block_written().samples
         out = audio.output('Speakers', out_callback)
         
         while audio.input_stream.is_active():
             time.sleep(1)
 
     except KeyboardInterrupt as err:
+        audio.shutdown()
+    finally:
         audio.shutdown()
