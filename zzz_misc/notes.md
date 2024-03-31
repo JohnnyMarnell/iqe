@@ -1432,3 +1432,42 @@ APP /lx/midi/computerKeyboardEnabled 0
 APP /lx/midi/computerKeyboardOctave 5
 APP /lx/midi/computerKeyboardVelocity 5
 ```
+
+# PixelBlaze corrected coords name greps
+
+Some may also be revisit in general, not just coordinate flip resolved.
+
+2d line dancer
+voronoi mix
+2d spiral twirls
+fast pulse
+2D Bouncing Additive Primaries
+stairmaster
+stargen polar 2d
+Mandelbrot 2D
+bouncing rgb balls.*2d
+heart
+all lasers fire
+midpointdisplacement1d
+shimmer crossfade 2d
+theta
+lissajous curve tracer
+tixy
+icicleblaze
+spectromatrix render2D
+spectro kalidastrip
+block reflections
+blinky eyes
+animated asterisks
+sinus
+metaballs of fire
+wandering fireball
+matrix rain
+angle and radius
+swirlpool
+map.*concentric
+time flies
+spinwheel
+millipede
+matrix green waterfall
+canvas example

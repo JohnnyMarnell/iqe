@@ -11,6 +11,7 @@ import org.iqe.LOG;
 import titanicsend.TEMath;
 import titanicsend.pattern.pixelblaze.PixelblazePattern;
 
+import javax.sound.sampled.Port;
 import java.time.LocalDateTime;
 
 /**
@@ -106,16 +107,27 @@ public class PixelblazeHelper extends PixelblazePattern {
         transformNeeded = true;
     }
 
+    public void rotate(float angleRadAroundZAxis) {
+        transform.rotateY(angleRadAroundZAxis);
+        transformNeeded = true;
+    }
+
     public double perlinRidge(float x, float y, float z, float lacunarity, float gain, float offset, int octaves) {
 
-        return LXNoisePorted.stb_perlin_ridge_noise3(x, y, z,
+        return Port_LXNoise.PASS_WRAP_stb_perlin_ridge_noise3(x, y, z,
                 lacunarity, gain, offset, octaves,
                 perlinWrapX, perlinWrapY, perlinWrapZ);
 
     }
 
     public double perlinTurbulence(float x, float y, float z, float lacunarity, float gain, int octaves) {
-        return LXNoisePorted.stb_perlin_turbulence_noise3(
+        return Port_LXNoise.PASS_WRAP_stb_perlin_turbulence_noise3(
+                x, y, z, lacunarity, gain, octaves,
+                perlinWrapX, perlinWrapY, perlinWrapZ);
+    }
+
+    public double perlinFbm(float x, float y, float z, float lacunarity, float gain, int octaves) {
+        return Port_LXNoise.PASS_WRAP_stb_perlin_fbm_noise3(
                 x, y, z, lacunarity, gain, octaves,
                 perlinWrapX, perlinWrapY, perlinWrapZ);
     }

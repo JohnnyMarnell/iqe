@@ -279,7 +279,7 @@ function glueRender() {
 
     // hacking in this coord switch option
     if (__pattern.getFlipCoords()) {
-        r(i, point.xn + xOffs, point.zn + yOffs, point.yn);
+        r(i, point.zn + yOffs, point.xn + xOffs, point.yn);
     } else {
         r(i, point.xn + xOffs, point.yn + yOffs, point.zn);
     }

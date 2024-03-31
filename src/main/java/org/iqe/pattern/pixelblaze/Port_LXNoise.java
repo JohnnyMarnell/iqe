@@ -4,7 +4,9 @@ package org.iqe.pattern.pixelblaze;
  * Copied IntelliJ decompiled of heronarts.lx.utils.Noise, since more private methods
  * Namely, needed configurable perlin wrap
  *
- * PixelBlaze allow setting the perlin wraps, luckily this wasn't terrible to copy pasta add elsewhere
+ * PixelBlaze allow setting the perlin wraps, luckily this wasn't terrible to copy pasta add elsewhere.
+ *
+ * Later copy pasta modified with PASS_WRAP to expose passing non-zero wrap values
  */
 public class Port_LXNoise {
     public static final int[] stb__perlin_randtab = new int[]{23, 125, 161, 52, 103, 117, 70, 37, 247, 101, 203, 169, 124, 126, 44, 123, 152, 238, 145, 45, 171, 114, 253, 10, 192, 136, 4, 157, 249, 30, 35, 72, 175, 63, 77, 90, 181, 16, 96, 111, 133, 104, 75, 162, 93, 56, 66, 240, 8, 50, 84, 229, 49, 210, 173, 239, 141, 1, 87, 18, 2, 198, 143, 57, 225, 160, 58, 217, 168, 206, 245, 204, 199, 6, 73, 60, 20, 230, 211, 233, 94, 200, 88, 9, 74, 155, 33, 15, 219, 130, 226, 202, 83, 236, 42, 172, 165, 218, 55, 222, 46, 107, 98, 154, 109, 67, 196, 178, 127, 158, 13, 243, 65, 79, 166, 248, 25, 224, 115, 80, 68, 51, 184, 128, 232, 208, 151, 122, 26, 212, 105, 43, 179, 213, 235, 148, 146, 89, 14, 195, 28, 78, 112, 76, 250, 47, 24, 251, 140, 108, 186, 190, 228, 170, 183, 139, 39, 188, 244, 246, 132, 48, 119, 144, 180, 138, 134, 193, 82, 182, 120, 121, 86, 220, 209, 3, 91, 241, 149, 85, 205, 150, 113, 216, 31, 100, 41, 164, 177, 214, 153, 231, 38, 71, 185, 174, 97, 201, 29, 95, 7, 92, 54, 254, 191, 118, 34, 221, 131, 11, 163, 99, 234, 81, 227, 147, 156, 176, 17, 142, 69, 12, 110, 62, 27, 255, 0, 194, 59, 116, 242, 252, 19, 21, 187, 53, 207, 129, 64, 135, 61, 40, 167, 237, 102, 223, 106, 159, 197, 189, 215, 137, 36, 32, 22, 5, 23, 125, 161, 52, 103, 117, 70, 37, 247, 101, 203, 169, 124, 126, 44, 123, 152, 238, 145, 45, 171, 114, 253, 10, 192, 136, 4, 157, 249, 30, 35, 72, 175, 63, 77, 90, 181, 16, 96, 111, 133, 104, 75, 162, 93, 56, 66, 240, 8, 50, 84, 229, 49, 210, 173, 239, 141, 1, 87, 18, 2, 198, 143, 57, 225, 160, 58, 217, 168, 206, 245, 204, 199, 6, 73, 60, 20, 230, 211, 233, 94, 200, 88, 9, 74, 155, 33, 15, 219, 130, 226, 202, 83, 236, 42, 172, 165, 218, 55, 222, 46, 107, 98, 154, 109, 67, 196, 178, 127, 158, 13, 243, 65, 79, 166, 248, 25, 224, 115, 80, 68, 51, 184, 128, 232, 208, 151, 122, 26, 212, 105, 43, 179, 213, 235, 148, 146, 89, 14, 195, 28, 78, 112, 76, 250, 47, 24, 251, 140, 108, 186, 190, 228, 170, 183, 139, 39, 188, 244, 246, 132, 48, 119, 144, 180, 138, 134, 193, 82, 182, 120, 121, 86, 220, 209, 3, 91, 241, 149, 85, 205, 150, 113, 216, 31, 100, 41, 164, 177, 214, 153, 231, 38, 71, 185, 174, 97, 201, 29, 95, 7, 92, 54, 254, 191, 118, 34, 221, 131, 11, 163, 99, 234, 81, 227, 147, 156, 176, 17, 142, 69, 12, 110, 62, 27, 255, 0, 194, 59, 116, 242, 252, 19, 21, 187, 53, 207, 129, 64, 135, 61, 40, 167, 237, 102, 223, 106, 159, 197, 189, 215, 137, 36, 32, 22, 5};
@@ -82,16 +84,18 @@ public class Port_LXNoise {
         return stb_perlin_noise3_internal(x, y, z, x_wrap, y_wrap, z_wrap, seed);
     }
 
-    public static float stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves) {
+    public static float PASS_WRAP_stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves,
+                                                          int xw, int yw, int zw) {
         float frequency = 1.0F;
         float prev = 1.0F;
         float amplitude = 0.5F;
         float sum = 0.0F;
 
         for(int i = 0; i < octaves; ++i) {
-            float r = stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, 0, 0, 0, i);
+            float r = stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, xw, yw, zw, i);
             r = offset - Math.abs(r);
             r *= r;
+
             sum += r * amplitude * prev;
             prev = r;
             frequency *= lacunarity;
@@ -101,13 +105,22 @@ public class Port_LXNoise {
         return sum;
     }
 
+    public static float stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves) {
+        return PASS_WRAP_stb_perlin_ridge_noise3(x, y, z, lacunarity, gain, offset, octaves, 0, 0, 0);
+    }
+
     public static float stb_perlin_fbm_noise3(float x, float y, float z, float lacunarity, float gain, int octaves) {
+        return PASS_WRAP_stb_perlin_fbm_noise3(x, y, z, lacunarity, gain, octaves, 0, 0, 0);
+    }
+
+    public static float PASS_WRAP_stb_perlin_fbm_noise3(float x, float y, float z, float lacunarity, float gain, int octaves,
+                                                        int xw, int yw, int zw) {
         float frequency = 1.0F;
         float amplitude = 1.0F;
         float sum = 0.0F;
 
         for(int i = 0; i < octaves; ++i) {
-            sum += stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, 0, 0, 0, i) * amplitude;
+            sum += stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, xw, yw, zw, i) * amplitude;
             frequency *= lacunarity;
             amplitude *= gain;
         }
@@ -115,13 +128,18 @@ public class Port_LXNoise {
         return sum;
     }
 
-    public static float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves) {
+    public static float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves,
+                                                               int xw, int yw, int zw) {
+        return PASS_WRAP_stb_perlin_turbulence_noise3(x, y, z, lacunarity, gain, octaves, 0, 0, 0);
+    }
+    public static float PASS_WRAP_stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves,
+                                                     int xw, int yw, int zw) {
         float frequency = 1.0F;
         float amplitude = 1.0F;
         float sum = 0.0F;
 
         for(int i = 0; i < octaves; ++i) {
-            float r = stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, 0, 0, 0, i) * amplitude;
+            float r = stb_perlin_noise3_internal(x * frequency, y * frequency, z * frequency, xw, yw, zw, i) * amplitude;
             sum += Math.abs(r);
             frequency *= lacunarity;
             amplitude *= gain;
