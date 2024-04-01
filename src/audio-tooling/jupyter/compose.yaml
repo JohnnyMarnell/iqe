@@ -11,6 +11,7 @@ services:
       - "8888:8888"
     volumes:
       - $PWD:/home/jovyan
+      - $PWD/tempo.html:/out/tempo.html
   jupyter-server:
     container_name: jupyter-server
     build:
