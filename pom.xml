@@ -45,6 +45,14 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/vendor/glxstudio.jar</systemPath>
     </dependency>
+
+
+<!--    <dependency>-->
+<!--      <groupId>com.heronarts</groupId>-->
+<!--      <artifactId>glxstudio</artifactId>-->
+<!--      <version>1.0.0</version>-->
+<!--    </dependency>-->
+
   </dependencies>
 
   <build>

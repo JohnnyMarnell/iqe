@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "**** ToDo: upgrade to Chromatik v1.0.0, place old jar in vendor" ; exit 0
 cd "$(dirname "$0")"
 cd ../../
 

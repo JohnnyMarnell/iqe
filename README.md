@@ -15,6 +15,7 @@ Outdated screenshart:
 
 Prerequisites:
 
+1. Make sure `git-lfs` (Large File Storage) is already installed, e.g. `brew install git-lfs`
 1. Java 17 Temurin / Eclipse is installed from here: https://adoptium.net/
 
 Then find and double-click the `IQE.command` here in this repo / folder. (Note: until annoying-ass Maven is sorted,
