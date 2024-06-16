@@ -15,10 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.StreamSupport;
@@ -117,6 +117,55 @@ public class PixelblazePatterns {
         }
     }
 
+    private static void addPixelblazeDownloads(Map<String, String> nameToSource) {
+        ClassLoader classLoader = PixelblazePatterns.class.getClassLoader();
+
+        // Specify the directory in the resources folder
+        String resourceDirectory = "pixelblaze-patterns"; // Replace with your resource directory
+
+        try {
+            // Get the URL of the resource directory
+            URL resourceDirURL = classLoader.getResource(resourceDirectory);
+
+            if (resourceDirURL != null) {
+                Path resourceDirPath = Paths.get(resourceDirURL.toURI());
+
+                Files.walkFileTree(resourceDirPath, new SimpleFileVisitor<>() {
+                    @Override
+                    public FileVisitResult visitFile(Path entry, BasicFileAttributes attrs) throws IOException {
+                        String file = entry.toAbsolutePath().toString().replaceAll(resourceDirPath.toAbsolutePath().toString(), "");
+                        String src = null;
+                        if (file.endsWith(".epe")) {
+                            src = gson.fromJson(Files.readString(entry), JsonObject.class)
+                                    .get("sources")
+                                    .getAsJsonObject()
+                                    .get("main")
+                                    .getAsString();
+                        }
+                        else if (file.endsWith(".js")) {
+                            src = Files.readString(entry);
+                        }
+                        else {
+                            System.out.println("SKIPPING PIXELBLAZE unknown: " + file);
+                        }
+
+                        if (nameToSource.containsKey(file)) {
+                            System.out.println("SKIPPING DUPLICATE PIXELBLAZE: " + file);
+                        } else if (src != null) {
+                            nameToSource.put(file, src);
+                        }
+
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+            } else {
+                System.out.println("Resource directory not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static Map<String, String> loadPatternData() {
         try {
             InputStream is = PixelblazePatterns.class.getClassLoader()
@@ -130,6 +179,7 @@ public class PixelblazePatterns {
                             el.get("file").getAsJsonObject()
                                 .get("sources").getAsJsonObject()
                                 .get("main").getAsString()));
+            addPixelblazeDownloads(nameToSource);
             return nameToSource;
         } catch (IOException e) {
             throw new RuntimeException(e);
