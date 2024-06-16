@@ -1,5 +1,14 @@
 # In Queso Emergency
 
+# Playa 2024 - To Do
+- Confirm and notate PixLite outputs connection strategy
+    - 1 side outputs #1 - #12, other #17 - #28
+    - Nick believes 12 data cables on one side, 12 on other
+    - Can see in line 27/28 of [buildProject.js](./src/nodejs/buildProject.js) code that it looks like we
+      set up the manual ArtNet mappings for the two halves of 12 rows of strips, and the second half fourth output
+      needed some kind of semi wonky jump... or maybe we went to another output (one after would be last, so #29)???
+
+# Summary
 Mainly LX Studio / Chromatik project and Java code for Burning Man IQE HQ shade structure LEDznutz.
 
 Also contains python code and Jupyter notebooks for audio analysis with
