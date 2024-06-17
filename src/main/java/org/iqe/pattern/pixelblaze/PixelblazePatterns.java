@@ -15,10 +15,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.StreamSupport;
@@ -128,7 +131,14 @@ public class PixelblazePatterns {
             URL resourceDirURL = classLoader.getResource(resourceDirectory);
 
             if (resourceDirURL != null) {
-                Path resourceDirPath = Paths.get(resourceDirURL.toURI());
+                URI uri = resourceDirURL.toURI();
+                Path resourceDirPath;
+                if (uri.getScheme().equals("jar")) {
+                    FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+                    resourceDirPath = fileSystem.getPath(resourceDirectory);
+                } else {
+                    resourceDirPath = Paths.get(uri);
+                }
 
                 Files.walkFileTree(resourceDirPath, new SimpleFileVisitor<>() {
                     @Override
@@ -152,6 +162,7 @@ public class PixelblazePatterns {
                         if (nameToSource.containsKey(file)) {
                             System.out.println("SKIPPING DUPLICATE PIXELBLAZE: " + file);
                         } else if (src != null) {
+                            System.out.println("Loading pixelblaze extra: " + file);
                             nameToSource.put(file, src);
                         }
 
