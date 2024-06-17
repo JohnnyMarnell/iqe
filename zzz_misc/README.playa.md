@@ -1,3 +1,18 @@
+# Checklist
+
+## Before Playa
+
+- Make sure GitHub Desktop App is logged in
+- pull latest to project
+- it's located in Finder at Home directory, src, iqe: ~/src/iqe
+- Desktop has link to these notes, and link to Run / Start Command
+- Verify LX Starts via clicking command
+
+## On Playa
+- Connect power and ethernet for pixlite, router, laptop
+- Each of these should get IP's of 10.10.42.xx, plus they should be:
+  - PixLite: 10.10.42.
+
 # OUTDATED, pre-Chromatik alpha builds
 # OUTDATED, pre-Chromatik alpha builds
 # OUTDATED, pre-Chromatik alpha builds
