@@ -72,6 +72,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 PixelBlazeBlowser.class,
                 PixelblazePatterns.PBTemp.class,
 
+                DiagnosticColorCyclePattern.class,
                 DiagnosticsPattern.class,
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
