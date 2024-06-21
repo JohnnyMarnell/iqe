@@ -11,7 +11,11 @@
 ## On Playa
 - Connect power and ethernet for pixlite, router, laptop
 - Each of these should get IP's of 10.10.42.xx, plus they should be:
-  - PixLite: 10.10.42.
+  - PixLite: 10.10.42.80
+- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
+```bash
+node ~/src/iqe/src/nodejs/buildProject.js
+```
 
 # OUTDATED, pre-Chromatik alpha builds
 # OUTDATED, pre-Chromatik alpha builds
