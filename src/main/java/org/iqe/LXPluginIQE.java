@@ -1,7 +1,9 @@
 package org.iqe;
 
 import heronarts.lx.*;
+import heronarts.lx.mixer.LXChannel;
 import heronarts.lx.model.LXModel;
+import heronarts.lx.pattern.LXPattern;
 import heronarts.lx.pattern.LifePattern;
 import heronarts.lx.pattern.color.GradientPattern;
 import heronarts.lx.pattern.color.SolidPattern;
@@ -81,6 +83,15 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
 
         running = true;
     }
+
+    public static class ChannelListener implements LXChannel.Listener {
+        @Override
+        public void patternWillChange(LXChannel channel, LXPattern pattern, LXPattern nextPattern) {
+            // TODO(jmarnell) - sigh, this never fires?
+            LOG.info("Channel {} changing from {} to {}", channel.getLabel(), pattern.getLabel(), nextPattern.getLabel());
+        }
+    }
+    ChannelListener channelListener = new ChannelListener();
 
     static public final double SLOWMIN = 30;
     static public final double SLOWMAX = 90;
@@ -231,6 +242,10 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         if (change == LX.ProjectListener.Change.OPEN) {
             LOG.info("Project open, dumping OSC state for clients");
             Audio.get().osc.refresh();
+
+            LOG.info("wtf {}", lx.engine.mixer.getChannels().size());
+            lx.engine.mixer.getChannels().forEach(c -> LOG.info("sigh {}", c.label.getString()));
+            lx.engine.mixer.getChannels().forEach(c -> c.addListener(channelListener));
         }
     }
 
