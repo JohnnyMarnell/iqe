@@ -79,6 +79,9 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
 
+        lx.registry.addFixture(CornerFixture.class);
+        lx.registry.addFixture(CornerFixture.OtherCorner.class);
+
         initializeAutopilot();
 
         running = true;
@@ -225,6 +228,15 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         // BouncingDots
     }
 
+    public void projectOpen() {
+        LOG.info("Project open, dumping OSC state for clients");
+        Audio.get().osc.refresh();
+
+        LOG.info("wtf {}", lx.engine.mixer.getChannels().size());
+        lx.engine.mixer.getChannels().forEach(c -> LOG.info("sigh {}", c.label.getString()));
+        lx.engine.mixer.getChannels().forEach(c -> c.addListener(channelListener));
+    }
+
     @Override
     public void initializeUI(LXStudio lx, LXStudio.UI ui) {
         LXStudio.Registry registry = (LXStudio.Registry) lx.registry;
@@ -240,12 +252,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
     @Override
     public void projectChanged(File file, Change change) {
         if (change == LX.ProjectListener.Change.OPEN) {
-            LOG.info("Project open, dumping OSC state for clients");
-            Audio.get().osc.refresh();
-
-            LOG.info("wtf {}", lx.engine.mixer.getChannels().size());
-            lx.engine.mixer.getChannels().forEach(c -> LOG.info("sigh {}", c.label.getString()));
-            lx.engine.mixer.getChannels().forEach(c -> c.addListener(channelListener));
+            projectOpen();
         }
     }
 
