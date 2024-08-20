@@ -132,6 +132,45 @@ TODO: Look into SuperCollider https://depts.washington.edu/dxscdoc/Help/Classes/
 MaxMSP can run on Pi, and BeatSeeker Ableton M4L can run? (Although is this only for drums, not full track?)
 https://www.ableton.com/en/packs/beatseeker/
 
+# PixelBlaze
+
+For wifi access point mode, hold button when turning on, until flashes. Join network, go to config page:
+http://192.168.4.1
+Then point to camp wifi and store IP address. (Probably better ways to scan).
+
+Upload "marimapper" pattern in this repo manually (wish there were API for this?).
+See more examples in my marimapper fork.
+
+Conda example:
+```bash
+conda create -n marimapper python=3.11
+conda activate marimapper
+# Commands run local code edits
+pip install -e .
+```
+
+TODO(jmarnell) - figure out where to put stuff
+
+```bash
+pip install "marimapper[pixelblaze]" @ git+http://github.com/themariday/marimapper"
+```
+
+Add doc manual step of uploading .epe, API looks hard unfortch Install and set up Camo, pair iPhone. Deselect annoying watermark. Make sure high framerate?
+
+todo: i think i saw a name match example somewhere...
+
+```bash
+# maybe need this multiple times
+pip install -e .
+DEBUG_LOGGING=True marimapper_check_camera --device 0
+DEBUG_LOGGING=True marimapper --device 0 --backend pixelblaze --server 192.168.0.95 ~/src/iqe/src/main/resources/binger-bag
+marimapper_upload_to_pixelblaze --server 192.168.0.95 --csv_file $(find ~/src/iqe/src/main/resources/binger-bag -type f | sort | tail -n1)
+```
+
+Add Q quit button
+
+Sigh, I had to futz with Camo a lot, change watermark in and out maybe?
+
 # Special Thanks
 
 Big thank you to kind souls, especially of Titanic's End, Pixelblaze, SymmetryLabs, who've helped us!
