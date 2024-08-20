@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1724123272244,
+  "timestamp": 1724131628630,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3109,7 +3109,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": true,
+          "selected": false,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -3132,6 +3132,88 @@
           "kinetPort": 1,
           "numPoints": 140,
           "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 228508,
+        "class": "org.iqe.CornerFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "NE",
+          "x": 0.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "points",
+          "protocol": 0,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 0,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1
+        },
+        "children": {}
+      },
+      {
+        "id": 232156,
+        "class": "org.iqe.CornerFixture$OtherCorner",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "NW",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -2100.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": true,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "points",
+          "protocol": 0,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 7890,
+          "dmxChannel": 0,
+          "artNetUniverse": 0,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1
         },
         "children": {}
       }
@@ -3171,7 +3253,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 1,
           "autoCycleTimeSecs": 35.0,
-          "autoCycleCursor": 5,
+          "autoCycleCursor": 3,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3185,7 +3267,7 @@
               "modulationsExpanded": true
             },
             "parameters": {
-              "label": "Daytime",
+              "label": "Rainbow2",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -3203,9 +3285,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 62.54233169555664,
+                  "primary/brightness": 100.0,
                   "primary/saturation": 100.0,
-                  "primary/hue": 114.43359375,
+                  "primary/hue": 109.3828125,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3224,9 +3306,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 72.81845092773438,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 182.85939025878906,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 97.19075775146484,
+                  "primary/hue": 177.1171875,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3246,8 +3328,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 182.90322875976562,
+                  "primary/saturation": 98.369140625,
+                  "primary/hue": 240.86720275878906,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3255,7 +3337,7 @@
                 "children": {}
               },
               {
-                "id": 224881,
+                "id": 232861,
                 "class": "heronarts.lx.color.LXDynamicColor",
                 "internal": {
                   "modulationColor": 0,
@@ -3266,9 +3348,30 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 86.259765625,
-                  "primary/saturation": 97.939453125,
-                  "primary/hue": 105.97264862060547,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 98.63607025146484,
+                  "primary/hue": 286.1953125,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 232935,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 100.0,
+                  "primary/hue": 0.0,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -4461,16 +4564,16 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.0,
-              "band-2": 0.07872973297539387,
-              "band-3": 0.11737963585315303,
-              "band-4": 0.1629102361822078,
-              "band-5": 0.1624520219445209,
-              "band-6": 0.11293034489663378,
-              "band-7": 0.14851787427917473,
-              "band-8": 0.10831692177637586,
-              "band-9": 0.128982973238004,
-              "band-10": 0.05101522070334441,
+              "band-1": 0.061077009252617276,
+              "band-2": 0.14000154145528876,
+              "band-3": 0.22396291734411655,
+              "band-4": 0.3059598630949282,
+              "band-5": 0.22639433166288414,
+              "band-6": 0.0,
+              "band-7": 0.0,
+              "band-8": 0.05993067321279,
+              "band-9": 0.05145113349210906,
+              "band-10": 0.014152903383838678,
               "band-11": 0.0,
               "band-12": 0.0,
               "band-13": 0.0,
@@ -4755,17 +4858,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 74.98030986779287,
+              "autoCycleTimeSecs": 69.1483753520304,
               "transitionEnabled": true,
-              "transitionTimeSecs": 13.964862094419596,
+              "transitionTimeSecs": 11.705663935829001,
               "transitionBlendMode": 0,
-              "focusedPattern": 10,
+              "focusedPattern": 22,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 10,
+            "patternIndex": 22,
             "patterns": [
               {
                 "id": 52632,
@@ -4856,7 +4959,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7247509610587268
+                        "basis": 0.38301541661884236
                       },
                       {
                         "id": 140409,
@@ -4885,7 +4988,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.595763270063729
+                        "basis": 0.6233782235302024
                       },
                       {
                         "id": 140411,
@@ -4914,7 +5017,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7574667715258651
+                        "basis": 0.6512400330253869
                       },
                       {
                         "id": 140413,
@@ -4943,7 +5046,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6129409923375682
+                        "basis": 0.9913859139266508
                       },
                       {
                         "id": 140415,
@@ -4972,7 +5075,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.10874370196984467
+                        "basis": 0.8901490862546512
                       },
                       {
                         "id": 140417,
@@ -5001,7 +5104,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5170277594173859
+                        "basis": 0.5626740453993084
                       },
                       {
                         "id": 140419,
@@ -5030,7 +5133,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9033806783288199
+                        "basis": 0.033069340673126287
                       }
                     ],
                     "modulations": [
@@ -5688,7 +5791,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.42129308166854257
+                        "basis": 0.4988505423597515
                       },
                       {
                         "id": 140436,
@@ -5717,7 +5820,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.40339358321191077
+                        "basis": 0.2804057103418909
                       },
                       {
                         "id": 140438,
@@ -5746,7 +5849,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5788682629855436
+                        "basis": 0.9275293750589853
                       },
                       {
                         "id": 140440,
@@ -5775,7 +5878,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5603272284413613
+                        "basis": 0.04274390026728739
                       }
                     ],
                     "modulations": [
@@ -5966,7 +6069,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.616658101175975
+                        "basis": 0.07217398197679983
                       },
                       {
                         "id": 140444,
@@ -5995,7 +6098,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.42645241683476004
+                        "basis": 0.17615945153759813
                       },
                       {
                         "id": 140446,
@@ -6024,7 +6127,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6398670746543038
+                        "basis": 0.45019286657229696
                       },
                       {
                         "id": 140448,
@@ -6053,7 +6156,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.21675339249573974
+                        "basis": 0.24222799864830807
                       },
                       {
                         "id": 140450,
@@ -6082,7 +6185,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7008209416540212
+                        "basis": 0.7256974337047292
                       },
                       {
                         "id": 140452,
@@ -6111,7 +6214,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6419325967088186
+                        "basis": 0.5231291738025697
                       },
                       {
                         "id": 140454,
@@ -6140,7 +6243,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6208531994366052
+                        "basis": 0.05885228871738624
                       },
                       {
                         "id": 140456,
@@ -6169,7 +6272,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.023481633307124748
+                        "basis": 0.5730289074670973
                       },
                       {
                         "id": 140458,
@@ -6198,7 +6301,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17888349911288123
+                        "basis": 0.7958968396815622
                       }
                     ],
                     "modulations": [
@@ -6493,7 +6596,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8748697375675021
+                        "basis": 0.32624210610503707
                       },
                       {
                         "id": 53174,
@@ -6522,7 +6625,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2945710262226415
+                        "basis": 0.21780178520101326
                       },
                       {
                         "id": 53194,
@@ -6551,7 +6654,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.263186793121969
+                        "basis": 0.8792987699420417
                       },
                       {
                         "id": 53196,
@@ -6580,7 +6683,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9987453313645862
+                        "basis": 0.8710004204793724
                       },
                       {
                         "id": 53198,
@@ -6609,7 +6712,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7321450953014131
+                        "basis": 0.6044238308631423
                       },
                       {
                         "id": 53200,
@@ -6638,7 +6741,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.91309766337039
+                        "basis": 0.4353499032442675
                       }
                     ],
                     "modulations": [
@@ -7135,7 +7238,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.28020230978324184
+                        "basis": 0.9434723687614842
                       },
                       {
                         "id": 140462,
@@ -7164,7 +7267,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9589742597928964
+                        "basis": 0.4638176900294463
                       },
                       {
                         "id": 140464,
@@ -7193,7 +7296,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3252833075768149
+                        "basis": 0.2990252142750676
                       },
                       {
                         "id": 140466,
@@ -7222,7 +7325,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5441184212302184
+                        "basis": 0.866834199667309
                       }
                     ],
                     "modulations": [
@@ -7413,7 +7516,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.1358976589208396
                       },
                       {
                         "id": 140471,
@@ -7442,7 +7545,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3597989523328867
+                        "basis": 0.77310301074729
                       },
                       {
                         "id": 140473,
@@ -7471,7 +7574,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19359196891587646
+                        "basis": 0.18415019088468107
                       },
                       {
                         "id": 140475,
@@ -7500,7 +7603,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5630060197300365
+                        "basis": 0.026838934224122778
                       },
                       {
                         "id": 140477,
@@ -7529,7 +7632,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9124124445694966
+                        "basis": 0.07363085442714917
                       },
                       {
                         "id": 140479,
@@ -7558,7 +7661,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9902316355560952
+                        "basis": 0.273139717658786
                       }
                     ],
                     "modulations": [
@@ -7789,7 +7892,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.621193405914596
                       },
                       {
                         "id": 140484,
@@ -7818,7 +7921,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.06685973269064122
+                        "basis": 0.0069280065448503415
                       },
                       {
                         "id": 140486,
@@ -7847,7 +7950,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.36905490506773075
+                        "basis": 0.8508268484431744
                       },
                       {
                         "id": 140488,
@@ -7876,7 +7979,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.11805146342994934
+                        "basis": 0.40309946126209206
                       }
                     ],
                     "modulations": [
@@ -8162,7 +8265,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6734722656250227
+                        "basis": 0.2749402322142487
                       },
                       {
                         "id": 140493,
@@ -8191,7 +8294,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.37513174159846197
+                        "basis": 0.8738002784514336
                       },
                       {
                         "id": 140495,
@@ -8220,7 +8323,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.18167941675266264
+                        "basis": 0.6420955891834832
                       },
                       {
                         "id": 140497,
@@ -8249,7 +8352,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5951383835854099
+                        "basis": 0.9467963731150439
                       }
                     ],
                     "modulations": [
@@ -8542,7 +8645,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.22516742363040976
                       },
                       {
                         "id": 140502,
@@ -8571,7 +8674,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6905014948119996
+                        "basis": 0.7140010002212216
                       },
                       {
                         "id": 140504,
@@ -8600,7 +8703,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6529987883842924
+                        "basis": 0.6228257501180567
                       },
                       {
                         "id": 140506,
@@ -8629,7 +8732,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.08667184559413037
+                        "basis": 0.6511675418091136
                       },
                       {
                         "id": 140508,
@@ -8658,7 +8761,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8249022552071721
+                        "basis": 0.4890893732220873
                       },
                       {
                         "id": 140510,
@@ -8687,7 +8790,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20548773865555425
+                        "basis": 0.742579860656211
                       },
                       {
                         "id": 140512,
@@ -8716,7 +8819,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.33756869097117903
+                        "basis": 0.333530252761689
                       }
                     ],
                     "modulations": [
@@ -9095,7 +9198,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.48272598608499384
+                        "basis": 0.24530066027992067
                       },
                       {
                         "id": 140516,
@@ -9124,7 +9227,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8127421446304135
+                        "basis": 0.7220387031341374
                       },
                       {
                         "id": 140518,
@@ -9153,7 +9256,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7557548769286968
+                        "basis": 0.332526572123334
                       },
                       {
                         "id": 140520,
@@ -9182,7 +9285,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7194551639776455
+                        "basis": 0.15388924948131924
                       },
                       {
                         "id": 140522,
@@ -9211,7 +9314,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6776603367452922
+                        "basis": 0.4651629917254362
                       },
                       {
                         "id": 140524,
@@ -9240,7 +9343,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.687365162208983
+                        "basis": 0.20210155276839573
                       },
                       {
                         "id": 140526,
@@ -9269,7 +9372,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.10493169111035167
+                        "basis": 0.6771496426705155
                       }
                     ],
                     "modulations": [
@@ -9983,7 +10086,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09272158436214667
+                        "basis": 0.3289634275136494
                       },
                       {
                         "id": 140544,
@@ -10012,7 +10115,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09759408776536191
+                        "basis": 0.8439508920040433
                       },
                       {
                         "id": 140546,
@@ -10041,7 +10144,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.897337377802728
                       },
                       {
                         "id": 140549,
@@ -10070,7 +10173,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7547124526991525
+                        "basis": 0.3052524934085476
                       },
                       {
                         "id": 140551,
@@ -10099,7 +10202,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5747664278457495
+                        "basis": 0.3758960929300486
                       },
                       {
                         "id": 140553,
@@ -10128,7 +10231,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.34721297678942525
+                        "basis": 0.06689339645721673
                       }
                     ],
                     "modulations": [
@@ -10369,7 +10472,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.03582808981171401
+                        "basis": 0.22752202553088122
                       },
                       {
                         "id": 140557,
@@ -10398,7 +10501,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.08498043438084153
+                        "basis": 0.29649084290062094
                       },
                       {
                         "id": 140559,
@@ -10427,7 +10530,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6280086269213148
+                        "basis": 0.8308877156522677
                       },
                       {
                         "id": 140561,
@@ -10456,7 +10559,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.30718554347221133
+                        "basis": 0.8240340414557048
                       },
                       {
                         "id": 140563,
@@ -10485,7 +10588,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.11927981030035041
+                        "basis": 0.12260098572122033
                       },
                       {
                         "id": 140565,
@@ -10514,7 +10617,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20518981752101395
+                        "basis": 0.6645157827853558
                       }
                     ],
                     "modulations": [
@@ -10892,7 +10995,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5963812590293855
                       },
                       {
                         "id": 140572,
@@ -10921,7 +11024,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7121261291150605
+                        "basis": 0.9165907181431262
                       },
                       {
                         "id": 140574,
@@ -10950,7 +11053,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5963812590293855
                       },
                       {
                         "id": 140577,
@@ -10979,7 +11082,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7822984668956723
+                        "basis": 0.33427872780956336
                       },
                       {
                         "id": 140579,
@@ -11008,7 +11111,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5774685590185858
+                        "basis": 0.3124860429391337
                       },
                       {
                         "id": 140581,
@@ -11037,7 +11140,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4428668941068156
+                        "basis": 0.0214438232037216
                       },
                       {
                         "id": 140583,
@@ -11066,7 +11169,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.48315864263757613
+                        "basis": 0.6402797016111849
                       },
                       {
                         "id": 140585,
@@ -11095,7 +11198,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1886749144391754
+                        "basis": 0.4701910493367076
                       },
                       {
                         "id": 140587,
@@ -11124,7 +11227,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.02441534264479989
+                        "basis": 0.9455488778524259
                       }
                     ],
                     "modulations": [
@@ -11440,7 +11543,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9098062700880948
+                        "basis": 0.6293030750592835
                       },
                       {
                         "id": 140591,
@@ -11469,7 +11572,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8079140163921091
+                        "basis": 0.007168976760409824
                       },
                       {
                         "id": 140593,
@@ -11498,7 +11601,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8000767495486066
+                        "basis": 0.4075457160840098
                       },
                       {
                         "id": 140595,
@@ -11527,7 +11630,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.502015507071066
+                        "basis": 0.973889419177706
                       },
                       {
                         "id": 140597,
@@ -11556,7 +11659,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.42727258823566805
+                        "basis": 0.020959333022787983
                       },
                       {
                         "id": 140599,
@@ -11585,7 +11688,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.06316566607188179
                       },
                       {
                         "id": 140602,
@@ -11614,7 +11717,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7120479921650621
+                        "basis": 0.5869675770409056
                       },
                       {
                         "id": 140604,
@@ -11643,7 +11746,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.06316566607188179
                       },
                       {
                         "id": 140607,
@@ -11672,7 +11775,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7263066163198152
+                        "basis": 0.6118876676980024
                       }
                     ],
                     "modulations": [
@@ -14180,17 +14283,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 34.189766826912106,
+              "autoCycleTimeSecs": 35.63994974284843,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.96275999906444,
+              "transitionTimeSecs": 3.6724593794177744,
               "transitionBlendMode": 0,
-              "focusedPattern": 80,
+              "focusedPattern": 48,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 80,
+            "patternIndex": 48,
             "patterns": [
               {
                 "id": 124436,
@@ -15113,7 +15216,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.40232276675065315
+                        "basis": 0.30344598232630804
                       },
                       {
                         "id": 140662,
@@ -15142,7 +15245,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.08542504419424715
+                        "basis": 0.05310815850806895
                       },
                       {
                         "id": 140664,
@@ -15171,7 +15274,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3915358645144891
+                        "basis": 0.7046763656361091
                       },
                       {
                         "id": 140666,
@@ -15200,7 +15303,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9337642515741738
+                        "basis": 0.4535902341408885
                       }
                     ],
                     "modulations": [
@@ -15918,7 +16021,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7683242472654778
+                        "basis": 0.9047292306577508
                       },
                       {
                         "id": 124556,
@@ -15947,7 +16050,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4182756216995752
+                        "basis": 0.7101220734319077
                       },
                       {
                         "id": 124557,
@@ -15976,7 +16079,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9439704204058195
+                        "basis": 0.44573057012676665
                       },
                       {
                         "id": 124558,
@@ -16005,7 +16108,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26674910419796877
+                        "basis": 0.7942562553451696
                       },
                       {
                         "id": 124559,
@@ -16034,7 +16137,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6258738879832956
+                        "basis": 0.0826456461335352
                       },
                       {
                         "id": 124560,
@@ -16063,7 +16166,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7649030643625608
+                        "basis": 0.8256579135057128
                       }
                     ],
                     "modulations": [
@@ -16560,7 +16663,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5061834792255501
+                        "basis": 0.34230271802100437
                       },
                       {
                         "id": 140689,
@@ -16589,7 +16692,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7677420565918949
+                        "basis": 0.42188413545544257
                       },
                       {
                         "id": 140691,
@@ -16618,7 +16721,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.06446302364737741
+                        "basis": 0.3303490231201804
                       },
                       {
                         "id": 140693,
@@ -16647,7 +16750,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5663536814374766
                       }
                     ],
                     "modulations": [
@@ -16838,7 +16941,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.6939434895843988
                       },
                       {
                         "id": 140699,
@@ -16867,7 +16970,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13339844287411634
+                        "basis": 0.814856885961785
                       },
                       {
                         "id": 140701,
@@ -16896,7 +16999,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.46792635455633735
+                        "basis": 0.24774320065562042
                       },
                       {
                         "id": 140703,
@@ -16925,7 +17028,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3000761427354432
+                        "basis": 0.34019417458282314
                       },
                       {
                         "id": 140705,
@@ -16954,7 +17057,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6768442725667296
+                        "basis": 0.37900770577384596
                       },
                       {
                         "id": 140707,
@@ -16983,7 +17086,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2918492399286235
+                        "basis": 0.06495764386231646
                       }
                     ],
                     "modulations": [
@@ -17587,7 +17690,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8510196526797513
+                        "basis": 0.3415875519409045
                       },
                       {
                         "id": 140719,
@@ -17616,7 +17719,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8507376697568045
+                        "basis": 0.1515835040794914
                       },
                       {
                         "id": 140721,
@@ -17645,7 +17748,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.893559447591061
+                        "basis": 0.36018549430775015
                       },
                       {
                         "id": 140723,
@@ -17674,7 +17777,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6673780501015414
+                        "basis": 0.09238376927422444
                       }
                     ],
                     "modulations": [
@@ -18520,7 +18623,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.10474759123177563
+                        "basis": 0.4644251589217501
                       },
                       {
                         "id": 140742,
@@ -18549,7 +18652,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8278380639969202
+                        "basis": 0.7132581040147634
                       },
                       {
                         "id": 140744,
@@ -18578,7 +18681,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6097626059442339
+                        "basis": 0.6597330356821436
                       },
                       {
                         "id": 140746,
@@ -18607,7 +18710,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6111005757994941
+                        "basis": 0.6611262930149624
                       },
                       {
                         "id": 140748,
@@ -18636,7 +18739,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4612923624432108
+                        "basis": 0.04231262176775142
                       },
                       {
                         "id": 140750,
@@ -18665,7 +18768,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6182949975897609
+                        "basis": 0.6686180020962066
                       },
                       {
                         "id": 140752,
@@ -18694,7 +18797,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6189983195620801
+                        "basis": 0.5371106169885106
                       }
                     ],
                     "modulations": [
@@ -18968,7 +19071,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8083654712012734
+                        "basis": 0.7486295621156197
                       },
                       {
                         "id": 140756,
@@ -18997,7 +19100,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.3297523565931897
                       },
                       {
                         "id": 140759,
@@ -19026,7 +19129,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.29617208853933114
+                        "basis": 0.2906684382049882
                       },
                       {
                         "id": 140761,
@@ -19055,7 +19158,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1245574177039134
+                        "basis": 0.02030505579794296
                       },
                       {
                         "id": 140763,
@@ -19084,7 +19187,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7154949611012469
+                        "basis": 0.08967363514176281
                       },
                       {
                         "id": 140765,
@@ -19113,7 +19216,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.16289965719166505
+                        "basis": 0.6995815746193733
                       },
                       {
                         "id": 140767,
@@ -19142,7 +19245,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20947453294336899
+                        "basis": 0.9854047665909541
                       }
                     ],
                     "modulations": [
@@ -19794,7 +19897,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.95214611707258
+                        "basis": 0.1848022103401469
                       },
                       {
                         "id": 140783,
@@ -19823,7 +19926,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5695351179954479
+                        "basis": 0.9698759289990423
                       },
                       {
                         "id": 140785,
@@ -19852,7 +19955,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5769990217804913
+                        "basis": 0.8306601473561155
                       },
                       {
                         "id": 140787,
@@ -19881,7 +19984,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9986964827638057
+                        "basis": 0.8415128371211903
                       },
                       {
                         "id": 140789,
@@ -19910,7 +20013,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6171347546370447
+                        "basis": 0.9020818501833964
                       },
                       {
                         "id": 140791,
@@ -19939,7 +20042,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5052296044899388
+                        "basis": 0.9514336460521378
                       }
                     ],
                     "modulations": [
@@ -21681,7 +21784,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.07908768205221813
+                        "basis": 0.28492093561692755
                       },
                       {
                         "id": 140844,
@@ -21710,7 +21813,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9326080680271346
+                        "basis": 0.03577319046025813
                       },
                       {
                         "id": 140846,
@@ -21739,7 +21842,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26013208501874574
+                        "basis": 0.329004863928528
                       },
                       {
                         "id": 140848,
@@ -21768,7 +21871,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26679624505813115
+                        "basis": 0.039544512633550626
                       },
                       {
                         "id": 140850,
@@ -21797,7 +21900,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.17161818199247136
                       },
                       {
                         "id": 140853,
@@ -21826,7 +21929,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.05540060749797302
+                        "basis": 0.8200886167709862
                       }
                     ],
                     "modulations": [
@@ -22300,7 +22403,12 @@
                   "timeDMax": 0.0,
                   "scriptName": "__pbb_FireFlies",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderDecay": 0.5,
+                  "sliderFade": 0.5,
+                  "sliderNumSparks": 0.5,
+                  "sliderColor": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -22492,7 +22600,8 @@
                   "timeDMax": 0.0,
                   "scriptName": "__pbb_Real World Lights",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderLightType": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -23068,7 +23177,8 @@
                   "timeDMax": 0.0,
                   "scriptName": "__pbb_UtilityColorTemp",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderColorTemperature": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -23980,7 +24090,9 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/Experimental/wavingquilt2d.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderScale": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24028,7 +24140,10 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/Experimental/water-caustics.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderWhiteLevel": 0.5,
+                  "sliderContrast": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24364,7 +24479,8 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/Experimental/radar2d.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderRadarWidth": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24508,7 +24624,9 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/Experimental/agitator.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderDistortion": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24556,7 +24674,11 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/2D_and_3D/rgbplasma-no2.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderScale": 0.5,
+                  "sliderRadial": 0.5,
+                  "sliderMirror": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24700,7 +24822,10 @@
                   "timeDMax": 0.5738085972843692,
                   "scriptName": "__pbb_/zr/2D_and_3D/linedancer2D.js",
                   "reload": 0.0,
-                  "error": ""
+                  "error": "",
+                  "sliderSpeed": 0.5,
+                  "sliderTwist": 0.5,
+                  "sliderReflections": 0.5
                 },
                 "children": {
                   "modulation": {
@@ -24757,17 +24882,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 37.010711929031416,
+              "autoCycleTimeSecs": 50.71787896230123,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.001248327462797,
+              "transitionTimeSecs": 6.307886588782774,
               "transitionBlendMode": 0,
-              "focusedPattern": 2,
+              "focusedPattern": 3,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 2,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 60878,
@@ -24963,11 +25088,11 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 59.74034543693884,
+              "autoCycleTimeSecs": 37.04416339676581,
               "transitionEnabled": true,
-              "transitionTimeSecs": 7.130695171957961,
+              "transitionTimeSecs": 2.1622409423545963,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 7,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -25169,7 +25294,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.25895467066326244
+                        "basis": 0.6811079076108711
                       }
                     ],
                     "modulations": [
@@ -25290,7 +25415,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 7,
             "patterns": [
               {
                 "id": 52574,
@@ -25376,7 +25501,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6734722656250227
+                        "basis": 0.3164000101733109
                       },
                       {
                         "id": 140858,
@@ -25405,7 +25530,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.02654018923208945
+                        "basis": 0.40148361139060557
                       },
                       {
                         "id": 140860,
@@ -25434,7 +25559,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5991509765650148
+                        "basis": 0.12258728159236476
                       }
                     ],
                     "modulations": [
@@ -25603,7 +25728,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9123597726626841
+                        "basis": 0.8711320095111856
                       },
                       {
                         "id": 140864,
@@ -25632,7 +25757,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.7002937756860774
                       },
                       {
                         "id": 140867,
@@ -25661,7 +25786,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3075218691494829
+                        "basis": 0.9434876631585951
                       }
                     ],
                     "modulations": [
@@ -25830,7 +25955,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9997746938236265
+                        "basis": 0.2647475920256018
                       },
                       {
                         "id": 140871,
@@ -25859,7 +25984,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7723556668620503
+                        "basis": 0.6270922643301622
                       },
                       {
                         "id": 140873,
@@ -25888,7 +26013,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.185265800791209
+                        "basis": 0.6023199412102557
                       }
                     ],
                     "modulations": [
@@ -26057,7 +26182,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9396509298199213
+                        "basis": 0.6188407663764255
                       },
                       {
                         "id": 140877,
@@ -26086,7 +26211,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.34892745399565683
                       },
                       {
                         "id": 140880,
@@ -26115,7 +26240,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2003798917218085
+                        "basis": 0.543042136244234
                       }
                     ],
                     "modulations": [
@@ -26284,7 +26409,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.29045263280387473
+                        "basis": 0.028979338714016686
                       },
                       {
                         "id": 140884,
@@ -26313,7 +26438,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8808801542172262
+                        "basis": 0.8327254216933484
                       },
                       {
                         "id": 140886,
@@ -26342,7 +26467,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5009694340397113
+                        "basis": 0.15942472115802395
                       }
                     ],
                     "modulations": [
@@ -26516,7 +26641,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5490684913431692
+                        "basis": 0.30463337262277107
                       },
                       {
                         "id": 140890,
@@ -26545,7 +26670,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5161951269798599
+                        "basis": 0.9000816672362596
                       },
                       {
                         "id": 140892,
@@ -26574,7 +26699,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.07517488819483312
+                        "basis": 0.7163540212507366
                       },
                       {
                         "id": 140894,
@@ -26603,7 +26728,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.598235878847162
+                        "basis": 0.19454312020150932
                       },
                       {
                         "id": 140896,
@@ -26632,7 +26757,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7214061666347039
+                        "basis": 0.47137920327408983
                       },
                       {
                         "id": 140898,
@@ -26661,7 +26786,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09125928353130403
+                        "basis": 0.5229609084606256
                       },
                       {
                         "id": 140900,
@@ -26690,7 +26815,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.02563780204465233
+                        "basis": 0.3653883231587901
                       }
                     ],
                     "modulations": [
@@ -26964,7 +27089,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6377861562296793
+                        "basis": 0.5786235344026075
                       },
                       {
                         "id": 140904,
@@ -26993,7 +27118,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.49056065436642443
+                        "basis": 0.05205828691569571
                       },
                       {
                         "id": 140906,
@@ -27022,7 +27147,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.28387256635141966
                       },
                       {
                         "id": 140909,
@@ -27051,7 +27176,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1620311416403846
+                        "basis": 0.9274868362635809
                       },
                       {
                         "id": 140911,
@@ -27080,7 +27205,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9382979243123555
+                        "basis": 0.17813255641360265
                       },
                       {
                         "id": 140913,
@@ -27109,7 +27234,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.28387256635141966
                       },
                       {
                         "id": 140916,
@@ -27138,7 +27263,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3951999572475933
+                        "basis": 0.8210606187619515
                       }
                     ],
                     "modulations": [
@@ -27412,7 +27537,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9481677306774742
+                        "basis": 0.11630572741518018
                       },
                       {
                         "id": 140920,
@@ -27441,7 +27566,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7243816386939715
+                        "basis": 0.840075148920787
                       },
                       {
                         "id": 140922,
@@ -27470,7 +27595,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9941766110771652
+                        "basis": 0.2154718672391348
                       },
                       {
                         "id": 140924,
@@ -27499,7 +27624,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8304601396827677
+                        "basis": 0.07606871891553701
                       },
                       {
                         "id": 140926,
@@ -27528,7 +27653,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7662672780830656
+                        "basis": 0.911437385300767
                       },
                       {
                         "id": 140928,
@@ -27557,7 +27682,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5963812590293855
                       },
                       {
                         "id": 140931,
@@ -27586,7 +27711,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0927214290363824
+                        "basis": 0.7267551517693771
                       }
                     ],
                     "modulations": [
@@ -27860,7 +27985,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.9605133262639356
                       },
                       {
                         "id": 140936,
@@ -27889,7 +28014,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4499014552903624
+                        "basis": 0.3123176533657917
                       },
                       {
                         "id": 140938,
@@ -27918,7 +28043,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2951976705523012
+                        "basis": 0.5297395818505445
                       },
                       {
                         "id": 140940,
@@ -27947,7 +28072,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.9605133262639356
                       },
                       {
                         "id": 140943,
@@ -27976,7 +28101,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9965289054032116
+                        "basis": 0.227148759092887
                       },
                       {
                         "id": 140945,
@@ -28005,7 +28130,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6445182466970606
+                        "basis": 0.8868334104906985
                       },
                       {
                         "id": 140947,
@@ -28034,7 +28159,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7314951367845784
+                        "basis": 0.5306959604804075
                       }
                     ],
                     "modulations": [
@@ -28308,7 +28433,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9406556315431633
+                        "basis": 0.5854236014539667
                       },
                       {
                         "id": 140951,
@@ -28337,7 +28462,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26168383433554376
+                        "basis": 0.5244074201244038
                       },
                       {
                         "id": 140953,
@@ -28366,7 +28491,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6375465724520013
+                        "basis": 0.25256720134307326
                       },
                       {
                         "id": 140955,
@@ -28395,7 +28520,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5429886524063866
+                        "basis": 0.5465004734239649
                       },
                       {
                         "id": 140957,
@@ -28424,7 +28549,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.190116765595576
                       },
                       {
                         "id": 140960,
@@ -28453,7 +28578,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4092668783107631
+                        "basis": 0.8754568748870184
                       },
                       {
                         "id": 140962,
@@ -28482,7 +28607,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.00925100017298116
+                        "basis": 0.16194421040990936
                       }
                     ],
                     "modulations": [
@@ -28732,17 +28857,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 59.26758385335478,
+              "autoCycleTimeSecs": 61.31719771655733,
               "transitionEnabled": true,
-              "transitionTimeSecs": 7.266161097375404,
+              "transitionTimeSecs": 13.101143759702055,
               "transitionBlendMode": 0,
-              "focusedPattern": 22,
+              "focusedPattern": 10,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 22,
+            "patternIndex": 10,
             "patterns": [
               {
                 "id": 82134,
@@ -28833,7 +28958,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.14178026750305625
+                        "basis": 0.029804580236130432
                       },
                       {
                         "id": 140966,
@@ -28862,7 +28987,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6427002201289722
+                        "basis": 0.7217609489219711
                       },
                       {
                         "id": 140968,
@@ -28891,7 +29016,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5294387353478028
+                        "basis": 0.8096351036562607
                       },
                       {
                         "id": 140970,
@@ -28920,7 +29045,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.540955467078846
+                        "basis": 0.02591948268795805
                       },
                       {
                         "id": 140972,
@@ -28949,7 +29074,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4040054052600837
+                        "basis": 0.3148188861333678
                       },
                       {
                         "id": 140974,
@@ -28978,7 +29103,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09720997472431527
+                        "basis": 0.20940151142529514
                       },
                       {
                         "id": 140976,
@@ -29007,7 +29132,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5663742462165828
                       }
                     ],
                     "modulations": [
@@ -29273,7 +29398,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2827806297319762
+                        "basis": 0.9652474028115545
                       },
                       {
                         "id": 140981,
@@ -29302,7 +29427,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.007513441529986272
+                        "basis": 0.21557632949318606
                       },
                       {
                         "id": 140983,
@@ -29331,7 +29456,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3566078922052563
+                        "basis": 0.26313123952090334
                       },
                       {
                         "id": 140985,
@@ -29360,7 +29485,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3806520888991835
+                        "basis": 0.22941173803600665
                       },
                       {
                         "id": 140987,
@@ -29389,7 +29514,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5963812590293855
                       },
                       {
                         "id": 140990,
@@ -29418,7 +29543,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8698203053003624
+                        "basis": 0.6436186690393242
                       }
                     ],
                     "modulations": [
@@ -31112,7 +31237,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9874067866720021
+                        "basis": 0.9089686989408163
                       },
                       {
                         "id": 141021,
@@ -31141,7 +31266,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.42284537710950826
+                        "basis": 0.5268329571881907
                       },
                       {
                         "id": 141023,
@@ -31170,7 +31295,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.38715003082192584
+                        "basis": 0.13853824394357586
                       },
                       {
                         "id": 141025,
@@ -31199,7 +31324,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.06529301141321392
+                        "basis": 0.45252755883936036
                       }
                     ],
                     "modulations": [
@@ -31390,7 +31515,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8399775260515207
+                        "basis": 0.5578154715492449
                       },
                       {
                         "id": 141029,
@@ -31419,7 +31544,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.7009589247395525
                       },
                       {
                         "id": 141032,
@@ -31448,7 +31573,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2088702358753196
+                        "basis": 0.26709281769102755
                       },
                       {
                         "id": 141034,
@@ -31477,7 +31602,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7161215436760685
+                        "basis": 0.2894369641555504
                       },
                       {
                         "id": 141036,
@@ -31506,7 +31631,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13882663525632608
+                        "basis": 0.8245523098059953
                       },
                       {
                         "id": 141038,
@@ -31535,7 +31660,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.48520720729887706
+                        "basis": 0.2422345895664765
                       }
                     ],
                     "modulations": [
@@ -31968,7 +32093,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6026796655011447
+                        "basis": 0.10708074401510069
                       },
                       {
                         "id": 141044,
@@ -31997,7 +32122,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.18237472399171273
+                        "basis": 0.4958077336078158
                       },
                       {
                         "id": 141046,
@@ -32026,7 +32151,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6024928265976797
+                        "basis": 0.31144053736802646
                       },
                       {
                         "id": 141048,
@@ -32055,7 +32180,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.15749180797691392
+                        "basis": 0.4962572036274013
                       }
                     ],
                     "modulations": [
@@ -32348,7 +32473,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20767949969420213
+                        "basis": 0.2864206176891702
                       },
                       {
                         "id": 141052,
@@ -32377,7 +32502,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8639099360585762
+                        "basis": 0.05989870324098433
                       },
                       {
                         "id": 141054,
@@ -32406,7 +32531,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.7079485379542803
                       },
                       {
                         "id": 141057,
@@ -32435,7 +32560,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2524792757966194
+                        "basis": 0.45391806464077894
                       },
                       {
                         "id": 141059,
@@ -32464,7 +32589,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7194402746850271
+                        "basis": 0.48276435284688296
                       },
                       {
                         "id": 141061,
@@ -32493,7 +32618,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4101178366695355
+                        "basis": 0.04287060167197275
                       },
                       {
                         "id": 141063,
@@ -32522,7 +32647,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.01937220475540037
+                        "basis": 0.9229982697220691
                       }
                     ],
                     "modulations": [
@@ -32836,7 +32961,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.962154557047447
+                        "basis": 0.3625716412060436
                       },
                       {
                         "id": 141067,
@@ -32865,7 +32990,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4609674736595752
+                        "basis": 0.22644342774710116
                       },
                       {
                         "id": 141069,
@@ -32894,7 +33019,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.08043647789322057
+                        "basis": 0.5994598870881752
                       },
                       {
                         "id": 141071,
@@ -32923,7 +33048,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.412194275391111
+                        "basis": 0.6290957437779672
                       },
                       {
                         "id": 141073,
@@ -32952,7 +33077,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.2774858666748514
                       },
                       {
                         "id": 141076,
@@ -32981,7 +33106,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6738613963462478
+                        "basis": 0.7978970814991431
                       },
                       {
                         "id": 141078,
@@ -33010,7 +33135,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.026746939255719523
+                        "basis": 0.6732740608212725
                       }
                     ],
                     "modulations": [
@@ -33284,7 +33409,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17076684730178376
+                        "basis": 0.06203789398617194
                       },
                       {
                         "id": 141082,
@@ -33313,7 +33438,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17172767932017757
+                        "basis": 0.7606922211739222
                       },
                       {
                         "id": 141084,
@@ -33342,7 +33467,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.715084835458369
+                        "basis": 0.16808746370266334
                       },
                       {
                         "id": 141086,
@@ -33371,7 +33496,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.12825851351499296
                       },
                       {
                         "id": 141089,
@@ -33400,7 +33525,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6973324842607754
+                        "basis": 0.10005924166118378
                       },
                       {
                         "id": 141091,
@@ -33429,7 +33554,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.18139996068656886
+                        "basis": 0.9815396003813082
                       },
                       {
                         "id": 141093,
@@ -33458,7 +33583,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.12825851351499296
                       }
                     ],
                     "modulations": [
@@ -33724,7 +33849,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5178671857149628
+                        "basis": 0.40257526123867504
                       },
                       {
                         "id": 141098,
@@ -33753,7 +33878,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.24019019309347908
+                        "basis": 0.07627863088654548
                       },
                       {
                         "id": 141100,
@@ -33782,7 +33907,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6970690076086228
+                        "basis": 0.36088013952640724
                       },
                       {
                         "id": 141102,
@@ -33811,7 +33936,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4993446869868686
+                        "basis": 0.36513867077047873
                       },
                       {
                         "id": 141104,
@@ -33840,7 +33965,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6831298976891425
+                        "basis": 0.22515845310470348
                       },
                       {
                         "id": 141106,
@@ -33869,7 +33994,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5611323749000114
+                        "basis": 0.14253609137015052
                       }
                     ],
                     "modulations": [
@@ -34110,7 +34235,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4074529400511643
+                        "basis": 0.206308030621752
                       },
                       {
                         "id": 141110,
@@ -34139,7 +34264,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20190666573039126
+                        "basis": 0.6198083754773892
                       },
                       {
                         "id": 141112,
@@ -34168,7 +34293,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.46969881863528984
+                        "basis": 0.08294763254587414
                       },
                       {
                         "id": 141114,
@@ -34197,7 +34322,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.9866842217775229
                       },
                       {
                         "id": 141117,
@@ -34226,7 +34351,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.45229117075521436
+                        "basis": 0.03280729614932975
                       },
                       {
                         "id": 141119,
@@ -34255,7 +34380,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.18319532471743782
+                        "basis": 0.6016521917574628
                       }
                     ],
                     "modulations": [
@@ -35582,7 +35707,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26943524702746635
+                        "basis": 0.5616675585391457
                       },
                       {
                         "id": 141162,
@@ -35611,7 +35736,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9050088539778856
+                        "basis": 0.0017897108091198244
                       },
                       {
                         "id": 141164,
@@ -35640,7 +35765,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0022402870688085614
+                        "basis": 0.013959761087162577
                       },
                       {
                         "id": 141166,
@@ -35669,7 +35794,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6106816538703631
+                        "basis": 0.40658971224725315
                       }
                     ],
                     "modulations": [
@@ -35860,7 +35985,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.901368229219201
+                        "basis": 0.38932579980516224
                       },
                       {
                         "id": 141170,
@@ -35889,7 +36014,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.25387510169706634
+                        "basis": 0.15015693854368536
                       },
                       {
                         "id": 141172,
@@ -35918,7 +36043,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3574006529517516
+                        "basis": 0.4636560447722613
                       },
                       {
                         "id": 141174,
@@ -35947,7 +36072,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.15426146494559875
+                        "basis": 0.7854818933683332
                       },
                       {
                         "id": 141176,
@@ -35976,7 +36101,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5288284900402782
+                        "basis": 0.22236873610217447
                       },
                       {
                         "id": 141178,
@@ -36005,7 +36130,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.27128355606495635
+                        "basis": 0.11553285718144495
                       }
                     ],
                     "modulations": [
@@ -36244,11 +36369,11 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 33.70398990651357,
+              "autoCycleTimeSecs": 43.923917705077166,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.435751348146255,
+              "transitionTimeSecs": 6.177241193166604,
               "transitionBlendMode": 0,
-              "focusedPattern": 9,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -36515,7 +36640,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 9,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 80237,
@@ -36601,7 +36726,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9854704643293265
+                        "basis": 0.5415589103064238
                       },
                       {
                         "id": 141182,
@@ -36630,7 +36755,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6928284111201611
+                        "basis": 0.48237551447554045
                       },
                       {
                         "id": 141184,
@@ -36659,7 +36784,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7381266851538484
+                        "basis": 0.08279468563897521
                       }
                     ],
                     "modulations": [
@@ -36833,7 +36958,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.614651174471222
+                        "basis": 0.4249679903830606
                       },
                       {
                         "id": 141188,
@@ -36862,7 +36987,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.16630722968063918
+                        "basis": 0.32897142987588246
                       },
                       {
                         "id": 141190,
@@ -36891,7 +37016,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9899141547336915
+                        "basis": 0.2940143820795887
                       },
                       {
                         "id": 141192,
@@ -36920,7 +37045,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2346843174727272
+                        "basis": 0.7735898258755534
                       },
                       {
                         "id": 141194,
@@ -36949,7 +37074,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8254038949765872
+                        "basis": 0.3783475612394119
                       },
                       {
                         "id": 141196,
@@ -36978,7 +37103,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8499623574973713
+                        "basis": 0.530242864403094
                       },
                       {
                         "id": 141198,
@@ -37007,7 +37132,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5963812590293855
                       }
                     ],
                     "modulations": [
@@ -37276,7 +37401,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2278298530236952
+                        "basis": 0.8747058113089494
                       },
                       {
                         "id": 141203,
@@ -37305,7 +37430,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.35676320421745983
+                        "basis": 0.7993806827736576
                       },
                       {
                         "id": 141205,
@@ -37334,7 +37459,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6888052616103676
+                        "basis": 0.0881179931371458
                       }
                     ],
                     "modulations": [
@@ -37503,7 +37628,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3922792792093828
+                        "basis": 0.7915065662160005
                       },
                       {
                         "id": 141209,
@@ -37532,7 +37657,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5539035249780546
+                        "basis": 0.19947667574884512
                       },
                       {
                         "id": 141211,
@@ -37561,7 +37686,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20163523672468645
+                        "basis": 0.44421078504848904
                       }
                     ],
                     "modulations": [
@@ -37730,7 +37855,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.14367120063349234
+                        "basis": 0.8223913758844156
                       },
                       {
                         "id": 141215,
@@ -37759,7 +37884,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3751480306828999
+                        "basis": 0.5097775369821255
                       },
                       {
                         "id": 141217,
@@ -37788,7 +37913,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.041108843205280486
+                        "basis": 0.685422642545658
                       }
                     ],
                     "modulations": [
@@ -37957,7 +38082,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.6142100549068346
                       },
                       {
                         "id": 141222,
@@ -37986,7 +38111,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1506646452892902
+                        "basis": 0.8997387946799432
                       },
                       {
                         "id": 141224,
@@ -38015,7 +38140,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5260691371978762
+                        "basis": 0.1118957734631765
                       }
                     ],
                     "modulations": [
@@ -38189,7 +38314,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4226846959202363
+                        "basis": 0.8352614773667226
                       },
                       {
                         "id": 141228,
@@ -38218,7 +38343,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.41855792215277166
+                        "basis": 0.7627033673081555
                       },
                       {
                         "id": 141230,
@@ -38247,7 +38372,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8858849285088484
+                        "basis": 0.2090711002896653
                       },
                       {
                         "id": 141232,
@@ -38276,7 +38401,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5449695540231312
+                        "basis": 0.5455163220960173
                       },
                       {
                         "id": 141234,
@@ -38305,7 +38430,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.581791670070914
+                        "basis": 0.8990929524634013
                       },
                       {
                         "id": 141236,
@@ -38334,7 +38459,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.950321820323552
                       },
                       {
                         "id": 141239,
@@ -38363,7 +38488,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19035635219353828
+                        "basis": 0.6407809897028769
                       }
                     ],
                     "modulations": [
@@ -38637,7 +38762,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.8297885768897686
                       },
                       {
                         "id": 141244,
@@ -38666,7 +38791,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.10851751550003592
+                        "basis": 0.4450433289724962
                       },
                       {
                         "id": 141246,
@@ -38695,7 +38820,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9464750493705154
+                        "basis": 0.9633742765617469
                       },
                       {
                         "id": 141248,
@@ -38724,7 +38849,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9765318936183962
+                        "basis": 0.9037439659364646
                       },
                       {
                         "id": 141250,
@@ -38753,7 +38878,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.8297885768897686
                       },
                       {
                         "id": 141253,
@@ -38782,7 +38907,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6004513830859954
+                        "basis": 0.052040775682729364
                       },
                       {
                         "id": 141255,
@@ -38811,7 +38936,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2355880790820521
+                        "basis": 0.3957879812394673
                       }
                     ],
                     "modulations": [
@@ -39085,7 +39210,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3480912807230984
+                        "basis": 0.4392501554172499
                       },
                       {
                         "id": 141259,
@@ -39114,7 +39239,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.012576249082986426
+                        "basis": 0.052928473319972365
                       },
                       {
                         "id": 141261,
@@ -39143,7 +39268,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.753055279454937
+                        "basis": 0.8467486244602249
                       },
                       {
                         "id": 141263,
@@ -39172,7 +39297,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5145686778733385
+                        "basis": 0.8835050268746031
                       },
                       {
                         "id": 141265,
@@ -39201,7 +39326,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.5312598837535916
                       },
                       {
                         "id": 141268,
@@ -39230,7 +39355,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7764898563175704
+                        "basis": 0.8265203127852029
                       },
                       {
                         "id": 141270,
@@ -39259,7 +39384,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9689282746212158
+                        "basis": 0.6147213415131979
                       }
                     ],
                     "modulations": [
@@ -39533,7 +39658,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7450760886108153
+                        "basis": 0.3589495646640116
                       },
                       {
                         "id": 141274,
@@ -39562,7 +39687,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6734722656250227
+                        "basis": 0.7169083948779189
                       },
                       {
                         "id": 141277,
@@ -39591,7 +39716,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9373284953145106
+                        "basis": 0.5834604002148261
                       },
                       {
                         "id": 141279,
@@ -39620,7 +39745,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6849102689676041
+                        "basis": 0.9278993228672169
                       },
                       {
                         "id": 141281,
@@ -39649,7 +39774,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.22247420345174396
+                        "basis": 0.3870679428301444
                       },
                       {
                         "id": 141283,
@@ -39678,7 +39803,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17621180127380057
+                        "basis": 0.9572948607005353
                       },
                       {
                         "id": 141285,
@@ -39707,7 +39832,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13524575123867297
+                        "basis": 0.5892895285401888
                       }
                     ],
                     "modulations": [
@@ -39927,9 +40052,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 58.52484966752557,
+              "autoCycleTimeSecs": 60.39231652877365,
               "transitionEnabled": true,
-              "transitionTimeSecs": 5.380121199469697,
+              "transitionTimeSecs": 12.760718992074105,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -40153,7 +40278,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5244666530358183
+            "basis": 0.5689998109737291
           },
           {
             "id": 54255,
@@ -40209,7 +40334,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.20146665303377256
+            "basis": 0.24599981097167337
           },
           {
             "id": 56980,
@@ -40240,7 +40365,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.20146665303377256
+            "basis": 0.24599981097167337
           },
           {
             "id": 56981,
@@ -40271,7 +40396,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.38679998633277884
+            "basis": 0.4313331442706851
           },
           {
             "id": 56982,
@@ -40302,7 +40427,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.20146665303377256
+            "basis": 0.24599981097167337
           },
           {
             "id": 56983,
@@ -40333,7 +40458,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.20146665303377256
+            "basis": 0.24599981097167337
           },
           {
             "id": 57307,
@@ -40364,7 +40489,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7444666530314161
+            "basis": 0.7889998109693246
           },
           {
             "id": 57308,
@@ -40395,7 +40520,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7444666530314161
+            "basis": 0.7889998109693246
           },
           {
             "id": 62913,
@@ -40426,7 +40551,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9504666530304264
+            "basis": 0.9949998109683293
           },
           {
             "id": 66458,
@@ -40457,7 +40582,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4294666530262428
+            "basis": 0.4739998109641507
           },
           {
             "id": 76378,
@@ -40517,7 +40642,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4824666530298654
+            "basis": 0.5269998109677722
           },
           {
             "id": 182480,
@@ -40548,7 +40673,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.43513935848255275
+            "basis": 0.4796725164204678
           },
           {
             "id": 182455,
@@ -40579,7 +40704,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.43125224886995933
+            "basis": 0.47578540680786924
           },
           {
             "id": 64644,
@@ -40668,7 +40793,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4314666530267178
+            "basis": 0.4759998109646279
           },
           {
             "id": 125371,
@@ -40697,7 +40822,7 @@
               "exp": 1.0
             },
             "children": {},
-            "basis": 0.35939971488191846
+            "basis": 0.4686321398375956
           },
           {
             "id": 182481,
@@ -40728,7 +40853,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.1251136824775048
+            "basis": 0.1696468404154056
           },
           {
             "id": 185910,
@@ -40759,7 +40884,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.44413572671288076
+            "basis": 0.48866888465078806
           },
           {
             "id": 185931,
@@ -40790,7 +40915,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.0452107111641728
+            "basis": 0.0897438691020746
           },
           {
             "id": 185932,
@@ -40821,7 +40946,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3531995122718977
+            "basis": 0.3977326702098097
           },
           {
             "id": 192762,
@@ -40850,7 +40975,7 @@
               "exp": 0.24999999825377017
             },
             "children": {},
-            "basis": 0.6734722656250227
+            "basis": 0.5963812590293855
           },
           {
             "id": 203089,
@@ -40879,7 +41004,7 @@
               "exp": 0.0
             },
             "children": {},
-            "basis": 0.13874963153109052
+            "basis": 0.183282789468984
           }
         ],
         "modulations": [
@@ -69346,13 +69471,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/2",
-                "activePatternIndex": 10
+                "activePatternIndex": 18
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/enabled",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69360,7 +69485,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/recall",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69368,7 +69493,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/compositeMode",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69376,7 +69501,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69384,15 +69509,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/density",
-                "value": 10.337912090958143,
-                "normalizedValue": 0.16076311836797444
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/speed",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/x",
                 "value": 0.5,
                 "normalizedValue": 0.5
               },
@@ -69400,15 +69517,63 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/variation",
-                "value": 25.0,
-                "normalizedValue": 0.25
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/y",
+                "value": 0.4856640624348074,
+                "normalizedValue": 0.4856640624348074
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/duration",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/z",
+                "value": 0.5003906289348379,
+                "normalizedValue": 0.5003906289348379
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/xAmt",
+                "value": 0.6871757774560276,
+                "normalizedValue": 0.8435878887280138
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/yAmt",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/zAmt",
+                "value": 0.26393997886395404,
+                "normalizedValue": 0.631969989431977
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/stripes",
+                "value": 0.7273714537594369,
+                "normalizedValue": 0.15470564707804127
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/sharp",
+                "value": 0.5582979818353134,
+                "normalizedValue": 0.038417421494833986
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/speedUnipolar",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -69416,39 +69581,31 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/sharp",
-                "value": -0.33901060334599675,
-                "normalizedValue": 0.3304946983270016
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/speedBipolar",
+                "value": 45.87500015622936,
+                "normalizedValue": 0.7293750007811468
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/waveshape",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/minInterval",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/speedIsBipolar",
                 "value": 1.0,
-                "normalizedValue": 0.12257667696681554
+                "normalizedValue": 1.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/maxInterval",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/speedRange",
                 "value": 1.0,
-                "normalizedValue": 0.12257667696681554
+                "normalizedValue": 0.1
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/baseLevel",
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/tempoSync",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69456,17 +69613,65 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/minLevel",
-                "value": 47.92496558386568,
-                "normalizedValue": 0.47924965583865675
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/tempoDivision",
+                "value": 5,
+                "normalizedValue": 0.3333333333333333
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/maxLevel",
-                "value": 66.41768638568044,
-                "normalizedValue": 0.6641768638568044
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/reverse",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/invert",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/level",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/rotate",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/yaw",
+                "value": 109.91667950905239,
+                "normalizedValue": 0.30532410974736773
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/pitch",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/19/roll",
+                "value": 0.0,
+                "normalizedValue": 0.0
               },
               {
                 "scope": "MIXER",
@@ -69497,13 +69702,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/3",
-                "activePatternIndex": 55
+                "activePatternIndex": 68
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/enabled",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69511,7 +69716,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/recall",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69519,7 +69724,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/compositeMode",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69527,7 +69732,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69535,7 +69740,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/enableEdges",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/enableEdges",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69543,23 +69748,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/flipCoord",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/script",
-                "value": 155,
-                "normalizedValue": 0.45857988165680474
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/speed",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/flipCoord",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69567,15 +69756,47 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/timeDelta",
-                "value": 0.0,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/script",
+                "value": 327,
+                "normalizedValue": 0.9674556213017751
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/timeDMax",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/speed",
+                "value": 0.4025511648040265,
+                "normalizedValue": 0.40195311792194843
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/timeDelta",
+                "value": -0.716484378091991,
+                "normalizedValue": 0.14175781095400453
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/timeDMax",
+                "value": 0.5738085972843692,
+                "normalizedValue": 0.3825390648562461
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/scriptName",
+                "value": "__pbb_/zr/Experimental/water-caustics.js",
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/reload",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69583,23 +69804,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/scriptName",
-                "value": "__pbb_plasma 3D",
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/reload",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/56/error",
+                "parameterPath": "/lx/mixer/channel/3/pattern/69/error",
                 "value": "",
                 "normalizedValue": 0.0
               },
@@ -69695,13 +69900,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/5",
-                "activePatternIndex": 0
+                "activePatternIndex": 9
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/enabled",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69709,7 +69914,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/recall",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69717,7 +69922,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/compositeMode",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69725,7 +69930,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69733,79 +69938,23 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/xAmount",
-                "value": 1.0,
-                "normalizedValue": 1.0
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/midpoint",
+                "value": 35.68349358090393,
+                "normalizedValue": 0.3568349358090393
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/yAmount",
-                "value": 0.0,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/contrast",
+                "value": 157.48039333287963,
+                "normalizedValue": 0.5612136729141222
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/zAmount",
-                "value": 0.0,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/xOffset",
-                "value": -0.016183030791580677,
-                "normalizedValue": 0.49190848460420966
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/yOffset",
-                "value": 0.07626487984089181,
-                "normalizedValue": 0.5381324399204459
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/zOffset",
-                "value": 0.0,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/colorMode",
-                "value": 1,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/blendMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/gradient",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/brightness",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/minLevel",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69813,71 +69962,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/saturation",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/hue",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/xMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/yMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/zMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/paletteIndex",
-                "value": 1,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/paletteStops",
-                "value": 2,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/gradientRange",
-                "value": 200.0,
-                "normalizedValue": 0.05555555555555555
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/saturationRange",
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/maxLevel",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -69885,40 +69970,200 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/brightnessRange",
-                "value": 100.0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/invert",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/xOffset",
+                "value": 0.047619049437344074,
+                "normalizedValue": 0.523809524718672
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/yOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/zOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/scale",
+                "value": 1.0,
                 "normalizedValue": 1.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/rotate",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/minScale",
+                "value": 1.0,
+                "normalizedValue": 0.0949157995752499
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/maxScale",
+                "value": 10.0,
+                "normalizedValue": 0.0949157995752499
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/xScale",
+                "value": 0.25786494593492426,
+                "normalizedValue": 0.6289324729674621
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/yScale",
+                "value": 0.2292315018199127,
+                "normalizedValue": 0.6146157509099563
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/zScale",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/motion",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/motionSpeed",
+                "value": 0.6229785660093428,
+                "normalizedValue": 0.8114892830046714
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/motionSpeedRange",
+                "value": 12.0,
+                "normalizedValue": 0.043137254901960784
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/xMotion",
+                "value": -0.12932141339709224,
+                "normalizedValue": 0.4353392933014539
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/yMotion",
+                "value": -0.17301269756226978,
+                "normalizedValue": 0.4134936512188651
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/zMotion",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/algorithm",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/yaw",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/seed",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/pitch",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/octaves",
+                "value": 3,
+                "normalizedValue": 0.2857142857142857
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/lacunarity",
+                "value": 2.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/gain",
+                "value": 0.5,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/ridgeOffset",
+                "value": 0.9,
+                "normalizedValue": 0.45
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/xMode",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/1/roll",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/yMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/10/zMode",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
@@ -70286,13 +70531,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/7",
-                "activePatternIndex": 22
+                "activePatternIndex": 1
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/enabled",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70300,7 +70545,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/recall",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70308,7 +70553,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/compositeMode",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70316,7 +70561,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70324,71 +70569,71 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/x",
-                "value": 0.5,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/x",
+                "value": 0.4879296862054616,
+                "normalizedValue": 0.4879296862054616
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/y",
-                "value": 0.5,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/y",
+                "value": 0.48871094756759703,
+                "normalizedValue": 0.48871094756759703
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/z",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/z",
+                "value": 0.5003906289348379,
+                "normalizedValue": 0.5003906289348379
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/xAmt",
+                "value": 0.427265637088567,
+                "normalizedValue": 0.7136328185442835
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/yAmt",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/zAmt",
                 "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/xAmt",
-                "value": 0.0,
                 "normalizedValue": 0.5
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/yAmt",
-                "value": -1.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/stripes",
+                "value": 6.231274262720062,
+                "normalizedValue": 0.7767187571153045
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/zAmt",
-                "value": 0.923281256807968,
-                "normalizedValue": 0.961640628403984
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/sharp",
+                "value": 1.883110775756933,
+                "normalizedValue": 0.1871241905189992
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/stripes",
-                "value": 2.2002156664191896,
-                "normalizedValue": 0.4230485434904467
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/sharp",
-                "value": 1.6881823663874502,
-                "normalizedValue": 0.17343749951396603
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/speedUnipolar",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/speedUnipolar",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -70396,15 +70641,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/speedBipolar",
-                "value": 41.726561984978616,
-                "normalizedValue": 0.7086328099248931
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/speedBipolar",
+                "value": 14.898438419913873,
+                "normalizedValue": 0.5744921920995694
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/speedIsBipolar",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/speedIsBipolar",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70412,15 +70657,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/speedRange",
-                "value": 0.4,
-                "normalizedValue": 0.04
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/speedRange",
+                "value": 1.0,
+                "normalizedValue": 0.1
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/tempoSync",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/tempoSync",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70428,7 +70673,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/tempoDivision",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/tempoDivision",
                 "value": 5,
                 "normalizedValue": 0.3333333333333333
               },
@@ -70436,7 +70681,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/reverse",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/reverse",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70444,7 +70689,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/invert",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/invert",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70452,7 +70697,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/level",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/level",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70460,7 +70705,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/rotate",
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/rotate",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70468,25 +70713,25 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/yaw",
-                "value": 328.2412500913051,
-                "normalizedValue": 0.9117812502536253
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/yaw",
+                "value": 163.8562726881355,
+                "normalizedValue": 0.4551563130225986
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/pitch",
-                "value": 0.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/pitch",
+                "value": 97.05938452854753,
+                "normalizedValue": 0.26960940146818757
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/23/roll",
-                "value": 0.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/2/roll",
+                "value": 165.10781873948872,
+                "normalizedValue": 0.4586328298319131
               },
               {
                 "scope": "MIXER",
@@ -70517,13 +70762,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/8",
-                "activePatternIndex": 2
+                "activePatternIndex": 5
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/enabled",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70531,7 +70776,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/recall",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70539,7 +70784,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/compositeMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70547,7 +70792,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70555,7 +70800,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/xAmount",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/xAmount",
                 "value": 0.7,
                 "normalizedValue": 0.85
               },
@@ -70563,7 +70808,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/yAmount",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/yAmount",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70571,7 +70816,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/zAmount",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/zAmount",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70579,7 +70824,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/xOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/xOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70587,7 +70832,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/yOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/yOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70595,7 +70840,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/zOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/zOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70603,7 +70848,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/colorMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/colorMode",
                 "value": 1,
                 "normalizedValue": 0.5
               },
@@ -70611,7 +70856,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/blendMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/blendMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70619,7 +70864,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/gradient",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/gradient",
                 "value": 0.75,
                 "normalizedValue": 0.875
               },
@@ -70627,7 +70872,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/fixedColor/brightness",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/brightness",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70635,7 +70880,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/fixedColor/saturation",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/saturation",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70643,7 +70888,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/fixedColor/hue",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/hue",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70651,7 +70896,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/xMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/xMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70659,7 +70904,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/yMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/yMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70667,7 +70912,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/zMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/zMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70675,7 +70920,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/paletteIndex",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/paletteIndex",
                 "value": 1,
                 "normalizedValue": 0.0
               },
@@ -70683,7 +70928,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/paletteStops",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/paletteStops",
                 "value": 2,
                 "normalizedValue": 0.0
               },
@@ -70691,7 +70936,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/gradientRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/gradientRange",
                 "value": 200.0,
                 "normalizedValue": 0.05555555555555555
               },
@@ -70699,7 +70944,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/saturationRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/saturationRange",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -70707,7 +70952,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/brightnessRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/brightnessRange",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -70715,7 +70960,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/rotate",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/rotate",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70723,15 +70968,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/yaw",
-                "value": 110.18161512292639,
-                "normalizedValue": 0.30606004200812886
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/yaw",
+                "value": 145.7445099731107,
+                "normalizedValue": 0.4048458610364186
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/pitch",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/pitch",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70739,7 +70984,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/3/roll",
+                "parameterPath": "/lx/mixer/channel/8/pattern/6/roll",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -79103,12 +79348,12 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 1770.3783538215168,
-          "theta": 269.4379202625714,
-          "phi": 86.07665914297104,
-          "x": -1188.6405739446927,
-          "y": 1396.1541282244725,
-          "z": -710.446821192978
+          "radius": 2536.194103198072,
+          "theta": 279.0116430944763,
+          "phi": 6.6453985050320625,
+          "x": -677.7502360064827,
+          "y": 182.22238412580919,
+          "z": -679.1175315564033
         },
         "cue": [
           {
@@ -79122,12 +79367,12 @@
           },
           {
             "active": true,
-            "radius": 1770.3783538215168,
-            "theta": 269.4379202625714,
-            "phi": 86.07665914297104,
-            "x": -1188.6405739446927,
-            "y": 1396.1541282244725,
-            "z": -710.446821192978
+            "radius": 2536.194103198072,
+            "theta": 279.0116430944763,
+            "phi": 6.6453985050320625,
+            "x": -677.7502360064827,
+            "y": 182.22238412580919,
+            "z": -679.1175315564033
           },
           {
             "active": false,
@@ -79173,7 +79418,7 @@
           "ledStyle": 3
         },
         "grid": {
-          "visible": true,
+          "visible": false,
           "spacing": 100.0,
           "size": 10,
           "plane": 0,
@@ -79185,7 +79430,7 @@
           "neg2": false
         },
         "axes": {
-          "visible": true
+          "visible": false
         }
       },
       "previewAux": {

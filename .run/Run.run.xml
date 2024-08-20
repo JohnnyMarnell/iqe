@@ -4,7 +4,7 @@
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="heronarts.lx.studio.ChromatikIQE" />
     <module name="iqe" />
-    <option name="PROGRAM_PARAMETERS" value="&quot;pb coord tests.lxp&quot;" />
+    <option name="PROGRAM_PARAMETERS" value="&quot;iqe.lxp&quot;" />
     <option name="VM_PARAMETERS" value="-XstartOnFirstThread -XX:-OmitStackTraceInFastThrow" />
     <method v="2">
       <option name="Make" enabled="true" />
