@@ -79,8 +79,8 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 BassBreathPattern.class
         ).forEach(lx.registry::addPattern);
 
-        lx.registry.addFixture(CornerFixture.class);
-        lx.registry.addFixture(CornerFixture.OtherCorner.class);
+        lx.registry.addFixture(FlamecasterFixtures.NECorner.class);
+        lx.registry.addFixture(FlamecasterFixtures.NWCorner.class);
 
         initializeAutopilot();
 

@@ -1,10 +1,10 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "projectFileName": "iqe.lxp",
+  "projectFileName": "fartNetTestes.lxp",
   "windowWidth": 1512,
-  "windowHeight": 847,
+  "windowHeight": 894,
   "windowPosX": 0,
-  "windowPosY": 77,
+  "windowPosY": 66,
   "uiZoom": 100,
   "focusChannelOnCue": true,
   "focusActivePattern": true,
@@ -13,11 +13,6 @@
   "schedulerEnabled": false,
   "showCpuLoad": false,
   "registry": {
-    "plugins": [
-      {
-        "class": "org.iqe.LXPluginIQE",
-        "enabled": true
-      }
-    ]
+    "plugins": []
   }
 }

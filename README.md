@@ -45,7 +45,7 @@ eval "java $( [[ $(uname) == 'Darwin' ]] && echo '-XstartOnFirstThread' ) \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```
 
-# PixelBlaze
+# PixelBlaze Pattern Support
 
 Some PixelBlaze functionality has been ported (with permission). Currently there is a `PixelBlazeBlowser` pattern with
 a `script` knob. Changing it will cycle some PB patterns, some with controls / sliders, and not all render.
@@ -132,11 +132,22 @@ TODO: Look into SuperCollider https://depts.washington.edu/dxscdoc/Help/Classes/
 MaxMSP can run on Pi, and BeatSeeker Ableton M4L can run? (Although is this only for drums, not full track?)
 https://www.ableton.com/en/packs/beatseeker/
 
-# PixelBlaze
+# PixelBlaze / Python
+
+```bash
+conda create -n iqe python=3.11
+conda activate iqe
+brew install portaudio
+pip install -r ~/src/iqe/requirements.txt
+pip install -r ~/src/Flamecaster/requirements.txt
+(cd ~/src/marimapper ; pip install -e . )
+```
 
 For wifi access point mode, hold button when turning on, until flashes. Join network, go to config page:
 http://192.168.4.1
 Then point to camp wifi and store IP address. (Probably better ways to scan).
+
+## Marimapper Automapping
 
 Upload "marimapper" pattern in this repo manually (wish there were API for this?).
 See more examples in my marimapper fork.
@@ -170,6 +181,38 @@ marimapper_upload_to_pixelblaze --server 192.168.0.95 --csv_file $(find ~/src/iq
 Add Q quit button
 
 Sigh, I had to futz with Camo a lot, change watermark in and out maybe?
+
+Hacked Electight pebble strip are `GRB` I think, also switch it to ws2812 / NeoPixel!
+BTF are `RGB`
+
+```bash
+python src/scripts/flamecaster_conf.py > src/main/resources/flamecaster-config.conf
+```
+
+## ArtNet Debug
+
+jesus fucking christ what a god awful fucking nightmare.
+
+I think pixel counts and universe numbers must be absolutely exact and expected between
+Pixelblaze config, flamecastur config, and LX fixtures. Nightmare.
+
+Finally got a testcase of two pixelblazes emulating corner configs. 200 pebbles on one,
+400+ eco strip pixels (PB set to 400, OF COURSE THOUGH!). ArtNet port doesn't seem to
+work with LX, tried two mutual Flamecasturbaishtion but could never get it to the other.
+
+*** RE-START / RE-SELECT PIXELBLAZE PATTERNS!!!!!!!
+
+```bash
+# upload these
+ls src/main/resources/artNetDebug.NECorner.200BTFPebbles.pbb # @ ip 192.168.0.79
+ls src/main/resources/artNetDebug.NWCorner.400BTFecostrip.pbb # @ ip 192.168.0.229
+(cd ~/src/Flamecaster ; python --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
+
+java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes.lxp --clean
+```
+
+******* Next thing to try, overwrite the dumb fucking Java class Object #89123 Fixtures to be able
+to set override the port (in buildOutputs() ?) and try flamecasturbaishe again.
 
 # Special Thanks
 
