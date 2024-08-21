@@ -124,7 +124,10 @@ public final class ChromatikIQE extends LXStudio {
 
             for(int i = 0; i < args.length; ++i) {
                 String arg = args[i];
-                if ("--require-license".equals(arg)) {
+                if ("--clean".equals(arg)) {
+                    flags.classpathPlugins.remove("org.iqe.LXPluginIQE");
+                }
+                else if ("--require-license".equals(arg)) {
                     if (License.get().type == License.Type.NONE) {
                         error("License required by --require-license but none found, quitting.");
                         return;

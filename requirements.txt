@@ -1,0 +1,9 @@
+PyAudio
+numpy
+librosa
+python-osc
+argparse
+pylint
+black
+mypy
+pixelblaze-client

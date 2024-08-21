@@ -25,7 +25,9 @@ cd `dirname $0`
 
 ./mvnw clean package -DskipTests ;
 
-eval "java $( [[ $(uname) == 'Darwin' ]] && echo "-XstartOnFirstThread" ) \
+CMD="java $( [[ $(uname) == 'Darwin' ]] && echo "-XstartOnFirstThread" ) \
     -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 
+echo "$CMD"
+eval "$CMD"
