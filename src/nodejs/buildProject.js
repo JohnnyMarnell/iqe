@@ -46,6 +46,7 @@ const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
 const numRafters = 72
 const numPillars = 0
+const controllerPort = 7890 // how, why, where did this come from???!?!?!
 const controllerIP = "10.10.42.80"
 // const controllerIP = "127.0.0.1"
 // const controllerIP = "99.99.99.99"
@@ -354,7 +355,7 @@ function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
             transport: 0,
             reverse: false,
             host: controllerIP,
-            port: 7890,
+            port: controllerPort,
             artNetUniverse: artNetPair ? artNetPair.universe : fArtNetPairs[mapStripToArtnetPair(i)][0],
             dmxChannel: artNetPair ? artNetPair.channel : fArtNetPairs[mapStripToArtnetPair(i)][1],
             artNetSequenceEnabled: false,

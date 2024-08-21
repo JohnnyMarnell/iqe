@@ -232,8 +232,8 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         LOG.info("Project open, dumping OSC state for clients");
         Audio.get().osc.refresh();
 
-        LOG.info("wtf {}", lx.engine.mixer.getChannels().size());
-        lx.engine.mixer.getChannels().forEach(c -> LOG.info("sigh {}", c.label.getString()));
+        LOG.info("LX number of mixer channels {}", lx.engine.mixer.getChannels().size());
+        lx.engine.mixer.getChannels().forEach(c -> LOG.info("Adding listener that never fires for channel name: {}", c.label.getString()));
         lx.engine.mixer.getChannels().forEach(c -> c.addListener(channelListener));
     }
 
