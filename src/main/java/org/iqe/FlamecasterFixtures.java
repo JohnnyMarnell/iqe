@@ -1,7 +1,6 @@
 package org.iqe;
 
 import heronarts.lx.LX;
-import heronarts.lx.output.LXBufferOutput;
 import heronarts.lx.structure.PointListFixture;
 import heronarts.lx.structure.StripFixture;
 import heronarts.lx.transform.LXVector;
@@ -19,7 +18,8 @@ public class FlamecasterFixtures {
 
     public static class NECorner extends FlamecasterNetFixture {
         public NECorner(LX lx) {
-            super(lx, 9999);
+            super(lx, 6455 + 0);
+            LOG.info("NECorner start main construct sigh");
 
 //            var strip = new StripFixture(lx);
 //
@@ -37,9 +37,9 @@ public class FlamecasterFixtures {
 //            strip.dmxChannel.setValue(channel);
 //            strip.enabled.setValue(true);
 //
-//            this.addChild(strip);
+//            this.addChild(strip, true);
 
-//            drape(-9.5f * HORIZ_SPACE, 0);
+            drape(-9.5f * HORIZ_SPACE, 0);
 //            drape(-8.5f * HORIZ_SPACE, 0);
 //            drape(-7.5f * HORIZ_SPACE, 0);
 //            drape(-6.5f * HORIZ_SPACE, 0);
@@ -60,14 +60,17 @@ public class FlamecasterFixtures {
 //            drape(0, -7.5f * HORIZ_SPACE);
 //            drape(0, -8.5f * HORIZ_SPACE);
 //            drape(0, -9.5f * HORIZ_SPACE);
+
+            LOG.info("NECorner exit construct sigh");
         }
     }
 
     public static class NWCorner extends FlamecasterNetFixture {
         public NWCorner(LX lx) {
             super(lx, 6455 + 1);
+            LOG.info("NWCorner start main construct sigh");
 
-//             drape(0, 9.5f * HORIZ_SPACE);
+             drape(0, 9.5f * HORIZ_SPACE);
 //             drape(0, 8.5f * HORIZ_SPACE);
 //             drape(0, 7.5f * HORIZ_SPACE);
 //             drape(0, 6.5f * HORIZ_SPACE);
@@ -88,6 +91,8 @@ public class FlamecasterFixtures {
 //             drape(-7.5f * HORIZ_SPACE, 0);
 //             drape(-8.5f * HORIZ_SPACE, 0);
 //             drape(-9.5f * HORIZ_SPACE, 0);
+
+            LOG.info("NWCorner exit main construct sigh");
         }
     }
 
@@ -100,6 +105,7 @@ public class FlamecasterFixtures {
 
         public FlamecasterNetFixture(LX lx, int port) {
             super(lx, Collections.emptyList());
+//            LOG.info("sigh FC postContruct");
             flamecasterPort = port;
         }
 
@@ -108,7 +114,8 @@ public class FlamecasterFixtures {
             int numPixels = 10;
             assert pixelsMapped + numPixels <= MAX_PIXELS_PER_UNIVERSE : "todo, split across fixtures";
 
-            StripFixture strip = new StripFixture(lx);
+//            StripFixture strip = new StripFixture(lx);
+            StripFixture strip = new OOPIsDead(lx, flamecasterPort);
 
             strip.x.setValue(x);
             strip.y.setValue(this.y.getValuef());
@@ -124,6 +131,8 @@ public class FlamecasterFixtures {
             strip.port.setValue(flamecasterPort);
 
             this.addChild(strip);
+//            this.addChild(strip, true);
+//            org.iqe.LXUtils.addChildRegen(this, strip);
 
             pixelsMapped += numPixels;
             channel += numPixels;
@@ -135,9 +144,16 @@ public class FlamecasterFixtures {
 
         @Override
         protected void buildOutputs() {
+//            LOG.info("sigh, FC buildOutputs1 {} {}", protocol.getEnum(), port.getValuei());
             super.buildOutputs();
-            int outputs = this.outputDefinitions.size();
-            LOG.info("Flamecaster has {} outputs", outputs);
+//            children.forEach(c -> c.buildOutputs()); // so effing annoying, protected
+//            LOG.info("sigh, FC buildOutputs2 {} {}", protocol.getEnum(), port.getValuei());
+        }
+
+        @Override
+        protected void beforeRegenerate() {
+//            LOG.info("sigh, FC beforeRegen {} {}", protocol.getEnum(), port.getValuei());
+            super.beforeRegenerate();
         }
     }
 
@@ -207,7 +223,7 @@ public class FlamecasterFixtures {
     // strip.dmxChannel.setValue(0);
     // strip.enabled.setValue(true);
     // strip.port.setValue(6454);
-    // addChild(strip);
+    // addChild(strip, true);
     //
     // strip = new StripFixture(lx);
     // strip.numPoints.setValue(7);
@@ -216,5 +232,49 @@ public class FlamecasterFixtures {
     // strip.dmxChannel.setValue(0);
     // strip.enabled.setValue(true);
     // strip.port.setValue(6454);
-    // addChild(strip);
+    // addChild(strip, true);
+
+    public static class OOPIsDead extends StripFixture {
+        int realPort;
+
+        public OOPIsDead(LX lx, int realPort) {
+            super(lx);
+            this.realPort = realPort;
+        }
+
+        @Override
+        protected void buildOutputs() {
+//            LOG.info("sigh, buildOutputs1 {} {}", protocol.getEnum(), port.getValuei());
+            super.buildOutputs();
+            logStatus();
+//            LOG.info("sigh, buildOutputs2 {} {}", protocol.getEnum(), port.getValuei());
+        }
+
+        public void logStatus() {
+            outputDefinitions.forEach(o -> {
+                LOG.info("{} output OOPisded", this.getLabel());
+            });
+        }
+
+        @Override
+        protected Segment buildSegment() {
+//            LOG.info("sigh, buildSegment1 {} {}", protocol.getEnum(), port.getValuei());
+            var segFault = super.buildSegment();
+//            LOG.info("sigh, buildSegment2 {} {}", protocol.getEnum(), port.getValuei());
+            return segFault;
+        }
+
+        @Override
+        protected void beforeRegenerate() {
+//            LOG.info("sigh, beforeRegen {} {}", protocol.getEnum(), port.getValuei());
+            super.beforeRegenerate();
+        }
+
+        @Override
+        protected int getProtocolPort() {
+            var port = super.getProtocolPort();
+            LOG.info("so dumb, always protocol port sigh {} remap to {}", port, realPort);
+            return realPort;
+        }
+    }
 }

@@ -13,6 +13,11 @@
   "schedulerEnabled": false,
   "showCpuLoad": false,
   "registry": {
-    "plugins": []
+    "plugins": [
+      {
+        "class": "org.iqe.LXPluginIQE",
+        "enabled": true
+      }
+    ]
   }
 }

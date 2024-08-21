@@ -206,7 +206,7 @@ work with LX, tried two mutual Flamecasturbaishtion but could never get it to th
 # upload these
 ls src/main/resources/artNetDebug.NECorner.200BTFPebbles.pbb # @ ip 192.168.0.79
 ls src/main/resources/artNetDebug.NWCorner.400BTFecostrip.pbb # @ ip 192.168.0.229
-(cd ~/src/Flamecaster ; python --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
 
 java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes.lxp --clean
 ```
