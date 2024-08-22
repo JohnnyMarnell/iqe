@@ -1,6 +1,7 @@
 package org.iqe;
 
 import heronarts.lx.LX;
+import heronarts.lx.parameter.LXParameter;
 
 /**
  * Kenny LOGgins. Poor man's sl4j
@@ -29,6 +30,13 @@ public class LOG {
 
     // Don't worry, it's already slow
     public static String format(String msg, Object ... args) {
+        for (int i = 0; i < args.length; i++) {
+            Object o = args[i];
+            if (o instanceof LXParameter) {
+                o = ((LXParameter) o).getValue();
+            }
+            args[i] = o;
+        }
         return msg.replaceAll("\\{}", "%s").formatted(args);
     }
 
