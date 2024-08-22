@@ -13,7 +13,7 @@
         "1": {
             "name": "NECorner",
             "ip": "192.168.0.79",
-            "pixelCount": 30,
+            "pixelCount": 200,
             "deviceStyle": "pixels",
             "data": {
                 "0": {
@@ -45,7 +45,7 @@
         "2": {
             "name": "NWCorner",
             "ip": "192.168.0.229",
-            "pixelCount": 20,
+            "pixelCount": 400,
             "deviceStyle": "pixels",
             "data": {
                 "0": {

@@ -1,59 +1,67 @@
 import pixelblaze
 import json
-from pathlib import Path
+import sys
 
-pixelblaze_ips = "192.168.0.79 192.168.0.229".split(" ")
-pixelblaze_ips = ["192.168.0.79"]
+pixelblaze_ips = sys.argv[-2].split(" ")
+pixel_counts = [int(s) for s in sys.argv[-1].split(" ")]
+
+pixels_per_device = 400
 
 cfg = {
     "system": {
         "maxFps": 30,
-        "statusUpdateIntervalMs": 3000,
+        # "statusUpdateIntervalMs": 3000,
+        "statusUpdateIntervalMs": 2000,
+        "updateInterval": 3000,
         "pixelsPerUniverse": 170,
-        "ipArtnet": "0.0.0.0",
-        "portArtnet": 6454,
+        "ipArtnet": "127.0.0.1",
+        "portArtnet": 6455,
         "ipWebInterface": "127.0.0.1",
         "portWebInterface": 8585,
     },
     "devices": {},
 }
 
+pixels_per_universe = 10
+universe = 0
+
 for device_index, ip in enumerate(pixelblaze_ips):
-    print(f"Attempting to connect to Pixelblaze at {ip}")
+    print(f"Attempting to connect to Pixelblaze at {ip}", file=sys.stderr)
     pb = pixelblaze.Pixelblaze(ip)
     assert pb.connected, f"Pixelblaze at {ip} is not connected"
     name, pixels = pb.getDeviceName(), pb.getPixelCount()
-    print(f"Connected to Pixelblaze at {ip} {name} {pixels} pixels")
+    print(
+        f"Connected to Pixelblaze at {ip} {name}, {pixels} total pixels",
+        file=sys.stderr,
+    )
 
     data = {}
     pixels_mapped = 0
-    start_universe = 4096
     i = 0
 
-    while pixels_mapped < pixels:
+    while pixels_mapped < pixel_counts[device_index]:
         segment_pixels = min(170, pixels - pixels_mapped)
         data[str(i)] = {
             "net": 0,
             "subnet": 0,
-            "universe": start_universe + i,
+            "universe": universe,
             "startChannel": 0,
             # "destIndex": i * 20,
             "destIndex": pixels_mapped,
-            "pixelCount": segment_pixels,
+            "pixelCount": pixels_per_universe,
         }
-        pixels_mapped += segment_pixels
+        pixels_mapped += pixels_per_universe
+        universe += 1
         i += 1
 
-    cfg["devices"][str(device_index)] = {
+    cfg["devices"][str(device_index + 1)] = {
         "name": name,
         "ip": ip,
-        "pixelCount": pixels,
-        "maxFps": 30,
+        "pixelCount": pixel_counts[device_index],
+        # "maxFps": 30,
         "deviceStyle": "pixels",
         "data": data,
     }
 
-cfg_json = json.dumps(cfg, indent=2)
+cfg_json = json.dumps(cfg, indent=4)
 print(cfg_json)
-with open(f"{Path(__file__).parent}/../main/resources/flamecaster.json", "w") as f:
-    f.write(cfg_json)
