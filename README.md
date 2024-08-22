@@ -235,8 +235,26 @@ take existing fixtures and shrink them. Right now there is 2 for PB 1 and 3 for 
 
 I think this works!
 ```bash
-
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.tens.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_tens.lxp
 ```
+
+So in this universe (_HAhaHahahahAHHAHAHhahahaHAHA_), java fixtures can just keep incrementing in 10-sized universes,
+and the python generated config just needs to switch over.
+```bash
+python ./src/scripts/ > ~/src/iqe/src/main/resources/artNetDebug.tens.flamecaster.json
+python > ~/src/iqe/src/main/resources/flamecaster.json
+```
+
+(By the way, thought I could try skipping to a higher universe like 40 [since first 0-39 would be curtain one], confirmed
+thought it didn't error, it doesn't work, second PB didn't animate. What a mess!).
+
+I also keep hoping pixel count doesn't matter as much across Flamecaster, real pixelblaze settings, and LX,
+but I'm pretty sure I can't guarantee that. So everything needs to be perfect. Start with 30 and 20. Then get
+200 and 400. Then build a real 400 and cross fingers. Then build second real 400. Also print configs, as I borked it.
+
+Oh man, don't forget to enable output on fixtures :(
+
 
 # Special Thanks
 
