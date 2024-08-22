@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class FlamecasterFixtures {
 
-    public static final int MAX_PIXELS_PER_UNIVERSE = 10;
+    public static final int PIXELS_PER_UNIVERSE = 10;
     public static final int FLAMECASTER_PORT = 6455;
 
     public static final float VERT_SPACE = 100.0f;
@@ -22,24 +22,24 @@ public class FlamecasterFixtures {
             drape(-9.5f * HORIZ_SPACE, 0);
             drape(-8.5f * HORIZ_SPACE, 0);
             drape(-7.5f * HORIZ_SPACE, 0);
-            // drape(-6.5f * HORIZ_SPACE, 0);
-            // drape(-5.5f * HORIZ_SPACE, 0);
-            // drape(-4.5f * HORIZ_SPACE, 0);
-            // drape(-3.5f * HORIZ_SPACE, 0);
-            // drape(-2.5f * HORIZ_SPACE, 0);
-            // drape(-1.5f * HORIZ_SPACE, 0);
-            // drape(-0.5f * HORIZ_SPACE, 0);
-            //
-            // drape(0, -0.5f * HORIZ_SPACE);
-            // drape(0, -1.5f * HORIZ_SPACE);
-            // drape(0, -2.5f * HORIZ_SPACE);
-            // drape(0, -3.5f * HORIZ_SPACE);
-            // drape(0, -4.5f * HORIZ_SPACE);
-            // drape(0, -5.5f * HORIZ_SPACE);
-            // drape(0, -6.5f * HORIZ_SPACE);
-            // drape(0, -7.5f * HORIZ_SPACE);
-            // drape(0, -8.5f * HORIZ_SPACE);
-            // drape(0, -9.5f * HORIZ_SPACE);
+            drape(-6.5f * HORIZ_SPACE, 0);
+            drape(-5.5f * HORIZ_SPACE, 0);
+            drape(-4.5f * HORIZ_SPACE, 0);
+            drape(-3.5f * HORIZ_SPACE, 0);
+            drape(-2.5f * HORIZ_SPACE, 0);
+            drape(-1.5f * HORIZ_SPACE, 0);
+            drape(-0.5f * HORIZ_SPACE, 0);
+
+            drape(0, -0.5f * HORIZ_SPACE);
+            drape(0, -1.5f * HORIZ_SPACE);
+            drape(0, -2.5f * HORIZ_SPACE);
+            drape(0, -3.5f * HORIZ_SPACE);
+            drape(0, -4.5f * HORIZ_SPACE);
+            drape(0, -5.5f * HORIZ_SPACE);
+            drape(0, -6.5f * HORIZ_SPACE);
+            drape(0, -7.5f * HORIZ_SPACE);
+            drape(0, -8.5f * HORIZ_SPACE);
+            drape(0, -9.5f * HORIZ_SPACE);
 
             LOG.info("NECorner exit construct sigh");
         }
@@ -52,25 +52,25 @@ public class FlamecasterFixtures {
 
             drape(0, 9.5f * HORIZ_SPACE);
             drape(0, 8.5f * HORIZ_SPACE);
-            // drape(0, 7.5f * HORIZ_SPACE);
-            // drape(0, 6.5f * HORIZ_SPACE);
-            // drape(0, 5.5f * HORIZ_SPACE);
-            // drape(0, 4.5f * HORIZ_SPACE);
-            // drape(0, 3.5f * HORIZ_SPACE);
-            // drape(0, 2.5f * HORIZ_SPACE);
-            // drape(0, 1.5f * HORIZ_SPACE);
-            // drape(0, 0.5f * HORIZ_SPACE);
-            //
-            // drape(-0.5f * HORIZ_SPACE, 0);
-            // drape(-1.5f * HORIZ_SPACE, 0);
-            // drape(-2.5f * HORIZ_SPACE, 0);
-            // drape(-3.5f * HORIZ_SPACE, 0);
-            // drape(-4.5f * HORIZ_SPACE, 0);
-            // drape(-5.5f * HORIZ_SPACE, 0);
-            // drape(-6.5f * HORIZ_SPACE, 0);
-            // drape(-7.5f * HORIZ_SPACE, 0);
-            // drape(-8.5f * HORIZ_SPACE, 0);
-            // drape(-9.5f * HORIZ_SPACE, 0);
+            drape(0, 7.5f * HORIZ_SPACE);
+            drape(0, 6.5f * HORIZ_SPACE);
+            drape(0, 5.5f * HORIZ_SPACE);
+            drape(0, 4.5f * HORIZ_SPACE);
+            drape(0, 3.5f * HORIZ_SPACE);
+            drape(0, 2.5f * HORIZ_SPACE);
+            drape(0, 1.5f * HORIZ_SPACE);
+            drape(0, 0.5f * HORIZ_SPACE);
+
+            drape(-0.5f * HORIZ_SPACE, 0);
+            drape(-1.5f * HORIZ_SPACE, 0);
+            drape(-2.5f * HORIZ_SPACE, 0);
+            drape(-3.5f * HORIZ_SPACE, 0);
+            drape(-4.5f * HORIZ_SPACE, 0);
+            drape(-5.5f * HORIZ_SPACE, 0);
+            drape(-6.5f * HORIZ_SPACE, 0);
+            drape(-7.5f * HORIZ_SPACE, 0);
+            drape(-8.5f * HORIZ_SPACE, 0);
+            drape(-9.5f * HORIZ_SPACE, 0);
 
             LOG.info("NWCorner exit main construct sigh");
         }
@@ -85,9 +85,13 @@ public class FlamecasterFixtures {
             // LOG.info("sigh FC postContruct");
         }
 
-        // TODO (jmarnell): handle variable pixels, split across strips / fixtures
         protected void drape(float x, float z) {
-            int numPixels = 10;
+            strip(x, y.getValuef(), z);
+            strip(x, y.getValuef() - PIXELS_PER_UNIVERSE * VERT_SPACE, z);
+        }
+
+        // TODO (jmarnell): handle variable pixels, split across strips / fixtures
+        protected void strip(float x, float y, float z) {
             // assert pixelsMapped + numPixels <= MAX_PIXELS_PER_UNIVERSE : "todo, split
             // across fixtures";
 
@@ -98,7 +102,7 @@ public class FlamecasterFixtures {
             strip.y.setValue(this.y.getValuef());
             strip.z.setValue(z);
 
-            strip.numPoints.setValue(numPixels);
+            strip.numPoints.setValue(PIXELS_PER_UNIVERSE);
             strip.spacing.setValue(VERT_SPACE);
 
             strip.protocol.setValue(Integer.valueOf(Protocol.ARTNET.ordinal()).doubleValue()); // lulz?
