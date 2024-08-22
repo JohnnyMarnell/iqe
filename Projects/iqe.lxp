@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1724238523398,
+  "timestamp": 1724295955996,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3109,7 +3109,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": false,
+          "selected": true,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -3132,88 +3132,6 @@
           "kinetPort": 1,
           "numPoints": 140,
           "spacing": 5.0
-        },
-        "children": {}
-      },
-      {
-        "id": 248593,
-        "class": "org.iqe.FlamecasterFixtures$NECorner",
-        "internal": {
-          "modulationColor": 0,
-          "modulationControlsExpanded": true,
-          "modulationsExpanded": true
-        },
-        "parameters": {
-          "label": "NECorner",
-          "x": 0.0,
-          "y": 700.0,
-          "z": 0.0,
-          "yaw": 0.0,
-          "pitch": 0.0,
-          "roll": 0.0,
-          "scale": 1.0,
-          "selected": false,
-          "deactivate": false,
-          "enabled": true,
-          "brightness": 1.0,
-          "identify": false,
-          "mute": false,
-          "solo": false,
-          "tags": "NECorner",
-          "protocol": 1,
-          "byteOrder": 0,
-          "transport": 0,
-          "reverse": false,
-          "host": "127.0.0.1",
-          "port": 7890,
-          "dmxChannel": 0,
-          "artNetUniverse": 254,
-          "artNetSequenceEnabled": false,
-          "opcChannel": 0,
-          "opcOffset": 0,
-          "ddpDataOffset": 0,
-          "kinetPort": 1
-        },
-        "children": {}
-      },
-      {
-        "id": 252241,
-        "class": "org.iqe.FlamecasterFixtures$NWCorner",
-        "internal": {
-          "modulationColor": 0,
-          "modulationControlsExpanded": true,
-          "modulationsExpanded": true
-        },
-        "parameters": {
-          "label": "NWCorner",
-          "x": 0.0,
-          "y": 700.0,
-          "z": -2000.0,
-          "yaw": 0.0,
-          "pitch": 0.0,
-          "roll": 0.0,
-          "scale": 1.0,
-          "selected": true,
-          "deactivate": false,
-          "enabled": true,
-          "brightness": 1.0,
-          "identify": false,
-          "mute": false,
-          "solo": false,
-          "tags": "NWCorner",
-          "protocol": 1,
-          "byteOrder": 0,
-          "transport": 0,
-          "reverse": false,
-          "host": "127.0.0.1",
-          "port": 7890,
-          "dmxChannel": 255,
-          "artNetUniverse": 255,
-          "artNetSequenceEnabled": false,
-          "opcChannel": 0,
-          "opcOffset": 0,
-          "ddpDataOffset": 0,
-          "kinetPort": 1
         },
         "children": {}
       }
@@ -3253,7 +3171,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 1,
           "autoCycleTimeSecs": 35.0,
-          "autoCycleCursor": 1,
+          "autoCycleCursor": 6,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3267,7 +3185,7 @@
               "modulationsExpanded": true
             },
             "parameters": {
-              "label": "Swatch-2",
+              "label": "Undersea",
               "recall": false,
               "autoCycleEligible": true
             },
@@ -3286,8 +3204,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 178.81640625,
+                  "primary/saturation": 74.04622650146484,
+                  "primary/hue": 201.69140625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3306,9 +3224,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 91.1953125,
+                  "primary/brightness": 65.40692901611328,
+                  "primary/saturation": 82.69856262207031,
+                  "primary/hue": 0.0,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3327,9 +3245,30 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
+                  "primary/brightness": 98.24085998535156,
+                  "primary/saturation": 83.90625,
+                  "primary/hue": 3.503906011581421,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 260055,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 214.53515625,
+                  "primary/saturation": 67.76042175292969,
+                  "primary/hue": 235.34765625,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -4523,20 +4462,20 @@
               "release": 100.0,
               "slope": 4.5,
               "band-1": 0.0,
-              "band-2": 0.011356594654353347,
-              "band-3": 0.08205055659305849,
-              "band-4": 0.15954829706219398,
-              "band-5": 0.3770336914508521,
-              "band-6": 0.49593156433417185,
-              "band-7": 0.4073379882368382,
-              "band-8": 0.39088528000766853,
-              "band-9": 0.417920865685972,
-              "band-10": 0.6765469270842805,
-              "band-11": 0.6558794206751608,
-              "band-12": 0.6509412578305191,
-              "band-13": 0.6486540983082345,
-              "band-14": 0.5413668764348254,
-              "band-15": 0.22726562250441962,
+              "band-2": 0.03783351377420485,
+              "band-3": 0.22275978054443557,
+              "band-4": 0.36422576678965524,
+              "band-5": 0.547357720033222,
+              "band-6": 0.5820069475059166,
+              "band-7": 0.6476821952546448,
+              "band-8": 0.3642993104168418,
+              "band-9": 0.3567433129546439,
+              "band-10": 0.26836318478603793,
+              "band-11": 0.20563119407096997,
+              "band-12": 0.0,
+              "band-13": 0.0,
+              "band-14": 0.0,
+              "band-15": 0.0,
               "band-16": 0.0
             },
             "children": {}
@@ -4816,17 +4755,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 42.168175544180855,
+              "autoCycleTimeSecs": 41.13133360301461,
               "transitionEnabled": true,
-              "transitionTimeSecs": 12.803601925475192,
+              "transitionTimeSecs": 13.007376385115116,
               "transitionBlendMode": 0,
-              "focusedPattern": 3,
+              "focusedPattern": 25,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 3,
+            "patternIndex": 25,
             "patterns": [
               {
                 "id": 52632,
@@ -6027,7 +5966,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4838821774916857
+                        "basis": 0.9441380392863786
                       },
                       {
                         "id": 140444,
@@ -6056,7 +5995,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.18905247698903319
+                        "basis": 0.6188035447460085
                       },
                       {
                         "id": 140446,
@@ -6085,7 +6024,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.10953354302743237
+                        "basis": 0.7197274373487472
                       },
                       {
                         "id": 140448,
@@ -6114,7 +6053,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4475874849885193
+                        "basis": 0.9938743252881445
                       },
                       {
                         "id": 140450,
@@ -6143,7 +6082,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5347794801065159
+                        "basis": 0.2356396970055039
                       },
                       {
                         "id": 140452,
@@ -6172,7 +6111,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.23193269729035057
+                        "basis": 0.8720756594362055
                       },
                       {
                         "id": 140454,
@@ -6201,7 +6140,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8541949881065757
+                        "basis": 0.15222235087364883
                       },
                       {
                         "id": 140456,
@@ -6230,7 +6169,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3524344341808809
+                        "basis": 0.4298398001061523
                       },
                       {
                         "id": 140458,
@@ -6259,7 +6198,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3203189571439189
+                        "basis": 0.8488215353265366
                       }
                     ],
                     "modulations": [
@@ -8223,7 +8162,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20089556821190513
+                        "basis": 0.0
                       },
                       {
                         "id": 140493,
@@ -12317,7 +12256,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8594843040082634
+                        "basis": 0.41003656404442973
                       },
                       {
                         "id": 140621,
@@ -12346,7 +12285,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.35850304181450793
+                        "basis": 0.4212409528385283
                       },
                       {
                         "id": 140623,
@@ -12375,7 +12314,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7711366905774825
+                        "basis": 0.0519658001728813
                       },
                       {
                         "id": 140625,
@@ -12404,7 +12343,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.609695259094245
                       },
                       {
                         "id": 140628,
@@ -12433,7 +12372,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.08060192096508435
+                        "basis": 0.8054865501851675
                       },
                       {
                         "id": 140630,
@@ -12462,7 +12401,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.20135002794667364
+                        "basis": 0.310313007275488
                       }
                     ],
                     "modulations": [
@@ -14241,17 +14180,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 64.53232325521178,
+              "autoCycleTimeSecs": 40.75391468014592,
               "transitionEnabled": true,
-              "transitionTimeSecs": 9.85551894753129,
+              "transitionTimeSecs": 11.751063714251034,
               "transitionBlendMode": 0,
-              "focusedPattern": 7,
+              "focusedPattern": 60,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 7,
+            "patternIndex": 60,
             "patterns": [
               {
                 "id": 124436,
@@ -17275,7 +17214,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6836943867926492
+                        "basis": 0.636026276641892
                       },
                       {
                         "id": 140711,
@@ -17304,7 +17243,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7444272658109974
+                        "basis": 0.7015634464677541
                       },
                       {
                         "id": 140713,
@@ -17333,7 +17272,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.020445799284215194
+                        "basis": 0.13531325903683375
                       },
                       {
                         "id": 140715,
@@ -17362,7 +17301,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.044399909864657146
+                        "basis": 0.5998123764571779
                       }
                     ],
                     "modulations": [
@@ -22553,8 +22492,7 @@
                   "timeDMax": 0.0,
                   "scriptName": "__pbb_Real World Lights",
                   "reload": 0.0,
-                  "error": "",
-                  "sliderLightType": 0.5
+                  "error": ""
                 },
                 "children": {
                   "modulation": {
@@ -24819,9 +24757,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 66.63627204253032,
+              "autoCycleTimeSecs": 30.59434326102088,
               "transitionEnabled": true,
-              "transitionTimeSecs": 9.07805791126771,
+              "transitionTimeSecs": 6.158407983396216,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -25025,9 +24963,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 50.94145749960683,
+              "autoCycleTimeSecs": 46.390711824753666,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.126947182456115,
+              "transitionTimeSecs": 13.240354321422746,
               "transitionBlendMode": 0,
               "focusedPattern": 0,
               "triggerPatternCycle": false
@@ -25231,7 +25169,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.6890579565535893
+                        "basis": 0.07860959406366258
                       }
                     ],
                     "modulations": [
@@ -25438,7 +25376,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6454135401408507
+                        "basis": 0.609695259094245
                       },
                       {
                         "id": 140858,
@@ -25467,7 +25405,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9545136474430282
+                        "basis": 0.14660756868290142
                       },
                       {
                         "id": 140860,
@@ -25496,7 +25434,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.23191202518747434
+                        "basis": 0.1537904351901514
                       }
                     ],
                     "modulations": [
@@ -27026,7 +26964,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9913342171581604
+                        "basis": 0.6457727531796092
                       },
                       {
                         "id": 140904,
@@ -27055,7 +26993,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7420948554007258
+                        "basis": 0.1927351357911853
                       },
                       {
                         "id": 140906,
@@ -27113,7 +27051,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.006080663928748436
+                        "basis": 0.5662963256286583
                       },
                       {
                         "id": 140911,
@@ -27142,7 +27080,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3502899697826382
+                        "basis": 0.09087385051877504
                       },
                       {
                         "id": 140913,
@@ -27200,7 +27138,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.442529170709275
+                        "basis": 0.7458098759980193
                       }
                     ],
                     "modulations": [
@@ -27922,7 +27860,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7869928571065543
+                        "basis": 0.0
                       },
                       {
                         "id": 140936,
@@ -28009,7 +27947,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7869928571065543
+                        "basis": 0.0
                       },
                       {
                         "id": 140943,
@@ -28794,17 +28732,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 69.613637124701,
+              "autoCycleTimeSecs": 67.49371133597066,
               "transitionEnabled": true,
-              "transitionTimeSecs": 13.032727788491329,
+              "transitionTimeSecs": 13.337344468813086,
               "transitionBlendMode": 0,
-              "focusedPattern": 17,
+              "focusedPattern": 0,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 17,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 82134,
@@ -28895,7 +28833,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9236403723042576
+                        "basis": 0.4185638628029918
                       },
                       {
                         "id": 140966,
@@ -28924,7 +28862,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4618098752549131
+                        "basis": 0.2152266920788466
                       },
                       {
                         "id": 140968,
@@ -28953,7 +28891,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4030725078613347
+                        "basis": 0.4171745083115196
                       },
                       {
                         "id": 140970,
@@ -28982,7 +28920,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9229024198957829
+                        "basis": 0.11331656177337802
                       },
                       {
                         "id": 140972,
@@ -29011,7 +28949,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.09339197470688583
+                        "basis": 0.942164666857373
                       },
                       {
                         "id": 140974,
@@ -29040,7 +28978,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13105062479221372
+                        "basis": 0.023528851717189537
                       },
                       {
                         "id": 140976,
@@ -29069,7 +29007,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.609695259094245
                       }
                     ],
                     "modulations": [
@@ -31481,7 +31419,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13138162612918336
+                        "basis": 0.0
                       },
                       {
                         "id": 141032,
@@ -33786,7 +33724,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.020357409276450328
+                        "basis": 0.7018188396736417
                       },
                       {
                         "id": 141098,
@@ -33815,7 +33753,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.15464849076560797
+                        "basis": 0.8473101503497139
                       },
                       {
                         "id": 141100,
@@ -33844,7 +33782,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7539761531416072
+                        "basis": 0.648793629641657
                       },
                       {
                         "id": 141102,
@@ -33873,7 +33811,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.21526629957475646
+                        "basis": 0.4036456501935276
                       },
                       {
                         "id": 141104,
@@ -33902,7 +33840,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.19171751402215761
+                        "basis": 0.8125605365600881
                       },
                       {
                         "id": 141106,
@@ -33931,7 +33869,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1240668246597645
+                        "basis": 0.754526495267985
                       }
                     ],
                     "modulations": [
@@ -35644,7 +35582,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.13778948936638585
+                        "basis": 0.7270086911466931
                       },
                       {
                         "id": 141162,
@@ -35673,7 +35611,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.36560638266332895
+                        "basis": 0.8011102291496052
                       },
                       {
                         "id": 141164,
@@ -35702,7 +35640,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.11291993659822837
+                        "basis": 0.9085999619062454
                       },
                       {
                         "id": 141166,
@@ -35731,7 +35669,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3573591554771093
+                        "basis": 0.7697745591903264
                       }
                     ],
                     "modulations": [
@@ -36306,9 +36244,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 48.088101389710104,
+              "autoCycleTimeSecs": 66.70233858031219,
               "transitionEnabled": true,
-              "transitionTimeSecs": 7.563611294021172,
+              "transitionTimeSecs": 10.290658673018019,
               "transitionBlendMode": 0,
               "focusedPattern": 0,
               "triggerPatternCycle": false
@@ -36663,7 +36601,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5027689676305224
+                        "basis": 0.37869414497046094
                       },
                       {
                         "id": 141182,
@@ -36692,7 +36630,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5070468597458562
+                        "basis": 0.966268794788049
                       },
                       {
                         "id": 141184,
@@ -36721,7 +36659,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.23407540427478915
+                        "basis": 0.7192584076934927
                       }
                     ],
                     "modulations": [
@@ -38019,7 +37957,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5076558059692644
+                        "basis": 0.0
                       },
                       {
                         "id": 141222,
@@ -38728,7 +38666,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.793366338512892
+                        "basis": 0.39006124639042883
                       },
                       {
                         "id": 141246,
@@ -38757,7 +38695,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.23137614953361765
+                        "basis": 0.5329730297982483
                       },
                       {
                         "id": 141248,
@@ -38786,7 +38724,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.12496511418905117
+                        "basis": 0.40938421240248124
                       },
                       {
                         "id": 141250,
@@ -38844,7 +38782,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9819797637127213
+                        "basis": 0.7922428147933004
                       },
                       {
                         "id": 141255,
@@ -38873,7 +38811,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6521395827251248
+                        "basis": 0.2150627862952546
                       }
                     ],
                     "modulations": [
@@ -39624,7 +39562,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6454135401408507
+                        "basis": 0.0
                       },
                       {
                         "id": 141277,
@@ -39989,9 +39927,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 44.744234256697055,
+              "autoCycleTimeSecs": 56.08567810785027,
               "transitionEnabled": true,
-              "transitionTimeSecs": 8.476618278466859,
+              "transitionTimeSecs": 12.41225554805652,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -40203,9 +40141,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 44.744234256697055,
+              "autoCycleTimeSecs": 34.80754430269058,
               "transitionEnabled": true,
-              "transitionTimeSecs": 8.476618278466859,
+              "transitionTimeSecs": 3.7575556593290136,
               "transitionBlendMode": 0,
               "focusedPattern": 0,
               "triggerPatternCycle": false
@@ -40473,7 +40411,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9509890748017358
+            "basis": 0.18432170041104654
           },
           {
             "id": 54255,
@@ -40529,7 +40467,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6279890747996825
+            "basis": 0.8613217004089972
           },
           {
             "id": 56980,
@@ -40560,7 +40498,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6279890747996825
+            "basis": 0.8613217004089972
           },
           {
             "id": 56981,
@@ -40591,7 +40529,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8133224080986875
+            "basis": 0.04665503370800127
           },
           {
             "id": 56982,
@@ -40622,7 +40560,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6279890747996825
+            "basis": 0.8613217004089972
           },
           {
             "id": 56983,
@@ -40653,7 +40591,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6279890747996825
+            "basis": 0.8613217004089972
           },
           {
             "id": 57307,
@@ -40684,7 +40622,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.1709890747973283
+            "basis": 0.404321700406643
           },
           {
             "id": 57308,
@@ -40715,7 +40653,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.1709890747973283
+            "basis": 0.404321700406643
           },
           {
             "id": 62913,
@@ -40746,7 +40684,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.376989074796336
+            "basis": 0.6103217004056519
           },
           {
             "id": 66458,
@@ -40777,7 +40715,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8559890747921598
+            "basis": 0.08932170040147276
           },
           {
             "id": 76378,
@@ -40837,7 +40775,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9089890747957794
+            "basis": 0.14232170040509048
           },
           {
             "id": 182480,
@@ -40868,7 +40806,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8616617802484682
+            "basis": 0.09499440585778203
           },
           {
             "id": 182455,
@@ -40899,7 +40837,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8577746706358761
+            "basis": 0.09110729624518994
           },
           {
             "id": 64644,
@@ -40988,7 +40926,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.857989074792633
+            "basis": 0.0913217004019475
           },
           {
             "id": 125371,
@@ -41017,7 +40955,7 @@
               "exp": 1.0
             },
             "children": {},
-            "basis": 0.7118333561464257
+            "basis": 0.13091079058270835
           },
           {
             "id": 182481,
@@ -41048,7 +40986,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5516361042434225
+            "basis": 0.7849687298527409
           },
           {
             "id": 185910,
@@ -41079,7 +41017,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8706581484787976
+            "basis": 0.10399077408810864
           },
           {
             "id": 185931,
@@ -41110,7 +41048,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.4717331329300778
+            "basis": 0.7050657585393943
           },
           {
             "id": 185932,
@@ -41141,7 +41079,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7797219340378067
+            "basis": 0.013054559647121655
           },
           {
             "id": 192762,
@@ -41170,7 +41108,7 @@
               "exp": 0.24999999825377017
             },
             "children": {},
-            "basis": 0.6454135401408507
+            "basis": 0.609695259094245
           },
           {
             "id": 203089,
@@ -41199,7 +41137,7 @@
               "exp": 0.0
             },
             "children": {},
-            "basis": 0.5652720532969879
+            "basis": 0.7986046789063054
           }
         ],
         "modulations": [
@@ -69666,13 +69604,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/2",
-                "activePatternIndex": 10
+                "activePatternIndex": 25
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/enabled",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69680,7 +69618,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/recall",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69688,7 +69626,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/compositeMode",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69696,7 +69634,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69704,15 +69642,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/density",
-                "value": 10.337912090958143,
-                "normalizedValue": 0.16076311836797444
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/speed",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/x",
                 "value": 0.5,
                 "normalizedValue": 0.5
               },
@@ -69720,55 +69650,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/variation",
-                "value": 25.0,
-                "normalizedValue": 0.25
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/y",
+                "value": 0.5,
+                "normalizedValue": 0.5
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/duration",
-                "value": 100.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/sharp",
-                "value": -0.33901060334599675,
-                "normalizedValue": 0.3304946983270016
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/waveshape",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/minInterval",
-                "value": 1.0,
-                "normalizedValue": 0.12257667696681554
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/maxInterval",
-                "value": 1.0,
-                "normalizedValue": 0.12257667696681554
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/baseLevel",
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/z",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69776,17 +69666,145 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/minLevel",
-                "value": 47.92496558386568,
-                "normalizedValue": 0.47924965583865675
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/xAmt",
+                "value": 0.1901992987836929,
+                "normalizedValue": 0.5950996493918465
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/2/pattern/11/maxLevel",
-                "value": 66.41768638568044,
-                "normalizedValue": 0.6641768638568044
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/yAmt",
+                "value": -1.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/zAmt",
+                "value": 0.35808392480061757,
+                "normalizedValue": 0.6790419624003088
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/stripes",
+                "value": 0.5682599587390417,
+                "normalizedValue": 0.08476590596835479
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/sharp",
+                "value": 1.5679261182428583,
+                "normalizedValue": 0.16442659231192766
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/speedUnipolar",
+                "value": 100.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/speedBipolar",
+                "value": 41.726561984978616,
+                "normalizedValue": 0.7086328099248931
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/speedIsBipolar",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/speedRange",
+                "value": 0.4,
+                "normalizedValue": 0.04
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/tempoSync",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/tempoDivision",
+                "value": 5,
+                "normalizedValue": 0.3333333333333333
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/reverse",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/invert",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/level",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/rotate",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/yaw",
+                "value": 91.02577022388829,
+                "normalizedValue": 0.252849361733023
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/pitch",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/2/pattern/26/roll",
+                "value": 0.0,
+                "normalizedValue": 0.0
               },
               {
                 "scope": "MIXER",
@@ -69817,13 +69835,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/3",
-                "activePatternIndex": 36
+                "activePatternIndex": 60
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/enabled",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69831,7 +69849,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/recall",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69839,7 +69857,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/compositeMode",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69847,7 +69865,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69855,7 +69873,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/enableEdges",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/enableEdges",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69863,7 +69881,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/flipCoord",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/flipCoord",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69871,15 +69889,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/script",
-                "value": 25,
-                "normalizedValue": 0.07396449704142012
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/script",
+                "value": 103,
+                "normalizedValue": 0.3047337278106509
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/speed",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/speed",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69887,7 +69905,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/timeDelta",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/timeDelta",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -69895,7 +69913,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/timeDMax",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/timeDMax",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69903,15 +69921,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/scriptName",
-                "value": "__pbb_Real World Lights",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/scriptName",
+                "value": "__pbb_Sunset",
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/reload",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/reload",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69919,7 +69937,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/3/pattern/37/error",
+                "parameterPath": "/lx/mixer/channel/3/pattern/61/error",
                 "value": "",
                 "normalizedValue": 0.0
               },
@@ -69952,13 +69970,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/4",
-                "activePatternIndex": 3
+                "activePatternIndex": 2
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/4/pattern/4/enabled",
+                "parameterPath": "/lx/mixer/channel/4/pattern/3/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -69966,7 +69984,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/4/pattern/4/recall",
+                "parameterPath": "/lx/mixer/channel/4/pattern/3/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -69974,7 +69992,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/4/pattern/4/compositeMode",
+                "parameterPath": "/lx/mixer/channel/4/pattern/3/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -69982,7 +70000,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/4/pattern/4/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/4/pattern/3/compositeLevel",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/4/pattern/3/running",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70015,13 +70041,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/5",
-                "activePatternIndex": 8
+                "activePatternIndex": 0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/enabled",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70029,7 +70055,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/recall",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70037,7 +70063,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/compositeMode",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70045,7 +70071,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70053,23 +70079,79 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/midpoint",
-                "value": 32.4999300445513,
-                "normalizedValue": 0.324999300445513
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/xAmount",
+                "value": 1.0,
+                "normalizedValue": 1.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/contrast",
-                "value": 21.972641343481,
-                "normalizedValue": 0.20963130178234834
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/yAmount",
+                "value": 0.0,
+                "normalizedValue": 0.5
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/minLevel",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/zAmount",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/xOffset",
+                "value": -0.016183030791580677,
+                "normalizedValue": 0.49190848460420966
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/yOffset",
+                "value": 0.07626487984089181,
+                "normalizedValue": 0.5381324399204459
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/zOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/colorMode",
+                "value": 1,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/blendMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/gradient",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/brightness",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70077,7 +70159,71 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/maxLevel",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/saturation",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/fixedColor/hue",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/xMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/yMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/zMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/paletteIndex",
+                "value": 1,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/paletteStops",
+                "value": 2,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/gradientRange",
+                "value": 200.0,
+                "normalizedValue": 0.05555555555555555
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/saturationRange",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -70085,7 +70231,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/invert",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/brightnessRange",
+                "value": 100.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/rotate",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70093,192 +70247,24 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/xOffset",
-                "value": 0.047619049437344074,
-                "normalizedValue": 0.523809524718672
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/yOffset",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/yaw",
                 "value": 0.0,
-                "normalizedValue": 0.5
+                "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/zOffset",
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/pitch",
                 "value": 0.0,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/scale",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/minScale",
-                "value": 1.0,
-                "normalizedValue": 0.0949157995752499
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/maxScale",
-                "value": 10.0,
-                "normalizedValue": 0.0949157995752499
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/xScale",
-                "value": 0.20856917575102507,
-                "normalizedValue": 0.6042845878755125
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/yScale",
-                "value": 0.282231950039022,
-                "normalizedValue": 0.641115975019511
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/zScale",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/motion",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/motionSpeed",
-                "value": 0.7681769484623266,
-                "normalizedValue": 0.8840884742311633
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/motionSpeedRange",
-                "value": 12.0,
-                "normalizedValue": 0.043137254901960784
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/xMotion",
-                "value": -0.41798620704485745,
-                "normalizedValue": 0.2910068964775713
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/yMotion",
-                "value": -0.013245065679881374,
-                "normalizedValue": 0.4933774671600593
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/zMotion",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/algorithm",
-                "value": 0,
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/seed",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/octaves",
-                "value": 3,
-                "normalizedValue": 0.2857142857142857
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/lacunarity",
-                "value": 2.0,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/gain",
-                "value": 0.5,
-                "normalizedValue": 0.5
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/ridgeOffset",
-                "value": 0.9,
-                "normalizedValue": 0.45
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/xMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/yMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/5/pattern/9/zMode",
-                "value": 0,
+                "parameterPath": "/lx/mixer/channel/5/pattern/1/roll",
+                "value": 0.0,
                 "normalizedValue": 0.0
               },
               {
@@ -70646,13 +70632,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/7",
-                "activePatternIndex": 6
+                "activePatternIndex": 0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/enabled",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70660,7 +70646,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/recall",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70668,7 +70654,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/compositeMode",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70676,7 +70662,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70684,71 +70670,31 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/x",
-                "value": 0.5,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/midpoint",
+                "value": 29.91495024326006,
+                "normalizedValue": 0.2991495024326006
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/y",
-                "value": 0.5,
-                "normalizedValue": 0.5
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/contrast",
+                "value": 179.93866264811777,
+                "normalizedValue": 0.5998977623697521
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/z",
-                "value": 0.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/minLevel",
+                "value": 20.265625217871275,
+                "normalizedValue": 0.20265625217871275
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/xAmt",
-                "value": 0.18844545675771718,
-                "normalizedValue": 0.5942227283788586
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/yAmt",
-                "value": -1.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/zAmt",
-                "value": 0.4803401761428361,
-                "normalizedValue": 0.740170088071418
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/stripes",
-                "value": 0.6244559939146452,
-                "normalizedValue": 0.11445798765653584
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/sharp",
-                "value": 0.6813556407392972,
-                "normalizedValue": 0.06775899972721587
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/speedUnipolar",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/maxLevel",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -70756,15 +70702,39 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/speedBipolar",
-                "value": 41.726561984978616,
-                "normalizedValue": 0.7086328099248931
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/invert",
+                "value": 0.0,
+                "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/speedIsBipolar",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/xOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/yOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/zOffset",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/scale",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70772,47 +70742,39 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/speedRange",
-                "value": 0.4,
-                "normalizedValue": 0.04
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/minScale",
+                "value": 1.0,
+                "normalizedValue": 0.0949157995752499
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/tempoSync",
-                "value": 0.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/maxScale",
+                "value": 10.0,
+                "normalizedValue": 0.0949157995752499
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/tempoDivision",
-                "value": 5,
-                "normalizedValue": 0.3333333333333333
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/xScale",
+                "value": -7.051739181995753E-4,
+                "normalizedValue": 0.4996474130409002
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/reverse",
-                "value": 0.0,
-                "normalizedValue": 0.0
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/yScale",
+                "value": -0.2914763912293068,
+                "normalizedValue": 0.3542618043853466
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/invert",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/level",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/zScale",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70820,7 +70782,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/rotate",
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/motion",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70828,24 +70790,112 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/yaw",
-                "value": 145.54824007051428,
-                "normalizedValue": 0.4043006668625397
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/motionSpeed",
+                "value": 0.6346936394700566,
+                "normalizedValue": 0.8173468197350283
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/pitch",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/motionSpeedRange",
+                "value": 12.0,
+                "normalizedValue": 0.043137254901960784
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/xMotion",
+                "value": -0.5366356444974392,
+                "normalizedValue": 0.23168217775128042
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/yMotion",
+                "value": -0.1635020846497307,
+                "normalizedValue": 0.41824895767513465
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/zMotion",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/algorithm",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/7/pattern/7/roll",
-                "value": 0.0,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/seed",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/octaves",
+                "value": 3,
+                "normalizedValue": 0.2857142857142857
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/lacunarity",
+                "value": 2.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/gain",
+                "value": 0.5,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/ridgeOffset",
+                "value": 0.9,
+                "normalizedValue": 0.45
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/xMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/yMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/7/pattern/1/zMode",
+                "value": 0,
                 "normalizedValue": 0.0
               },
               {
@@ -70877,13 +70927,13 @@
                 "type": "ACTIVE_PATTERN",
                 "enabled": true,
                 "channelPath": "/lx/mixer/channel/8",
-                "activePatternIndex": 5
+                "activePatternIndex": 0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/enabled",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/enabled",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70891,7 +70941,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/recall",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/recall",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70899,7 +70949,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/compositeMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/compositeMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70907,7 +70957,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/compositeLevel",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/compositeLevel",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70915,15 +70965,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/xAmount",
-                "value": 0.7,
-                "normalizedValue": 0.85
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/yAmount",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/xAmount",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70931,7 +70973,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/zAmount",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/yAmount",
+                "value": 0.0,
+                "normalizedValue": 0.5
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/zAmount",
                 "value": 1.0,
                 "normalizedValue": 1.0
               },
@@ -70939,7 +70989,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/xOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/xOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70947,7 +70997,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/yOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/yOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70955,7 +71005,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/zOffset",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/zOffset",
                 "value": 0.0,
                 "normalizedValue": 0.5
               },
@@ -70963,7 +71013,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/colorMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/colorMode",
                 "value": 1,
                 "normalizedValue": 0.5
               },
@@ -70971,7 +71021,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/blendMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/blendMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -70979,15 +71029,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/gradient",
-                "value": 0.75,
-                "normalizedValue": 0.875
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/gradient",
+                "value": 1.0,
+                "normalizedValue": 1.0
               },
               {
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/brightness",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/fixedColor/brightness",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -70995,7 +71045,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/saturation",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/fixedColor/saturation",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -71003,7 +71053,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/fixedColor/hue",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/fixedColor/hue",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -71011,7 +71061,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/xMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/xMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -71019,7 +71069,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/yMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/yMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -71027,7 +71077,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/zMode",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/zMode",
                 "value": 0,
                 "normalizedValue": 0.0
               },
@@ -71035,7 +71085,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/paletteIndex",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/paletteIndex",
                 "value": 1,
                 "normalizedValue": 0.0
               },
@@ -71043,7 +71093,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/paletteStops",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/paletteStops",
                 "value": 2,
                 "normalizedValue": 0.0
               },
@@ -71051,7 +71101,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/gradientRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/gradientRange",
                 "value": 200.0,
                 "normalizedValue": 0.05555555555555555
               },
@@ -71059,7 +71109,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/saturationRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/saturationRange",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -71067,7 +71117,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/brightnessRange",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/brightnessRange",
                 "value": 100.0,
                 "normalizedValue": 1.0
               },
@@ -71075,7 +71125,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/rotate",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/rotate",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -71083,15 +71133,7 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/yaw",
-                "value": 145.7445099731107,
-                "normalizedValue": 0.4048458610364186
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/pitch",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/yaw",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -71099,7 +71141,15 @@
                 "scope": "PATTERNS",
                 "type": "PARAMETER",
                 "enabled": true,
-                "parameterPath": "/lx/mixer/channel/8/pattern/6/roll",
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/pitch",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/8/pattern/1/roll",
                 "value": 0.0,
                 "normalizedValue": 0.0
               },
@@ -71389,6 +71439,134 @@
                 "enabled": true,
                 "parameterPath": "/lx/mixer/channel/9/pattern/4/enabled",
                 "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "MIXER",
+                "type": "CHANNEL_FADER",
+                "enabled": true,
+                "channelPath": "/lx/mixer/channel/10",
+                "channelEnabled": true,
+                "channelFader": 1.0
+              },
+              {
+                "scope": "MIXER",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/crossfadeGroup",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/compositeMode",
+                "value": 1,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/1/enabled",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/2/enabled",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/3/enabled",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/4/enabled",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/enabled",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/recall",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/compositeMode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/compositeLevel",
+                "value": 1.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/brightness",
+                "value": 100.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/saturation",
+                "value": 100.0,
+                "normalizedValue": 1.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/hue",
+                "value": 0.0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/mode",
+                "value": 0,
+                "normalizedValue": 0.0
+              },
+              {
+                "scope": "PATTERNS",
+                "type": "PARAMETER",
+                "enabled": true,
+                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/index",
+                "value": 1,
                 "normalizedValue": 0.0
               },
               {
@@ -79464,8 +79642,8 @@
         "camera": {
           "active": true,
           "radius": 4263.28277542003,
-          "theta": 272.1972524425946,
-          "phi": 33.07665977627039,
+          "theta": 1.523698618169874,
+          "phi": 38.54559334367514,
           "x": -677.7502360064827,
           "y": 182.22238412580919,
           "z": -679.1175315564033
@@ -79483,8 +79661,8 @@
           {
             "active": true,
             "radius": 4263.28277542003,
-            "theta": 272.1972524425946,
-            "phi": 33.07665977627039,
+            "theta": 1.523698618169874,
+            "phi": 38.54559334367514,
             "x": -677.7502360064827,
             "y": 182.22238412580919,
             "z": -679.1175315564033
