@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class FlamecasterFixtures {
 
-    public static final int PIXELS_PER_UNIVERSE = 10;
+    public static final int PIXELS_PER_UNIVERSE = 20;
     public static final int FLAMECASTER_PORT = 6455;
 
     public static final float VERT_SPACE = 100.0f;

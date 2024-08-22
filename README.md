@@ -186,7 +186,10 @@ Hacked Electight pebble strip are `GRB` I think, also switch it to ws2812 / NeoP
 BTF are `RGB`
 
 ```bash
-python src/scripts/flamecaster_conf.py > src/main/resources/flamecaster-config.conf
+# make sure PixelBlazes have ArtNet pattern running
+python src/scripts/flamecaster_conf.py "192.168.0.79 192.168.0.229" "400 400" > src/main/resources/flamecaster.json
+
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/flamecaster.json)
 ```
 
 ## ArtNet Debug
@@ -255,6 +258,7 @@ but I'm pretty sure I can't guarantee that. So everything needs to be perfect. S
 
 Oh man, don't forget to enable output on fixtures :(
 
+Ended up going nodejs route.
 
 # Special Thanks
 
