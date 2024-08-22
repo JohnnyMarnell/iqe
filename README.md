@@ -208,11 +208,26 @@ ls src/main/resources/artNetDebug.NECorner.200BTFPebbles.pbb # @ ip 192.168.0.79
 ls src/main/resources/artNetDebug.NWCorner.400BTFecostrip.pbb # @ ip 192.168.0.229
 (cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
 
-java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes.lxp --clean
+java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_manyUniverseTestes.lxp
 ```
 
 ******* Next thing to try, overwrite the dumb fucking Java class Object #89123 Fixtures to be able
-to set override the port (in buildOutputs() ?) and try flamecasturbaishe again.
+to set override the port (in buildOutputs() ?) and try flamecasturbaishe again. ~DONE~
+
+Tried many universe approach again, no logging in flamecaster, no action:
+```bash
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug_manyUniverseTestes.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_manyUniverseTestes.lxp
+```
+
+Trying another port. SUCCESS!!!! With 0 based artNet universe counting, and alternate artNet port,
+hacked into LX so it (fucking) honors it, this is clashless PoC (Advatek stays on its standard port 🤞🏻, won't know till Playa. Great.)
+```bash
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.port.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_port.lxp
+```
+
+Next, we programmatically build Strips + Flamecasturbator configglesmiths for alternate port and universe striping.
 
 # Special Thanks
 
