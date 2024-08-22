@@ -22,7 +22,7 @@ cfg = {
     "devices": {},
 }
 
-pixels_per_universe = 10
+pixels_per_universe = 20
 universe = 0
 
 for device_index, ip in enumerate(pixelblaze_ips):

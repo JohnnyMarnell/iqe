@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1724295955996,
+  "timestamp": 1724299638736,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -3109,7 +3109,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": true,
+          "selected": false,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -3132,6 +3132,1726 @@
           "kinetPort": 1,
           "numPoints": 140,
           "spacing": 5.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2000,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip0",
+          "x": -475.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns0 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 0,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2001,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip1",
+          "x": -425.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns1 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 1,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2002,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip2",
+          "x": -375.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns2 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 2,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2003,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip3",
+          "x": -325.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns3 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 3,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2004,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip4",
+          "x": -275.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns4 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 4,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2005,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip5",
+          "x": -225.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns5 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 5,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2006,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip6",
+          "x": -175.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns6 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 6,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2007,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip7",
+          "x": -125.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns7 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 7,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2008,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip8",
+          "x": -75.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns8 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 8,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2009,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip9",
+          "x": -25.0,
+          "y": 700.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns9 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 9,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2010,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip10",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -25.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns10 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 10,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2011,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip11",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -75.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns11 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 11,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2012,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip12",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -125.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns12 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 12,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2013,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip13",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -175.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns13 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 13,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2014,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip14",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -225.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns14 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 14,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2015,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip15",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -275.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns15 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 15,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2016,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip16",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -325.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns16 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 16,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2017,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip17",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -375.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns17 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 17,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2018,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip18",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -425.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns18 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 18,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2019,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip19",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -475.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns19 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 19,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2020,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip20",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1525.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns20 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 20,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2021,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip21",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1575.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns21 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 21,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2022,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip22",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1625.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns22 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 22,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2023,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip23",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1675.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns23 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 23,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2024,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip24",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1725.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns24 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 24,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2025,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip25",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1775.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns25 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 25,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2026,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip26",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1825.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns26 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 26,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2027,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip27",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1875.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns27 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 27,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2028,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip28",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1925.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns28 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 28,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2029,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip29",
+          "x": 0.0,
+          "y": 700.0,
+          "z": -1975.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns29 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 29,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2030,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip30",
+          "x": -25.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns30 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 30,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2031,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip31",
+          "x": -75.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns31 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 31,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2032,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip32",
+          "x": -125.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns32 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 32,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2033,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip33",
+          "x": -175.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns33 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 33,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2034,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip34",
+          "x": -225.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns34 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 34,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2035,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip35",
+          "x": -275.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns35 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 35,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2036,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip36",
+          "x": -325.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns36 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 36,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2037,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip37",
+          "x": -375.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns37 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 37,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2038,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip38",
+          "x": -425.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns38 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 38,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
+        },
+        "children": {}
+      },
+      {
+        "id": 2039,
+        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "netStrip39",
+          "x": -475.0,
+          "y": 700.0,
+          "z": -2000.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": -90.0,
+          "scale": 1.0,
+          "selected": true,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "netStrip ns39 sigh",
+          "protocol": 1,
+          "byteOrder": 0,
+          "transport": 0,
+          "reverse": false,
+          "host": "127.0.0.1",
+          "port": 6455,
+          "dmxChannel": 0,
+          "artNetUniverse": 39,
+          "artNetSequenceEnabled": false,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 20,
+          "spacing": 50.0
         },
         "children": {}
       }
@@ -3171,7 +4891,7 @@
           "autoCycleEnabled": true,
           "autoCycleMode": 1,
           "autoCycleTimeSecs": 35.0,
-          "autoCycleCursor": 6,
+          "autoCycleCursor": 2,
           "triggerSwatchCycle": false,
           "expandedPerformance": true
         },
@@ -3204,8 +4924,8 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 74.04622650146484,
-                  "primary/hue": 201.69140625,
+                  "primary/saturation": 98.4313735961914,
+                  "primary/hue": 10.756970405578613,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3224,9 +4944,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 65.40692901611328,
-                  "primary/saturation": 82.69856262207031,
-                  "primary/hue": 0.0,
+                  "primary/brightness": 98.03921508789062,
+                  "primary/saturation": 99.19999694824219,
+                  "primary/hue": 62.177425384521484,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3245,9 +4965,9 @@
                   "label": "LX",
                   "mode": 0,
                   "period": 30.0,
-                  "primary/brightness": 98.24085998535156,
-                  "primary/saturation": 83.90625,
-                  "primary/hue": 3.503906011581421,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 99.21568298339844,
+                  "primary/hue": 131.146240234375,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -3267,8 +4987,29 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 67.76042175292969,
-                  "primary/hue": 235.34765625,
+                  "primary/saturation": 98.4313735961914,
+                  "primary/hue": 202.70916748046875,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 263786,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0,
+                  "modulationControlsExpanded": true,
+                  "modulationsExpanded": true
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 98.4313735961914,
+                  "primary/hue": 272.2709045410156,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -4461,17 +6202,17 @@
               "attack": 10.0,
               "release": 100.0,
               "slope": 4.5,
-              "band-1": 0.0,
-              "band-2": 0.03783351377420485,
-              "band-3": 0.22275978054443557,
-              "band-4": 0.36422576678965524,
-              "band-5": 0.547357720033222,
-              "band-6": 0.5820069475059166,
-              "band-7": 0.6476821952546448,
-              "band-8": 0.3642993104168418,
-              "band-9": 0.3567433129546439,
-              "band-10": 0.26836318478603793,
-              "band-11": 0.20563119407096997,
+              "band-1": 0.04894635386922841,
+              "band-2": 0.16382586663385867,
+              "band-3": 0.18124445033735748,
+              "band-4": 0.2043428314890795,
+              "band-5": 0.21159923736985375,
+              "band-6": 0.2408053273098778,
+              "band-7": 0.14356304578644108,
+              "band-8": 0.0,
+              "band-9": 0.0,
+              "band-10": 0.0,
+              "band-11": 0.0,
               "band-12": 0.0,
               "band-13": 0.0,
               "band-14": 0.0,
@@ -4494,8 +6235,8 @@
           "label": "Mixer",
           "crossfader": 0.0,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 9,
-          "focusedChannelAux": 9,
+          "focusedChannel": 8,
+          "focusedChannelAux": 8,
           "cueA": false,
           "cueB": false,
           "auxA": false,
@@ -4755,17 +6496,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 41.13133360301461,
+              "autoCycleTimeSecs": 44.12453096816543,
               "transitionEnabled": true,
-              "transitionTimeSecs": 13.007376385115116,
+              "transitionTimeSecs": 2.2069406449836833,
               "transitionBlendMode": 0,
-              "focusedPattern": 25,
+              "focusedPattern": 7,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 25,
+            "patternIndex": 7,
             "patterns": [
               {
                 "id": 52632,
@@ -7789,7 +9530,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.06058918444318806
                       },
                       {
                         "id": 140484,
@@ -7818,7 +9559,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0911151842718856
+                        "basis": 0.19129063562428925
                       },
                       {
                         "id": 140486,
@@ -7847,7 +9588,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.39724890115870526
+                        "basis": 0.44773656314566534
                       },
                       {
                         "id": 140488,
@@ -7876,7 +9617,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.352027424560688
+                        "basis": 0.5321021776914854
                       }
                     ],
                     "modulations": [
@@ -12256,7 +13997,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.41003656404442973
+                        "basis": 0.6166546825345222
                       },
                       {
                         "id": 140621,
@@ -12285,7 +14026,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4212409528385283
+                        "basis": 0.6371967635954623
                       },
                       {
                         "id": 140623,
@@ -12314,7 +14055,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0519658001728813
+                        "basis": 0.5174556281385052
                       },
                       {
                         "id": 140625,
@@ -12343,7 +14084,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.609695259094245
+                        "basis": 0.6817624894460295
                       },
                       {
                         "id": 140628,
@@ -12372,7 +14113,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8054865501851675
+                        "basis": 0.7790526251588905
                       },
                       {
                         "id": 140630,
@@ -12401,7 +14142,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.310313007275488
+                        "basis": 0.5791582838402682
                       }
                     ],
                     "modulations": [
@@ -14180,9 +15921,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 40.75391468014592,
+              "autoCycleTimeSecs": 56.45602568758346,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.751063714251034,
+              "transitionTimeSecs": 7.066661204108293,
               "transitionBlendMode": 0,
               "focusedPattern": 60,
               "triggerPatternCycle": false
@@ -24757,17 +26498,17 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 30.59434326102088,
+              "autoCycleTimeSecs": 41.07038361258673,
               "transitionEnabled": true,
-              "transitionTimeSecs": 6.158407983396216,
+              "transitionTimeSecs": 5.946303708187183,
               "transitionBlendMode": 0,
-              "focusedPattern": 2,
+              "focusedPattern": 3,
               "triggerPatternCycle": false
             },
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 2,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 60878,
@@ -24963,11 +26704,11 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 46.390711824753666,
+              "autoCycleTimeSecs": 31.49224100871517,
               "transitionEnabled": true,
-              "transitionTimeSecs": 13.240354321422746,
+              "transitionTimeSecs": 5.497663997313062,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 5,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -25169,7 +26910,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.07860959406366258
+                        "basis": 0.3520086008447013
                       }
                     ],
                     "modulations": [
@@ -25290,7 +27031,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 5,
             "patterns": [
               {
                 "id": 52574,
@@ -25376,7 +27117,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.609695259094245
+                        "basis": 0.7927314161936749
                       },
                       {
                         "id": 140858,
@@ -25405,7 +27146,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.14660756868290142
+                        "basis": 0.2888385988573128
                       },
                       {
                         "id": 140860,
@@ -25434,7 +27175,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1537904351901514
+                        "basis": 0.9116245593814264
                       }
                     ],
                     "modulations": [
@@ -26516,7 +28257,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.26096151659538225
+                        "basis": 0.6018405212680364
                       },
                       {
                         "id": 140890,
@@ -26545,7 +28286,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.11197980207236202
+                        "basis": 0.7129369902249588
                       },
                       {
                         "id": 140892,
@@ -26574,7 +28315,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.22323008173605594
+                        "basis": 0.6275899372026511
                       },
                       {
                         "id": 140894,
@@ -26603,7 +28344,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5384939790978095
+                        "basis": 0.15467748819645474
                       },
                       {
                         "id": 140896,
@@ -26632,7 +28373,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9108574131178031
+                        "basis": 0.5380556901055998
                       },
                       {
                         "id": 140898,
@@ -26661,7 +28402,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8996139001278494
+                        "basis": 0.2889584027911204
                       },
                       {
                         "id": 140900,
@@ -26690,7 +28431,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6848793071856166
+                        "basis": 0.06763275252352152
                       }
                     ],
                     "modulations": [
@@ -28732,9 +30473,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 67.49371133597066,
+              "autoCycleTimeSecs": 64.33915062998123,
               "transitionEnabled": true,
-              "transitionTimeSecs": 13.337344468813086,
+              "transitionTimeSecs": 13.935785550853701,
               "transitionBlendMode": 0,
               "focusedPattern": 0,
               "triggerPatternCycle": false
@@ -28833,7 +30574,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4185638628029918
+                        "basis": 0.8796928055306189
                       },
                       {
                         "id": 140966,
@@ -28862,7 +30603,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2152266920788466
+                        "basis": 0.44774766048576076
                       },
                       {
                         "id": 140968,
@@ -28891,7 +30632,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4171745083115196
+                        "basis": 0.4276284110837597
                       },
                       {
                         "id": 140970,
@@ -28920,7 +30661,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.11331656177337802
+                        "basis": 0.6657331342033174
                       },
                       {
                         "id": 140972,
@@ -28949,7 +30690,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.942164666857373
+                        "basis": 0.4750597928054172
                       },
                       {
                         "id": 140974,
@@ -28978,7 +30719,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.023528851717189537
+                        "basis": 0.6868493990189551
                       },
                       {
                         "id": 140976,
@@ -29007,7 +30748,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.609695259094245
+                        "basis": 0.06058918444318806
                       }
                     ],
                     "modulations": [
@@ -36244,11 +37985,11 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 66.70233858031219,
+              "autoCycleTimeSecs": 32.50053683269764,
               "transitionEnabled": true,
-              "transitionTimeSecs": 10.290658673018019,
+              "transitionTimeSecs": 12.32888430813848,
               "transitionBlendMode": 0,
-              "focusedPattern": 0,
+              "focusedPattern": 9,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -36515,7 +38256,7 @@
               }
             ],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 9,
             "patterns": [
               {
                 "id": 80237,
@@ -36601,7 +38342,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.37869414497046094
+                        "basis": 0.37904669938027447
                       },
                       {
                         "id": 141182,
@@ -36630,7 +38371,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.966268794788049
+                        "basis": 0.48862420749189933
                       },
                       {
                         "id": 141184,
@@ -36659,7 +38400,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7192584076934927
+                        "basis": 0.31196326358961196
                       }
                     ],
                     "modulations": [
@@ -39533,7 +41274,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6724545449663138
+                        "basis": 0.1347748398971792
                       },
                       {
                         "id": 141274,
@@ -39562,7 +41303,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0
+                        "basis": 0.06058918444318806
                       },
                       {
                         "id": 141277,
@@ -39591,7 +41332,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8036922350997276
+                        "basis": 0.12846425868599057
                       },
                       {
                         "id": 141279,
@@ -39620,7 +41361,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17642285238730387
+                        "basis": 0.5429161417576766
                       },
                       {
                         "id": 141281,
@@ -39649,7 +41390,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6318754469947728
+                        "basis": 0.9928887789601604
                       },
                       {
                         "id": 141283,
@@ -39678,7 +41419,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.1839235308431312
+                        "basis": 0.5181288551703058
                       },
                       {
                         "id": 141285,
@@ -39707,7 +41448,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.942619518301349
+                        "basis": 0.4636690560687534
                       }
                     ],
                     "modulations": [
@@ -39911,7 +41652,7 @@
               "label": "FX",
               "fader": 1.0,
               "arm": false,
-              "selected": false,
+              "selected": true,
               "enabled": true,
               "cue": false,
               "aux": false,
@@ -39927,9 +41668,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 56.08567810785027,
+              "autoCycleTimeSecs": 70.28707294524737,
               "transitionEnabled": true,
-              "transitionTimeSecs": 12.41225554805652,
+              "transitionTimeSecs": 2.9442633529804927,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -40108,264 +41849,6 @@
                 "deviceVersion": -1
               }
             ]
-          },
-          {
-            "id": 255911,
-            "class": "heronarts.lx.mixer.LXChannel",
-            "internal": {
-              "modulationColor": 0,
-              "modulationControlsExpanded": true,
-              "modulationsExpanded": true,
-              "controlsExpandedCue": true,
-              "controlsExpandedAux": true,
-              "controlsExpanded": true,
-              "viewPatternLabel": false
-            },
-            "parameters": {
-              "label": "DIAG",
-              "fader": 1.0,
-              "arm": false,
-              "selected": true,
-              "enabled": true,
-              "cue": true,
-              "aux": false,
-              "crossfadeGroup": 0,
-              "blendMode": 0,
-              "midiMonitor": false,
-              "midiChannel": 16,
-              "viewEnabled": false,
-              "viewSelector": "",
-              "viewNormalization": 0,
-              "compositeMode": 1,
-              "compositeDampingEnabled": true,
-              "compositeDampingTimeSecs": 0.1,
-              "autoCycleEnabled": true,
-              "autoCycleMode": 1,
-              "autoCycleTimeSecs": 34.80754430269058,
-              "transitionEnabled": true,
-              "transitionTimeSecs": 3.7575556593290136,
-              "transitionBlendMode": 0,
-              "focusedPattern": 0,
-              "triggerPatternCycle": false
-            },
-            "children": {},
-            "effects": [],
-            "clips": [],
-            "patternIndex": 0,
-            "patterns": [
-              {
-                "id": 255927,
-                "class": "org.iqe.pattern.pixelblaze.PixelBlazeBlowser",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "PB_Lightning_FX",
-                  "enabled": false,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "enableEdges": true,
-                  "flipCoord": false,
-                  "script": 5,
-                  "speed": 0.23225287689358812,
-                  "timeDelta": 0.0,
-                  "timeDMax": 0.0,
-                  "scriptName": "__pbb_lightning ZAP!",
-                  "reload": 0.0,
-                  "error": ""
-                },
-                "children": {
-                  "modulation": {
-                    "id": 255928,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 255938,
-                "class": "org.iqe.pattern.PillarFirePattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "PillarFire",
-                  "enabled": false,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "syncTrigger": false
-                },
-                "children": {
-                  "modulation": {
-                    "id": 255939,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 255949,
-                "class": "org.iqe.pattern.MindLikeWaterPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "MindLikeWater",
-                  "enabled": false,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "running": true
-                },
-                "children": {
-                  "modulation": {
-                    "id": 255950,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 255960,
-                "class": "org.iqe.pattern.EqVisualizerPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "EqVisualizer",
-                  "enabled": false,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "running": true
-                },
-                "children": {
-                  "modulation": {
-                    "id": 255961,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              },
-              {
-                "id": 255989,
-                "class": "heronarts.lx.pattern.color.SolidPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "Solid",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "color/brightness": 100.0,
-                  "color/saturation": 100.0,
-                  "color/hue": 0.0,
-                  "color/mode": 0,
-                  "color/index": 1
-                },
-                "children": {
-                  "modulation": {
-                    "id": 255990,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              }
-            ]
           }
         ]
       },
@@ -40411,7 +41894,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.18432170041104654
+            "basis": 0.8841452428867156
           },
           {
             "id": 54255,
@@ -40467,7 +41950,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8613217004089972
+            "basis": 0.5611452428846753
           },
           {
             "id": 56980,
@@ -40498,7 +41981,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8613217004089972
+            "basis": 0.5611452428846753
           },
           {
             "id": 56981,
@@ -40529,7 +42012,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.04665503370800127
+            "basis": 0.7464785761836775
           },
           {
             "id": 56982,
@@ -40560,7 +42043,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8613217004089972
+            "basis": 0.5611452428846753
           },
           {
             "id": 56983,
@@ -40591,7 +42074,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8613217004089972
+            "basis": 0.5611452428846753
           },
           {
             "id": 57307,
@@ -40622,7 +42105,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.404321700406643
+            "basis": 0.1041452428823043
           },
           {
             "id": 57308,
@@ -40653,7 +42136,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.404321700406643
+            "basis": 0.1041452428823043
           },
           {
             "id": 62913,
@@ -40684,7 +42167,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.6103217004056519
+            "basis": 0.31014524288131995
           },
           {
             "id": 66458,
@@ -40715,7 +42198,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.08932170040147276
+            "basis": 0.7891452428771474
           },
           {
             "id": 76378,
@@ -40775,7 +42258,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.14232170040509048
+            "basis": 0.8421452428807609
           },
           {
             "id": 182480,
@@ -40806,7 +42289,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.09499440585778203
+            "basis": 0.7948179483334555
           },
           {
             "id": 182455,
@@ -40837,7 +42320,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.09110729624518994
+            "basis": 0.7909308387208639
           },
           {
             "id": 64644,
@@ -40926,7 +42409,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.0913217004019475
+            "basis": 0.7911452428776212
           },
           {
             "id": 125371,
@@ -40955,7 +42438,7 @@
               "exp": 1.0
             },
             "children": {},
-            "basis": 0.13091079058270835
+            "basis": 0.12686183727865838
           },
           {
             "id": 182481,
@@ -40986,7 +42469,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7849687298527409
+            "basis": 0.48479227232841715
           },
           {
             "id": 185910,
@@ -41017,7 +42500,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.10399077408810864
+            "basis": 0.803814316563782
           },
           {
             "id": 185931,
@@ -41048,7 +42531,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7050657585393943
+            "basis": 0.4048893010150649
           },
           {
             "id": 185932,
@@ -41079,7 +42562,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.013054559647121655
+            "basis": 0.7128781021227991
           },
           {
             "id": 192762,
@@ -41108,7 +42591,7 @@
               "exp": 0.24999999825377017
             },
             "children": {},
-            "basis": 0.609695259094245
+            "basis": 0.06058918444318806
           },
           {
             "id": 203089,
@@ -41137,7 +42620,7 @@
               "exp": 0.0
             },
             "children": {},
-            "basis": 0.7986046789063054
+            "basis": 0.49842822138198245
           }
         ],
         "modulations": [
@@ -71442,134 +72925,6 @@
                 "normalizedValue": 0.0
               },
               {
-                "scope": "MIXER",
-                "type": "CHANNEL_FADER",
-                "enabled": true,
-                "channelPath": "/lx/mixer/channel/10",
-                "channelEnabled": true,
-                "channelFader": 1.0
-              },
-              {
-                "scope": "MIXER",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/crossfadeGroup",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/compositeMode",
-                "value": 1,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/1/enabled",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/2/enabled",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/3/enabled",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/4/enabled",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/enabled",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/recall",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/compositeMode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/compositeLevel",
-                "value": 1.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/brightness",
-                "value": 100.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/saturation",
-                "value": 100.0,
-                "normalizedValue": 1.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/hue",
-                "value": 0.0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/mode",
-                "value": 0,
-                "normalizedValue": 0.0
-              },
-              {
-                "scope": "PATTERNS",
-                "type": "PARAMETER",
-                "enabled": true,
-                "parameterPath": "/lx/mixer/channel/10/pattern/5/color/index",
-                "value": 1,
-                "normalizedValue": 0.0
-              },
-              {
                 "scope": "MASTER",
                 "type": "PARAMETER",
                 "enabled": true,
@@ -79641,9 +80996,9 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 4263.28277542003,
-          "theta": 1.523698618169874,
-          "phi": 38.54559334367514,
+          "radius": 2682.3888374449916,
+          "theta": 274.7321143350564,
+          "phi": 3.1494957581162453,
           "x": -677.7502360064827,
           "y": 182.22238412580919,
           "z": -679.1175315564033
@@ -79660,9 +81015,9 @@
           },
           {
             "active": true,
-            "radius": 4263.28277542003,
-            "theta": 1.523698618169874,
-            "phi": 38.54559334367514,
+            "radius": 2682.3888374449916,
+            "theta": 274.7321143350564,
+            "phi": 3.1494957581162453,
             "x": -677.7502360064827,
             "y": 182.22238412580919,
             "z": -679.1175315564033

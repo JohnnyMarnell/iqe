@@ -311,16 +311,6 @@ function buildNagBugglerSaberOfLightFixtures_v1() {
     ]
 }
 
-// Load project file, overwrite fixtures, re-write file.
-const path = `${__dirname}/../../Projects/iqe.lxp`
-const project = JSON.parse(fs.readFileSync(path))
-// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
-project.model.fixtures = fixtures
-console.log(JSON.stringify(project, null, 2))
-console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
-
-fs.writeFileSync(path, JSON.stringify(project, null, 2))
-
 function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
     id++
     const i = id - 101
@@ -372,3 +362,135 @@ function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
         children: {}
     }
 }
+
+const netStripSpacing = 50
+let netStrips = 0
+
+function addNets() {
+    // for (let i = 0; i < 20 * 2; i++) {
+    //     fixtures.push(netStrip({x: 0, y: stripLen, z: i * 100, yaw: 0, pitch: 0, roll: -90}, 'sigh'))
+    // }
+
+    function hang(x, z) {
+        fixtures.push(netStrip({x: x, y: stripLen, z: z, yaw: 0, pitch: 0, roll: -90}, 'sigh'))
+    }
+    
+    const ns = netStripSpacing
+    
+    // NE corner
+    let x = 0
+    let z = 0
+    hang(x - 9.5 * ns, z)
+    hang(x - 8.5 * ns, z)
+    hang(x - 7.5 * ns, z)
+    hang(x - 6.5 * ns, z)
+    hang(x - 5.5 * ns, z)
+    hang(x - 4.5 * ns, z)
+    hang(x - 3.5 * ns, z)
+    hang(x - 2.5 * ns, z)
+    hang(x - 1.5 * ns, z)
+    hang(x - 0.5 * ns, z)
+
+    hang(x, z - 0.5 * ns)
+    hang(x, z - 1.5 * ns)
+    hang(x, z - 2.5 * ns)
+    hang(x, z - 3.5 * ns)
+    hang(x, z - 4.5 * ns)
+    hang(x, z - 5.5 * ns)
+    hang(x, z - 6.5 * ns)
+    hang(x, z - 7.5 * ns)
+    hang(x, z - 8.5 * ns)
+    hang(x, z - 9.5 * ns)
+
+    // NW corner
+    z = -2000
+    x = 0    
+    
+    hang(x, z + 9.5 * ns)
+    hang(x, z + 8.5 * ns)
+    hang(x, z + 7.5 * ns)
+    hang(x, z + 6.5 * ns)
+    hang(x, z + 5.5 * ns)
+    hang(x, z + 4.5 * ns)
+    hang(x, z + 3.5 * ns)
+    hang(x, z + 2.5 * ns)
+    hang(x, z + 1.5 * ns)
+    hang(x, z + 0.5 * ns)
+
+    hang(x - 0.5 * ns, z)
+    hang(x - 1.5 * ns, z)
+    hang(x - 2.5 * ns, z)
+    hang(x - 3.5 * ns, z)
+    hang(x - 4.5 * ns, z)
+    hang(x - 5.5 * ns, z)
+    hang(x - 6.5 * ns, z)
+    hang(x - 7.5 * ns, z)
+    hang(x - 8.5 * ns, z)
+    hang(x - 9.5 * ns, z)
+}
+
+function netStrip(params, tags) {
+    
+    let fixtureTags = `netStrip ns${netStrips}`
+    if (tags) fixtureTags += ` ${tags.split(/\s+/ig).join(' ')}`
+    const fixture = {
+        id: 2000 + netStrips,
+        class: "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        internal: {
+            modulationColor: 0,
+            modulationControlsExpanded: true
+        },
+        parameters: {
+            label: `netStrip${netStrips}`,
+            tags: fixtureTags,
+            x: 0,
+            y: stripLen, // most (all) strips have origin in ceiling
+            z: 0,
+            yaw: 0,
+            pitch: 0,
+            roll: 0,
+            scale: 1,
+            selected: false,
+            deactivate: false,
+            enabled: true,
+            brightness: 1,
+            identify: false,
+            mute: false,
+            solo: false,
+            protocol: 1, // ArtNet
+            byteOrder: 0,
+            transport: 0,
+            reverse: false,
+            host: "127.0.0.1",
+            port: 6455,
+            artNetUniverse: netStrips,
+            dmxChannel: 0,
+            artNetSequenceEnabled: false,
+            opcChannel: 0,
+            opcOffset: 0,
+            ddpDataOffset: 0,
+            kinetPort: 1,
+            numPoints: 20,
+            spacing: netStripSpacing,
+            
+            // overlay any overriding params from above!
+            ...params
+        },
+        children: {}
+    }
+
+    netStrips++
+    return fixture
+}
+
+addNets()
+
+// Load project file, overwrite fixtures, re-write file.
+const path = `${__dirname}/../../Projects/iqe.lxp`
+const project = JSON.parse(fs.readFileSync(path))
+// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
+project.model.fixtures = fixtures
+console.log(JSON.stringify(project, null, 2))
+console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
+
+fs.writeFileSync(path, JSON.stringify(project, null, 2))
