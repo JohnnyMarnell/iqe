@@ -229,6 +229,15 @@ hacked into LX so it (fucking) honors it, this is clashless PoC (Advatek stays o
 
 Next, we programmatically build Strips + Flamecasturbator configglesmiths for alternate port and universe striping.
 
+First striping attempt failed. What about many low index numbered universes, only ten pixels in each... then I
+shouldn't have to worry about channels at least. Could also in process try not filling a device, thus
+take existing fixtures and shrink them. Right now there is 2 for PB 1 and 3 for PB2. Let's try 3 and 2, all ten size...
+
+I think this works!
+```bash
+
+```
+
 # Special Thanks
 
 Big thank you to kind souls, especially of Titanic's End, Pixelblaze, SymmetryLabs, who've helped us!
