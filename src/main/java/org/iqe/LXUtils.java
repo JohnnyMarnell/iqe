@@ -17,6 +17,14 @@ public class LXUtils {
         return ReflectionTestUtils.invokeMethod(instance, method, args);
     }
 
+    public static <T> T field(Class<T> clazz, Object instance, String field) {
+        return (T) ReflectionTestUtils.getField(instance, clazz, field);
+    }
+
+    public static Object field(Object instance, String field) {
+        return ReflectionTestUtils.getField(instance, field);
+    }
+
     public static void addParameter(LXComponent component, String path, LXParameter parameter) {
         call(component, "addParameter", path, parameter);
     }

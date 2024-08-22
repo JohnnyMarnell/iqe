@@ -234,12 +234,16 @@ public class FlamecasterFixtures {
     // strip.port.setValue(6454);
     // addChild(strip, true);
 
-    public static class OOPIsDead extends StripFixture {
-        int realPort;
+    public static class OOPIsDead extends PatchedStripFixture { public OOPIsDead(LX lx, int p) { super(lx, p); } public OOPIsDead(LX lx) { super(lx); } }
+    public static class PatchedStripFixture extends StripFixture {
 
-        public OOPIsDead(LX lx, int realPort) {
+        public PatchedStripFixture(LX lx) {
+            this(lx, 6454);
+        }
+
+        public PatchedStripFixture(LX lx, int realPort) {
             super(lx);
-            this.realPort = realPort;
+            this.port.setValue(realPort);
         }
 
         @Override
@@ -252,7 +256,10 @@ public class FlamecasterFixtures {
 
         public void logStatus() {
             outputDefinitions.forEach(o -> {
-                LOG.info("{} output OOPisded", this.getLabel());
+                LOG.info("{} output OOPisded universe {} port {}",
+                        this.getLabel(),
+                        LXUtils.field(o, "universe"),
+                        LXUtils.field(o, "port"));
             });
         }
 
@@ -273,8 +280,8 @@ public class FlamecasterFixtures {
         @Override
         protected int getProtocolPort() {
             var port = super.getProtocolPort();
-            LOG.info("so dumb, always protocol port sigh {} remap to {}", port, realPort);
-            return realPort;
+            LOG.info("so dumb, always protocol port sigh {} remap hopefully to {}", port, this.port.getValuei());
+            return this.port.getValuei();
         }
     }
 }
