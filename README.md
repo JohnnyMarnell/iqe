@@ -270,6 +270,7 @@ Note there are 750 total pixels on disco ball + Gandalf staff eco strip IP6+ wit
 
 Big thank you to kind souls, especially of Titanic's End, Pixelblaze, SymmetryLabs, who've helped us!
 
+- [Jon ZRanger1, the Ledge](https://github.com/zranger1)
 - [Mark Slee](https://heronarts.com/)
 - [Ben Hencke](https://www.bhencke.com/)
 - [Jeff Vyduna](https://ngnr.org/)

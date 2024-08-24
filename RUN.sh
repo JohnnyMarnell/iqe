@@ -13,6 +13,7 @@ trap cleanup EXIT
 
 function run_flamecaster() {
     (
+        akill 'Flamecaster|python.*multiprocessing'
         cd ../Flamecaster
         python -m Flamecaster --file ../iqe/src/main/resources/flamecaster-config.conf
     )
