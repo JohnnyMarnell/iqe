@@ -13,7 +13,7 @@
         "1": {
             "name": "NWCorner",
             "ip": "192.168.0.229",
-            "pixelCount": 34,
+            "pixelCount": 30,
             "deviceStyle": "pixels",
             "data": {
                 "0": {
@@ -23,46 +23,22 @@
                     "startChannel": 0,
                     "destIndex": 0,
                     "pixelCount": 30
-                },
-                "1": {
-                    "net": 0,
-                    "subnet": 0,
-                    "universe": 1,
-                    "startChannel": 0,
-                    "destIndex": 30,
-                    "pixelCount": 3
                 }
             }
         },
         "2": {
             "name": "NECorner",
             "ip": "192.168.0.79",
-            "pixelCount": 41,
+            "pixelCount": 43,
             "deviceStyle": "pixels",
             "data": {
                 "0": {
                     "net": 0,
                     "subnet": 0,
                     "universe": 1,
-                    "startChannel": 9,
+                    "startChannel": 0,
                     "destIndex": 0,
-                    "pixelCount": 21
-                },
-                "1": {
-                    "net": 0,
-                    "subnet": 0,
-                    "universe": 2,
-                    "startChannel": 0,
-                    "destIndex": 21,
-                    "pixelCount": 5
-                },
-                "2": {
-                    "net": 0,
-                    "subnet": 0,
-                    "universe": 3,
-                    "startChannel": 0,
-                    "destIndex": 26,
-                    "pixelCount": 14
+                    "pixelCount": 43
                 }
             }
         }

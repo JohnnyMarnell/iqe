@@ -264,6 +264,8 @@ Revisiting Flamecaster + LX.
 Made 3 strips, R, G, B of pixels 30, 24, 19 = 73 total pixelblaze pixels to map.
 I want 4 universes arbitraly numbered, 1 is contained by PB1, 2 is shared, 3 + 4 are PB2.
 
+Note there are 750 total pixels on disco ball + Gandalf staff eco strip IP6+ with one PixelBlaze testes.
+
 # Special Thanks
 
 Big thank you to kind souls, especially of Titanic's End, Pixelblaze, SymmetryLabs, who've helped us!

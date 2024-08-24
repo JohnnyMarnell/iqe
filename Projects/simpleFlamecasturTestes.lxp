@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "timestamp": 1724457193063,
+  "timestamp": 1724458125460,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -235,8 +235,8 @@
           "reverse": false,
           "host": "127.0.0.1",
           "port": 7890,
-          "dmxChannel": 0,
-          "artNetUniverse": 2,
+          "dmxChannel": 72,
+          "artNetUniverse": 1,
           "artNetSequenceEnabled": false,
           "sacnPriority": 100,
           "opcChannel": 0,
@@ -1074,7 +1074,7 @@
                   "customCycleTimeSecs": 60.0,
                   "color/brightness": 100.0,
                   "color/saturation": 100.0,
-                  "color/hue": 137.12109375,
+                  "color/hue": 108.53999175550416,
                   "color/mode": 0,
                   "color/index": 1
                 },
@@ -1280,7 +1280,7 @@
                   "customCycleTimeSecs": 60.0,
                   "color/brightness": 100.0,
                   "color/saturation": 100.0,
-                  "color/hue": 0.0,
+                  "color/hue": 289.3502588006668,
                   "color/mode": 0,
                   "color/index": 1
                 },
@@ -1454,8 +1454,8 @@
         "camera": {
           "active": false,
           "radius": 161.65639707545722,
-          "theta": 0.26592525839805603,
-          "phi": 20.23287396132946,
+          "theta": 359.5605467259884,
+          "phi": 20.054839104413986,
           "x": 139.62254859006498,
           "y": -5.1529212817549706,
           "z": -2.3714843045454472
@@ -1464,8 +1464,8 @@
           {
             "active": false,
             "radius": 161.65639707545722,
-            "theta": 0.26592525839805603,
-            "phi": 20.23287396132946,
+            "theta": 359.5605467259884,
+            "phi": 20.054839104413986,
             "x": 139.62254859006498,
             "y": -5.1529212817549706,
             "z": -2.3714843045454472
