@@ -483,7 +483,36 @@ function netStrip(params, tags) {
     return fixture
 }
 
-addNets()
+
+const universes = [{id: 0, pixels: 0}]
+const last = (arr) => arr[arr.length - 1]
+function addScreen(rows, cols, columnSpacing, z) {
+    const spacing = 40
+    const numPoints = rows
+    for (let i = 0; i < cols; i++) {
+        const y = i % 2 === 0 ? stripLen : stripLen - (numPoints - 1) * spacing
+        const roll = i % 2 === 0 ? -90 : 90
+        
+        if (numPoints + last(universes).pixels > 170) {
+            universes.push({
+                id: last(universes).id + 1,
+                pixels: 0
+            })
+        }
+        let props = {x: 0, y: y, z: z -i * columnSpacing, yaw: 0, pitch: 0, roll: roll, spacing: spacing, numPoints: numPoints}
+        props = {...props, artNetUniverse: last(universes).id, dmxChannel: last(universes).pixels * 3}
+        fixtures.push(netStrip(props))
+        
+        last(universes).pixels += numPoints
+    }
+}
+
+// addNets()
+
+// ~300 pixels, 16 columns of 18, zig zag
+addScreen(18, 16, 10, 0)
+universes.push({id: universes.length, pixels: 0})
+addScreen(18, 16, 10, -1200)
 
 // Load project file, overwrite fixtures, re-write file.
 const path = `${__dirname}/../../Projects/iqe.lxp`
@@ -493,4 +522,5 @@ project.model.fixtures = fixtures
 console.log(JSON.stringify(project, null, 2))
 console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
 
+console.log(universes)
 fs.writeFileSync(path, JSON.stringify(project, null, 2))
