@@ -149,8 +149,7 @@ public class Audio implements Tempo.Listener {
                 bpm = beatsPerSecond * 60.0d;
             }
             lastBassHit = now;
-            LOG.debug("Bass hit detected");
-            LX.log("BASS HIT! High varying implied bpm: " + bpm);
+            LOG.debug("BASS HIT! High varying implied bpm: " + bpm);
         }
 
         for (int i = startTasks.size() - 1; i >= 0; i--) {

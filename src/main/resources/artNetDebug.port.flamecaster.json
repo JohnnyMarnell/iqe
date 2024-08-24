@@ -1,0 +1,70 @@
+{
+    "system": {
+        "maxFps": 30,
+        "statusUpdateIntervalMs": 2000,
+        "pixelsPerUniverse": 170,
+        "ipArtnet": "127.0.0.1",
+        "ipWebInterface": "127.0.0.1",
+        "portArtnet": 6455,
+        "portWebInterface": 8081,
+        "updateInterval": 3000
+    },
+    "devices": {
+        "1": {
+            "ip": "192.168.0.79",
+            "name": "Fuck My Life 1",
+            "pixelCount": 200,
+            "deviceStyle": "pixels",
+            "data": {
+                "0": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 0,
+                    "startChannel": 0,
+                    "destIndex": 0,
+                    "pixelCount": 170
+                },
+                "1": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 1,
+                    "startChannel": 0,
+                    "destIndex": 170,
+                    "pixelCount": 30
+                }
+            }
+        },
+        "2": {
+            "ip": "192.168.0.229",
+            "name": "Fuck My Life 2",
+            "pixelCount": 400,
+            "deviceStyle": "pixels",
+            "data": {
+                "0": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 2,
+                    "startChannel": 0,
+                    "destIndex": 0,
+                    "pixelCount": 170
+                },
+                "1": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 3,
+                    "startChannel": 0,
+                    "destIndex": 170,
+                    "pixelCount": 170
+                },
+                "2": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 4,
+                    "startChannel": 0,
+                    "destIndex": 340,
+                    "pixelCount": 60
+                }
+            }
+        }
+    }
+}

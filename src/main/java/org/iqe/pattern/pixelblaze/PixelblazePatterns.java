@@ -7,6 +7,7 @@ import heronarts.lx.LX;
 import heronarts.lx.LXCategory;
 import heronarts.lx.pattern.LXPattern;
 import org.iqe.Audio;
+import org.openjdk.nashorn.api.tree.Tree;
 import titanicsend.pattern.pixelblaze.Wrapper;
 
 import javax.script.Bindings;
@@ -24,6 +25,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
@@ -121,6 +123,7 @@ public class PixelblazePatterns {
     }
 
     private static void addPixelblazeDownloads(Map<String, String> nameToSource) {
+        Map<String, String> sorted = new TreeMap<>();
         ClassLoader classLoader = PixelblazePatterns.class.getClassLoader();
 
         // Specify the directory in the resources folder
@@ -159,11 +162,11 @@ public class PixelblazePatterns {
                             System.out.println("SKIPPING PIXELBLAZE unknown: " + file);
                         }
 
-                        if (nameToSource.containsKey(file)) {
+                        if (nameToSource.containsKey(file) || sorted.containsKey(file)) {
                             System.out.println("SKIPPING DUPLICATE PIXELBLAZE: " + file);
                         } else if (src != null) {
                             System.out.println("Loading pixelblaze extra: " + file);
-                            nameToSource.put(file, src);
+                            sorted.put(file, src);
                         }
 
                         return FileVisitResult.CONTINUE;
@@ -175,6 +178,8 @@ public class PixelblazePatterns {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        nameToSource.putAll(sorted);
     }
 
     private static Map<String, String> loadPatternData() {
