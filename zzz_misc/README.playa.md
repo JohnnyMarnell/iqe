@@ -16,6 +16,8 @@
 ```bash
 node ~/src/iqe/src/nodejs/buildProject.js
 ```
+- can try [http://10.10.42.80](http://10.10.42.80) in browser, hopefully loads PixLite UI. (Try Advatek Assistant as last resort)
+- 
 
 # OUTDATED, pre-Chromatik alpha builds
 # OUTDATED, pre-Chromatik alpha builds

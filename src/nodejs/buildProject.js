@@ -46,6 +46,7 @@ const ledSpacing = 5
 const stripLen = numLedsPerStrip * ledSpacing // 700 == 5 spacing * 140 LED pixels / "numPoints"
 const numRafters = 72
 const numPillars = 0
+const controllerPort = 7890 // how, why, where did this come from???!?!?!
 const controllerIP = "10.10.42.80"
 // const controllerIP = "127.0.0.1"
 // const controllerIP = "99.99.99.99"
@@ -310,16 +311,6 @@ function buildNagBugglerSaberOfLightFixtures_v1() {
     ]
 }
 
-// Load project file, overwrite fixtures, re-write file.
-const path = `${__dirname}/../../Projects/iqe.lxp`
-const project = JSON.parse(fs.readFileSync(path))
-// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
-project.model.fixtures = fixtures
-console.log(JSON.stringify(project, null, 2))
-console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
-
-fs.writeFileSync(path, JSON.stringify(project, null, 2))
-
 function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
     id++
     const i = id - 101
@@ -354,7 +345,7 @@ function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
             transport: 0,
             reverse: false,
             host: controllerIP,
-            port: 7890,
+            port: controllerPort,
             artNetUniverse: artNetPair ? artNetPair.universe : fArtNetPairs[mapStripToArtnetPair(i)][0],
             dmxChannel: artNetPair ? artNetPair.channel : fArtNetPairs[mapStripToArtnetPair(i)][1],
             artNetSequenceEnabled: false,
@@ -371,3 +362,165 @@ function defaultNagBugglerSaberOfLight(params, tags, labelParam, artNetPair) {
         children: {}
     }
 }
+
+const netStripSpacing = 50
+let netStrips = 0
+
+function addNets() {
+    // for (let i = 0; i < 20 * 2; i++) {
+    //     fixtures.push(netStrip({x: 0, y: stripLen, z: i * 100, yaw: 0, pitch: 0, roll: -90}, 'sigh'))
+    // }
+
+    function hang(x, z) {
+        fixtures.push(netStrip({x: x, y: stripLen, z: z, yaw: 0, pitch: 0, roll: -90}, 'sigh'))
+    }
+    
+    const ns = netStripSpacing
+    
+    // NE corner
+    let x = 0
+    let z = 0
+    hang(x - 9.5 * ns, z)
+    hang(x - 8.5 * ns, z)
+    hang(x - 7.5 * ns, z)
+    hang(x - 6.5 * ns, z)
+    hang(x - 5.5 * ns, z)
+    hang(x - 4.5 * ns, z)
+    hang(x - 3.5 * ns, z)
+    hang(x - 2.5 * ns, z)
+    hang(x - 1.5 * ns, z)
+    hang(x - 0.5 * ns, z)
+
+    hang(x, z - 0.5 * ns)
+    hang(x, z - 1.5 * ns)
+    hang(x, z - 2.5 * ns)
+    hang(x, z - 3.5 * ns)
+    hang(x, z - 4.5 * ns)
+    hang(x, z - 5.5 * ns)
+    hang(x, z - 6.5 * ns)
+    hang(x, z - 7.5 * ns)
+    hang(x, z - 8.5 * ns)
+    hang(x, z - 9.5 * ns)
+
+    // NW corner
+    z = -2000
+    x = 0    
+    
+    hang(x, z + 9.5 * ns)
+    hang(x, z + 8.5 * ns)
+    hang(x, z + 7.5 * ns)
+    hang(x, z + 6.5 * ns)
+    hang(x, z + 5.5 * ns)
+    hang(x, z + 4.5 * ns)
+    hang(x, z + 3.5 * ns)
+    hang(x, z + 2.5 * ns)
+    hang(x, z + 1.5 * ns)
+    hang(x, z + 0.5 * ns)
+
+    hang(x - 0.5 * ns, z)
+    hang(x - 1.5 * ns, z)
+    hang(x - 2.5 * ns, z)
+    hang(x - 3.5 * ns, z)
+    hang(x - 4.5 * ns, z)
+    hang(x - 5.5 * ns, z)
+    hang(x - 6.5 * ns, z)
+    hang(x - 7.5 * ns, z)
+    hang(x - 8.5 * ns, z)
+    hang(x - 9.5 * ns, z)
+}
+
+function netStrip(params, tags) {
+    
+    let fixtureTags = `netStrip ns${netStrips}`
+    if (tags) fixtureTags += ` ${tags.split(/\s+/ig).join(' ')}`
+    const fixture = {
+        id: 2000 + netStrips,
+        class: "org.iqe.FlamecasterFixtures$PatchedStripFixture",
+        internal: {
+            modulationColor: 0,
+            modulationControlsExpanded: true
+        },
+        parameters: {
+            label: `netStrip${netStrips}`,
+            tags: fixtureTags,
+            x: 0,
+            y: stripLen, // most (all) strips have origin in ceiling
+            z: 0,
+            yaw: 0,
+            pitch: 0,
+            roll: 0,
+            scale: 1,
+            selected: false,
+            deactivate: false,
+            enabled: true,
+            brightness: 1,
+            identify: false,
+            mute: false,
+            solo: false,
+            protocol: 1, // ArtNet
+            byteOrder: 0,
+            transport: 0,
+            reverse: false,
+            host: "127.0.0.1",
+            port: 6455,
+            artNetUniverse: netStrips,
+            dmxChannel: 0,
+            artNetSequenceEnabled: false,
+            opcChannel: 0,
+            opcOffset: 0,
+            ddpDataOffset: 0,
+            kinetPort: 1,
+            numPoints: 20,
+            spacing: netStripSpacing,
+            
+            // overlay any overriding params from above!
+            ...params
+        },
+        children: {}
+    }
+
+    netStrips++
+    return fixture
+}
+
+
+const universes = [{id: 0, pixels: 0}]
+const last = (arr) => arr[arr.length - 1]
+function addScreen(rows, cols, columnSpacing, z) {
+    const spacing = 40
+    const numPoints = rows
+    for (let i = 0; i < cols; i++) {
+        const y = i % 2 === 0 ? stripLen : stripLen - (numPoints - 1) * spacing
+        const roll = i % 2 === 0 ? -90 : 90
+        
+        if (numPoints + last(universes).pixels > 170) {
+            universes.push({
+                id: last(universes).id + 1,
+                pixels: 0
+            })
+        }
+        let props = {x: 0, y: y, z: z -i * columnSpacing, yaw: 0, pitch: 0, roll: roll, spacing: spacing, numPoints: numPoints}
+        props = {...props, artNetUniverse: last(universes).id, dmxChannel: last(universes).pixels * 3}
+        fixtures.push(netStrip(props))
+        
+        last(universes).pixels += numPoints
+    }
+}
+
+// addNets()
+
+// ~300 pixels, 16 columns of 18, zig zag
+addScreen(18, 16, 10, 0)
+universes.push({id: universes.length, pixels: 0})
+addScreen(18, 16, 10, -1200)
+
+// Load project file, overwrite fixtures, re-write file.
+const path = `${__dirname}/../../Projects/iqe.lxp`
+const project = JSON.parse(fs.readFileSync(path))
+// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
+project.model.fixtures = fixtures
+console.log(JSON.stringify(project, null, 2))
+console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
+
+console.log(universes)
+fs.writeFileSync(path, JSON.stringify(project, null, 2))

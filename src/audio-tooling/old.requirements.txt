@@ -1,0 +1,8 @@
+PyAudio==0.2.13
+numpy==1.23.5
+librosa==0.10.0.post2
+python-osc==1.8.3
+argparse==1.4.0
+pylint==3.1.0
+black==24.3.0
+mypy==1.9.0

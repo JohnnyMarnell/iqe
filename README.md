@@ -45,7 +45,7 @@ eval "java $( [[ $(uname) == 'Darwin' ]] && echo '-XstartOnFirstThread' ) \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```
 
-# PixelBlaze
+# PixelBlaze Pattern Support
 
 Some PixelBlaze functionality has been ported (with permission). Currently there is a `PixelBlazeBlowser` pattern with
 a `script` knob. Changing it will cycle some PB patterns, some with controls / sliders, and not all render.
@@ -131,6 +131,140 @@ docker-compose exec -it jupyter-lab jupyter nbconvert --to html --output-dir /ou
 TODO: Look into SuperCollider https://depts.washington.edu/dxscdoc/Help/Classes/BeatTrack.html , as well as if
 MaxMSP can run on Pi, and BeatSeeker Ableton M4L can run? (Although is this only for drums, not full track?)
 https://www.ableton.com/en/packs/beatseeker/
+
+# PixelBlaze / Python
+
+```bash
+conda create -n iqe python=3.11
+conda activate iqe
+brew install portaudio
+pip install -r ~/src/iqe/requirements.txt
+pip install -r ~/src/Flamecaster/requirements.txt
+(cd ~/src/marimapper ; pip install -e . )
+```
+
+For wifi access point mode, hold button when turning on, until flashes. Join network, go to config page:
+http://192.168.4.1
+Then point to camp wifi and store IP address. (Probably better ways to scan).
+
+## Marimapper Automapping
+
+Upload "marimapper" pattern in this repo manually (wish there were API for this?).
+See more examples in my marimapper fork.
+
+Conda example:
+```bash
+conda create -n marimapper python=3.11
+conda activate marimapper
+# Commands run local code edits
+pip install -e .
+```
+
+TODO(jmarnell) - figure out where to put stuff
+
+```bash
+pip install "marimapper[pixelblaze]" @ git+http://github.com/themariday/marimapper"
+```
+
+Add doc manual step of uploading .epe, API looks hard unfortch Install and set up Camo, pair iPhone. Deselect annoying watermark. Make sure high framerate?
+
+todo: i think i saw a name match example somewhere...
+
+```bash
+# maybe need this multiple times
+pip install -e .
+DEBUG_LOGGING=True marimapper_check_camera --device 0
+DEBUG_LOGGING=True marimapper --device 0 --backend pixelblaze --server 192.168.0.95 ~/src/iqe/src/main/resources/binger-bag
+marimapper_upload_to_pixelblaze --server 192.168.0.95 --csv_file $(find ~/src/iqe/src/main/resources/binger-bag -type f | sort | tail -n1)
+```
+
+Add Q quit button
+
+Sigh, I had to futz with Camo a lot, change watermark in and out maybe?
+
+Hacked Electight pebble strip are `GRB` I think, also switch it to ws2812 / NeoPixel!
+BTF are `RGB`
+
+```bash
+# make sure PixelBlazes have ArtNet pattern running
+python src/scripts/flamecaster_conf.py "192.168.0.79 192.168.0.229" "400 400" > src/main/resources/flamecaster.json
+
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/flamecaster.json)
+```
+
+## ArtNet Debug
+
+jesus fucking christ what a god awful fucking nightmare.
+
+I think pixel counts and universe numbers must be absolutely exact and expected between
+Pixelblaze config, flamecastur config, and LX fixtures. Nightmare.
+
+Finally got a testcase of two pixelblazes emulating corner configs. 200 pebbles on one,
+400+ eco strip pixels (PB set to 400, OF COURSE THOUGH!). ArtNet port doesn't seem to
+work with LX, tried two mutual Flamecasturbaishtion but could never get it to the other.
+
+*** RE-START / RE-SELECT PIXELBLAZE PATTERNS!!!!!!!
+
+```bash
+# upload these
+ls src/main/resources/artNetDebug.NECorner.200BTFPebbles.pbb # @ ip 192.168.0.79
+ls src/main/resources/artNetDebug.NWCorner.400BTFecostrip.pbb # @ ip 192.168.0.229
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
+
+java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_manyUniverseTestes.lxp
+```
+
+******* Next thing to try, overwrite the dumb fucking Java class Object #89123 Fixtures to be able
+to set override the port (in buildOutputs() ?) and try flamecasturbaishe again. ~DONE~
+
+Tried many universe approach again, no logging in flamecaster, no action:
+```bash
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug_manyUniverseTestes.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_manyUniverseTestes.lxp
+```
+
+Trying another port. SUCCESS!!!! With 0 based artNet universe counting, and alternate artNet port,
+hacked into LX so it (fucking) honors it, this is clashless PoC (Advatek stays on its standard port 🤞🏻, won't know till Playa. Great.)
+```bash
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.port.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_port.lxp
+```
+
+Next, we programmatically build Strips + Flamecasturbator configglesmiths for alternate port and universe striping.
+
+First striping attempt failed. What about many low index numbered universes, only ten pixels in each... then I
+shouldn't have to worry about channels at least. Could also in process try not filling a device, thus
+take existing fixtures and shrink them. Right now there is 2 for PB 1 and 3 for PB2. Let's try 3 and 2, all ten size...
+
+I think this works!
+```bash
+(cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.tens.flamecaster.json)
+./mvnw package -DskipTests ; java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_tens.lxp
+```
+
+So in this universe (_HAhaHahahahAHHAHAHhahahaHAHA_), java fixtures can just keep incrementing in 10-sized universes,
+and the python generated config just needs to switch over.
+```bash
+python ./src/scripts/ > ~/src/iqe/src/main/resources/artNetDebug.tens.flamecaster.json
+python > ~/src/iqe/src/main/resources/flamecaster.json
+```
+
+(By the way, thought I could try skipping to a higher universe like 40 [since first 0-39 would be curtain one], confirmed
+thought it didn't error, it doesn't work, second PB didn't animate. What a mess!).
+
+I also keep hoping pixel count doesn't matter as much across Flamecaster, real pixelblaze settings, and LX,
+but I'm pretty sure I can't guarantee that. So everything needs to be perfect. Start with 30 and 20. Then get
+200 and 400. Then build a real 400 and cross fingers. Then build second real 400. Also print configs, as I borked it.
+
+Oh man, don't forget to enable output on fixtures :(
+
+Ended up going nodejs route.
+
+Revisiting Flamecaster + LX.
+Made 3 strips, R, G, B of pixels 30, 24, 19 = 73 total pixelblaze pixels to map.
+I want 4 universes arbitraly numbered, 1 is contained by PB1, 2 is shared, 3 + 4 are PB2.
+
+Note there are 750 total pixels on disco ball + Gandalf staff eco strip IP6+ with one PixelBlaze testes.
 
 # Special Thanks
 

@@ -1,0 +1,350 @@
+{
+    "system": {
+        "maxFps": 30,
+        "statusUpdateIntervalMs": 2000,
+        "updateInterval": 3000,
+        "pixelsPerUniverse": 170,
+        "ipArtnet": "127.0.0.1",
+        "portArtnet": 6455,
+        "ipWebInterface": "127.0.0.1",
+        "portWebInterface": 8585
+    },
+    "devices": {
+        "1": {
+            "name": "NECorner",
+            "ip": "192.168.0.79",
+            "pixelCount": 400,
+            "deviceStyle": "pixels",
+            "data": {
+                "0": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 0,
+                    "startChannel": 0,
+                    "destIndex": 0,
+                    "pixelCount": 20
+                },
+                "1": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 1,
+                    "startChannel": 0,
+                    "destIndex": 20,
+                    "pixelCount": 20
+                },
+                "2": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 2,
+                    "startChannel": 0,
+                    "destIndex": 40,
+                    "pixelCount": 20
+                },
+                "3": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 3,
+                    "startChannel": 0,
+                    "destIndex": 60,
+                    "pixelCount": 20
+                },
+                "4": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 4,
+                    "startChannel": 0,
+                    "destIndex": 80,
+                    "pixelCount": 20
+                },
+                "5": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 5,
+                    "startChannel": 0,
+                    "destIndex": 100,
+                    "pixelCount": 20
+                },
+                "6": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 6,
+                    "startChannel": 0,
+                    "destIndex": 120,
+                    "pixelCount": 20
+                },
+                "7": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 7,
+                    "startChannel": 0,
+                    "destIndex": 140,
+                    "pixelCount": 20
+                },
+                "8": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 8,
+                    "startChannel": 0,
+                    "destIndex": 160,
+                    "pixelCount": 20
+                },
+                "9": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 9,
+                    "startChannel": 0,
+                    "destIndex": 180,
+                    "pixelCount": 20
+                },
+                "10": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 10,
+                    "startChannel": 0,
+                    "destIndex": 200,
+                    "pixelCount": 20
+                },
+                "11": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 11,
+                    "startChannel": 0,
+                    "destIndex": 220,
+                    "pixelCount": 20
+                },
+                "12": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 12,
+                    "startChannel": 0,
+                    "destIndex": 240,
+                    "pixelCount": 20
+                },
+                "13": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 13,
+                    "startChannel": 0,
+                    "destIndex": 260,
+                    "pixelCount": 20
+                },
+                "14": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 14,
+                    "startChannel": 0,
+                    "destIndex": 280,
+                    "pixelCount": 20
+                },
+                "15": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 15,
+                    "startChannel": 0,
+                    "destIndex": 300,
+                    "pixelCount": 20
+                },
+                "16": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 16,
+                    "startChannel": 0,
+                    "destIndex": 320,
+                    "pixelCount": 20
+                },
+                "17": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 17,
+                    "startChannel": 0,
+                    "destIndex": 340,
+                    "pixelCount": 20
+                },
+                "18": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 18,
+                    "startChannel": 0,
+                    "destIndex": 360,
+                    "pixelCount": 20
+                },
+                "19": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 19,
+                    "startChannel": 0,
+                    "destIndex": 380,
+                    "pixelCount": 20
+                }
+            }
+        },
+        "2": {
+            "name": "NWCorner",
+            "ip": "192.168.0.229",
+            "pixelCount": 400,
+            "deviceStyle": "pixels",
+            "data": {
+                "0": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 20,
+                    "startChannel": 0,
+                    "destIndex": 0,
+                    "pixelCount": 20
+                },
+                "1": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 21,
+                    "startChannel": 0,
+                    "destIndex": 20,
+                    "pixelCount": 20
+                },
+                "2": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 22,
+                    "startChannel": 0,
+                    "destIndex": 40,
+                    "pixelCount": 20
+                },
+                "3": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 23,
+                    "startChannel": 0,
+                    "destIndex": 60,
+                    "pixelCount": 20
+                },
+                "4": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 24,
+                    "startChannel": 0,
+                    "destIndex": 80,
+                    "pixelCount": 20
+                },
+                "5": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 25,
+                    "startChannel": 0,
+                    "destIndex": 100,
+                    "pixelCount": 20
+                },
+                "6": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 26,
+                    "startChannel": 0,
+                    "destIndex": 120,
+                    "pixelCount": 20
+                },
+                "7": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 27,
+                    "startChannel": 0,
+                    "destIndex": 140,
+                    "pixelCount": 20
+                },
+                "8": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 28,
+                    "startChannel": 0,
+                    "destIndex": 160,
+                    "pixelCount": 20
+                },
+                "9": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 29,
+                    "startChannel": 0,
+                    "destIndex": 180,
+                    "pixelCount": 20
+                },
+                "10": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 30,
+                    "startChannel": 0,
+                    "destIndex": 200,
+                    "pixelCount": 20
+                },
+                "11": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 31,
+                    "startChannel": 0,
+                    "destIndex": 220,
+                    "pixelCount": 20
+                },
+                "12": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 32,
+                    "startChannel": 0,
+                    "destIndex": 240,
+                    "pixelCount": 20
+                },
+                "13": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 33,
+                    "startChannel": 0,
+                    "destIndex": 260,
+                    "pixelCount": 20
+                },
+                "14": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 34,
+                    "startChannel": 0,
+                    "destIndex": 280,
+                    "pixelCount": 20
+                },
+                "15": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 35,
+                    "startChannel": 0,
+                    "destIndex": 300,
+                    "pixelCount": 20
+                },
+                "16": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 36,
+                    "startChannel": 0,
+                    "destIndex": 320,
+                    "pixelCount": 20
+                },
+                "17": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 37,
+                    "startChannel": 0,
+                    "destIndex": 340,
+                    "pixelCount": 20
+                },
+                "18": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 38,
+                    "startChannel": 0,
+                    "destIndex": 360,
+                    "pixelCount": 20
+                },
+                "19": {
+                    "net": 0,
+                    "subnet": 0,
+                    "universe": 39,
+                    "startChannel": 0,
+                    "destIndex": 380,
+                    "pixelCount": 20
+                }
+            }
+        }
+    }
+}
