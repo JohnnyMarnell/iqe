@@ -2,23 +2,31 @@
 
 cd "$(dirname $0)"
 
+akill () {
+	echo "Killing:" >&2
+	ps aux | grep -iP "$@" | grep -v grep >&2
+	ps aux | grep -iP "$@" | grep -v grep | awk '{print "kill -9 "$2}' | sh >&2
+}
+
 # Function to kill all child processes
 cleanup() {
     echo "Cleaning up..."
     pkill -P $$
+    akill 'Flamecaster|python.*multiprocessing'
 }
 
 # Trap EXIT signal to trigger cleanup
 trap cleanup EXIT
 
-function run_flamecaster() {
-    (
-        akill 'Flamecaster|python.*multiprocessing'
-        cd ../Flamecaster
-        python -m Flamecaster --file ../iqe/src/main/resources/flamecaster-config.conf
-    )
-}
-run_flamecaster &
+# function run_flamecaster() {
+#     (
+#         akill 'Flamecaster|python.*multiprocessing'
+#         cd ../Flamecaster
+#         conda activate iqe
+#         python -m Flamecaster --file ~/src/iqe/src/main/resources/flamecaster-config.conf
+#     )
+# }
+# run_flamecaster &
 
 cd `dirname $0`
 
