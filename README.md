@@ -195,6 +195,8 @@ python src/scripts/flamecaster_conf.py "192.168.0.79 192.168.0.229" "400 400" > 
 (cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/flamecaster.json)
 ```
 
+Random note I think binaries dir here was upgrade we never got to try
+
 ## ArtNet Debug
 
 jesus fucking christ what a god awful fucking nightmare.
