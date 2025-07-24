@@ -3,6 +3,7 @@ package org.iqe;
 import heronarts.lx.*;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.parameter.BooleanParameter;
+import heronarts.lx.parameter.BoundedParameter;
 import heronarts.lx.parameter.DiscreteParameter;
 import heronarts.lx.parameter.TriggerParameter;
 
@@ -14,10 +15,15 @@ import static org.iqe.LXPluginIQE.INTERNAL;
 
 /**
  * A lot of the finagling and hacky stuff here is because I don't yet know about proper UI
- * and organization. Adding a global effect that I can throw controls into
+ * and organization. Adding a global effect that I can throw controls into.
+ *
+ * Update 2025: Never did learn how to properly set this up... I believe the instance was manually
+ * added to the .lxp in the GUI (not programmatically). It's visible on Master channel's plugin tab.
  */
 @LXCategory(INTERNAL) @LXComponent.Hidden
 public class GlobalControls extends LXEffect {
+    public static final BoundedParameter speed = new BoundedParameter("speedUp", 0.0, 0.0, 1.0)
+            .setDescription("Globally speed up pattern animations, 0 is no speed up");
     public static final List<String> clicks = buildClicks();
     public static final DiscreteParameter defaultClick =
             new DiscreteParameter("syncMode", clicks.toArray(new String[0]))
@@ -53,6 +59,7 @@ public class GlobalControls extends LXEffect {
         super(lx);
         this.label.setValue("Global Controls");
         this.setDescription("Global / default control panel");
+        this.addParameter("speed", speed);
         this.addParameter("defaultSyncMode", defaultClick);
         this.addParameter("bassDynamics", bassDynamics);
         this.addParameter("bassBnc", bassBounce);

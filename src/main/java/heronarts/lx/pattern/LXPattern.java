@@ -209,6 +209,7 @@ public abstract class LXPattern extends LXDeviceComponent implements LXComponent
       }
 
       long runStart = System.nanoTime();
+      deltaMs *= 1.0 + GlobalControls.speed.getNormalized() * 20.0;
       this.runMs += deltaMs;
       this.run(deltaMs);
       

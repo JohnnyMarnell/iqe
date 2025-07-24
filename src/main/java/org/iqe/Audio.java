@@ -25,6 +25,7 @@ import static org.iqe.LXPluginIQE.INTERNAL;
 /**
  * <p>
  * Main Audio engine class and logic.
+ * And pretty gross singleton static mess.
  *
  * </p>
  * todo: Also has become a bit more than that, entry point to a lot of classes, change that?

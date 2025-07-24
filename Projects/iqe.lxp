@@ -5892,7 +5892,7 @@
                 "parameters": {
                   "label": "Global Controls",
                   "enabled": true,
-                  "speed": 0.4857812442496652,
+                  "speed": 0.0,
                   "defaultSyncMode": 9,
                   "bassDynamics": true,
                   "bassBnc": false,
