@@ -10,6 +10,7 @@
 
 # Summary
 Mainly LX Studio / Chromatik project and Java code for Burning Man IQE HQ shade structure LEDznutz.
+See more pics: (https://johnnymarnell.github.io/led-art)[https://johnnymarnell.github.io/led-art]
 
 Also contains python code and Jupyter notebooks for audio analysis with
 [Librosa](https://librosa.org/doc/latest/index.html),
@@ -24,11 +25,10 @@ Outdated screenshart:
 
 Prerequisites:
 
-1. Make sure `git-lfs` (Large File Storage) is already installed, e.g. `brew install git-lfs`
-1. Java 17 Temurin / Eclipse is installed from here: https://adoptium.net/
+1. Clone this repository to a folder (you can use GitHub Desktop App if this is new to you)
+1. Java 17 "Temurin / Eclipse" is installed from here: https://adoptium.net/ (tied to our old LX / Chromatik build)
 
-Then find and double-click the `IQE.command` here in this repo / folder. (Note: until annoying-ass Maven is sorted,
-before very first `./mvnw` CLI use, need to have clicked above or run its scripts).
+Then find and double-click the `IQE.command` here in this repo / folder in Finder.
 
 You can import this repo as project (select pom.xml) in IntelliJ IDEA, and just click the dropdown near Play and Debug
 buttons to select ready-to-go easy run configuration, ready to run (or debug, with hot reload, useful!) via those buttons.
@@ -36,14 +36,17 @@ buttons to select ready-to-go easy run configuration, ready to run (or debug, wi
 Or examples with sperminal:
 
 ```bash
-./src/scripts/download_chromatik.sh # do once, to fetch LX / Chromatik per arch binary jar
 ./mvnw clean package -DskipTests ; # to (re-)build
 
-# and run
+./RUN.sh # should quickly build and run, same as Mac 
+
+# the java command these execute:
 eval "java $( [[ $(uname) == 'Darwin' ]] && echo '-XstartOnFirstThread' ) \
     -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```
+
+Note we are on an old version of Chromatik / LX Studio, haven't properly upgraded and bootstrapped yet.
 
 # PixelBlaze Pattern Support
 
@@ -95,7 +98,7 @@ party mode, Orchestrator buttons / actions)...
 We can (of course) make edits to the project in LX Studio / Chromatik, and save it
 to persist these changes.
 
-Rarely to never, one can (of course) edit the [iqe.lxp](./iqe.lxp) JSON directly.
+Rarely to never, one can (of course) edit the [iqe.lxp](./Projects/iqe.lxp) JSON directly.
 
 There is a NodeJS script that will parse the `.lxp` JSON, and rebuild only the fixtures part,
 and re-write the `.lxp` file with it. Put another way, we generate and update the fixture geometry via simple
