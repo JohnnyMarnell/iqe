@@ -1,0 +1,19 @@
+{
+  "name": "control-ui",
+  "version": "1.0.0",
+  "description": "TypeScript webapp for controlling LX parameters via OSC",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start": "vite --port 8282 --host"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  },
+  "dependencies": {
+    "osc-js": "^2.4.0"
+  }
+}

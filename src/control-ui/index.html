@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LX Control UI</title>
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="control-group">
+        <h2 class="slider-label">Speed Up</h2>
+        <div class="slider-container">
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div class="value-display">0.00</div>
+        </div>
+      </div>
+      <div class="info">
+        <p class="status">Connecting...</p>
+        <button class="toggle-log">Show Log</button>
+        <div class="log-container">
+          <div class="log-controls">
+            <label>
+              <input type="checkbox" class="filter-outgoing" checked> Outgoing
+            </label>
+            <label>
+              <input type="checkbox" class="filter-incoming"> Incoming
+            </label>
+            <label>
+              <input type="checkbox" class="filter-info"> Info
+            </label>
+          </div>
+          <div class="log-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
