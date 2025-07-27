@@ -1,0 +1,25 @@
+# IQE Lighting Project Allowlist
+# This file specifies allowed external documentation sources for this project
+
+# TouchDesigner official documentation
+https://docs.derivative.ca/
+
+# Chromatik/LX Studio documentation  
+https://chromatik.co/api/
+https://docs.chromatik.co/
+https://heronarts.com/
+
+# Python TouchDesigner API reference
+https://docs.derivative.ca/Category:Python
+
+# TouchDesigner community resources
+https://td.community/
+https://forum.derivative.ca/
+
+# PixelBlaze documentation
+https://electromage.com/docs/
+https://github.com/simap/pixelblaze
+
+# Python audio libraries
+https://librosa.org/doc/latest/
+https://pyaudio.readthedocs.io/
