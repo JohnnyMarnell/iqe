@@ -1,9 +1,33 @@
 # CLAUDE.md - TouchDesigner Python Guide
 
+## 🚀 Quick Start (New Session)
+```python
+# 1. Load utilities (always do this first!)
+exec(open('/Users/jmarnell/src/iqe/src/touch-designer/utils.py').read())
+
+# 2. Check what's in the project
+print(f"Project has {len(op('/project1').children)} nodes")
+for child in op('/project1').children[:5]:  # First 5 nodes
+    print(f"  - {child.name} ({child.type})")
+
+# 3. Use helper functions
+nop('audio')  # Find audio nodes
+nop('geo')    # Find geometry nodes
+```
+
+## 🔐 Common Permissions Required
+When working with TouchDesigner + Claude, you'll typically need to approve:
+- **File reading**: Reading Python scripts, CLAUDE.md, and .toe files
+- **File writing**: Updating Python utilities and documentation
+- **MCP TouchDesigner commands**: All mcp__touchdesigner__* operations
+- **Task management**: TodoWrite for tracking complex workflows
+
+Note: These permissions are session-based and cannot be permanently stored.
+
 ## Project: Audio-Reactive Jelly Beans
 A displacement and static overlay effect system that responds to microphone input.
 
-### Quick Start
+### Quick Start for Jelly Beans Project
 ```python
 # Load utilities and restore working configuration
 exec(open('/Users/jmarnell/src/iqe/src/touch-designer/audio_reactive_jellybeans.py').read())
@@ -311,6 +335,44 @@ amp.par.gain = 100  # 100x amplification often needed!
 ```
 
 ### Project Startup & Restoration
+
+#### Quick Start for New TouchDesigner Session
+```python
+# 1. First, check TouchDesigner MCP connection (from Claude)
+mcp__touchdesigner__get_td_info()
+
+# 2. Load utility functions into TouchDesigner Python
+exec(open('/Users/jmarnell/src/iqe/src/touch-designer/utils.py').read())
+
+# 3. Quick project overview
+print(f"Project nodes: {len(op('/project1').children)}")
+for child in op('/project1').children:
+    print(f"  - {child.name} ({child.type})")
+```
+
+#### Startup Workflow Best Practices
+1. **Always verify MCP connection first** - ensures TouchDesigner is running
+2. **Load utilities immediately** - provides nop(), rm(), explore_tree()
+3. **Check existing nodes** - understand current project state
+4. **Use textport (Alt+Shift+T)** for quick Python testing
+5. **Create todo list** for complex multi-step tasks
+
+#### Common Startup Commands
+```python
+# Quick exploration
+nop('audio')          # Find any audio-related nodes
+nop('geo')            # Find geometry nodes
+explore_tree(op('/project1'), max_depth=2)  # See project structure
+
+# Check for existing setups
+if op('/project1/audiodevin1'):
+    print("✅ Audio input exists")
+if op('/project1/audioAnalysis'):
+    print("✅ Audio analysis exists")
+    
+# Clean up test nodes from previous sessions
+rm('test|temp|debug')  # Remove testing nodes
+```
 
 #### Essential Startup Script
 ```python

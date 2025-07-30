@@ -1,0 +1,21 @@
+# Cursor AI Rules for TouchDesigner Project
+# This file configures how Claude behaves in this project
+
+# Allow all file operations without prompting
+allow_file_operations: true
+
+# Auto-approve common tool usage
+auto_approve_tools:
+  - Read
+  - Write
+  - Edit
+  - mcp__touchdesigner__*
+  - TodoWrite
+
+# Project context
+project_type: touchdesigner
+primary_language: python
+
+# Behavior preferences
+skip_permission_prompts: true
+verbose_mode: false
