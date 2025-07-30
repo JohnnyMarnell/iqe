@@ -1,5 +1,15 @@
 # CLAUDE.md - TouchDesigner Python Guide
 
+## Project: Audio-Reactive Jelly Beans
+A displacement and static overlay effect system that responds to microphone input.
+
+### Quick Start
+```python
+# Load utilities and restore working configuration
+exec(open('/Users/jmarnell/src/iqe/src/touch-designer/audio_reactive_jellybeans.py').read())
+restore_final_config()
+```
+
 ## Core Concepts Learned
 
 ### The TouchDesigner Python Console (Textport)
@@ -195,6 +205,64 @@ From our exploration, typical audio analysis structure:
 ```
 
 **Key insight**: The `out1` CHOP is usually what you want to reference, not the container itself.
+
+### Animation Issues & Solutions
+
+#### Noise Animation Problem
+- **Issue**: Noise CHOP doesn't animate on its own with timeline
+- **Root cause**: Transform parameters need to change over time
+- **Failed attempts**: 
+  - `me.time.seconds` - not accessible in MCP context
+  - `absTime.seconds` - may not work in all contexts
+  - Setting tx to large values - creates static offset
+
+#### LFO Solution
+- **Solution**: Use LFO CHOP to drive noise transform
+- **Implementation**:
+  ```python
+  # Create LFO
+  lfo = op('/project1').create(lfoCHOP, 'time_driver')
+  lfo.par.wavetype = 'sin'  # Smooth movement
+  lfo.par.frequency = 0.1   # Slow oscillation
+  
+  # Drive noise with LFO
+  noise1.par.tx.expr = 'op("/project1/time_driver")[0] * 2'
+  ```
+- **Result**: Continuous, smooth animation independent of timeline
+
+### Audio-Reactive Jelly Bean System Architecture
+
+#### Final Working Signal Flow
+```
+1. Audio Input
+   audiodevin1 → audioAnalysis → audio_amp (100x) → audio_low → audio_lag
+
+2. Displacement Effect
+   LFO → drives → noise1.tx
+   noise1 (hermite) × audio_lag → math1 → chopto1 → displace1
+
+3. Static Overlay
+   audio_lag → chopto_static → controls → static_level.opacity
+                                             ↑
+                                        static_noise
+
+4. Final Composite
+   moviefilein1 → displace1 → audio_composite → out1
+                               ↑
+                         static_level
+```
+
+#### Critical Parameters
+- **LFO**: sine wave, 0.1 Hz, drives noise animation
+- **Noise**: hermite type for smooth interpolation
+- **Math CHOP**: MUST be set to 'mul' (kept reverting to 'off')
+- **Displacement**: weight = 0.02 (subtle effect)
+- **Audio amp**: 100x gain (microphone input is very weak ~0.001)
+
+### Lessons on Node Layout
+- Created `reflow()`, `reflow_by_type()`, and `reflow_audio_chain()` functions
+- Nodes pile up in lower-left by default when created via MCP
+- Custom layout functions help organize complex signal flows
 
 ### TouchDesigner + Python Philosophy
 
