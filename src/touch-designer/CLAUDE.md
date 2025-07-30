@@ -203,13 +203,186 @@ From our exploration, typical audio analysis structure:
 3. **Clean iteration cycles** - rm() + act() pattern for rapid development
 4. **Parameter discovery first** - check real names before assuming
 5. **Use Python for complex logic** - visual programming for data flow
+6. **Use bypass, not disconnect** - Maintain connections, toggle processing
+
+### MCP Integration Lessons Learned
+
+#### Operator Type Names
+```python
+# ❌ WRONG - Python class names don't work in MCP
+op('/project1').create(mathCHOP)  # NameError
+
+# ✅ CORRECT - Use string type names for MCP
+mcp__touchdesigner__create_td_node(nodeType='mathCHOP')
+```
+
+#### Common MCP Type Names
+- `mathCHOP`, `selectCHOP`, `lagCHOP`, `noiseCHOP`, `levelCHOP`
+- `noiseTOP`, `compositeTOP`, `levelTOP`, `choptoTOP`, `displaceTOP`
+- `textDAT`, `executeDAT`
+
+#### Parameter Setting Patterns
+```python
+# ❌ WRONG - Direct assignment for expressions
+node.par.opacity = 'op("/project1/chopto")[0]'
+
+# ✅ CORRECT - Use .expr for expression parameters
+node.par.opacity.expr = 'op("/project1/chopto")[0]'
+
+# ✅ For numeric values, direct assignment works
+node.par.gain = 2.0
+```
+
+#### Audio Weak Signal Issues
+```python
+# Audio from microphone often needs massive amplification
+# Create amplifier between audioAnalysis and processing:
+amp = create_node('mathCHOP', 'audio_amp')
+amp.par.chopop = 'mult'
+amp.par.gain = 100  # 100x amplification often needed!
+```
+
+### Project Startup & Restoration
+
+#### Essential Startup Script
+```python
+def setup_audio_reactive_jellybeans():
+    """Restore audio-reactive jelly bean setup after restart"""
+    
+    # 1. Ensure audio device is active
+    audio_in = op('/project1/audiodevin1')
+    if audio_in:
+        audio_in.par.active = 1
+        print(f"✅ Audio device: {audio_in.par.device}")
+    
+    # 2. Create/verify audio amplification
+    audio_out = op('/project1/audioAnalysis/out1')
+    audio_amp = op('/project1/audio_amp')
+    if not audio_amp:
+        audio_amp = op('/project1').create(mathCHOP, 'audio_amp')
+        audio_amp.par.chopop = 'mult'
+        audio_amp.par.gain = 100
+        # Connect: audioAnalysis → amp → audio_low
+        audio_out.outputConnectors[0].connect(audio_amp)
+    
+    # 3. Verify connections
+    nodes_to_connect = [
+        ('audio_amp', 'audio_low'),
+        ('audio_low', 'audio_lag'),
+        ('noise1', 'math1', 0),
+        ('audio_lag', 'math1', 1)
+    ]
+    
+    for src_name, dst_name, *input_idx in nodes_to_connect:
+        src = op(f'/project1/{src_name}')
+        dst = op(f'/project1/{dst_name}')
+        if src and dst:
+            idx = input_idx[0] if input_idx else 0
+            src.outputConnectors[0].connect(dst.inputConnectors[idx])
+    
+    # 4. Set critical parameters
+    math1 = op('/project1/math1')
+    if math1:
+        math1.par.chopop = 'mult'  # CRITICAL: Not 'off'!
+        math1.par.gain = 5.0
+    
+    # 5. Configure displacement
+    displace = op('/project1/displace1')
+    if displace:
+        displace.par.displaceweighty = 0.5
+    
+    print("✅ Audio-reactive system restored!")
+```
+
+### Enhanced Utility Functions
+
+```python
+def trace_audio_signal():
+    """Debug audio signal through the chain"""
+    chain = [
+        ('audiodevin1', 0, 'Input'),
+        ('audioAnalysis/out1', 'low', 'Analysis'),
+        ('audio_amp', 0, 'Amplified'),
+        ('audio_low', 0, 'Selected'),
+        ('audio_lag', 0, 'Smoothed'),
+        ('math1', 0, 'Output')
+    ]
+    
+    print("📊 Audio Signal Trace:")
+    for path, chan, label in chain:
+        node = op(f'/project1/{path}')
+        if node and node.numChans > 0:
+            if isinstance(chan, str):
+                val = next((node[i].eval() for i in range(node.numChans) 
+                           if node[i].name == chan), 0)
+            else:
+                val = node[chan].eval()
+            print(f"  {label:12} {val:8.3f}")
+
+def toggle_noise_modulation(enable=True):
+    """Toggle between pure audio and noise-modulated displacement"""
+    noise1 = op('/project1/noise1')
+    chopto1 = op('/project1/chopto1')
+    
+    if noise1:
+        noise1.bypass = not enable
+        
+    if chopto1:
+        if enable:
+            chopto1.par.chop = '/project1/math1'  # Noise × Audio
+        else:
+            chopto1.par.chop = '/project1/audio_lag'  # Pure audio
+    
+    print(f"✅ Noise modulation: {'ON' if enable else 'OFF'}")
+
+def check_cooking():
+    """Force cook critical nodes"""
+    critical_nodes = [
+        'audioAnalysis', 'audio_amp', 'audio_low', 
+        'audio_lag', 'math1', 'chopto1', 'displace1'
+    ]
+    
+    for node_name in critical_nodes:
+        node = op(f'/project1/{node_name}')
+        if node:
+            node.cook(force=True)
+    print("✅ Force cooked all critical nodes")
+```
+
+### Common Error Prevention
+
+1. **Always check if node exists before accessing properties**
+   ```python
+   if node and node.numChans > 0:  # Safe access
+       value = node[0].eval()
+   ```
+
+2. **Use MCP node creation with string types**
+   ```python
+   mcp__touchdesigner__create_td_node(nodeType='mathCHOP', nodeName='my_math')
+   ```
+
+3. **Set expression parameters with .expr**
+   ```python
+   param.expr = 'expression_string'  # Not param = 'expression_string'
+   ```
+
+4. **Bypass nodes instead of disconnecting**
+   ```python
+   node.bypass = True  # Maintains connections, stops processing
+   ```
+
+5. **Audio needs amplification**
+   - Microphone input is often very weak (0.001 - 0.01 range)
+   - Use 50x-200x amplification for visible effects
 
 ### Next Steps & Advanced Patterns
 
 - **Component creation with Python** - build entire networks programmatically
-- **MCP integration** - live project state queries
+- **MCP integration** - live project state queries with proper type names
 - **Claude Code integration** - iterative development with full context
 - **Custom operator development** - extend TouchDesigner capabilities
+- **Persistent utility DATs** - Store functions in project for reuse
 
 ### Resources for Deep Dive
 
@@ -217,7 +390,8 @@ From our exploration, typical audio analysis structure:
 - Connector Class documentation (for operator connections)
 - OP Class documentation (for operator manipulation)
 - CHOP Class documentation (for channel operations)
+- [MCP TouchDesigner Server](https://github.com/touchdesigner/td-mcp-server)
 
 ---
 
-*This guide represents lessons learned from hands-on TouchDesigner + Claude experimentation. The key insight: TouchDesigner's Python API is powerful but requires discovery-driven development rather than assumption-based coding.*
+*This guide represents lessons learned from hands-on TouchDesigner + Claude experimentation. The key insight: TouchDesigner's Python API is powerful but requires discovery-driven development rather than assumption-based coding. MCP integration requires understanding the differences between Python API and MCP command syntax.*
