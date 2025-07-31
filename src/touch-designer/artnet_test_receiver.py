@@ -8,7 +8,7 @@ import socket
 import struct
 import time
 
-def test_artnet_receiver(bind_ip="127.0.0.1", port=6455):
+def test_artnet_receiver(bind_ip="127.0.0.1", port=6454):
     """Simple ArtNet packet receiver for testing"""
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

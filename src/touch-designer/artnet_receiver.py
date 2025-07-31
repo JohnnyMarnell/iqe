@@ -13,7 +13,7 @@ import threading
 import queue
 
 class ArtNetReceiver:
-    def __init__(self, bind_ip="0.0.0.0", port=6455):
+    def __init__(self, bind_ip="0.0.0.0", port=6454):  # Standard ArtNet port
         self.bind_ip = bind_ip
         self.port = port
         self.sock = None
@@ -29,8 +29,13 @@ class ArtNetReceiver:
         self.pixels = np.zeros((self.height, self.width, 3), dtype=np.uint8)
         self.pixel_lock = threading.Lock()
         
-        # Universe mapping
+        # Universe mapping - track last update time
         self.universes = {}
+        self.universe_count = 60
+        
+        # Statistics
+        self.packet_count = 0
+        self.last_packet_time = 0
         
     def start(self):
         """Start the ArtNet receiver"""
@@ -89,10 +94,16 @@ class ArtNetReceiver:
         # Extract DMX data
         dmx_data = data[18:18+length]
         
+        # Update statistics
+        self.packet_count += 1
+        import time
+        self.last_packet_time = time.time()
+        
         # Store universe data
         self.universes[universe] = {
             'data': dmx_data,
-            'addr': addr
+            'addr': addr,
+            'time': self.last_packet_time
         }
         
         # Update pixel buffer
@@ -130,10 +141,22 @@ class ArtNetReceiver:
             
     def get_stats(self):
         """Get receiver statistics"""
+        import time
+        current_time = time.time()
+        
+        # Check which universes are active (received in last second)
+        active_universes = 0
+        for univ_id, univ_data in self.universes.items():
+            if current_time - univ_data.get('time', 0) < 1.0:
+                active_universes += 1
+        
         return {
             'universes_received': len(self.universes),
-            'expected_universes': 60,
-            'pixels_updated': len(self.universes) * self.pixels_per_universe
+            'active_universes': active_universes,
+            'expected_universes': self.universe_count,
+            'pixels_updated': len(self.universes) * self.pixels_per_universe,
+            'packet_count': self.packet_count,
+            'last_packet': current_time - self.last_packet_time if self.last_packet_time > 0 else 999
         }
 
 
@@ -180,8 +203,11 @@ class LEDVisualizer:
         
         # Update info
         stats = self.receiver.get_stats()
-        info = f"Universes: {stats['universes_received']}/{stats['expected_universes']}\n"
-        info += f"Pixels received: {stats['pixels_updated']}/{self.receiver.total_pixels}"
+        info = f"Universes: {stats['universes_received']}/{stats['expected_universes']} "
+        info += f"(Active: {stats['active_universes']})\n"
+        info += f"Pixels: {stats['pixels_updated']}/{self.receiver.total_pixels} | "
+        info += f"Packets: {stats['packet_count']} | "
+        info += f"Last: {stats['last_packet']:.1f}s ago"
         self.info_text.set_text(info)
         
         return [self.im, self.info_text]
@@ -199,8 +225,13 @@ class LEDVisualizer:
 
 
 def main():
-    # Create receiver
-    receiver = ArtNetReceiver(bind_ip="127.0.0.1", port=6455)  # localhost, custom port
+    # Create receiver - listening on localhost at standard ArtNet port
+    receiver = ArtNetReceiver(bind_ip="127.0.0.1", port=6454)
+    
+    print("ArtNet LED Visualizer - 420x24 pixels")
+    print("Expecting 60 universes from TouchDesigner")
+    print(f"Listening on {receiver.bind_ip}:{receiver.port}")
+    print("-" * 40)
     
     try:
         # Start receiver
@@ -214,6 +245,7 @@ def main():
         print("\nShutting down...")
     finally:
         receiver.stop()
+        print(f"Total packets received: {receiver.packet_count}")
 
 
 if __name__ == "__main__":
