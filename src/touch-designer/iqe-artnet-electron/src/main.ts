@@ -17,32 +17,50 @@ function createWindow() {
     title: 'IQE ArtNet LED Visualizer - 420x24'
   });
 
-  mainWindow.loadFile(path.join(__dirname, '../index.html'));
+  // Load debug page for now
+  mainWindow.loadFile(path.join(__dirname, '../debug.html'));
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
-  // Open DevTools in development
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools();
-  }
+  // Open DevTools for debugging
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
   createWindow();
 
   // Start ArtNet receiver
+  console.log('Starting ArtNet receiver...');
   artnetReceiver = new ArtNetReceiver();
   artnetReceiver.start();
+  console.log('ArtNet receiver started');
 
   // Set up IPC handlers
   ipcMain.handle('get-pixels', () => {
-    return artnetReceiver?.getPixels() || [];
+    console.log('IPC: get-pixels called');
+    const pixels = artnetReceiver?.getPixels();
+    if (!pixels) {
+      console.log('IPC: No pixels available');
+      return new Array(420 * 24 * 3).fill(0); // Return empty pixel buffer
+    }
+    // Convert to regular array for IPC transfer
+    const pixelArray = Array.from(pixels);
+    console.log(`IPC: Returning ${pixelArray.length} pixels`);
+    return pixelArray;
   });
 
   ipcMain.handle('get-stats', () => {
-    return artnetReceiver?.getStats() || {};
+    return artnetReceiver?.getStats() || {
+      universesReceived: 0,
+      activeUniverses: [],
+      expectedUniverses: [],
+      missingUniverses: [],
+      packetCount: 0,
+      packetsByUniverse: {},
+      lastPacket: 999
+    };
   });
 
   ipcMain.handle('set-config', (event, config) => {

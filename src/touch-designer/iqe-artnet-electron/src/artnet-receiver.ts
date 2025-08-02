@@ -48,6 +48,13 @@ export class ArtNetReceiver {
     // Initialize pixel buffer (height x width x 3 for RGB)
     this.pixels = new Uint8Array(this.height * this.width * 3);
     this.buildUniverseMap();
+    
+    // Periodic status log
+    setInterval(() => {
+      if (this.running) {
+        console.log(`ArtNet status: ${this.packetCount} packets received, ${this.universes.size} universes active`);
+      }
+    }, 2000);
   }
 
   private buildUniverseMap(): void {
@@ -93,6 +100,10 @@ export class ArtNetReceiver {
     this.socket = dgram.createSocket('udp4');
     
     this.socket.on('message', (data, rinfo) => {
+      // Only log first packet
+      if (this.packetCount === 0) {
+        console.log(`First packet received from ${rinfo.address}:${rinfo.port}, size: ${data.length}`);
+      }
       this.processArtNetPacket(data, rinfo.address);
     });
 
@@ -100,9 +111,14 @@ export class ArtNetReceiver {
       console.error('ArtNet receiver error:', err);
     });
 
+    this.socket.on('listening', () => {
+      const address = this.socket!.address();
+      console.log(`ArtNet receiver listening on ${address.address}:${address.port}`);
+    });
+
     this.socket.bind(this.port, this.bindIp, () => {
       this.running = true;
-      console.log(`ArtNet receiver listening on ${this.bindIp}:${this.port}`);
+      console.log(`ArtNet receiver bound to ${this.bindIp}:${this.port}`);
     });
   }
 
@@ -115,17 +131,24 @@ export class ArtNetReceiver {
   }
 
   private processArtNetPacket(data: Buffer, addr: string): void {
-    if (data.length < 18) return;
+    if (data.length < 18) {
+      return;
+    }
 
     // Check ArtNet header
-    const header = data.slice(0, 8).toString();
-    if (header !== 'Art-Net\x00') return;
+    const header = data.slice(0, 8);
+    const headerStr = header.toString('ascii', 0, 7);
+    if (headerStr !== 'Art-Net') {
+      return;
+    }
 
     // Get opcode
     const opcode = data.readUInt16LE(8);
 
     // OpOutput (0x5000)
-    if (opcode !== 0x5000) return;
+    if (opcode !== 0x5000) {
+      return;
+    }
 
     // Parse packet
     const sequence = data[12];

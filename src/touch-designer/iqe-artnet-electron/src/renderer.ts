@@ -1,7 +1,7 @@
 // Canvas LED Visualizer
 
 interface ArtNetAPI {
-  getPixels: () => Promise<Uint8Array>;
+  getPixels: () => Promise<number[]>;
   getStats: () => Promise<Stats>;
   setConfig: (config: { spacedRows?: boolean }) => Promise<void>;
 }
@@ -48,6 +48,8 @@ class LEDVisualizer {
   constructor() {
     this.canvas = document.getElementById('led-canvas') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d')!;
+    
+    console.log('LEDVisualizer initialized');
     
     this.setupControls();
     this.updateDisplayDimensions();
@@ -111,6 +113,11 @@ class LEDVisualizer {
       // Get pixel data
       const pixels = await window.artnetAPI.getPixels();
       
+      // Log first time
+      if (!this.lastStatsUpdate) {
+        console.log('Got pixels:', pixels.length);
+      }
+      
       // Clear canvas
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -137,7 +144,7 @@ class LEDVisualizer {
     this.animationId = requestAnimationFrame(() => this.animate());
   }
 
-  private drawPixels(pixels: Uint8Array): void {
+  private drawPixels(pixels: number[]): void {
     const pixelDraw = this.pixelSize + this.gap;
     
     for (let row = 0; row < 24; row++) {
@@ -248,7 +255,7 @@ class LEDVisualizer {
         // Show top universes by packet count
         if (stats.packetsByUniverse) {
           const topUniverses = Object.entries(stats.packetsByUniverse)
-            .sort(([, a], [, b]) => b - a)
+            .sort(([, a], [, b]) => (b as number) - (a as number))
             .slice(0, 5)
             .map(([u, c]) => `U${u}:${c}`)
             .join(', ');
@@ -281,3 +288,6 @@ class LEDVisualizer {
 document.addEventListener('DOMContentLoaded', () => {
   new LEDVisualizer();
 });
+
+// Export to make this a module
+export {};

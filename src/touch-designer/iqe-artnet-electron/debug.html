@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IQE ArtNet Debug</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      padding: 20px;
+    }
+    #status {
+      background: #111;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #333;
+    }
+    canvas {
+      border: 1px solid #333;
+      display: block;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>IQE ArtNet Debug</h1>
+  <div id="status">Initializing...</div>
+  <canvas id="testCanvas" width="420" height="24"></canvas>
+  <pre id="log"></pre>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const logEl = document.getElementById('log');
+    const canvas = document.getElementById('testCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let frameCount = 0;
+    let lastPixelCheck = 0;
+    
+    function log(msg) {
+      const time = new Date().toISOString().substr(11, 8);
+      logEl.textContent = `[${time}] ${msg}\n` + logEl.textContent;
+      console.log(msg);
+    }
+    
+    log('Debug page loaded');
+    
+    // Test if artnetAPI exists
+    if (window.artnetAPI) {
+      log('✓ artnetAPI found');
+      statusEl.textContent = 'API found, starting animation...';
+      
+      async function animate() {
+        frameCount++;
+        
+        try {
+          // Get pixels
+          const pixels = await window.artnetAPI.getPixels();
+          
+          // Check if we have data
+          if (!pixels || pixels.length === 0) {
+            if (frameCount % 60 === 1) {
+              log(`No pixel data received (frame ${frameCount})`);
+            }
+          } else {
+            // Check for non-zero pixels
+            let nonZeroCount = 0;
+            for (let i = 0; i < pixels.length; i += 3) {
+              if (pixels[i] > 0 || pixels[i+1] > 0 || pixels[i+2] > 0) {
+                nonZeroCount++;
+              }
+            }
+            
+            if (Date.now() - lastPixelCheck > 1000) {
+              log(`Pixels: ${pixels.length} bytes, ${nonZeroCount} lit pixels`);
+              lastPixelCheck = Date.now();
+            }
+            
+            // Draw to canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, 420, 24);
+            
+            for (let row = 0; row < 24; row++) {
+              for (let col = 0; col < 420; col++) {
+                const idx = (row * 420 + col) * 3;
+                const r = pixels[idx] || 0;
+                const g = pixels[idx + 1] || 0;
+                const b = pixels[idx + 2] || 0;
+                
+                if (r > 0 || g > 0 || b > 0) {
+                  ctx.fillStyle = `rgb(${r},${g},${b})`;
+                  ctx.fillRect(col, row, 1, 1);
+                }
+              }
+            }
+          }
+          
+          // Get stats
+          if (frameCount % 30 === 1) {
+            const stats = await window.artnetAPI.getStats();
+            statusEl.textContent = `Packets: ${stats.packetCount}, Universes: ${stats.activeUniverses.length}/72`;
+            
+            if (stats.packetCount === 0) {
+              log('⚠️ No ArtNet packets received');
+            }
+          }
+          
+        } catch (err) {
+          log(`Error: ${err.message}`);
+        }
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+      
+    } else {
+      log('✗ artnetAPI not found!');
+      statusEl.textContent = 'ERROR: artnetAPI not available';
+      
+      // Test drawing
+      ctx.fillStyle = '#f00';
+      ctx.fillRect(0, 0, 100, 10);
+      ctx.fillStyle = '#0f0';
+      ctx.fillRect(100, 0, 100, 10);
+      ctx.fillStyle = '#00f';
+      ctx.fillRect(200, 0, 100, 10);
+    }
+  </script>
+</body>
+</html>
