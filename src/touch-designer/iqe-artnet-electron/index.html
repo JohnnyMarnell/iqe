@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IQE ArtNet LED Visualizer - 420x24</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #canvas-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #led-canvas {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    #controls {
+      padding: 10px 20px;
+      background-color: #111;
+      border-top: 1px solid #333;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #stats {
+      padding: 10px 20px;
+      background-color: #111;
+      border-top: 1px solid #333;
+      font-size: 12px;
+      min-height: 60px;
+    }
+
+    button {
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 5px 15px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    button.active {
+      background-color: #555;
+      border-color: #777;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .stat-line {
+      margin: 2px 0;
+    }
+
+    .universe-info {
+      color: #0f0;
+    }
+
+    .warning {
+      color: #f80;
+    }
+
+    .error {
+      color: #f00;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="canvas-container">
+      <canvas id="led-canvas"></canvas>
+    </div>
+    
+    <div id="controls">
+      <label>
+        <input type="checkbox" id="spaced-mode"> Spaced Mode (25' x 21' aspect)
+      </label>
+      <label>
+        <input type="checkbox" id="show-grid"> Show Grid
+      </label>
+      <label>
+        <input type="checkbox" id="show-labels"> Show Labels
+      </label>
+      <button id="clear-stats">Clear Stats</button>
+    </div>
+    
+    <div id="stats">
+      <div class="stat-line">Waiting for ArtNet data...</div>
+    </div>
+  </div>
+
+  <script src="dist/renderer.js"></script>
+</body>
+</html>

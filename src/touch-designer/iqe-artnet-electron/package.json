@@ -1,0 +1,32 @@
+{
+  "name": "iqe-artnet-visualizer",
+  "version": "1.0.0",
+  "description": "IQE ArtNet LED Visualizer - 420x24 Grid",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && electron .",
+    "dev": "tsc -w & electron .",
+    "dist": "electron-builder"
+  },
+  "keywords": ["artnet", "led", "visualizer"],
+  "author": "IQE",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.0",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "typescript": "^4.9.0"
+  },
+  "dependencies": {},
+  "build": {
+    "appId": "com.iqe.artnet-visualizer",
+    "productName": "IQE ArtNet Visualizer",
+    "directories": {
+      "output": "build"
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    }
+  }
+}
