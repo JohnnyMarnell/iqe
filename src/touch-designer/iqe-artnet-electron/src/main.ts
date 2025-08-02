@@ -17,8 +17,7 @@ function createWindow() {
     title: 'IQE ArtNet LED Visualizer - 420x24'
   });
 
-  // Load debug page for now
-  mainWindow.loadFile(path.join(__dirname, '../debug.html'));
+  mainWindow.loadFile(path.join(__dirname, '../index.html'));
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -39,16 +38,12 @@ app.whenReady().then(() => {
 
   // Set up IPC handlers
   ipcMain.handle('get-pixels', () => {
-    console.log('IPC: get-pixels called');
     const pixels = artnetReceiver?.getPixels();
     if (!pixels) {
-      console.log('IPC: No pixels available');
       return new Array(420 * 24 * 3).fill(0); // Return empty pixel buffer
     }
     // Convert to regular array for IPC transfer
-    const pixelArray = Array.from(pixels);
-    console.log(`IPC: Returning ${pixelArray.length} pixels`);
-    return pixelArray;
+    return Array.from(pixels);
   });
 
   ipcMain.handle('get-stats', () => {
@@ -67,6 +62,24 @@ app.whenReady().then(() => {
     if (artnetReceiver) {
       artnetReceiver.setConfig(config);
     }
+  });
+
+  ipcMain.handle('fatal-error', (event, message) => {
+    console.error('\n========================================');
+    console.error('FATAL ERROR IN RENDERER PROCESS:');
+    console.error(message);
+    console.error('========================================\n');
+    console.error('Shutting down application...');
+    
+    // Clean shutdown
+    if (artnetReceiver) {
+      artnetReceiver.stop();
+    }
+    
+    // Quit after a short delay to ensure message is printed
+    setTimeout(() => {
+      app.quit();
+    }, 100);
   });
 });
 

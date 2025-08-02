@@ -52,7 +52,14 @@ export class ArtNetReceiver {
     // Periodic status log
     setInterval(() => {
       if (this.running) {
-        console.log(`ArtNet status: ${this.packetCount} packets received, ${this.universes.size} universes active`);
+        // Count non-zero pixels
+        let nonZeroPixels = 0;
+        for (let i = 0; i < this.pixels.length; i += 3) {
+          if (this.pixels[i] > 0 || this.pixels[i+1] > 0 || this.pixels[i+2] > 0) {
+            nonZeroPixels++;
+          }
+        }
+        console.log(`ArtNet status: ${this.packetCount} packets, ${this.universes.size} universes, ${nonZeroPixels} lit pixels`);
       }
     }, 2000);
   }
