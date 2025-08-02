@@ -7,7 +7,7 @@ import time
 from collections import defaultdict
 import numpy as np
 
-def count_artnet_pixels(port=7890, duration=10):
+def count_artnet_pixels(port=6454, duration=10):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind(("0.0.0.0", port))
     sock.settimeout(0.1)

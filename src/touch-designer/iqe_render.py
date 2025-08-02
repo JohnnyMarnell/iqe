@@ -15,7 +15,7 @@ import time
 from collections import defaultdict
 
 class IQEArtNetReceiver:
-    def __init__(self, bind_ip="0.0.0.0", port=7890):
+    def __init__(self, bind_ip="0.0.0.0", port=6454):
         self.bind_ip = bind_ip
         self.port = port
         self.sock = None
@@ -111,29 +111,35 @@ class IQEArtNetReceiver:
         current_universe = 1
         
         for row in range(24):  # 24 rows
-            # Based on actual data received:
-            # First universe: 80 pixels
+            # Apply vertical flip - Row 1 in LX appears at bottom in physical space
+            # So universe 1-3 should map to visual row 23, universe 4-6 to row 22, etc.
+            visual_row = 23 - row  # Flip vertically
+            
+            # Based on actual data pattern:
+            # Universe pattern: 510, 510, 240 bytes repeating
+            
+            # First universe: 510 bytes = 170 pixels max
             universe_map[current_universe] = [{
-                'row': row,
+                'row': visual_row,
                 'start_pixel': 0,
                 'dmx_start': 0,
-                'pixel_count': 80
+                'pixel_count': 170  # Full universe
             }]
             current_universe += 1
             
-            # Second universe: 170 pixels
+            # Second universe: 510 bytes = 170 pixels max
             universe_map[current_universe] = [{
-                'row': row,
-                'start_pixel': 80,
+                'row': visual_row,
+                'start_pixel': 170,
                 'dmx_start': 0,
-                'pixel_count': 170
+                'pixel_count': 170  # Full universe
             }]
             current_universe += 1
             
-            # Third universe: 80 pixels
+            # Third universe: 240 bytes = 80 pixels
             universe_map[current_universe] = [{
-                'row': row,
-                'start_pixel': 250,
+                'row': visual_row,
+                'start_pixel': 340,
                 'dmx_start': 0,
                 'pixel_count': 80
             }]
@@ -243,19 +249,20 @@ class IQEArtNetReceiver:
                 # Remove debug for now
                 pass
                 
-                # Update the pixels
+                # Update the pixels - FLIP HORIZONTALLY
                 pixels_actually_updated = 0
                 for i in range(pixels_to_update):
                     dmx_offset = dmx_start + (i * 3)
-                    pixel_col = start_pixel + i
+                    # Flip horizontally: 419 - pixel_col
+                    pixel_col = (self.width - 1) - (start_pixel + i)
                     
-                    if pixel_col < self.width and dmx_offset + 2 < len(dmx_data):
+                    if pixel_col >= 0 and pixel_col < self.width and dmx_offset + 2 < len(dmx_data):
                         self.pixels[row, pixel_col, 0] = dmx_data[dmx_offset]      # R
                         self.pixels[row, pixel_col, 1] = dmx_data[dmx_offset + 1]  # G
                         self.pixels[row, pixel_col, 2] = dmx_data[dmx_offset + 2]  # B
                         pixels_actually_updated += 1
-                    elif pixel_col >= self.width:
-                        print(f"WARNING: Pixel column {pixel_col} exceeds width {self.width} (universe {universe}, row {row})")
+                    elif pixel_col < 0 or pixel_col >= self.width:
+                        print(f"WARNING: Pixel column {pixel_col} out of bounds (universe {universe}, row {row})")
                 
                 if universe == 3 and pixels_actually_updated < pixels_to_update:
                     print(f"U{universe}: Only updated {pixels_actually_updated} of {pixels_to_update} pixels")
@@ -356,8 +363,9 @@ class IQELEDVisualizer:
         self.ax_main.set_ylabel('Row (Rafter)')
         
         # Set ticks to show strip boundaries
-        self.ax_main.set_xticks([0, 140, 280, 419])
-        self.ax_main.set_xticklabels(['0', '140\nStrip 1', '280\nStrip 2', '419\nEnd'])
+        # After horizontal flip: Strip 3 appears at left, Strip 1 at right
+        self.ax_main.set_xticks([0, 80, 250, 419])
+        self.ax_main.set_xticklabels(['0\nStrip 3', '80\nStrip 2', '250\nStrip 1', '419\nEnd'])
         
         # Ensure we show the full pixel range
         self.ax_main.set_xlim(-0.5, 419.5)  # Show pixels 0-419
@@ -366,9 +374,12 @@ class IQELEDVisualizer:
             # Show fewer Y ticks for spaced view
             y_positions = [i * (self.row_height + self.row_gap) + self.row_height // 2 for i in range(0, 24, 4)]
             self.ax_main.set_yticks(y_positions)
-            self.ax_main.set_yticklabels([f'Row {i}' for i in range(0, 24, 4)])
+            # Show Row labels - after vertical flip, Row 24 at top, Row 1 at bottom
+            self.ax_main.set_yticklabels([f'Row {24-i}' for i in range(0, 24, 4)])
         else:
             self.ax_main.set_yticks(list(range(0, 24, 3)))
+            # Show Row labels - after vertical flip, Row 24 at top, Row 1 at bottom
+            self.ax_main.set_yticklabels([f'Row {24-i}' for i in range(0, 24, 3)])
         
         # Stats display
         self.ax_stats.axis('off')
@@ -454,7 +465,7 @@ def main():
     
     parser = argparse.ArgumentParser(description='IQE ArtNet LED Visualizer')
     parser.add_argument('--ip', default='0.0.0.0', help='IP to bind to (default: 0.0.0.0)')
-    parser.add_argument('--port', type=int, default=7890, help='Port to listen on (default: 7890 - LX Studio custom port)')
+    parser.add_argument('--port', type=int, default=6454, help='Port to listen on (default: 6454 - standard ArtNet)')
     parser.add_argument('--spaced', action='store_true', help='Show rows with spacing to reflect real-world geometry')
     parser.add_argument('--shift', type=int, default=0, help='Shift pixels right by N positions (use negative to shift left)')
     args = parser.parse_args()
