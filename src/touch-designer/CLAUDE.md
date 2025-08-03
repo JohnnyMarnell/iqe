@@ -297,6 +297,33 @@ From our exploration, typical audio analysis structure:
 5. **Use Python for complex logic** - visual programming for data flow
 6. **Use bypass, not disconnect** - Maintain connections, toggle processing
 
+### Debugging Warnings & Errors
+
+#### Reading GUI Warnings via MCP
+While MCP doesn't have a dedicated warning reader, you can access diagnostics through Python:
+
+```python
+# Check specific node
+node = op('/project1/render1')
+print(f"Warnings: {node.warnings()}")
+print(f"Errors: {node.errors()}")
+print(f"Valid: {node.valid}")
+
+# Use the utility function (after loading utils.py)
+check_warnings()  # Check all project nodes
+check_warnings('render1', 'noise1')  # Check specific nodes
+```
+
+#### Common Warnings and Solutions
+1. **"No Camera COMP found"** - Render TOP needs camera
+   - Solution: Create cameraCOMP and connect to render's camera parameter
+   
+2. **"Input is not a TOP"** - Trying to connect wrong operator type
+   - Solution: Use appropriate converters (renderTOP for SOP→TOP)
+   
+3. **"Missing required input"** - Node expects connection
+   - Solution: Check node's required inputs and connect appropriate sources
+
 ### MCP Integration Lessons Learned
 
 #### Operator Type Names
@@ -427,6 +454,22 @@ def setup_audio_reactive_jellybeans():
 ### Enhanced Utility Functions
 
 ```python
+def check_warnings(*node_paths):
+    """
+    Check nodes for warnings and errors.
+    
+    Usage:
+        check_warnings()  # Check all nodes in /project1
+        check_warnings('render1', 'resize_to_24')  # Check specific nodes
+        check_warnings('/project1/render1', '/project1/out')  # Full paths
+    
+    Returns:
+        dict: Dictionary with 'errors' and 'warnings' lists
+    """
+    # Implementation in utils.py
+    # This function helps diagnose issues when you see warning triangles in the GUI
+    # Very useful for debugging connection problems!
+
 def trace_audio_signal():
     """Debug audio signal through the chain"""
     chain = [
