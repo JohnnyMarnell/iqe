@@ -185,6 +185,62 @@
       height: 16px;
     }
 
+    /* Slider styles */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 200px;
+    }
+
+    .slider-label {
+      font-size: 12px;
+      min-width: 100px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      height: 4px;
+      background: #333;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #0f0;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: #0f0;
+      box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+      transform: scale(1.2);
+    }
+
+    input[type="range"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    input[type="range"]:disabled::-webkit-slider-thumb {
+      background: #666;
+      cursor: not-allowed;
+    }
+
+    .slider-value {
+      font-size: 11px;
+      color: #0f0;
+      min-width: 30px;
+      text-align: right;
+    }
+
     .stat-line {
       margin: 4px 0;
     }
@@ -251,6 +307,11 @@
       <label>
         <input type="checkbox" id="spaced-mode"> Spaced Mode
       </label>
+      <div class="slider-container" id="spacing-slider-container" style="display: none;">
+        <span class="slider-label">Row Spacing:</span>
+        <input type="range" id="spacing-slider" min="0" max="30" value="14" step="1">
+        <span class="slider-value" id="spacing-value">14</span>
+      </div>
       <label>
         <input type="checkbox" id="show-grid" checked> Show Grid
       </label>

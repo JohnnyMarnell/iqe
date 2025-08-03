@@ -28,6 +28,7 @@ class LEDVisualizer {
   private showGrid = true;
   private showLabels = true;
   private autoScale = true;
+  private rowGap = 14; // Default spacing
   
   // LED configuration
   private readonly width = 420;
@@ -68,12 +69,26 @@ class LEDVisualizer {
     const autoScaleCheckbox = document.getElementById('auto-scale') as HTMLInputElement;
     const clearLogButton = document.getElementById('clear-log') as HTMLButtonElement;
     const toggleSidebarButton = document.getElementById('toggle-sidebar') as HTMLButtonElement;
+    const spacingSliderContainer = document.getElementById('spacing-slider-container')!;
+    const spacingSlider = document.getElementById('spacing-slider') as HTMLInputElement;
+    const spacingValue = document.getElementById('spacing-value')!;
 
     spacedModeCheckbox.addEventListener('change', (e) => {
       this.spacedMode = (e.target as HTMLInputElement).checked;
+      spacingSliderContainer.style.display = this.spacedMode ? 'flex' : 'none';
       this.updateCanvasSize();
       artnetAPI.setConfig({ spacedRows: this.spacedMode });
       this.log(`Spaced mode: ${this.spacedMode ? 'ON' : 'OFF'}`);
+    });
+
+    spacingSlider.addEventListener('input', (e) => {
+      this.rowGap = parseInt((e.target as HTMLInputElement).value);
+      spacingValue.textContent = this.rowGap.toString();
+      this.updateCanvasSize();
+    });
+
+    spacingSlider.addEventListener('change', (e) => {
+      this.log(`Row spacing changed to: ${this.rowGap} pixels`);
     });
 
     showGridCheckbox.addEventListener('change', (e) => {
@@ -122,9 +137,8 @@ class LEDVisualizer {
     
     // Calculate display dimensions
     if (this.spacedMode) {
-      // Real world aspect ratio: 25' x 21'
-      const rowGap = 14;
-      this.displayHeight = 24 + 23 * rowGap; // 346 pixels
+      // Dynamic spacing based on slider
+      this.displayHeight = 24 + 23 * this.rowGap;
       this.displayWidth = 420;
     } else {
       this.displayHeight = 24;
@@ -219,7 +233,7 @@ class LEDVisualizer {
   }
 
   private drawPixels(pixels: number[]): void {
-    const rowGap = this.spacedMode ? 14 : 0;
+    const rowGap = this.spacedMode ? this.rowGap : 0;
     
     // Count lit pixels for logging
     let litPixels = 0;
@@ -271,7 +285,7 @@ class LEDVisualizer {
     this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
     this.ctx.lineWidth = 1;
     
-    const rowGap = this.spacedMode ? 14 : 0;
+    const rowGap = this.spacedMode ? this.rowGap : 0;
     
     // Draw strip boundaries (after horizontal flip)
     this.ctx.beginPath();
@@ -298,7 +312,7 @@ class LEDVisualizer {
     this.ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
     this.ctx.font = `${Math.max(10, 10 * this.scale)}px monospace`;
     
-    const rowGap = this.spacedMode ? 14 : 0;
+    const rowGap = this.spacedMode ? this.rowGap : 0;
     
     // Strip labels (after horizontal flip)
     this.ctx.fillText('Strip 3', 10, 20);
