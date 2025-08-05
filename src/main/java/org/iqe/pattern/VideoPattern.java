@@ -18,10 +18,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.bytedeco.javacv.*;
 
 @LXCategory(LXCategory.TEST)
 public class VideoPattern extends LXPattern {
+    
+    private static final int MAX_RESAMPLED_WIDTH = 420;
+    private static final int MAX_RESAMPLED_HEIGHT = 240;
+    private static final int MAX_FRAMES_IN_MEMORY = 150;
+    private static final int FRAME_LOAD_BATCH_SIZE = 10;
     
     private final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample.webm")
         .setDescription("Path to the video file");
@@ -47,13 +57,24 @@ public class VideoPattern extends LXPattern {
     private final CompoundParameter brightness = new CompoundParameter("brightness", 1.0, 0, 2.0)
         .setDescription("Brightness adjustment");
     
-    private FFmpegFrameGrabber grabber;
-    private Java2DFrameConverter converter;
-    private List<BufferedImage> frames;
-    private String currentVideoPath = "";
-    private int currentFrameIndex = 0;
-    private double frameAccumulator = 0;
-    private double fps = 30.0;
+    private final ExecutorService loadingExecutor = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "VideoPattern-Loader");
+        t.setDaemon(true);
+        return t;
+    });
+    
+    private volatile List<BufferedImage> frames = new ArrayList<>();
+    private volatile boolean isLoading = false;
+    private volatile String loadingStatus = "";
+    private volatile String currentVideoPath = "";
+    private volatile int currentFrameIndex = 0;
+    private volatile double frameAccumulator = 0;
+    private volatile double fps = 30.0;
+    private volatile int resampledWidth = MAX_RESAMPLED_WIDTH;
+    private volatile int resampledHeight = MAX_RESAMPLED_HEIGHT;
+    
+    private Future<?> currentLoadTask = null;
+    private final Object frameLock = new Object();
     
     private double minX = Double.MAX_VALUE;
     private double maxX = Double.MIN_VALUE;
@@ -64,6 +85,7 @@ public class VideoPattern extends LXPattern {
     
     public VideoPattern(LX lx) {
         super(lx);
+        LOG.info("VideoPattern constructor starting");
         addParameter(videoPath);
         addParameter(playbackSpeed);
         addParameter(loop);
@@ -73,10 +95,9 @@ public class VideoPattern extends LXPattern {
         addParameter(yOffset);
         addParameter(brightness);
         
-        converter = new Java2DFrameConverter();
-        frames = new ArrayList<>();
-        
-        loadVideo(videoPath.getString());
+        LOG.info("VideoPattern parameters added, starting async load of: {}", videoPath.getString());
+        loadVideoAsync(videoPath.getString());
+        LOG.info("VideoPattern constructor completed");
     }
     
     private void calculateBounds() {
@@ -105,82 +126,209 @@ public class VideoPattern extends LXPattern {
                  minX, maxX, minZ, maxZ, targetY);
     }
     
-    private void loadVideo(String path) {
+    private void loadVideoAsync(String path) {
+        LOG.info("loadVideoAsync called for path: {}", path);
+        if (isLoading) {
+            LOG.info("Video is already loading, skipping new load request");
+            return;
+        }
+        
+        if (currentLoadTask != null && !currentLoadTask.isDone()) {
+            LOG.info("Cancelling previous load task");
+            currentLoadTask.cancel(true);
+        }
+        
+        isLoading = true;
+        loadingStatus = "Loading...";
+        LOG.info("Starting background load task for: {}", path);
+        
+        currentLoadTask = loadingExecutor.submit(() -> {
+            LOG.info("Background thread started for loading: {}", path);
+            long startTime = System.currentTimeMillis();
+            try {
+                loadVideoInBackground(path);
+                long duration = System.currentTimeMillis() - startTime;
+                LOG.info("Video loading completed in {} ms", duration);
+            } catch (Exception e) {
+                LOG.error("Failed to load video in background: {}", e.getMessage(), e);
+                loadingStatus = "Error: " + e.getMessage();
+            } finally {
+                isLoading = false;
+                LOG.info("Background loading thread finished");
+            }
+        });
+        LOG.info("loadVideoAsync submitted task, returning to main thread");
+    }
+    
+    private void loadVideoInBackground(String path) {
+        LOG.info("loadVideoInBackground started on thread: {}", Thread.currentThread().getName());
+        File file = new File(path);
+        if (!file.exists()) {
+            LOG.error("Video file not found: {}", path);
+            loadingStatus = "File not found";
+            return;
+        }
+        
+        LOG.info("Video file exists: {} (size: {} bytes)", file.getAbsolutePath(), file.length());
+        
+        FFmpegFrameGrabber grabber = null;
+        Java2DFrameConverter converter = new Java2DFrameConverter();
+        List<BufferedImage> newFrames = new ArrayList<>();
+        
         try {
-            File file = new File(path);
-            if (!file.exists()) {
-                LOG.error("Video file not found: {}", path);
-                return;
-            }
-            
-            frames.clear();
-            currentFrameIndex = 0;
-            frameAccumulator = 0;
-            
-            if (grabber != null) {
-                try {
-                    grabber.stop();
-                    grabber.release();
-                } catch (Exception e) {
-                    LOG.error("Error closing previous grabber: {}", e.getMessage());
-                }
-            }
-            
+            loadingStatus = "Opening video...";
+            LOG.info("Creating FFmpegFrameGrabber for: {}", file.getAbsolutePath());
             grabber = new FFmpegFrameGrabber(file);
+            
+            LOG.info("Starting grabber...");
+            long grabberStartTime = System.currentTimeMillis();
             grabber.start();
+            LOG.info("Grabber started in {} ms", System.currentTimeMillis() - grabberStartTime);
             
-            fps = grabber.getFrameRate();
-            if (fps <= 0) fps = 30.0;
+            double videoFps = grabber.getFrameRate();
+            if (videoFps <= 0) videoFps = 30.0;
             
-            LOG.info("Loading video: {} ({}x{}, {} fps, {} frames)", 
-                     path, grabber.getImageWidth(), grabber.getImageHeight(), 
-                     fps, grabber.getLengthInFrames());
+            int originalWidth = grabber.getImageWidth();
+            int originalHeight = grabber.getImageHeight();
+            int totalFrames = grabber.getLengthInFrames();
+            
+            LOG.info("Opening video: {} ({}x{}, {} fps, {} frames)", 
+                     path, originalWidth, originalHeight, videoFps, totalFrames);
+            
+            double aspectRatio = (double) originalWidth / originalHeight;
+            int targetWidth, targetHeight;
+            
+            if (originalWidth > MAX_RESAMPLED_WIDTH || originalHeight > MAX_RESAMPLED_HEIGHT) {
+                if (aspectRatio > (double) MAX_RESAMPLED_WIDTH / MAX_RESAMPLED_HEIGHT) {
+                    targetWidth = MAX_RESAMPLED_WIDTH;
+                    targetHeight = (int) (MAX_RESAMPLED_WIDTH / aspectRatio);
+                } else {
+                    targetHeight = MAX_RESAMPLED_HEIGHT;
+                    targetWidth = (int) (MAX_RESAMPLED_HEIGHT * aspectRatio);
+                }
+                LOG.info("Resampling video from {}x{} to {}x{}", 
+                         originalWidth, originalHeight, targetWidth, targetHeight);
+            } else {
+                targetWidth = originalWidth;
+                targetHeight = originalHeight;
+                LOG.info("Using original video dimensions: {}x{}", targetWidth, targetHeight);
+            }
+            
+            int framesToLoad = Math.min(totalFrames, MAX_FRAMES_IN_MEMORY);
+            int frameSkip = totalFrames > MAX_FRAMES_IN_MEMORY ? totalFrames / MAX_FRAMES_IN_MEMORY : 1;
+            
+            LOG.info("Planning to load {} frames (skip every {} frames) from total of {} frames", 
+                     framesToLoad, frameSkip, totalFrames);
             
             org.bytedeco.javacv.Frame frame;
             int frameCount = 0;
-            int maxFrames = 300;
+            int loadedFrames = 0;
+            long frameLoadStartTime = System.currentTimeMillis();
             
-            while ((frame = grabber.grab()) != null && frameCount < maxFrames) {
-                if (frame.image != null) {
-                    BufferedImage bufferedImage = converter.convert(frame);
-                    if (bufferedImage != null) {
-                        frames.add(cloneImage(bufferedImage));
-                        frameCount++;
+            LOG.info("Starting frame grab loop...");
+            while ((frame = grabber.grab()) != null && loadedFrames < framesToLoad) {
+                if (Thread.currentThread().isInterrupted()) {
+                    LOG.info("Video loading interrupted at frame {}", frameCount);
+                    break;
+                }
+                
+                if (frame.image != null && frameCount % frameSkip == 0) {
+                    long frameProcessStart = System.currentTimeMillis();
+                    BufferedImage originalImage = converter.convert(frame);
+                    
+                    if (originalImage != null) {
+                        // Only log first frame details and every 10th frame
+                        if (loadedFrames == 0 || loadedFrames % 10 == 0) {
+                            LOG.info("Processing frame {} ({}x{}) -> resampling to {}x{}", 
+                                    frameCount, originalImage.getWidth(), originalImage.getHeight(),
+                                    targetWidth, targetHeight);
+                        }
+                        BufferedImage resampledImage = resampleImage(originalImage, targetWidth, targetHeight);
+                        newFrames.add(resampledImage);
+                        loadedFrames++;
                         
-                        if (frameCount % 30 == 0) {
-                            LOG.info("Loaded {} frames...", frameCount);
+                        long frameProcessTime = System.currentTimeMillis() - frameProcessStart;
+                        if (loadedFrames % FRAME_LOAD_BATCH_SIZE == 0) {
+                            loadingStatus = String.format("Loading... %d/%d frames", loadedFrames, framesToLoad);
+                            long avgTimePerFrame = (System.currentTimeMillis() - frameLoadStartTime) / loadedFrames;
+                            LOG.info("Progress: {} frames loaded (last frame: {} ms, avg: {} ms/frame, total elapsed: {} ms)", 
+                                    loadedFrames, frameProcessTime, avgTimePerFrame, 
+                                    System.currentTimeMillis() - frameLoadStartTime);
                         }
                     }
                 }
+                frameCount++;
+            }
+            LOG.info("Frame grab loop completed. Loaded {} frames in {} ms", 
+                     loadedFrames, System.currentTimeMillis() - frameLoadStartTime);
+            
+            LOG.info("Updating frame buffer with {} new frames", newFrames.size());
+            synchronized (frameLock) {
+                frames = newFrames;
+                fps = videoFps;
+                resampledWidth = targetWidth;
+                resampledHeight = targetHeight;
+                currentFrameIndex = 0;
+                frameAccumulator = 0;
             }
             
-            grabber.stop();
-            grabber.release();
-            
-            LOG.info("Successfully loaded {} frames from video", frames.size());
+            loadingStatus = "";
+            LOG.info("Successfully loaded {} frames from video (resampled to {}x{})", 
+                     newFrames.size(), targetWidth, targetHeight);
             
         } catch (FrameGrabber.Exception e) {
-            LOG.error("Error loading video: {}", e.getMessage());
-            frames.clear();
+            LOG.error("Error loading video: {}", e.getMessage(), e);
+            loadingStatus = "Error: " + e.getMessage();
+            synchronized (frameLock) {
+                frames.clear();
+            }
+        } catch (Exception e) {
+            LOG.error("Unexpected error loading video: {}", e.getMessage(), e);
+            loadingStatus = "Error: " + e.getMessage();
+            synchronized (frameLock) {
+                frames.clear();
+            }
+        } finally {
+            if (grabber != null) {
+                try {
+                    LOG.info("Stopping and releasing grabber...");
+                    long stopTime = System.currentTimeMillis();
+                    grabber.stop();
+                    grabber.release();
+                    LOG.info("Grabber stopped and released in {} ms", System.currentTimeMillis() - stopTime);
+                } catch (Exception e) {
+                    LOG.error("Error closing grabber: {}", e.getMessage());
+                }
+            }
         }
     }
     
-    private BufferedImage cloneImage(BufferedImage source) {
-        BufferedImage clone = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = clone.createGraphics();
-        g.drawImage(source, 0, 0, null);
+    private BufferedImage resampleImage(BufferedImage original, int targetWidth, int targetHeight) {
+        if (original.getWidth() == targetWidth && original.getHeight() == targetHeight) {
+            return original;
+        }
+        
+        BufferedImage resampled = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = resampled.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.drawImage(original, 0, 0, targetWidth, targetHeight, null);
         g.dispose();
-        return clone;
+        
+        return resampled;
     }
     
     @Override
     protected void run(double deltaMs) {
         if (!videoPath.getString().equals(currentVideoPath)) {
+            LOG.info("Video path changed from '{}' to '{}'", currentVideoPath, videoPath.getString());
             currentVideoPath = videoPath.getString();
-            loadVideo(currentVideoPath);
+            loadVideoAsync(currentVideoPath);
         }
         
         if (!boundsCalculated) {
+            LOG.info("Calculating bounds in run()...");
             calculateBounds();
         }
         
@@ -188,30 +336,53 @@ public class VideoPattern extends LXPattern {
             colors[p.index] = LXColor.CLEAR;
         }
         
-        if (frames.isEmpty()) {
-            return;
-        }
+        List<BufferedImage> currentFrames;
+        int frameIndex;
+        int frameWidth, frameHeight;
         
-        if (playing.isOn()) {
-            double frameDelta = (deltaMs / 1000.0) * fps * playbackSpeed.getValue();
-            frameAccumulator += frameDelta;
+        synchronized (frameLock) {
+            if (frames.isEmpty()) {
+                if (isLoading) {
+                    if (!loadingStatus.isEmpty()) {
+                        LOG.info("Frames empty, loading in progress: {}", loadingStatus);
+                    }
+                } else {
+                    LOG.info("Frames empty, not loading");
+                }
+                return;
+            }
             
-            while (frameAccumulator >= 1.0) {
-                frameAccumulator -= 1.0;
-                currentFrameIndex++;
+            currentFrames = frames;
+            frameIndex = currentFrameIndex;
+            frameWidth = resampledWidth;
+            frameHeight = resampledHeight;
+            
+            if (playing.isOn() && !isLoading) {
+                double frameDelta = (deltaMs / 1000.0) * fps * playbackSpeed.getValue();
+                frameAccumulator += frameDelta;
                 
-                if (currentFrameIndex >= frames.size()) {
-                    if (loop.isOn()) {
-                        currentFrameIndex = 0;
-                    } else {
-                        currentFrameIndex = frames.size() - 1;
-                        playing.setValue(false);
+                while (frameAccumulator >= 1.0) {
+                    frameAccumulator -= 1.0;
+                    currentFrameIndex++;
+                    
+                    if (currentFrameIndex >= currentFrames.size()) {
+                        if (loop.isOn()) {
+                            currentFrameIndex = 0;
+                        } else {
+                            currentFrameIndex = currentFrames.size() - 1;
+                            playing.setValue(false);
+                        }
                     }
                 }
+                frameIndex = currentFrameIndex;
             }
         }
         
-        BufferedImage currentFrame = frames.get(currentFrameIndex);
+        if (frameIndex >= currentFrames.size()) {
+            return;
+        }
+        
+        BufferedImage currentFrame = currentFrames.get(frameIndex);
         if (currentFrame == null) {
             return;
         }
@@ -220,7 +391,7 @@ public class VideoPattern extends LXPattern {
         double zRange = maxZ - minZ;
         
         double fixtureAspect = xRange / zRange;
-        double videoAspect = (double) currentFrame.getWidth() / currentFrame.getHeight();
+        double videoAspect = (double) frameWidth / frameHeight;
         
         double effectiveScale = scale.getValue();
         double videoXScale, videoZScale;
@@ -257,35 +428,39 @@ public class VideoPattern extends LXPattern {
                 continue;
             }
             
-            int pixelX = (int) (videoX * (currentFrame.getWidth() - 1));
-            int pixelY = (int) (videoY * (currentFrame.getHeight() - 1));
+            int pixelX = (int) (videoX * (frameWidth - 1));
+            int pixelY = (int) (videoY * (frameHeight - 1));
             
-            int rgb = currentFrame.getRGB(pixelX, pixelY);
-            
-            int alpha = (rgb >> 24) & 0xFF;
-            if (alpha == 0) {
-                continue;
+            try {
+                int rgb = currentFrame.getRGB(pixelX, pixelY);
+                
+                int alpha = (rgb >> 24) & 0xFF;
+                if (alpha == 0) {
+                    continue;
+                }
+                
+                int r = (int) Math.min(255, ((rgb >> 16) & 0xFF) * bright);
+                int g = (int) Math.min(255, ((rgb >> 8) & 0xFF) * bright);
+                int b = (int) Math.min(255, (rgb & 0xFF) * bright);
+                
+                colors[p.index] = LXColor.rgba(r, g, b, alpha);
+            } catch (Exception e) {
+                LOG.error("Error getting pixel at ({}, {}): {}", pixelX, pixelY, e.getMessage());
             }
-            
-            int r = (int) Math.min(255, ((rgb >> 16) & 0xFF) * bright);
-            int g = (int) Math.min(255, ((rgb >> 8) & 0xFF) * bright);
-            int b = (int) Math.min(255, (rgb & 0xFF) * bright);
-            
-            colors[p.index] = LXColor.rgba(r, g, b, alpha);
         }
     }
     
     @Override
     public void dispose() {
-        if (grabber != null) {
-            try {
-                grabber.stop();
-                grabber.release();
-            } catch (Exception e) {
-                LOG.error("Error disposing grabber: {}", e.getMessage());
-            }
+        if (currentLoadTask != null) {
+            currentLoadTask.cancel(true);
         }
-        frames.clear();
+        loadingExecutor.shutdown();
+        
+        synchronized (frameLock) {
+            frames.clear();
+        }
+        
         super.dispose();
     }
 }
