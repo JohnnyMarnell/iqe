@@ -5,11 +5,18 @@ LX is like Ableton Live but for LEDs, there are channels,
 plugins, layers, etc., and resultant pixels are pushed
 as ArtNet network packets to an Advatek PixLite controller.
 
+The main project file that specifies channels, settings,
+and pattern sets, is in [./Projects/iqe.lxp](./Projects/iqe.lxp) , in json format.
+
+Patterns must be named like FooPattern.java, and included in
+bootstrapping, much of which can be traced from:
+@src/main/java/org/iqe/LXPluginIQE.java
+
 See also:
 @README.md
 
 There is also a sub-layer enabling [PixelBlaze](https://electromage.com/pixelblaze) patterns
-(crowd sourced javascript files) animation capability as well.
+(crowd sourced javascript files) animation capability within Chromatik as well.
 
 There's also a NodeJS element for some OSC communication and control,
 as well as some python for real-time audio analysis like
