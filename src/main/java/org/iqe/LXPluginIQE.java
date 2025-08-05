@@ -68,6 +68,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 MindLikeWaterPattern.class,
                 EqVisualizerPattern.class,
                 PongPattern.class,
+                ImagePattern.class,
 
                 PBXorcery.class,
                 PBAudio1.class,
