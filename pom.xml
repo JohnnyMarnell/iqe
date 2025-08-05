@@ -46,6 +46,12 @@
       <systemPath>${project.basedir}/vendor/glxstudio.jar</systemPath>
     </dependency>
 
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>javacv-platform</artifactId>
+      <version>1.5.9</version>
+    </dependency>
+
 
 <!--    <dependency>-->
 <!--      <groupId>com.heronarts</groupId>-->
