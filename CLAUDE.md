@@ -28,3 +28,37 @@ here in LX ecosystem.
 # Bash
 - ./mvnw clean install -DskipTests : Build the project
 - See @RUN.sh for java run and other commands
+
+# Pattern Development
+
+## Creating New Patterns
+- All patterns extend `LXPattern` and go in `org.iqe.pattern` package
+- Pattern classes must be named like `FooPattern.java`
+- Register patterns in `LXPluginIQE.java` in the `Stream.of()` list around line 62
+- Use `@LXCategory(LXCategory.TEST)` annotation (GAME category doesn't exist)
+- Main method is `run(double deltaMs)` where deltaMs is milliseconds since last frame
+- Use `LXColor.CLEAR` instead of `LXColor.BLACK` for transparency to avoid transition artifacts
+
+## Pattern Examples
+- **ImagePattern**: Loads PNG images, handles alpha channel, supports rotation/scaling/bouncing
+- **PongPattern**: Classic game with ball physics, AI paddles, score tracking
+
+## Key Pattern Tips
+- Calculate model bounds in first run for normalized coordinates
+- Use `CompoundParameter` for sliders, `BooleanParameter` for toggles, `DiscreteParameter` for dropdowns
+- Access parameter values with `.getValue()`, `.getValueb()`, or `.getValuei()`
+- LOG class uses `.info()` and `.error()` (no `.warn()` method)
+
+# Fixture Management
+
+## Current Setup (as of Aug 2024)
+- 72 ceiling strips only (24 rafters × 3 strips each)
+- Class: `org.iqe.NagBugglerSaberOfLightFixture`
+- Removed 32 `FlamecasterFixtures$PatchedStripFixture` netStrips
+- Each strip has 140 pixels
+- Fixtures stored in JSON under `model.fixtures` in iqe.lxp
+
+## Test Channel
+- Located around line 41500+ in iqe.lxp
+- Can hold multiple patterns for testing
+- Pattern transitions use alpha blending (importance of CLEAR vs BLACK)
