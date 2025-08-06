@@ -55,13 +55,24 @@ public class VideoPattern extends LXPattern {
     private final CompoundParameter brightness = new CompoundParameter("brightness", 1.0, 0, 2.0)
         .setDescription("Brightness adjustment");
     
-    private final ExecutorService loadingExecutor = Executors.newSingleThreadExecutor(r -> {
-        Thread t = new Thread(r, "VideoPattern-Loader");
-        t.setDaemon(true);
-        return t;
-    });
+    private final BooleanParameter preserveAspect = new BooleanParameter("preserveAspect", false)
+        .setDescription("Preserve video aspect ratio");
     
-    volatile List<BufferedImage> frames = new ArrayList<>();
+    private ExecutorService loadingExecutor = null;
+    
+    private ExecutorService getLoadingExecutor() {
+        if (loadingExecutor == null) {
+            loadingExecutor = Executors.newSingleThreadExecutor(r -> {
+                Thread t = new Thread(r, "VideoPattern-Loader");
+                t.setDaemon(true);
+                return t;
+            });
+        }
+        return loadingExecutor;
+    }
+    
+    volatile int[][][] framePixels = null; // [frame][y][x] = ARGB int
+    volatile int numFrames = 0;
     volatile boolean isLoading = false;
     private volatile String loadingStatus = "";
     private volatile String currentVideoPath = "";
@@ -93,6 +104,7 @@ public class VideoPattern extends LXPattern {
         addParameter(xOffset);
         addParameter(yOffset);
         addParameter(brightness);
+        addParameter(preserveAspect);
         
         // Don't load in constructor - let run() trigger it
         LOG.info("VideoPattern constructor completed, video will load on first run");
@@ -149,7 +161,7 @@ public class VideoPattern extends LXPattern {
         loadingStatus = "Loading...";
         LOG.info("Starting background load task for: {}", path);
         
-        currentLoadTask = loadingExecutor.submit(() -> {
+        currentLoadTask = getLoadingExecutor().submit(() -> {
             LOG.info("Background thread started for loading: {}", path);
             long startTime = System.currentTimeMillis();
             try {
@@ -180,7 +192,7 @@ public class VideoPattern extends LXPattern {
         
         FFmpegFrameGrabber grabber = null;
         Java2DFrameConverter converter = new Java2DFrameConverter();
-        List<BufferedImage> newFrames = new ArrayList<>();
+        List<int[][]> tempFramePixels = new ArrayList<>(); // Temporary list to collect frames
         
         try {
             loadingStatus = "Opening video...";
@@ -251,7 +263,15 @@ public class VideoPattern extends LXPattern {
                                     targetWidth, targetHeight);
                         }
                         BufferedImage resampledImage = resampleImage(originalImage, targetWidth, targetHeight);
-                        newFrames.add(resampledImage);
+                        
+                        // Convert BufferedImage to int array
+                        int[][] pixelData = new int[targetHeight][targetWidth];
+                        for (int y = 0; y < targetHeight; y++) {
+                            for (int x = 0; x < targetWidth; x++) {
+                                pixelData[y][x] = resampledImage.getRGB(x, y);
+                            }
+                        }
+                        tempFramePixels.add(pixelData);
                         loadedFrames++;
                         
                         long frameProcessTime = System.currentTimeMillis() - frameProcessStart;
@@ -269,8 +289,13 @@ public class VideoPattern extends LXPattern {
             LOG.info("Frame grab loop completed. Loaded {} frames in {} ms", 
                      loadedFrames, System.currentTimeMillis() - frameLoadStartTime);
             
-            LOG.info("Updating frame buffer with {} new frames", newFrames.size());
-            frames = newFrames;
+            LOG.info("Updating frame buffer with {} new frames", tempFramePixels.size());
+            // Convert list to 3D array
+            framePixels = new int[tempFramePixels.size()][][];
+            for (int i = 0; i < tempFramePixels.size(); i++) {
+                framePixels[i] = tempFramePixels.get(i);
+            }
+            numFrames = tempFramePixels.size();
             fps = videoFps;
             resampledWidth = targetWidth;
             resampledHeight = targetHeight;
@@ -279,16 +304,18 @@ public class VideoPattern extends LXPattern {
             
             loadingStatus = "";
             LOG.info("Successfully loaded {} frames from video (resampled to {}x{})", 
-                     newFrames.size(), targetWidth, targetHeight);
+                     numFrames, targetWidth, targetHeight);
             
         } catch (FrameGrabber.Exception e) {
             LOG.error("Error loading video: {}", e.getMessage(), e);
             loadingStatus = "Error: " + e.getMessage();
-            frames = new ArrayList<>();
+            framePixels = null;
+            numFrames = 0;
         } catch (Exception e) {
             LOG.error("Unexpected error loading video: {}", e.getMessage(), e);
             loadingStatus = "Error: " + e.getMessage();
-            frames = new ArrayList<>();
+            framePixels = null;
+            numFrames = 0;
         } finally {
             if (grabber != null) {
                 try {
@@ -319,7 +346,7 @@ public class VideoPattern extends LXPattern {
         
         return resampled;
     }
-    
+
     @Override
     protected void run(double deltaMs) {
         // Ensure colors array is initialized
@@ -336,17 +363,16 @@ public class VideoPattern extends LXPattern {
             currentVideoPath = videoPath.getString();
             loadVideoAsync(currentVideoPath);
         }
-        
+
         if (!boundsCalculated) {
             calculateBounds();
         }
-        
+
         for (LXPoint p : model.points) {
             colors[p.index] = LXColor.CLEAR;
         }
-        
-        List<BufferedImage> currentFrames = frames;
-        if (currentFrames.isEmpty()) {
+
+        if (framePixels == null || numFrames == 0) {
             if (isLoading) {
                 if (!hasLoggedLoading) {
                     LOG.info("Frames empty, loading in progress: {}", loadingStatus);
@@ -362,7 +388,7 @@ public class VideoPattern extends LXPattern {
             }
             return;
         }
-        
+
         // Reset logging flags when we have frames
         if (hasLoggedEmpty || hasLoggedLoading) {
             LOG.info("Frames loaded, starting playback");
@@ -377,47 +403,70 @@ public class VideoPattern extends LXPattern {
             double frameDelta = (deltaMs / 1000.0) * fps * playbackSpeed.getValue();
             frameAccumulator += frameDelta;
             
+            // Debug logging for frame advancement
+            if (currentFrameIndex == 0 && frameAccumulator < 1.0) {
+                LOG.info("Frame animation debug: deltaMs={}, fps={}, speed={}, frameDelta={}, accumulator={}", 
+                        deltaMs, fps, playbackSpeed.getValue(), frameDelta, frameAccumulator);
+            }
+            
             while (frameAccumulator >= 1.0) {
                 frameAccumulator -= 1.0;
+                int oldIndex = currentFrameIndex;
                 currentFrameIndex++;
                 
-                if (currentFrameIndex >= currentFrames.size()) {
+                if (currentFrameIndex >= numFrames) {
                     if (loop.isOn()) {
                         currentFrameIndex = 0;
+                        LOG.info("Looping video back to frame 0");
                     } else {
-                        currentFrameIndex = currentFrames.size() - 1;
+                        currentFrameIndex = numFrames - 1;
                         playing.setValue(false);
                     }
+                } else if (oldIndex != currentFrameIndex && currentFrameIndex % 10 == 0) {
+                    LOG.info("Advanced to frame {} of {}", currentFrameIndex, numFrames);
                 }
+            }
+        } else {
+            // Debug why we're not animating
+            if (!hasLoggedEmpty && !hasLoggedLoading && framePixels != null) {
+                LOG.info("Not animating: playing={}, isLoading={}", playing.isOn(), isLoading);
             }
         }
         
         int frameIndex = currentFrameIndex;
         
-        if (frameIndex >= currentFrames.size()) {
+        if (framePixels == null || frameIndex >= numFrames) {
             return;
         }
         
-        BufferedImage currentFrame = currentFrames.get(frameIndex);
-        if (currentFrame == null) {
+        int[][] currentFramePixels = framePixels[frameIndex];
+        if (currentFramePixels == null) {
             return;
         }
         
         double xRange = maxX - minX;
         double zRange = maxZ - minZ;
         
-        double fixtureAspect = xRange / zRange;
-        double videoAspect = (double) frameWidth / frameHeight;
-        
         double effectiveScale = scale.getValue();
         double videoXScale, videoZScale;
         
-        if (videoAspect > fixtureAspect) {
-            videoXScale = effectiveScale;
-            videoZScale = effectiveScale * fixtureAspect / videoAspect;
+        if (preserveAspect.isOn()) {
+            // Preserve aspect ratio
+            double fixtureAspect = xRange / zRange;
+            // Video is rotated 90 CCW, so swap width/height for aspect ratio
+            double videoAspect = (double) frameHeight / frameWidth;
+            
+            if (videoAspect > fixtureAspect) {
+                videoXScale = effectiveScale;
+                videoZScale = effectiveScale * fixtureAspect / videoAspect;
+            } else {
+                videoZScale = effectiveScale;
+                videoXScale = effectiveScale * videoAspect / fixtureAspect;
+            }
         } else {
+            // Stretch to fill - both scales are the same
+            videoXScale = effectiveScale;
             videoZScale = effectiveScale;
-            videoXScale = effectiveScale * videoAspect / fixtureAspect;
         }
         
         double threshold = targetY - 10;
@@ -428,17 +477,23 @@ public class VideoPattern extends LXPattern {
                 continue;
             }
             
+            // Map LED coordinates to normalized space
             double normalizedX = (p.x - minX) / xRange - 0.5;
             double normalizedZ = (p.z - minZ) / zRange - 0.5;
             
+            // Apply offsets
             normalizedX -= xOffset.getValue();
             normalizedZ -= yOffset.getValue();
             
+            // Apply scaling
             normalizedX /= videoXScale;
             normalizedZ /= videoZScale;
             
-            double videoX = normalizedX + 0.5;
-            double videoY = normalizedZ + 0.5;
+            // Map to video coordinates with 90 CCW rotation
+            // LED X maps to video Y (vertical in rotated video)
+            // LED Z maps to video X (horizontal in rotated video) 
+            double videoX = normalizedZ + 0.5;
+            double videoY = normalizedX + 0.5;
             
             if (videoX < 0 || videoX >= 1 || videoY < 0 || videoY >= 1) {
                 continue;
@@ -448,7 +503,8 @@ public class VideoPattern extends LXPattern {
             int pixelY = (int) (videoY * (frameHeight - 1));
             
             try {
-                int rgb = currentFrame.getRGB(pixelX, pixelY);
+                // Get pixel from our int array [y][x]
+                int rgb = currentFramePixels[pixelY][pixelX];
                 
                 int alpha = (rgb >> 24) & 0xFF;
                 if (alpha == 0) {
@@ -466,14 +522,43 @@ public class VideoPattern extends LXPattern {
         }
     }
     
+    private void drawDebugLine(int frameIndex) {
+        // Calculate line position based on frame index (0-149 maps to 0.0-1.0)
+        double linePosition = (double) frameIndex / Math.max(1, numFrames - 1);
+        
+        // Draw a vertical white line at this position
+        double threshold = targetY - 10;
+        for (LXPoint p : model.points) {
+            if (p.y < threshold) {
+                continue;
+            }
+            
+            double normalizedX = (p.x - minX) / (maxX - minX);
+            
+            // Draw line if point is within 2% of the line position
+            if (Math.abs(normalizedX - linePosition) < 0.02) {
+                // Bright white line, overlaying the video
+                colors[p.index] = LXColor.rgb(255, 255, 255);
+            }
+        }
+        
+        // Log every 10 frames to confirm this is being called with different indices
+        if (frameIndex % 10 == 0) {
+            LOG.info("Debug line at frame {} (position: {:.2f})", frameIndex, linePosition);
+        }
+    }
+    
     @Override
     public void dispose() {
         if (currentLoadTask != null) {
             currentLoadTask.cancel(true);
         }
-        loadingExecutor.shutdown();
+        if (loadingExecutor != null) {
+            loadingExecutor.shutdown();
+        }
         
-        frames = new ArrayList<>();
+        framePixels = null;
+        numFrames = 0;
         
         super.dispose();
     }

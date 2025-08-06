@@ -60,10 +60,27 @@
       <systemPath>${project.basedir}/vendor/glxstudio.jar</systemPath>
     </dependency>
 
+    <!-- JavaCV core (without platform-specific binaries) -->
     <dependency>
       <groupId>org.bytedeco</groupId>
-      <artifactId>javacv-platform</artifactId>
+      <artifactId>javacv</artifactId>
       <version>1.5.9</version>
+    </dependency>
+    
+    <!-- FFmpeg bindings for macOS ARM64 only -->
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>ffmpeg</artifactId>
+      <version>6.0-1.5.9</version>
+      <classifier>macosx-arm64</classifier>
+    </dependency>
+    
+    <!-- OpenCV bindings for macOS ARM64 only (if needed) -->
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>opencv</artifactId>
+      <version>4.7.0-1.5.9</version>
+      <classifier>macosx-arm64</classifier>
     </dependency>
 
 

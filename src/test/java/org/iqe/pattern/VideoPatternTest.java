@@ -94,10 +94,10 @@ public class VideoPatternTest {
                 }
                 
                 // Check if loading finished
-                if (!pattern.frames.isEmpty() && loadingFinished.getCount() > 0) {
+                if (pattern.numFrames > 0 && loadingFinished.getCount() > 0) {
                     loadingFinished.countDown();
                     loadingCompleted = true;
-                    System.out.println("Loading completed at frame " + runCount.get() + " with " + pattern.frames.size() + " frames");
+                    System.out.println("Loading completed at frame " + runCount.get() + " with " + pattern.numFrames + " frames");
                 }
                 
                 // Once loading is done, run a few more frames to verify playback works
@@ -130,9 +130,9 @@ public class VideoPatternTest {
         assertFalse(mainThreadBlocked.get(), "Main render thread should never be blocked");
         
         // Verify frames were loaded
-        assertFalse(pattern.frames.isEmpty(), "Frames should be loaded");
+        assertTrue(pattern.numFrames > 0, "Frames should be loaded");
         
-        System.out.println("Test completed successfully. Loaded " + pattern.frames.size() + " frames");
+        System.out.println("Test completed successfully. Loaded " + pattern.numFrames + " frames");
         
         renderThread.interrupt();
         renderThread.join(1000);
@@ -157,7 +157,7 @@ public class VideoPatternTest {
         Thread.sleep(500);
         
         // Should handle gracefully
-        assertTrue(pattern.frames.isEmpty(), "Pattern should handle missing file gracefully");
+        assertEquals(0, pattern.numFrames, "Pattern should handle missing file gracefully");
         assertFalse(pattern.isLoading, "Should not be loading after file not found");
     }
     

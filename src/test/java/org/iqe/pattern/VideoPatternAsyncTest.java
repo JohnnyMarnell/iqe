@@ -70,8 +70,8 @@ public class VideoPatternAsyncTest {
         }
         
         assertFalse(pattern.isLoading, "Loading should complete");
-        assertFalse(pattern.frames.isEmpty(), "Frames should be loaded");
-        System.out.println("Loading completed with " + pattern.frames.size() + " frames");
+        assertTrue(pattern.numFrames > 0, "Frames should be loaded");
+        System.out.println("Loading completed with " + pattern.numFrames + " frames");
         
         // Verify pattern can run after loading
         startTime = System.currentTimeMillis();
