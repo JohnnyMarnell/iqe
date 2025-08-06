@@ -28,7 +28,7 @@ public class VideoPattern extends LXPattern {
     
     private static final int MAX_RESAMPLED_WIDTH = 420;
     private static final int MAX_RESAMPLED_HEIGHT = 240;
-    private static final int MAX_FRAMES_IN_MEMORY = 150;
+    private static final int MAX_FRAMES_IN_MEMORY = 10000;  // Allow up to 10K frames (~83 seconds at 120fps)
     private static final int FRAME_LOAD_BATCH_SIZE = 10;
     
     final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample.mp4")
@@ -57,6 +57,9 @@ public class VideoPattern extends LXPattern {
     
     private final BooleanParameter preserveAspect = new BooleanParameter("preserveAspect", false)
         .setDescription("Preserve video aspect ratio");
+    
+    private final BooleanParameter interpolate = new BooleanParameter("interpolate", true)
+        .setDescription("Interpolate frames for smooth slow-motion");
     
     private ExecutorService loadingExecutor = null;
     
@@ -105,6 +108,7 @@ public class VideoPattern extends LXPattern {
         addParameter(yOffset);
         addParameter(brightness);
         addParameter(preserveAspect);
+        addParameter(interpolate);
         
         // Don't load in constructor - let run() trigger it
         LOG.info("VideoPattern constructor completed, video will load on first run");
@@ -214,6 +218,12 @@ public class VideoPattern extends LXPattern {
             LOG.info("Opening video: {} ({}x{}, {} fps, {} frames)", 
                      path, originalWidth, originalHeight, videoFps, totalFrames);
             
+            // For high frame rate videos, we might want to skip frames when loading
+            // to avoid using too much memory
+            if (videoFps > 60 && totalFrames > MAX_FRAMES_IN_MEMORY) {
+                LOG.info("High frame rate video detected ({}fps), will adjust frame loading", videoFps);
+            }
+            
             double aspectRatio = (double) originalWidth / originalHeight;
             int targetWidth, targetHeight;
             
@@ -233,11 +243,17 @@ public class VideoPattern extends LXPattern {
                 LOG.info("Using original video dimensions: {}x{}", targetWidth, targetHeight);
             }
             
+            // Load all frames up to our memory limit
             int framesToLoad = Math.min(totalFrames, MAX_FRAMES_IN_MEMORY);
             int frameSkip = totalFrames > MAX_FRAMES_IN_MEMORY ? totalFrames / MAX_FRAMES_IN_MEMORY : 1;
             
             LOG.info("Planning to load {} frames (skip every {} frames) from total of {} frames", 
                      framesToLoad, frameSkip, totalFrames);
+            
+            if (totalFrames > MAX_FRAMES_IN_MEMORY) {
+                LOG.info("WARNING: Video has {} frames but we can only load {} in memory. Consider increasing MAX_FRAMES_IN_MEMORY", 
+                         totalFrames, MAX_FRAMES_IN_MEMORY);
+            }
             
             org.bytedeco.javacv.Frame frame;
             int frameCount = 0;
@@ -400,13 +416,17 @@ public class VideoPattern extends LXPattern {
         int frameHeight = resampledHeight;
         
         if (playing.isOn() && !isLoading) {
-            double frameDelta = (deltaMs / 1000.0) * fps * playbackSpeed.getValue();
-            frameAccumulator += frameDelta;
+            // Calculate how many video frames should advance based on real time
+            // deltaMs is the real time passed, fps is the video's frame rate
+            // We want to advance (deltaMs/1000) * fps frames to maintain proper playback speed
+            double secondsElapsed = deltaMs / 1000.0;
+            double framesToAdvance = secondsElapsed * fps * playbackSpeed.getValue();
+            frameAccumulator += framesToAdvance;
             
             // Debug logging for frame advancement
             if (currentFrameIndex == 0 && frameAccumulator < 1.0) {
-                LOG.info("Frame animation debug: deltaMs={}, fps={}, speed={}, frameDelta={}, accumulator={}", 
-                        deltaMs, fps, playbackSpeed.getValue(), frameDelta, frameAccumulator);
+                LOG.info("Frame animation debug: deltaMs={}, fps={}, speed={}, framesToAdvance={}, accumulator={}", 
+                        deltaMs, fps, playbackSpeed.getValue(), framesToAdvance, frameAccumulator);
             }
             
             while (frameAccumulator >= 1.0) {
@@ -422,8 +442,6 @@ public class VideoPattern extends LXPattern {
                         currentFrameIndex = numFrames - 1;
                         playing.setValue(false);
                     }
-                } else if (oldIndex != currentFrameIndex && currentFrameIndex % 10 == 0) {
-                    LOG.info("Advanced to frame {} of {}", currentFrameIndex, numFrames);
                 }
             }
         } else {
@@ -439,7 +457,13 @@ public class VideoPattern extends LXPattern {
             return;
         }
         
+        // Calculate interpolation for smooth slow-motion
+        double interpolationFactor = frameAccumulator;
+        int nextFrameIndex = (frameIndex + 1) % numFrames;
+        
         int[][] currentFramePixels = framePixels[frameIndex];
+        int[][] nextFramePixels = framePixels[nextFrameIndex];
+        
         if (currentFramePixels == null) {
             return;
         }
@@ -506,16 +530,49 @@ public class VideoPattern extends LXPattern {
                 // Get pixel from our int array [y][x]
                 int rgb = currentFramePixels[pixelY][pixelX];
                 
-                int alpha = (rgb >> 24) & 0xFF;
-                if (alpha == 0) {
-                    continue;
+                // If interpolation is enabled and we're playing slowly, blend frames
+                if (interpolate.isOn() && playbackSpeed.getValue() < 1.0 && nextFramePixels != null && interpolationFactor > 0) {
+                    int nextRgb = nextFramePixels[pixelY][pixelX];
+                    
+                    // Extract ARGB components from both frames
+                    int a1 = (rgb >> 24) & 0xFF;
+                    int r1 = (rgb >> 16) & 0xFF;
+                    int g1 = (rgb >> 8) & 0xFF;
+                    int b1 = rgb & 0xFF;
+                    
+                    int a2 = (nextRgb >> 24) & 0xFF;
+                    int r2 = (nextRgb >> 16) & 0xFF;
+                    int g2 = (nextRgb >> 8) & 0xFF;
+                    int b2 = nextRgb & 0xFF;
+                    
+                    // Linear interpolation between frames
+                    int alpha = (int) (a1 + (a2 - a1) * interpolationFactor);
+                    int r = (int) (r1 + (r2 - r1) * interpolationFactor);
+                    int g = (int) (g1 + (g2 - g1) * interpolationFactor);
+                    int b = (int) (b1 + (b2 - b1) * interpolationFactor);
+                    
+                    if (alpha == 0) {
+                        continue;
+                    }
+                    
+                    r = (int) Math.min(255, r * bright);
+                    g = (int) Math.min(255, g * bright);
+                    b = (int) Math.min(255, b * bright);
+                    
+                    colors[p.index] = LXColor.rgba(r, g, b, alpha);
+                } else {
+                    // No interpolation - use current frame as-is
+                    int alpha = (rgb >> 24) & 0xFF;
+                    if (alpha == 0) {
+                        continue;
+                    }
+                    
+                    int r = (int) Math.min(255, ((rgb >> 16) & 0xFF) * bright);
+                    int g = (int) Math.min(255, ((rgb >> 8) & 0xFF) * bright);
+                    int b = (int) Math.min(255, (rgb & 0xFF) * bright);
+                    
+                    colors[p.index] = LXColor.rgba(r, g, b, alpha);
                 }
-                
-                int r = (int) Math.min(255, ((rgb >> 16) & 0xFF) * bright);
-                int g = (int) Math.min(255, ((rgb >> 8) & 0xFF) * bright);
-                int b = (int) Math.min(255, (rgb & 0xFF) * bright);
-                
-                colors[p.index] = LXColor.rgba(r, g, b, alpha);
             } catch (Exception e) {
                 LOG.error("Error getting pixel at ({}, {}): {}", pixelX, pixelY, e.getMessage());
             }
