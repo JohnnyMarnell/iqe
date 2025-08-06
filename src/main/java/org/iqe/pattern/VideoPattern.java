@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.bytedeco.javacv.*;
 
 @LXCategory(LXCategory.TEST)
@@ -31,7 +34,7 @@ public class VideoPattern extends LXPattern {
     private static final int MAX_FRAMES_IN_MEMORY = 10000;  // Allow up to 10K frames (~83 seconds at 120fps)
     private static final int FRAME_LOAD_BATCH_SIZE = 10;
     
-    final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample.mp4")
+    public final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample2-24p-120fps.mp4")
         .setDescription("Path to the video file");
     
     private final CompoundParameter playbackSpeed = new CompoundParameter("speed", 1.0, 0.1, 4.0)
@@ -74,16 +77,16 @@ public class VideoPattern extends LXPattern {
         return loadingExecutor;
     }
     
-    volatile int[][][] framePixels = null; // [frame][y][x] = ARGB int
-    volatile int numFrames = 0;
-    volatile boolean isLoading = false;
-    private volatile String loadingStatus = "";
-    private volatile String currentVideoPath = "";
-    private volatile int currentFrameIndex = 0;
-    private volatile double frameAccumulator = 0;
-    private volatile double fps = 30.0;
-    private volatile int resampledWidth = MAX_RESAMPLED_WIDTH;
-    private volatile int resampledHeight = MAX_RESAMPLED_HEIGHT;
+    final AtomicReference<int[][][]> framePixels = new AtomicReference<>(null); // [frame][y][x] = ARGB int
+    final AtomicInteger numFrames = new AtomicInteger(0);
+    final AtomicBoolean isLoading = new AtomicBoolean(false);
+    private final AtomicReference<String> loadingStatus = new AtomicReference<>("");
+    private final AtomicReference<String> currentVideoPath = new AtomicReference<>("");
+    private final AtomicInteger currentFrameIndex = new AtomicInteger(0);
+    private double frameAccumulator = 0;
+    private double fps = 30.0;
+    private int resampledWidth = MAX_RESAMPLED_WIDTH;
+    private int resampledHeight = MAX_RESAMPLED_HEIGHT;
     
     private Future<?> currentLoadTask = null;
     private boolean hasLoggedEmpty = false;
@@ -117,10 +120,45 @@ public class VideoPattern extends LXPattern {
     @Override
     protected void onActive() {
         super.onActive();
+        LOG.info("VideoPattern onActive - pattern is being transitioned into");
+        
         // Ensure colors array is initialized when pattern becomes active
         if (this.colors == null && this.model != null) {
             this.colors = new int[this.model.points.length];
         }
+        
+        // Load the video when pattern becomes active
+        String path = videoPath.getString();
+        if (!path.isEmpty() && !path.equals(currentVideoPath.get())) {
+            LOG.info("Loading video on activation: {}", path);
+            currentVideoPath.set(path);
+            loadVideoAsync(path);
+        }
+    }
+    
+    @Override
+    protected void onInactive() {
+        super.onInactive();
+        LOG.info("VideoPattern onInactive - pattern is being transitioned out, freeing memory");
+        
+        // Cancel any ongoing load
+        if (currentLoadTask != null) {
+            currentLoadTask.cancel(true);
+            currentLoadTask = null;
+        }
+        
+        // Clear the video frames to free memory
+        framePixels.set(null);
+        numFrames.set(0);
+        currentFrameIndex.set(0);
+        frameAccumulator = 0;
+        
+        // Clear the current path so it reloads when reactivated
+        currentVideoPath.set("");
+        
+        // Force garbage collection to reclaim memory
+        System.gc();
+        LOG.info("VideoPattern memory freed");
     }
     
     private void calculateBounds() {
@@ -151,7 +189,7 @@ public class VideoPattern extends LXPattern {
     
     private void loadVideoAsync(String path) {
         LOG.info("loadVideoAsync called for path: {}", path);
-        if (isLoading) {
+        if (!isLoading.compareAndSet(false, true)) {
             LOG.info("Video is already loading, skipping new load request");
             return;
         }
@@ -161,8 +199,7 @@ public class VideoPattern extends LXPattern {
             currentLoadTask.cancel(true);
         }
         
-        isLoading = true;
-        loadingStatus = "Loading...";
+        loadingStatus.set("Loading...");
         LOG.info("Starting background load task for: {}", path);
         
         currentLoadTask = getLoadingExecutor().submit(() -> {
@@ -174,9 +211,9 @@ public class VideoPattern extends LXPattern {
                 LOG.info("Video loading completed in {} ms", duration);
             } catch (Exception e) {
                 LOG.error("Failed to load video in background: {}", e.getMessage(), e);
-                loadingStatus = "Error: " + e.getMessage();
+                loadingStatus.set("Error: " + e.getMessage());
             } finally {
-                isLoading = false;
+                isLoading.set(false);
                 LOG.info("Background loading thread finished");
             }
         });
@@ -188,7 +225,7 @@ public class VideoPattern extends LXPattern {
         File file = new File(path);
         if (!file.exists()) {
             LOG.error("Video file not found: {}", path);
-            loadingStatus = "File not found";
+            loadingStatus.set("File not found");
             return;
         }
         
@@ -199,7 +236,7 @@ public class VideoPattern extends LXPattern {
         List<int[][]> tempFramePixels = new ArrayList<>(); // Temporary list to collect frames
         
         try {
-            loadingStatus = "Opening video...";
+            loadingStatus.set("Opening video...");
             LOG.info("Creating FFmpegFrameGrabber for: {}", file.getAbsolutePath());
             grabber = new FFmpegFrameGrabber(file);
             
@@ -292,7 +329,7 @@ public class VideoPattern extends LXPattern {
                         
                         long frameProcessTime = System.currentTimeMillis() - frameProcessStart;
                         if (loadedFrames % FRAME_LOAD_BATCH_SIZE == 0) {
-                            loadingStatus = String.format("Loading... %d/%d frames", loadedFrames, framesToLoad);
+                            loadingStatus.set(String.format("Loading... %d/%d frames", loadedFrames, framesToLoad));
                             long avgTimePerFrame = (System.currentTimeMillis() - frameLoadStartTime) / loadedFrames;
                             LOG.info("Progress: {} frames loaded (last frame: {} ms, avg: {} ms/frame, total elapsed: {} ms)", 
                                     loadedFrames, frameProcessTime, avgTimePerFrame, 
@@ -307,31 +344,32 @@ public class VideoPattern extends LXPattern {
             
             LOG.info("Updating frame buffer with {} new frames", tempFramePixels.size());
             // Convert list to 3D array
-            framePixels = new int[tempFramePixels.size()][][];
+            int[][][] newFramePixels = new int[tempFramePixels.size()][][];
             for (int i = 0; i < tempFramePixels.size(); i++) {
-                framePixels[i] = tempFramePixels.get(i);
+                newFramePixels[i] = tempFramePixels.get(i);
             }
-            numFrames = tempFramePixels.size();
+            framePixels.set(newFramePixels);
+            numFrames.set(tempFramePixels.size());
             fps = videoFps;
             resampledWidth = targetWidth;
             resampledHeight = targetHeight;
-            currentFrameIndex = 0;
+            currentFrameIndex.set(0);
             frameAccumulator = 0;
             
-            loadingStatus = "";
+            loadingStatus.set("");
             LOG.info("Successfully loaded {} frames from video (resampled to {}x{})", 
                      numFrames, targetWidth, targetHeight);
             
         } catch (FrameGrabber.Exception e) {
             LOG.error("Error loading video: {}", e.getMessage(), e);
-            loadingStatus = "Error: " + e.getMessage();
-            framePixels = null;
-            numFrames = 0;
+            loadingStatus.set("Error: " + e.getMessage());
+            framePixels.set(null);
+            numFrames.set(0);
         } catch (Exception e) {
             LOG.error("Unexpected error loading video: {}", e.getMessage(), e);
-            loadingStatus = "Error: " + e.getMessage();
-            framePixels = null;
-            numFrames = 0;
+            loadingStatus.set("Error: " + e.getMessage());
+            framePixels.set(null);
+            numFrames.set(0);
         } finally {
             if (grabber != null) {
                 try {
@@ -374,10 +412,11 @@ public class VideoPattern extends LXPattern {
             }
         }
         
-        if (!videoPath.getString().equals(currentVideoPath)) {
-            LOG.info("Video path changed from '{}' to '{}'", currentVideoPath, videoPath.getString());
-            currentVideoPath = videoPath.getString();
-            loadVideoAsync(currentVideoPath);
+        String newPath = videoPath.getString();
+        if (!newPath.equals(currentVideoPath.get())) {
+            LOG.info("Video path changed from '{}' to '{}'", currentVideoPath.get(), newPath);
+            currentVideoPath.set(newPath);
+            loadVideoAsync(newPath);
         }
 
         if (!boundsCalculated) {
@@ -388,10 +427,13 @@ public class VideoPattern extends LXPattern {
             colors[p.index] = LXColor.CLEAR;
         }
 
-        if (framePixels == null || numFrames == 0) {
-            if (isLoading) {
+        int[][][] currentFrames = framePixels.get();
+        int frameCount = numFrames.get();
+        
+        if (currentFrames == null || frameCount == 0) {
+            if (isLoading.get()) {
                 if (!hasLoggedLoading) {
-                    LOG.info("Frames empty, loading in progress: {}", loadingStatus);
+                    LOG.info("Frames empty, loading in progress: {}", loadingStatus.get());
                     hasLoggedLoading = true;
                     hasLoggedEmpty = false;
                 }
@@ -415,7 +457,7 @@ public class VideoPattern extends LXPattern {
         int frameWidth = resampledWidth;
         int frameHeight = resampledHeight;
         
-        if (playing.isOn() && !isLoading) {
+        if (playing.isOn() && !isLoading.get()) {
             // Calculate how many video frames should advance based on real time
             // deltaMs is the real time passed, fps is the video's frame rate
             // We want to advance (deltaMs/1000) * fps frames to maintain proper playback speed
@@ -424,45 +466,47 @@ public class VideoPattern extends LXPattern {
             frameAccumulator += framesToAdvance;
             
             // Debug logging for frame advancement
-            if (currentFrameIndex == 0 && frameAccumulator < 1.0) {
+            if (currentFrameIndex.get() == 0 && frameAccumulator < 1.0) {
                 LOG.info("Frame animation debug: deltaMs={}, fps={}, speed={}, framesToAdvance={}, accumulator={}", 
                         deltaMs, fps, playbackSpeed.getValue(), framesToAdvance, frameAccumulator);
             }
             
             while (frameAccumulator >= 1.0) {
                 frameAccumulator -= 1.0;
-                int oldIndex = currentFrameIndex;
-                currentFrameIndex++;
+                int oldIndex = currentFrameIndex.get();
+                int newIndex = oldIndex + 1;
                 
-                if (currentFrameIndex >= numFrames) {
+                if (newIndex >= frameCount) {
                     if (loop.isOn()) {
-                        currentFrameIndex = 0;
+                        currentFrameIndex.set(0);
                         LOG.info("Looping video back to frame 0");
                     } else {
-                        currentFrameIndex = numFrames - 1;
+                        currentFrameIndex.set(frameCount - 1);
                         playing.setValue(false);
                     }
+                } else {
+                    currentFrameIndex.set(newIndex);
                 }
             }
         } else {
             // Debug why we're not animating
-            if (!hasLoggedEmpty && !hasLoggedLoading && framePixels != null) {
-                LOG.info("Not animating: playing={}, isLoading={}", playing.isOn(), isLoading);
+            if (!hasLoggedEmpty && !hasLoggedLoading && currentFrames != null) {
+                LOG.info("Not animating: playing={}, isLoading={}", playing.isOn(), isLoading.get());
             }
         }
         
-        int frameIndex = currentFrameIndex;
+        int frameIndex = currentFrameIndex.get();
         
-        if (framePixels == null || frameIndex >= numFrames) {
+        if (currentFrames == null || frameIndex >= frameCount) {
             return;
         }
         
         // Calculate interpolation for smooth slow-motion
         double interpolationFactor = frameAccumulator;
-        int nextFrameIndex = (frameIndex + 1) % numFrames;
+        int nextFrameIndex = (frameIndex + 1) % frameCount;
         
-        int[][] currentFramePixels = framePixels[frameIndex];
-        int[][] nextFramePixels = framePixels[nextFrameIndex];
+        int[][] currentFramePixels = currentFrames[frameIndex];
+        int[][] nextFramePixels = currentFrames[nextFrameIndex];
         
         if (currentFramePixels == null) {
             return;
@@ -581,7 +625,7 @@ public class VideoPattern extends LXPattern {
     
     private void drawDebugLine(int frameIndex) {
         // Calculate line position based on frame index (0-149 maps to 0.0-1.0)
-        double linePosition = (double) frameIndex / Math.max(1, numFrames - 1);
+        double linePosition = (double) frameIndex / Math.max(1, numFrames.get() - 1);
         
         // Draw a vertical white line at this position
         double threshold = targetY - 10;
@@ -614,8 +658,9 @@ public class VideoPattern extends LXPattern {
             loadingExecutor.shutdown();
         }
         
-        framePixels = null;
-        numFrames = 0;
+        framePixels.set(null);
+        numFrames.set(0);
+        currentFrameIndex.set(0);
         
         super.dispose();
     }

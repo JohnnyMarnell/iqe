@@ -88,16 +88,16 @@ public class VideoPatternTest {
                 }
                 
                 // Check if loading started
-                if (pattern.isLoading && loadingStarted.getCount() > 0) {
+                if (pattern.isLoading.get() && loadingStarted.getCount() > 0) {
                     loadingStarted.countDown();
                     System.out.println("Loading started at frame " + runCount.get());
                 }
                 
                 // Check if loading finished
-                if (pattern.numFrames > 0 && loadingFinished.getCount() > 0) {
+                if (pattern.numFrames.get() > 0 && loadingFinished.getCount() > 0) {
                     loadingFinished.countDown();
                     loadingCompleted = true;
-                    System.out.println("Loading completed at frame " + runCount.get() + " with " + pattern.numFrames + " frames");
+                    System.out.println("Loading completed at frame " + runCount.get() + " with " + pattern.numFrames.get() + " frames");
                 }
                 
                 // Once loading is done, run a few more frames to verify playback works
@@ -130,9 +130,9 @@ public class VideoPatternTest {
         assertFalse(mainThreadBlocked.get(), "Main render thread should never be blocked");
         
         // Verify frames were loaded
-        assertTrue(pattern.numFrames > 0, "Frames should be loaded");
+        assertTrue(pattern.numFrames.get() > 0, "Frames should be loaded");
         
-        System.out.println("Test completed successfully. Loaded " + pattern.numFrames + " frames");
+        System.out.println("Test completed successfully. Loaded " + pattern.numFrames.get() + " frames");
         
         renderThread.interrupt();
         renderThread.join(1000);
@@ -157,8 +157,8 @@ public class VideoPatternTest {
         Thread.sleep(500);
         
         // Should handle gracefully
-        assertEquals(0, pattern.numFrames, "Pattern should handle missing file gracefully");
-        assertFalse(pattern.isLoading, "Should not be loading after file not found");
+        assertEquals(0, pattern.numFrames.get(), "Pattern should handle missing file gracefully");
+        assertFalse(pattern.isLoading.get(), "Should not be loading after file not found");
     }
     
     @Test
@@ -185,13 +185,13 @@ public class VideoPatternTest {
         // Run frames until loading starts
         for (int i = 0; i < 30; i++) {
             pattern.run(33.33);
-            if (pattern.isLoading) {
+            if (pattern.isLoading.get()) {
                 System.out.println("Loading started after path change");
                 break;
             }
             Thread.sleep(50);
         }
         
-        assertTrue(pattern.isLoading, "Should start loading after path change");
+        assertTrue(pattern.isLoading.get(), "Should start loading after path change");
     }
 }

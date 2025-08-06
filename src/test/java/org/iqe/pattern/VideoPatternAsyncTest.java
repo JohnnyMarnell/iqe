@@ -48,7 +48,7 @@ public class VideoPatternAsyncTest {
         
         // Verify loading started
         Thread.sleep(100);
-        assertTrue(pattern.isLoading, "Loading should have started");
+        assertTrue(pattern.isLoading.get(), "Loading should have started");
         
         // Run frames while loading - should not block
         System.out.println("Running frames while loading...");
@@ -65,13 +65,13 @@ public class VideoPatternAsyncTest {
         // Wait for loading to complete
         System.out.println("Waiting for loading to complete...");
         int maxWaitIterations = 100; // 10 seconds max
-        while (pattern.isLoading && maxWaitIterations-- > 0) {
+        while (pattern.isLoading.get() && maxWaitIterations-- > 0) {
             Thread.sleep(100);
         }
         
-        assertFalse(pattern.isLoading, "Loading should complete");
-        assertTrue(pattern.numFrames > 0, "Frames should be loaded");
-        System.out.println("Loading completed with " + pattern.numFrames + " frames");
+        assertFalse(pattern.isLoading.get(), "Loading should complete");
+        assertTrue(pattern.numFrames.get() > 0, "Frames should be loaded");
+        System.out.println("Loading completed with " + pattern.numFrames.get() + " frames");
         
         // Verify pattern can run after loading
         startTime = System.currentTimeMillis();

@@ -41715,7 +41715,7 @@
                   "recall": false,
                   "compositeMode": 0,
                   "compositeLevel": 1.0,
-                  "videoPath": "src/main/resources/videos/sample.mp4",
+                  "videoPath": "src/main/resources/videos/sample2-24p-120fps.mp4",
                   "speed": 1.0,
                   "loop": true,
                   "playing": true,
