@@ -1,6 +1,6 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "timestamp": 1754419309352,
+  "timestamp": 1754429066894,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -68,7 +68,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 1,
@@ -111,7 +111,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 1,
@@ -154,7 +154,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 2,
@@ -197,7 +197,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 4,
@@ -240,7 +240,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 4,
@@ -283,7 +283,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 5,
@@ -326,7 +326,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 7,
@@ -369,7 +369,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 7,
@@ -412,7 +412,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 8,
@@ -455,7 +455,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 10,
@@ -498,7 +498,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 10,
@@ -541,7 +541,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 11,
@@ -584,7 +584,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 13,
@@ -627,7 +627,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 13,
@@ -670,7 +670,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 14,
@@ -713,7 +713,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 16,
@@ -756,7 +756,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 16,
@@ -799,7 +799,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 17,
@@ -842,7 +842,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 19,
@@ -885,7 +885,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 19,
@@ -928,7 +928,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 20,
@@ -971,7 +971,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 22,
@@ -1014,7 +1014,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 22,
@@ -1057,7 +1057,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 23,
@@ -1100,7 +1100,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 25,
@@ -1143,7 +1143,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 25,
@@ -1186,7 +1186,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 26,
@@ -1229,7 +1229,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 28,
@@ -1272,7 +1272,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 28,
@@ -1315,7 +1315,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 29,
@@ -1358,7 +1358,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 31,
@@ -1401,7 +1401,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 31,
@@ -1444,7 +1444,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 32,
@@ -1487,7 +1487,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 34,
@@ -1530,7 +1530,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 34,
@@ -1573,7 +1573,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 35,
@@ -1616,7 +1616,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 37,
@@ -1659,7 +1659,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 37,
@@ -1702,7 +1702,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 38,
@@ -1745,7 +1745,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 40,
@@ -1788,7 +1788,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 40,
@@ -1831,7 +1831,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 41,
@@ -1874,7 +1874,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 43,
@@ -1917,7 +1917,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 43,
@@ -1960,7 +1960,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 44,
@@ -2003,7 +2003,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 73,
@@ -2046,7 +2046,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 73,
@@ -2089,7 +2089,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 74,
@@ -2132,7 +2132,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 49,
@@ -2175,7 +2175,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 49,
@@ -2218,7 +2218,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 50,
@@ -2261,7 +2261,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 52,
@@ -2304,7 +2304,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 52,
@@ -2347,7 +2347,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 53,
@@ -2390,7 +2390,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 55,
@@ -2433,7 +2433,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 55,
@@ -2476,7 +2476,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 56,
@@ -2519,7 +2519,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 58,
@@ -2562,7 +2562,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 58,
@@ -2605,7 +2605,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 59,
@@ -2648,7 +2648,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 61,
@@ -2691,7 +2691,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 61,
@@ -2734,7 +2734,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 62,
@@ -2777,7 +2777,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 64,
@@ -2820,7 +2820,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 64,
@@ -2863,7 +2863,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 65,
@@ -2906,7 +2906,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 67,
@@ -2949,7 +2949,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 67,
@@ -2992,7 +2992,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 68,
@@ -3035,7 +3035,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 0,
           "artNetUniverse": 70,
@@ -3078,7 +3078,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 420,
           "artNetUniverse": 70,
@@ -3121,7 +3121,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "10.10.42.80",
+          "host": "127.0.0.1",
           "port": 7890,
           "dmxChannel": 330,
           "artNetUniverse": 71,
@@ -4442,7 +4442,7 @@
           "pitch": 0.0,
           "roll": -90.0,
           "scale": 1.0,
-          "selected": false,
+          "selected": true,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -4457,49 +4457,6 @@
           "host": "127.0.0.1",
           "port": 6455,
           "dmxChannel": 270,
-          "artNetUniverse": 3,
-          "artNetSequenceEnabled": false,
-          "opcChannel": 0,
-          "opcOffset": 0,
-          "ddpDataOffset": 0,
-          "kinetPort": 1,
-          "numPoints": 18,
-          "spacing": 40.0
-        },
-        "children": {}
-      },
-      {
-        "id": 2031,
-        "class": "org.iqe.FlamecasterFixtures$PatchedStripFixture",
-        "internal": {
-          "modulationColor": 0,
-          "modulationControlsExpanded": true,
-          "modulationsExpanded": true
-        },
-        "parameters": {
-          "label": "netStrip31",
-          "x": 0.0,
-          "y": 20.0,
-          "z": -1350.0,
-          "yaw": 0.0,
-          "pitch": 0.0,
-          "roll": 90.0,
-          "scale": 1.0,
-          "selected": true,
-          "deactivate": false,
-          "enabled": true,
-          "brightness": 1.0,
-          "identify": false,
-          "mute": false,
-          "solo": false,
-          "tags": "netStrip ns31",
-          "protocol": 1,
-          "byteOrder": 0,
-          "transport": 0,
-          "reverse": false,
-          "host": "127.0.0.1",
-          "port": 6455,
-          "dmxChannel": 324,
           "artNetUniverse": 3,
           "artNetSequenceEnabled": false,
           "opcChannel": 0,
@@ -6153,9 +6110,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 35.931909689227666,
+              "autoCycleTimeSecs": 47.51435807288312,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.859405203610871,
+              "transitionTimeSecs": 4.3904528702434575,
               "transitionBlendMode": 0,
               "focusedPattern": 3,
               "triggerPatternCycle": false
@@ -7364,7 +7321,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5291361320089459
+                        "basis": 0.11137233505040943
                       },
                       {
                         "id": 140444,
@@ -7393,7 +7350,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5921944261779108
+                        "basis": 0.5609897400950581
                       },
                       {
                         "id": 140446,
@@ -7422,7 +7379,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3647927178495118
+                        "basis": 0.006812519802526579
                       },
                       {
                         "id": 140448,
@@ -7451,7 +7408,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.013951000939418253
+                        "basis": 0.029211696368778097
                       },
                       {
                         "id": 140450,
@@ -7480,7 +7437,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9170271229396738
+                        "basis": 0.595197586418874
                       },
                       {
                         "id": 140452,
@@ -7509,7 +7466,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5291389383799561
+                        "basis": 0.18310009389369636
                       },
                       {
                         "id": 140454,
@@ -7538,7 +7495,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.07284294854805189
+                        "basis": 0.9891171174724483
                       },
                       {
                         "id": 140456,
@@ -7567,7 +7524,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.8614628468924158
+                        "basis": 0.2910481173955167
                       },
                       {
                         "id": 140458,
@@ -7596,7 +7553,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.461160178404723
+                        "basis": 0.07060785175039032
                       }
                     ],
                     "modulations": [
@@ -15670,9 +15627,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 68.57115616188213,
+              "autoCycleTimeSecs": 42.61572984835961,
               "transitionEnabled": true,
-              "transitionTimeSecs": 7.297975459023829,
+              "transitionTimeSecs": 4.5654721859661525,
               "transitionBlendMode": 0,
               "focusedPattern": 31,
               "triggerPatternCycle": false
@@ -26247,9 +26204,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 37.21619568620209,
+              "autoCycleTimeSecs": 71.00646201675329,
               "transitionEnabled": true,
-              "transitionTimeSecs": 14.193006155777034,
+              "transitionTimeSecs": 13.421337261044144,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -26453,9 +26410,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 67.28474492019052,
+              "autoCycleTimeSecs": 58.9217306175062,
               "transitionEnabled": true,
-              "transitionTimeSecs": 3.674001762807059,
+              "transitionTimeSecs": 7.00752741549518,
               "transitionBlendMode": 0,
               "focusedPattern": 6,
               "triggerPatternCycle": false
@@ -26659,7 +26616,7 @@
                           "exp": 1.0
                         },
                         "children": {},
-                        "basis": 0.6127881399015689
+                        "basis": 0.6880037244420562
                       }
                     ],
                     "modulations": [
@@ -28454,7 +28411,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0438699077368662
+                        "basis": 0.2855263143915714
                       },
                       {
                         "id": 140904,
@@ -28483,7 +28440,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4834914130085413
+                        "basis": 0.6298179009872914
                       },
                       {
                         "id": 140906,
@@ -28512,7 +28469,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5835465518951537
+                        "basis": 0.0031899094899685565
                       },
                       {
                         "id": 140909,
@@ -28541,7 +28498,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9147661368907211
+                        "basis": 0.11234827549697864
                       },
                       {
                         "id": 140911,
@@ -28570,7 +28527,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.007642251030634162
+                        "basis": 0.8218284141335951
                       },
                       {
                         "id": 140913,
@@ -28599,7 +28556,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5835465518951537
+                        "basis": 0.0031899094899685565
                       },
                       {
                         "id": 140916,
@@ -28628,7 +28585,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.4322499728120891
+                        "basis": 0.04188052760982839
                       }
                     ],
                     "modulations": [
@@ -30222,9 +30179,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 35.9324113930488,
+              "autoCycleTimeSecs": 63.87911289994497,
               "transitionEnabled": true,
-              "transitionTimeSecs": 4.954233733556797,
+              "transitionTimeSecs": 2.758032084230801,
               "transitionBlendMode": 0,
               "focusedPattern": 13,
               "triggerPatternCycle": false
@@ -33838,7 +33795,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6335268173159038
+                        "basis": 0.3741793791422024
                       },
                       {
                         "id": 141052,
@@ -33867,7 +33824,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9681976735075658
+                        "basis": 0.10692401489292089
                       },
                       {
                         "id": 141054,
@@ -33896,7 +33853,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5835465518951537
+                        "basis": 0.0031899094899685565
                       },
                       {
                         "id": 141057,
@@ -33925,7 +33882,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.38934496942311114
+                        "basis": 0.5300131459272456
                       },
                       {
                         "id": 141059,
@@ -33954,7 +33911,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.25985609513055835
+                        "basis": 0.8881260054695076
                       },
                       {
                         "id": 141061,
@@ -33983,7 +33940,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.17003281103351459
+                        "basis": 0.751780344557294
                       },
                       {
                         "id": 141063,
@@ -34012,7 +33969,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3760376588658936
+                        "basis": 0.41059557711089384
                       }
                     ],
                     "modulations": [
@@ -37734,9 +37691,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 35.06942477435191,
+              "autoCycleTimeSecs": 34.739287588071186,
               "transitionEnabled": true,
-              "transitionTimeSecs": 7.588830507910299,
+              "transitionTimeSecs": 14.87625173792879,
               "transitionBlendMode": 0,
               "focusedPattern": 8,
               "triggerPatternCycle": false
@@ -40575,7 +40532,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.3643103038736756
+                        "basis": 0.9690022557468048
                       },
                       {
                         "id": 141259,
@@ -40604,7 +40561,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.0020619171900656662
+                        "basis": 0.1327722084190895
                       },
                       {
                         "id": 141261,
@@ -40633,7 +40590,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7878938360141551
+                        "basis": 0.39399032560853675
                       },
                       {
                         "id": 141263,
@@ -40662,7 +40619,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9180037466843184
+                        "basis": 0.2308068388484212
                       },
                       {
                         "id": 141265,
@@ -40691,7 +40648,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.5835465518951537
+                        "basis": 0.0031899094899685565
                       },
                       {
                         "id": 141268,
@@ -40720,7 +40677,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.49055818791814443
+                        "basis": 0.07245783697304929
                       },
                       {
                         "id": 141270,
@@ -40749,7 +40706,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.05977773472997529
+                        "basis": 0.9718335728654984
                       }
                     ],
                     "modulations": [
@@ -41417,9 +41374,9 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 71.07909321285176,
+              "autoCycleTimeSecs": 52.29786583030088,
               "transitionEnabled": true,
-              "transitionTimeSecs": 11.788690202878902,
+              "transitionTimeSecs": 8.144089731606623,
               "transitionBlendMode": 0,
               "focusedPattern": 2,
               "triggerPatternCycle": false
@@ -41617,7 +41574,7 @@
               "arm": false,
               "selected": true,
               "enabled": false,
-              "cue": true,
+              "cue": false,
               "aux": false,
               "crossfadeGroup": 0,
               "blendMode": 0,
@@ -41631,11 +41588,11 @@
               "compositeDampingTimeSecs": 0.1,
               "autoCycleEnabled": true,
               "autoCycleMode": 1,
-              "autoCycleTimeSecs": 58.19871172612662,
+              "autoCycleTimeSecs": 35.8496885366807,
               "transitionEnabled": true,
-              "transitionTimeSecs": 2.3365050131995684,
+              "transitionTimeSecs": 2.4086738380582515,
               "transitionBlendMode": 0,
-              "focusedPattern": 2,
+              "focusedPattern": 1,
               "triggerPatternCycle": false
             },
             "children": {},
@@ -41734,53 +41691,6 @@
                   }
                 },
                 "deviceVersion": -1
-              },
-              {
-                "id": 1018365,
-                "class": "org.iqe.pattern.VideoPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "modulationControlsExpanded": true,
-                  "modulationsExpanded": true,
-                  "expanded": true,
-                  "expandedCue": true,
-                  "expandedAux": true,
-                  "modulationExpanded": false
-                },
-                "parameters": {
-                  "label": "Video",
-                  "enabled": true,
-                  "recall": false,
-                  "compositeMode": 0,
-                  "compositeLevel": 1.0,
-                  "videoPath": "src/main/resources/videos/sample.webm",
-                  "speed": 1.0,
-                  "loop": true,
-                  "playing": true,
-                  "scale": 1.0,
-                  "xOffset": 0.0,
-                  "yOffset": 0.0,
-                  "brightness": 1.0
-                },
-                "children": {
-                  "modulation": {
-                    "id": 1018366,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0,
-                      "modulationControlsExpanded": true,
-                      "modulationsExpanded": true
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [],
-                    "modulations": [],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
               }
             ]
           }
@@ -41828,7 +41738,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.14638790713849748
+            "basis": 0.09907638171913234
           },
           {
             "id": 54255,
@@ -41884,7 +41794,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8233879071364486
+            "basis": 0.7760763817170858
           },
           {
             "id": 56980,
@@ -41915,7 +41825,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8233879071364486
+            "basis": 0.7760763817170858
           },
           {
             "id": 56981,
@@ -41946,7 +41856,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.008721240435455968
+            "basis": 0.9614097150160915
           },
           {
             "id": 56982,
@@ -41977,7 +41887,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8233879071364486
+            "basis": 0.7760763817170858
           },
           {
             "id": 56983,
@@ -42008,7 +41918,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.8233879071364486
+            "basis": 0.7760763817170858
           },
           {
             "id": 57307,
@@ -42039,7 +41949,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.36638790713409064
+            "basis": 0.31907638171472613
           },
           {
             "id": 57308,
@@ -42070,7 +41980,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.36638790713409064
+            "basis": 0.31907638171472613
           },
           {
             "id": 62913,
@@ -42101,7 +42011,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.5723879071331022
+            "basis": 0.5250763817137388
           },
           {
             "id": 66458,
@@ -42132,7 +42042,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.051387907128926574
+            "basis": 0.004076381709561483
           },
           {
             "id": 76378,
@@ -42192,7 +42102,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.10438790713254215
+            "basis": 0.057076381713177055
           },
           {
             "id": 182480,
@@ -42223,7 +42133,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.05706061258523318
+            "basis": 0.009749087165867865
           },
           {
             "id": 182455,
@@ -42254,7 +42164,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.05317350297264176
+            "basis": 0.005861977553276221
           },
           {
             "id": 64644,
@@ -42343,7 +42253,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.05338790712939843
+            "basis": 0.006076381710032663
           },
           {
             "id": 125371,
@@ -42372,7 +42282,7 @@
               "exp": 1.0
             },
             "children": {},
-            "basis": 0.7196901593730717
+            "basis": 0.9936891070391711
           },
           {
             "id": 182481,
@@ -42403,7 +42313,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.7470349365801927
+            "basis": 0.6997234111608304
           },
           {
             "id": 185910,
@@ -42434,7 +42344,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.06605698081556097
+            "basis": 0.018745455396195806
           },
           {
             "id": 185931,
@@ -42465,7 +42375,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.667131965266844
+            "basis": 0.6198204398474816
           },
           {
             "id": 185932,
@@ -42496,7 +42406,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.9751207663745755
+            "basis": 0.9278092409552106
           },
           {
             "id": 192762,
@@ -42525,7 +42435,7 @@
               "exp": 0.24999999825377017
             },
             "children": {},
-            "basis": 0.5835465518951537
+            "basis": 0.0031899094899685565
           },
           {
             "id": 203089,
@@ -42554,7 +42464,7 @@
               "exp": 0.0
             },
             "children": {},
-            "basis": 0.7606708856337555
+            "basis": 0.7133593602143921
           }
         ],
         "modulations": [
@@ -81137,12 +81047,12 @@
         "depth": 1.0,
         "camera": {
           "active": true,
-          "radius": 2801.232520056459,
-          "theta": 272.25220360420644,
-          "phi": -88.73112096637487,
-          "x": -677.7502360064827,
-          "y": 182.22238412580919,
-          "z": -679.1175315564033
+          "radius": 2809.2881827189894,
+          "theta": 270.0424723394681,
+          "phi": -89.0,
+          "x": -889.4652453381859,
+          "y": 185.91915152862202,
+          "z": -777.210782912327
         },
         "cue": [
           {
@@ -81156,12 +81066,12 @@
           },
           {
             "active": true,
-            "radius": 2801.232520056459,
-            "theta": 272.25220360420644,
-            "phi": -88.73112096637487,
-            "x": -677.7502360064827,
-            "y": 182.22238412580919,
-            "z": -679.1175315564033
+            "radius": 2809.2881827189894,
+            "theta": 270.0424723394681,
+            "phi": -89.0,
+            "x": -889.4652453381859,
+            "y": 185.91915152862202,
+            "z": -777.210782912327
           },
           {
             "active": false,
