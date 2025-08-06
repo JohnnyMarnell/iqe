@@ -29,6 +29,8 @@ class LEDVisualizer {
   private showLabels = true;
   private autoScale = true;
   private rowGap = 14; // Default spacing
+  private pixelRadius = 3; // Pixel size multiplier
+  private enableGlow = true; // Enable glow effect
   
   // LED configuration
   private readonly width = 420;
@@ -67,6 +69,9 @@ class LEDVisualizer {
     const showGridCheckbox = document.getElementById('show-grid') as HTMLInputElement;
     const showLabelsCheckbox = document.getElementById('show-labels') as HTMLInputElement;
     const autoScaleCheckbox = document.getElementById('auto-scale') as HTMLInputElement;
+    const pixelRadiusSlider = document.getElementById('pixel-radius') as HTMLInputElement;
+    const pixelRadiusValue = document.getElementById('pixel-radius-value')!;
+    const enableGlowCheckbox = document.getElementById('enable-glow') as HTMLInputElement;
     const clearLogButton = document.getElementById('clear-log') as HTMLButtonElement;
     const toggleSidebarButton = document.getElementById('toggle-sidebar') as HTMLButtonElement;
     const spacingSliderContainer = document.getElementById('spacing-slider-container')!;
@@ -102,6 +107,20 @@ class LEDVisualizer {
     autoScaleCheckbox.addEventListener('change', (e) => {
       this.autoScale = (e.target as HTMLInputElement).checked;
       this.updateCanvasSize();
+    });
+
+    pixelRadiusSlider.addEventListener('input', (e) => {
+      this.pixelRadius = parseFloat((e.target as HTMLInputElement).value);
+      pixelRadiusValue.textContent = this.pixelRadius.toString();
+    });
+
+    pixelRadiusSlider.addEventListener('change', (e) => {
+      this.log(`Pixel radius changed to: ${this.pixelRadius}`);
+    });
+
+    enableGlowCheckbox.addEventListener('change', (e) => {
+      this.enableGlow = (e.target as HTMLInputElement).checked;
+      this.log(`Glow effect: ${this.enableGlow ? 'ON' : 'OFF'}`);
     });
 
     clearLogButton.addEventListener('click', () => {
@@ -261,16 +280,77 @@ class LEDVisualizer {
         
         if (r > 0 || g > 0 || b > 0) {
           litPixels++;
-          this.ctx.fillStyle = `rgb(${r},${g},${b})`;
           
-          // Make sure we're drawing at least 1 pixel
-          const size = Math.max(1, Math.floor(this.scale));
-          this.ctx.fillRect(
-            Math.floor(col * this.scale),
-            Math.floor(y * this.scale),
-            size,
-            size
-          );
+          const x = col * this.scale;
+          const centerY = y * this.scale;
+          const baseSize = this.scale * this.pixelRadius;
+          
+          // Apply glow effect if enabled
+          if (this.enableGlow) {
+            // Create gradient for glow
+            const gradient = this.ctx.createRadialGradient(
+              x + baseSize / 2,
+              centerY + baseSize / 2,
+              0,
+              x + baseSize / 2,
+              centerY + baseSize / 2,
+              baseSize * 1.5
+            );
+            
+            // Brighter core
+            const brightness = Math.max(r, g, b);
+            const glowIntensity = brightness / 255;
+            
+            // Inner glow (bright core)
+            gradient.addColorStop(0, `rgba(${Math.min(255, r * 1.5)},${Math.min(255, g * 1.5)},${Math.min(255, b * 1.5)},1)`);
+            // Mid glow
+            gradient.addColorStop(0.4, `rgba(${r},${g},${b},0.9)`);
+            // Outer glow fade
+            gradient.addColorStop(0.7, `rgba(${r},${g},${b},${0.3 * glowIntensity})`);
+            gradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+            
+            this.ctx.fillStyle = gradient;
+            
+            // Draw larger area for glow
+            this.ctx.fillRect(
+              Math.floor(x - baseSize * 0.5),
+              Math.floor(centerY - baseSize * 0.5),
+              Math.ceil(baseSize * 2),
+              Math.ceil(baseSize * 2)
+            );
+            
+            // Add subtle bloom effect for bright pixels
+            if (brightness > 200) {
+              this.ctx.globalAlpha = 0.3;
+              const bloomGradient = this.ctx.createRadialGradient(
+                x + baseSize / 2,
+                centerY + baseSize / 2,
+                baseSize,
+                x + baseSize / 2,
+                centerY + baseSize / 2,
+                baseSize * 2.5
+              );
+              bloomGradient.addColorStop(0, `rgba(${r},${g},${b},0.4)`);
+              bloomGradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+              this.ctx.fillStyle = bloomGradient;
+              this.ctx.fillRect(
+                Math.floor(x - baseSize),
+                Math.floor(centerY - baseSize),
+                Math.ceil(baseSize * 3),
+                Math.ceil(baseSize * 3)
+              );
+              this.ctx.globalAlpha = 1;
+            }
+          } else {
+            // Simple rectangle without glow
+            this.ctx.fillStyle = `rgb(${r},${g},${b})`;
+            this.ctx.fillRect(
+              Math.floor(x),
+              Math.floor(centerY),
+              Math.ceil(baseSize),
+              Math.ceil(baseSize)
+            );
+          }
         }
       }
     }
