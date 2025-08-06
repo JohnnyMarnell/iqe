@@ -3,9 +3,11 @@ package org.iqe.pattern;
 import heronarts.lx.LX;
 import heronarts.lx.model.LXModel;
 import heronarts.lx.model.LXPoint;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Timeout;
 
 import java.io.File;
 import java.util.Arrays;
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VideoPatternTest {
     
@@ -22,14 +24,14 @@ public class VideoPatternTest {
     private VideoPattern pattern;
     private volatile boolean loadingCompleted = false;
     
-    @Before
+    @BeforeEach
     public void setUp() {
         // Create a minimal LX instance with a simple model
         LXModel model = new LXModel(Arrays.asList(createTestPoints()));
         lx = new LX(model);
     }
     
-    @After
+    @AfterEach
     public void tearDown() {
         if (pattern != null) {
             pattern.dispose();
@@ -39,16 +41,18 @@ public class VideoPatternTest {
     private LXPoint[] createTestPoints() {
         // Create a simple 10x10 grid of points at Y=700 (ceiling)
         LXPoint[] points = new LXPoint[100];
-        int index = 0;
-        for (int x = 0; x < 10; x++) {
-            for (int z = 0; z < 10; z++) {
-                points[index++] = new LXPoint(x * 10, 700, z * 10);
-            }
+        for (int i = 0; i < 100; i++) {
+            int x = (i % 10) * 10;
+            int z = (i / 10) * 10;
+            points[i] = new LXPoint(x, 700, z);
+            points[i].index = i;  // Ensure index matches array position
         }
         return points;
     }
     
-    @Test(timeout = 10000) // 10 second timeout
+    @Test
+    @Timeout(value = 10, unit = TimeUnit.SECONDS)
+    @DisplayName("Video loading should not block main thread")
     public void testVideoLoadingDoesNotBlockMainThread() throws InterruptedException {
         System.out.println("Starting video loading test...");
         
@@ -59,7 +63,7 @@ public class VideoPatternTest {
         long constructorTime = System.currentTimeMillis() - startTime;
         
         System.out.println("Constructor completed in " + constructorTime + " ms");
-        assertTrue("Constructor should complete quickly (< 500ms)", constructorTime < 500);
+        assertTrue(constructorTime < 500, "Constructor should complete quickly (< 500ms)");
         
         // Simulate the render loop
         AtomicBoolean mainThreadBlocked = new AtomicBoolean(false);
@@ -115,18 +119,18 @@ public class VideoPatternTest {
         renderThread.start();
         
         // Wait for loading to start
-        assertTrue("Loading should start within 2 seconds", 
-                   loadingStarted.await(2, TimeUnit.SECONDS));
+        assertTrue(loadingStarted.await(2, TimeUnit.SECONDS),
+                   "Loading should start within 2 seconds");
         
         // Wait for loading to complete
-        assertTrue("Loading should complete within 8 seconds", 
-                   loadingFinished.await(8, TimeUnit.SECONDS));
+        assertTrue(loadingFinished.await(8, TimeUnit.SECONDS),
+                   "Loading should complete within 8 seconds");
         
         // Verify main thread was never blocked
-        assertFalse("Main render thread should never be blocked", mainThreadBlocked.get());
+        assertFalse(mainThreadBlocked.get(), "Main render thread should never be blocked");
         
         // Verify frames were loaded
-        assertFalse("Frames should be loaded", pattern.frames.isEmpty());
+        assertFalse(pattern.frames.isEmpty(), "Frames should be loaded");
         
         System.out.println("Test completed successfully. Loaded " + pattern.frames.size() + " frames");
         
@@ -135,6 +139,7 @@ public class VideoPatternTest {
     }
     
     @Test
+    @DisplayName("Should handle missing video file gracefully")
     public void testVideoFileNotFound() throws InterruptedException {
         pattern = new VideoPattern(lx);
         pattern.setModel(lx.getModel());
@@ -152,11 +157,12 @@ public class VideoPatternTest {
         Thread.sleep(500);
         
         // Should handle gracefully
-        assertTrue("Pattern should handle missing file gracefully", pattern.frames.isEmpty());
-        assertFalse("Should not be loading after file not found", pattern.isLoading);
+        assertTrue(pattern.frames.isEmpty(), "Pattern should handle missing file gracefully");
+        assertFalse(pattern.isLoading, "Should not be loading after file not found");
     }
     
     @Test
+    @DisplayName("Should handle video path changes correctly")
     public void testVideoPathChange() throws InterruptedException {
         pattern = new VideoPattern(lx);
         pattern.setModel(lx.getModel());
@@ -186,6 +192,6 @@ public class VideoPatternTest {
             Thread.sleep(50);
         }
         
-        assertTrue("Should start loading after path change", pattern.isLoading);
+        assertTrue(pattern.isLoading, "Should start loading after path change");
     }
 }

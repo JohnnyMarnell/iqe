@@ -3,15 +3,20 @@ package org.iqe.pattern;
 import heronarts.lx.LX;
 import heronarts.lx.model.LXModel;
 import heronarts.lx.model.LXPoint;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VideoPatternAsyncTest {
     
     @Test
+    @DisplayName("Video loading should be completely asynchronous")
+    @Timeout(value = 15, unit = TimeUnit.SECONDS)
     public void testVideoLoadingIsAsync() throws InterruptedException {
         System.out.println("=== Testing VideoPattern Async Loading ===");
         
@@ -19,6 +24,7 @@ public class VideoPatternAsyncTest {
         LXPoint[] points = new LXPoint[100];
         for (int i = 0; i < 100; i++) {
             points[i] = new LXPoint(i * 10, 700, 0);
+            points[i].index = i;  // Ensure index matches array position
         }
         LXModel model = new LXModel(Arrays.asList(points));
         LX lx = new LX(model);
@@ -30,7 +36,7 @@ public class VideoPatternAsyncTest {
         long constructorTime = System.currentTimeMillis() - startTime;
         
         System.out.println("Constructor time: " + constructorTime + "ms");
-        assertTrue("Constructor must be fast (<100ms)", constructorTime < 100);
+        assertTrue(constructorTime < 100, "Constructor must be fast (<100ms)");
         
         // First run triggers loading
         startTime = System.currentTimeMillis();
@@ -38,11 +44,11 @@ public class VideoPatternAsyncTest {
         long firstRunTime = System.currentTimeMillis() - startTime;
         
         System.out.println("First run time: " + firstRunTime + "ms");
-        assertTrue("First run must not block (<100ms)", firstRunTime < 100);
+        assertTrue(firstRunTime < 100, "First run must not block (<100ms)");
         
         // Verify loading started
         Thread.sleep(100);
-        assertTrue("Loading should have started", pattern.isLoading);
+        assertTrue(pattern.isLoading, "Loading should have started");
         
         // Run frames while loading - should not block
         System.out.println("Running frames while loading...");
@@ -52,7 +58,7 @@ public class VideoPatternAsyncTest {
             long frameTime = System.currentTimeMillis() - startTime;
             
             System.out.println("Frame " + i + " time: " + frameTime + "ms");
-            assertTrue("Frame " + i + " must not block (<50ms)", frameTime < 50);
+            assertTrue(frameTime < 50, "Frame " + i + " must not block (<50ms)");
             Thread.sleep(50);
         }
         
@@ -63,8 +69,8 @@ public class VideoPatternAsyncTest {
             Thread.sleep(100);
         }
         
-        assertFalse("Loading should complete", pattern.isLoading);
-        assertFalse("Frames should be loaded", pattern.frames.isEmpty());
+        assertFalse(pattern.isLoading, "Loading should complete");
+        assertFalse(pattern.frames.isEmpty(), "Frames should be loaded");
         System.out.println("Loading completed with " + pattern.frames.size() + " frames");
         
         // Verify pattern can run after loading
@@ -72,7 +78,7 @@ public class VideoPatternAsyncTest {
         pattern.run(33.33);
         long postLoadRunTime = System.currentTimeMillis() - startTime;
         System.out.println("Post-load run time: " + postLoadRunTime + "ms");
-        assertTrue("Post-load run must be fast (<50ms)", postLoadRunTime < 50);
+        assertTrue(postLoadRunTime < 50, "Post-load run must be fast (<50ms)");
         
         pattern.dispose();
         System.out.println("=== Test Passed ===");

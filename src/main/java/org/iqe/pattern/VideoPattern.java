@@ -31,7 +31,7 @@ public class VideoPattern extends LXPattern {
     private static final int MAX_FRAMES_IN_MEMORY = 150;
     private static final int FRAME_LOAD_BATCH_SIZE = 10;
     
-    final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample.webm")
+    final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample.mp4")
         .setDescription("Path to the video file");
     
     private final CompoundParameter playbackSpeed = new CompoundParameter("speed", 1.0, 0.1, 4.0)
