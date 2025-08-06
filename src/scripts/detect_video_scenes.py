@@ -51,17 +51,34 @@ class VideoSceneAnalyzer:
         return np.array(hist)
     
     def compute_frame_features(self, frame):
-        """Extract multiple features from a frame"""
+        """Extract multiple features from a frame - focus on structure not color"""
         # Resize for faster processing
         small = cv2.resize(frame, self.analysis_size)
+        gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
+        
+        # Compute gradient magnitude (motion/structure indicator)
+        grad_x = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+        grad_y = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+        gradient_mag = np.sqrt(grad_x**2 + grad_y**2)
+        
+        # Compute corner features (structural elements)
+        corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)
+        corner_count = len(corners) if corners is not None else 0
+        
+        # Compute texture complexity using local binary patterns idea
+        texture_complexity = np.std(gray) * np.mean(np.abs(np.diff(gray, axis=1)))
         
         features = {
             'histogram': self.compute_frame_histogram(small),
             'edges': self.compute_edge_density(small),
-            'brightness': np.mean(cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)),
-            'contrast': np.std(cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)),
-            'color_dominant': self.get_dominant_color(small),
-            'hash': self.compute_frame_hash(small)
+            'gradient_mag': np.mean(gradient_mag),
+            'gradient_std': np.std(gradient_mag),
+            'corners': corner_count,
+            'texture': texture_complexity,
+            'brightness': np.mean(gray),
+            'contrast': np.std(gray),
+            'hash': self.compute_frame_hash(small),
+            'gray_frame': gray  # Store for optical flow
         }
         return features
     
@@ -90,16 +107,17 @@ class VideoSceneAnalyzer:
     
     def detect_scene_transitions(self, threshold_multiplier: float = 2.5) -> List[int]:
         """
-        Detect scene transitions using multiple metrics
+        Detect scene transitions using structural and motion-based metrics
         Returns list of frame numbers where scenes begin
         """
-        print("\n🎬 Detecting scene transitions...")
+        print("\n🎬 Detecting scene transitions (motion & structure based)...")
         
         transitions = []
         prev_features = None
+        prev_gray = None
         differences = []
         
-        # First pass: collect frame differences
+        # First pass: collect frame differences with optical flow
         self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
         frame_idx = 0
         
@@ -110,66 +128,90 @@ class VideoSceneAnalyzer:
             
             features = self.compute_frame_features(frame)
             
-            if prev_features is not None:
-                # Calculate multiple difference metrics
+            if prev_features is not None and prev_gray is not None:
+                # Compute optical flow for motion detection
+                flow = cv2.calcOpticalFlowFarneback(
+                    prev_gray, features['gray_frame'], 
+                    None, 0.5, 3, 15, 3, 5, 1.2, 0
+                )
+                flow_magnitude = np.sqrt(flow[..., 0]**2 + flow[..., 1]**2)
+                motion_score = np.mean(flow_magnitude)
+                
+                # Structure-based differences (less weight on color)
                 hist_diff = cv2.compareHist(
                     features['histogram'], 
                     prev_features['histogram'], 
                     cv2.HISTCMP_BHATTACHARYYA
                 )
                 edge_diff = abs(features['edges'] - prev_features['edges'])
-                brightness_diff = abs(features['brightness'] - prev_features['brightness']) / 255.0
-                contrast_diff = abs(features['contrast'] - prev_features['contrast']) / 255.0
-                color_diff = abs(features['color_dominant'] - prev_features['color_dominant']) / 180.0
+                gradient_diff = abs(features['gradient_mag'] - prev_features['gradient_mag']) / 255.0
+                gradient_std_diff = abs(features['gradient_std'] - prev_features['gradient_std']) / 255.0
+                corner_diff = abs(features['corners'] - prev_features['corners']) / 100.0
+                texture_diff = abs(features['texture'] - prev_features['texture']) / 1000.0
                 
-                # Weighted combination of differences
+                # Motion discontinuity detection
+                motion_change = abs(motion_score - prev_features.get('motion', motion_score))
+                
+                # Weighted combination - prioritize structure and motion over color
                 total_diff = (
-                    hist_diff * 3.0 +
-                    edge_diff * 2.0 +
-                    brightness_diff * 1.5 +
-                    contrast_diff * 1.0 +
-                    color_diff * 1.5
+                    hist_diff * 0.5 +           # Reduced weight on color histogram
+                    edge_diff * 3.0 +            # High weight on edges
+                    gradient_diff * 2.5 +        # High weight on gradients
+                    gradient_std_diff * 2.0 +    # Gradient variation
+                    corner_diff * 2.0 +          # Structural corners
+                    texture_diff * 1.5 +         # Texture complexity
+                    motion_change * 4.0          # Highest weight on motion changes
                 )
                 
-                differences.append((frame_idx, total_diff))
+                differences.append((frame_idx, total_diff, motion_score))
+                prev_features['motion'] = motion_score
             
             prev_features = features
+            prev_gray = features['gray_frame']
             frame_idx += 1
             
             if frame_idx % 100 == 0:
                 print(f"  Analyzed {frame_idx}/{self.total_frames} frames...")
         
-        # Second pass: find peaks in differences (transitions)
+        # Second pass: find peaks with better peak detection
         if differences:
             diff_values = [d[1] for d in differences]
             mean_diff = np.mean(diff_values)
             std_diff = np.std(diff_values)
             threshold = mean_diff + threshold_multiplier * std_diff
             
-            # Find local maxima above threshold with refinement
-            for i in range(1, len(differences) - 1):
-                if (differences[i][1] > threshold and 
-                    differences[i][1] > differences[i-1][1] and 
-                    differences[i][1] > differences[i+1][1]):
+            # Smooth differences to reduce noise
+            from scipy.ndimage import gaussian_filter1d
+            smoothed_diffs = gaussian_filter1d([d[1] for d in differences], sigma=1)
+            
+            # Find peaks in smoothed signal
+            for i in range(2, len(smoothed_diffs) - 2):
+                if smoothed_diffs[i] > threshold:
+                    # Check if local maximum (peak)
+                    is_peak = (smoothed_diffs[i] > smoothed_diffs[i-1] and 
+                              smoothed_diffs[i] > smoothed_diffs[i+1] and
+                              smoothed_diffs[i] > smoothed_diffs[i-2] and
+                              smoothed_diffs[i] > smoothed_diffs[i+2])
                     
-                    # Check if not too close to previous transition
-                    if not transitions or differences[i][0] - transitions[-1] > self.fps / 2:
-                        # Refine: Look for the exact frame where change is maximal
-                        # within a small window around the peak
-                        window_start = max(0, i - 2)
-                        window_end = min(len(differences), i + 3)
-                        window_diffs = differences[window_start:window_end]
-                        
-                        # Find the frame with maximum difference in the window
-                        max_diff_idx = max(range(len(window_diffs)), 
-                                         key=lambda x: window_diffs[x][1])
-                        refined_frame = window_diffs[max_diff_idx][0]
-                        
-                        transitions.append(refined_frame)
-                        if self.debug:
-                            print(f"  Transition at frame {refined_frame} "
-                                  f"(t={refined_frame/self.fps:.2f}s), "
-                                  f"diff={window_diffs[max_diff_idx][1]:.3f}")
+                    if is_peak:
+                        # Check minimum distance from previous transition
+                        if not transitions or differences[i][0] - transitions[-1] > self.fps * 0.5:
+                            # Find exact frame of maximum change
+                            window_start = max(0, i - 3)
+                            window_end = min(len(differences), i + 4)
+                            window_slice = differences[window_start:window_end]
+                            
+                            # Get frame with max diff in window
+                            max_idx = max(range(len(window_slice)), 
+                                        key=lambda x: window_slice[x][1])
+                            refined_frame = window_slice[max_idx][0]
+                            
+                            transitions.append(refined_frame)
+                            if self.debug:
+                                print(f"  Transition at frame {refined_frame} "
+                                      f"(t={refined_frame/self.fps:.2f}s), "
+                                      f"diff={window_slice[max_idx][1]:.3f}, "
+                                      f"motion={window_slice[max_idx][2]:.3f}")
         
         # Always include frame 0 as first scene
         transitions = [0] + transitions
@@ -324,7 +366,9 @@ class VideoSceneAnalyzer:
                 features = self.compute_frame_features(frame)
                 scene['avg_brightness'] = float(features['brightness'])
                 scene['avg_contrast'] = float(features['contrast'])
-                scene['dominant_hue'] = int(features['color_dominant'])
+                scene['gradient_mag'] = float(features['gradient_mag'])
+                scene['corners'] = int(features['corners'])
+                scene['texture'] = float(features['texture'])
                 scene['edge_density'] = float(features['edges'])
             
             scenes.append(scene)

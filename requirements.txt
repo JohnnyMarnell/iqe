@@ -1,9 +1,10 @@
-PyAudio
-numpy
-librosa
-python-osc
 argparse
-pylint
 black
+librosa
 mypy
-pixelblaze-client
+numpy
+opencv-python
+pixelblaze-clientscipy==1.16.1
+PyAudio
+pylint
+python-osc

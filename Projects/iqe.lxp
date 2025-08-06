@@ -41697,6 +41697,305 @@
                 },
                 "deviceVersion": -1
               },
+
+
+  {
+    "id": 1018366,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 01 (0-10s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene01_0.0s-10.0s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018367,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+  {
+    "id": 1018368,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 02 (10-20s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene02_10.0s-20.0s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018369,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+  {
+    "id": 1018370,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 03 (20-32s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene03_20.0s-32.0s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018371,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+  {
+    "id": 1018372,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 04 (32-40s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene04_32.0s-40.0s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018373,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+  {
+    "id": 1018374,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 05 (40-51.7s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene05_40.0s-51.7s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018375,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+  {
+    "id": 1018376,
+    "class": "org.iqe.pattern.VideoPattern",
+    "internal": {
+      "modulationColor": 0,
+      "modulationControlsExpanded": true,
+      "modulationsExpanded": true,
+      "expanded": true,
+      "expandedCue": true,
+      "expandedAux": true,
+      "modulationExpanded": false
+    },
+    "parameters": {
+      "label": "Scene 06 (51.7-60s)",
+      "enabled": true,
+      "recall": false,
+      "compositeMode": 0,
+      "compositeLevel": 1.0,
+      "videoPath": "src/main/resources/videos/scenes/1min_scene06_51.7s-60.0s.webm.mp4",
+      "speed": 1.0,
+      "loop": true,
+      "playing": true,
+      "scale": 1.0,
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "brightness": 1.0,
+      "preserveAspect": false,
+      "interpolate": true
+    },
+    "children": {
+      "modulation": {
+        "id": 1018377,
+        "class": "heronarts.lx.modulation.LXModulationEngine",
+        "internal": {
+          "modulationColor": 0,
+          "modulationControlsExpanded": true,
+          "modulationsExpanded": true
+        },
+        "parameters": {
+          "label": "Modulation"
+        },
+        "children": {},
+        "modulators": [],
+        "modulations": [],
+        "triggers": []
+      }
+    },
+    "deviceVersion": -1
+  },
+
+
+
               {
                 "id": 1018364,
                 "class": "org.iqe.pattern.VideoPattern",

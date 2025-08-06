@@ -33,6 +33,52 @@ public class VideoPattern extends LXPattern {
     private static final int MAX_RESAMPLED_HEIGHT = 240;
     private static final int MAX_FRAMES_IN_MEMORY = 10000;  // Allow up to 10K frames (~83 seconds at 120fps)
     private static final int FRAME_LOAD_BATCH_SIZE = 10;
+    private static final int BUFFER_POOL_SIZE = 4;  // Number of pre-allocated buffers
+    
+    // Static memory pool shared across all VideoPattern instances
+    private static class FrameBufferPool {
+        private final int[][][][] buffers = new int[BUFFER_POOL_SIZE][][][];
+        private final AtomicInteger currentBufferIndex = new AtomicInteger(0);
+        private final boolean[] bufferInUse = new boolean[BUFFER_POOL_SIZE];
+        
+        synchronized int[][][] acquireBuffer(int frameCount, int height, int width) {
+            // Find next available buffer
+            for (int i = 0; i < BUFFER_POOL_SIZE; i++) {
+                int index = (currentBufferIndex.get() + i) % BUFFER_POOL_SIZE;
+                if (!bufferInUse[index]) {
+                    // Allocate or resize if needed
+                    if (buffers[index] == null || 
+                        buffers[index].length < frameCount ||
+                        (buffers[index].length > 0 && 
+                         (buffers[index][0].length != height || 
+                          buffers[index][0][0].length != width))) {
+                        LOG.info("Allocating new buffer {} for {} frames at {}x{}", 
+                                index, frameCount, width, height);
+                        buffers[index] = new int[frameCount][height][width];
+                    }
+                    bufferInUse[index] = true;
+                    currentBufferIndex.set((index + 1) % BUFFER_POOL_SIZE);
+                    return buffers[index];
+                }
+            }
+            // All buffers in use, force allocate new one (shouldn't happen with 4 buffers)
+            LOG.error("All {} buffers in use, forcing allocation", BUFFER_POOL_SIZE);
+            return new int[frameCount][height][width];
+        }
+        
+        synchronized void releaseBuffer(int[][][] buffer) {
+            if (buffer == null) return;
+            for (int i = 0; i < BUFFER_POOL_SIZE; i++) {
+                if (buffers[i] == buffer) {
+                    bufferInUse[i] = false;
+                    LOG.info("Released buffer {}", i);
+                    return;
+                }
+            }
+        }
+    }
+    
+    private static final FrameBufferPool bufferPool = new FrameBufferPool();
     
     public final StringParameter videoPath = new StringParameter("videoPath", "src/main/resources/videos/sample2-24p-120fps.mp4")
         .setDescription("Path to the video file");
@@ -122,11 +168,6 @@ public class VideoPattern extends LXPattern {
         super.onActive();
         LOG.info("VideoPattern onActive - pattern is being transitioned into");
         
-        // Ensure colors array is initialized when pattern becomes active
-        if (this.colors == null && this.model != null) {
-            this.colors = new int[this.model.points.length];
-        }
-        
         // Load the video when pattern becomes active
         String path = videoPath.getString();
         if (!path.isEmpty() && !path.equals(currentVideoPath.get())) {
@@ -139,7 +180,7 @@ public class VideoPattern extends LXPattern {
     @Override
     protected void onInactive() {
         super.onInactive();
-        LOG.info("VideoPattern onInactive - pattern is being transitioned out, freeing memory");
+        LOG.info("VideoPattern onInactive - pattern is being transitioned out, releasing buffer");
         
         // Cancel any ongoing load
         if (currentLoadTask != null) {
@@ -147,8 +188,11 @@ public class VideoPattern extends LXPattern {
             currentLoadTask = null;
         }
         
-        // Clear the video frames to free memory
-        framePixels.set(null);
+        // Release the buffer back to the pool
+        int[][][] currentBuffer = framePixels.getAndSet(null);
+        if (currentBuffer != null) {
+            bufferPool.releaseBuffer(currentBuffer);
+        }
         numFrames.set(0);
         currentFrameIndex.set(0);
         frameAccumulator = 0;
@@ -156,9 +200,7 @@ public class VideoPattern extends LXPattern {
         // Clear the current path so it reloads when reactivated
         currentVideoPath.set("");
         
-        // Force garbage collection to reclaim memory
-        System.gc();
-        LOG.info("VideoPattern memory freed");
+        LOG.info("VideoPattern buffer released");
     }
     
     private void calculateBounds() {
@@ -343,13 +385,31 @@ public class VideoPattern extends LXPattern {
                      loadedFrames, System.currentTimeMillis() - frameLoadStartTime);
             
             LOG.info("Updating frame buffer with {} new frames", tempFramePixels.size());
-            // Convert list to 3D array
-            int[][][] newFramePixels = new int[tempFramePixels.size()][][];
-            for (int i = 0; i < tempFramePixels.size(); i++) {
-                newFramePixels[i] = tempFramePixels.get(i);
+            // Acquire a buffer from the pool and copy frames into it
+            if (tempFramePixels.size() > 0 && targetHeight > 0 && targetWidth > 0) {
+                int[][][] newFramePixels = bufferPool.acquireBuffer(
+                    tempFramePixels.size(), targetHeight, targetWidth);
+                
+                // Copy frames into the pre-allocated buffer
+                for (int i = 0; i < tempFramePixels.size(); i++) {
+                    int[][] sourceFrame = tempFramePixels.get(i);
+                    int[][] destFrame = newFramePixels[i];
+                    for (int y = 0; y < targetHeight; y++) {
+                        System.arraycopy(sourceFrame[y], 0, destFrame[y], 0, targetWidth);
+                    }
+                }
+                
+                // Release old buffer if exists
+                int[][][] oldBuffer = framePixels.getAndSet(newFramePixels);
+                if (oldBuffer != null) {
+                    bufferPool.releaseBuffer(oldBuffer);
+                }
+                numFrames.set(tempFramePixels.size());
+            } else {
+                LOG.error("No frames to load or invalid dimensions");
+                framePixels.set(null);
+                numFrames.set(0);
             }
-            framePixels.set(newFramePixels);
-            numFrames.set(tempFramePixels.size());
             fps = videoFps;
             resampledWidth = targetWidth;
             resampledHeight = targetHeight;
@@ -363,12 +423,20 @@ public class VideoPattern extends LXPattern {
         } catch (FrameGrabber.Exception e) {
             LOG.error("Error loading video: {}", e.getMessage(), e);
             loadingStatus.set("Error: " + e.getMessage());
-            framePixels.set(null);
+            // Release any existing buffer on error
+            int[][][] existingBuffer = framePixels.getAndSet(null);
+            if (existingBuffer != null) {
+                bufferPool.releaseBuffer(existingBuffer);
+            }
             numFrames.set(0);
         } catch (Exception e) {
             LOG.error("Unexpected error loading video: {}", e.getMessage(), e);
             loadingStatus.set("Error: " + e.getMessage());
-            framePixels.set(null);
+            // Release any existing buffer on error
+            int[][][] existingBuffer = framePixels.getAndSet(null);
+            if (existingBuffer != null) {
+                bufferPool.releaseBuffer(existingBuffer);
+            }
             numFrames.set(0);
         } finally {
             if (grabber != null) {
@@ -403,15 +471,6 @@ public class VideoPattern extends LXPattern {
 
     @Override
     protected void run(double deltaMs) {
-        // Ensure colors array is initialized
-        if (this.colors == null) {
-            if (this.model != null) {
-                this.colors = new int[this.model.points.length];
-            } else {
-                return; // Can't proceed without model
-            }
-        }
-        
         String newPath = videoPath.getString();
         if (!newPath.equals(currentVideoPath.get())) {
             LOG.info("Video path changed from '{}' to '{}'", currentVideoPath.get(), newPath);
@@ -623,32 +682,6 @@ public class VideoPattern extends LXPattern {
         }
     }
     
-    private void drawDebugLine(int frameIndex) {
-        // Calculate line position based on frame index (0-149 maps to 0.0-1.0)
-        double linePosition = (double) frameIndex / Math.max(1, numFrames.get() - 1);
-        
-        // Draw a vertical white line at this position
-        double threshold = targetY - 10;
-        for (LXPoint p : model.points) {
-            if (p.y < threshold) {
-                continue;
-            }
-            
-            double normalizedX = (p.x - minX) / (maxX - minX);
-            
-            // Draw line if point is within 2% of the line position
-            if (Math.abs(normalizedX - linePosition) < 0.02) {
-                // Bright white line, overlaying the video
-                colors[p.index] = LXColor.rgb(255, 255, 255);
-            }
-        }
-        
-        // Log every 10 frames to confirm this is being called with different indices
-        if (frameIndex % 10 == 0) {
-            LOG.info("Debug line at frame {} (position: {:.2f})", frameIndex, linePosition);
-        }
-    }
-    
     @Override
     public void dispose() {
         if (currentLoadTask != null) {
@@ -658,7 +691,11 @@ public class VideoPattern extends LXPattern {
             loadingExecutor.shutdown();
         }
         
-        framePixels.set(null);
+        // Release buffer on dispose
+        int[][][] currentBuffer = framePixels.getAndSet(null);
+        if (currentBuffer != null) {
+            bufferPool.releaseBuffer(currentBuffer);
+        }
         numFrames.set(0);
         currentFrameIndex.set(0);
         
