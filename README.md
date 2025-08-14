@@ -272,6 +272,46 @@ I want 4 universes arbitraly numbered, 1 is contained by PB1, 2 is shared, 3 + 4
 Note there are 750 total pixels on disco ball + Gandalf staff eco strip IP6+ with one PixelBlaze testes I did,
 quick video: https://www.youtube.com/shorts/jStYmAj-Le8
 
+# Rando Burning Man Desert  Notes, God Help Us All
+
+## Checklist
+
+### Before Playa
+
+- Make sure GitHub Desktop App is logged in
+- pull latest to project
+- it's located in Finder at Home directory, src, iqe: ~/src/iqe
+- Desktop has link to these notes, and link to Run / Start Command
+- Verify LX Starts via clicking command
+
+### On Playa
+- Connect power and ethernet for pixlite, router, laptop
+- Each of these should get IP's of 10.10.42.xx, plus they should be:
+  - IQE router: ?? (probably 10.10.42.1 ?)
+  - PixLite: 10.10.42.80
+  - IQE laptop: ?? (hopefully hostname is "iqe", not even with ".local", for easy connect via device?), maybe it was 10.10.42.42 (btw this would be the *adapter* IP, right?)
+  - Swider's Pknight: 10.10.42.68
+  - j5 Anker Dongle (often wifi shared), gets link local garbage of 169.254.81.171 , and 192.168.2.X (2.1?) when "bridge100" Mac Internet from WiFi sharing is active (RPi gets similar ;via DHCP)
+- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
+```bash
+node ~/src/iqe/src/nodejs/buildProject.js
+```
+- can try [http://10.10.42.80](http://10.10.42.80) in browser, hopefully loads PixLite UI. (Try Advatek Assistant as last resort) 
+
+# Links
+- [Standford course involving LX Studio](https://code.stanford.edu/plevis/ee185/-/tree/master/software/FlightGui)
+
+# To Do
+- Add base pre-requisites, sdkman, maven, java 17 Temurin
+- Re-organize this repository (dont use submodule for IDE?), submit PR to LXStudio-IDE with sdkmanrc, improved os + arch inference, for now cd
+
+# Scratch area
+
+Scrape a bunch of test files
+```bash
+youtube_dl_mp3  'Monolink (live) - Mayan Warrior - Burning Man 2022'  'Keinemusik Mayan Bruning Man'  'ed sheeran bad habits'  'Chill EDM Slow Dance Mix'  'SLOW TRANCE • Downtempo EDM Background Track'  'dua lipa levitating'  "dua don't "  "dua new rules "  "lady gaga poker face " '120 bpm metronome' '126 bpm metronome'
+```
+
 # Special Thanks
 
 Big thank you to kind souls, especially of Titanic's End, Pixelblaze, SymmetryLabs, who've helped us!

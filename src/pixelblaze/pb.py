@@ -18,7 +18,7 @@ from pathlib import Path
 # Configuration
 DEFAULT_INTERFACE = "en0"
 AP_IP = "192.168.4.1"
-CONFIG_DIR = Path.home() / ".pixelblaze"
+CONFIG_DIR = Path("./pixelblaze")
 FLEET_CONFIG = CONFIG_DIR / "fleet.json"
 LOGS_DIR = CONFIG_DIR / "logs"
 
@@ -48,6 +48,21 @@ class PixelBlazeManager:
     
     def scan_networks(self) -> List[Dict]:
         """Scan for WiFi networks using system_profiler"""
+        # Ensure WiFi is on first
+        wifi_check = subprocess.run(
+            ['networksetup', '-getairportpower', self.interface],
+            capture_output=True,
+            text=True
+        )
+        
+        if 'Off' in wifi_check.stdout:
+            # Turn WiFi on
+            subprocess.run(
+                ['networksetup', '-setairportpower', self.interface, 'on'],
+                capture_output=True
+            )
+            time.sleep(2)  # Give it time to start
+        
         try:
             result = subprocess.run(
                 ['system_profiler', 'SPAirPortDataType', '-json'],
@@ -240,41 +255,267 @@ def scan(manager, continuous, interval):
 @click.argument('device_id', required=False)
 @click.pass_obj
 def connect(manager, device_id):
-    """Connect to a PixelBlaze device"""
+    """Connect to a PixelBlaze device (requires sudo for network routing)"""
+    # Check if running with sudo
+    if os.geteuid() != 0:
+        click.secho("This command requires sudo to fix network routing", fg='red')
+        click.echo("Run: sudo python pb.py connect")
+        return
+    
+    # Check for Internet Sharing - this breaks everything!
+    sharing_check = subprocess.run(
+        ['defaults', 'read', '/Library/Preferences/SystemConfiguration/com.apple.nat', 'NAT'],
+        capture_output=True,
+        text=True
+    )
+    
+    if 'Enabled = 1' in sharing_check.stdout:
+        click.secho("⚠️  WARNING: Internet Sharing is ON!", fg='yellow', bold=True)
+        click.echo("This is why your internet breaks when connecting to PixelBlaze!")
+        click.echo("\nInternet Sharing bridges WiFi → Ethernet for your Pi.")
+        click.echo("Connecting WiFi to PixelBlaze breaks this bridge.\n")
+        click.echo("Solutions:")
+        click.echo("1. Temporarily turn off Internet Sharing in System Settings")
+        click.echo("2. Use a USB WiFi adapter for PixelBlaze connections")
+        click.echo("3. Connect Pi directly to router instead of through Mac")
+        
+        if not click.confirm("\nContinue anyway? (Internet WILL break)"):
+            click.echo("\nTo disable Internet Sharing:")
+            click.echo("System Settings → General → Sharing → Internet Sharing → OFF")
+            return
+    
+    # Ensure WiFi is on
+    click.echo("Checking WiFi status...")
+    wifi_status = subprocess.run(
+        ['networksetup', '-getairportpower', manager.interface],
+        capture_output=True,
+        text=True
+    )
+    
+    if 'Off' in wifi_status.stdout:
+        click.echo("WiFi is off, turning it on...")
+        subprocess.run(
+            ['networksetup', '-setairportpower', manager.interface, 'on'],
+            capture_output=True
+        )
+        time.sleep(3)  # Give WiFi more time to fully start
+    else:
+        click.echo("WiFi is already on")
+    
+    # Scan for PixelBlaze devices - retry a few times as WiFi initializes
+    click.echo("Scanning for PixelBlaze devices in AP mode...")
+    pixelblaze_networks = []
+    for attempt in range(3):
+        networks = manager.scan_networks()
+        pixelblaze_networks = manager.find_pixelblaze_networks(networks)
+        
+        if pixelblaze_networks:
+            break
+        
+        if attempt < 2:
+            click.echo(f"  No devices found, retrying... ({attempt + 2}/3)")
+            time.sleep(3)
+    
+    if pixelblaze_networks:
+        click.secho(f"Found {len(pixelblaze_networks)} PixelBlaze device(s) broadcasting:", fg='green')
+        for pb in pixelblaze_networks:
+            pb_id = pb['ssid'].split('_')[-1] if '_' in pb['ssid'] else pb['ssid']
+            click.echo(f"  • {pb['ssid']} (ID: {pb_id}, Channel: {pb.get('channel', 'unknown')})")
+    else:
+        click.secho("No PixelBlaze devices found in AP mode", fg='yellow')
+        click.echo("Make sure device is powered on with button held until LED flashes")
+        return
+    
+    # Load config for saving updates
     config = manager.load_fleet_config()
     devices = config.get('devices', [])
     
-    if not devices:
-        click.secho("No devices in fleet config. Run 'pb scan' first.", fg='red')
-        return
+    # Find device to connect to
+    device = None
     
-    # Find device
     if device_id:
-        device = next((d for d in devices if d['device_id'] == device_id), None)
+        # User specified a device ID - look for it in current scan
+        for pb in pixelblaze_networks:
+            pb_id = pb['ssid'].split('_')[-1] if '_' in pb['ssid'] else pb['ssid']
+            if pb_id == device_id:
+                device = pb
+                device['device_id'] = pb_id
+                break
+        
         if not device:
-            click.secho(f"Device {device_id} not found in fleet", fg='red')
+            click.secho(f"Device {device_id} not found in current scan", fg='red')
+            click.echo("Available devices:")
+            for pb in pixelblaze_networks:
+                pb_id = pb['ssid'].split('_')[-1] if '_' in pb['ssid'] else pb['ssid']
+                click.echo(f"  • ID: {pb_id}")
             return
     else:
-        # Show device list
-        click.echo("Available devices:")
-        for i, d in enumerate(devices, 1):
-            click.echo(f"{i}. {d['ssid']} (ID: {d['device_id']})")
-        
-        choice = click.prompt("Select device", type=int) - 1
-        if choice < 0 or choice >= len(devices):
-            click.secho("Invalid selection", fg='red')
+        # No device specified - use first one found
+        if pixelblaze_networks:
+            device = pixelblaze_networks[0]
+            device['device_id'] = device['ssid'].split('_')[-1] if '_' in device['ssid'] else device['ssid']
+            click.secho(f"\nAuto-selecting first found: {device['ssid']}", fg='cyan')
+        else:
+            click.secho("No devices to connect to", fg='red')
             return
-        device = devices[choice]
+    
+    # Update config with this device if new
+    existing = next((d for d in devices if d['device_id'] == device['device_id']), None)
+    if not existing:
+        devices.append({
+            'ssid': device['ssid'],
+            'device_id': device['device_id'],
+            'channel': device.get('channel', ''),
+            'discovered': datetime.now().isoformat()
+        })
+        config['devices'] = devices
+        with open(FLEET_CONFIG, 'w') as f:
+            json.dump(config, f, indent=2)
     
     # Store current network
     current = manager.get_current_network()
     if current:
         click.echo(f"Current network: {current}")
     
+    # Find active ethernet interface with internet
+    click.echo("\nFinding active ethernet interface...")
+    ethernet_gateway = None
+    ethernet_interface = None
+    
+    result = subprocess.run(
+        ['netstat', '-rn'],
+        capture_output=True,
+        text=True
+    )
+    
+    for line in result.stdout.split('\n'):
+        if line.startswith('default'):
+            parts = line.split()
+            if len(parts) >= 4:
+                gateway = parts[1]
+                # Interface might be in different positions depending on flags
+                interface = None
+                for part in parts[3:]:
+                    if part.startswith('en') or part.startswith('bridge'):
+                        interface = part
+                        break
+                
+                if not interface:
+                    continue
+                    
+                # Check if it's an ethernet interface (not WiFi, not VPN)
+                if interface not in ['en0', 'lo0'] and not interface.startswith('utun'):
+                    # Skip IPv6 gateways for now
+                    if '::' in gateway or 'fe80' in gateway or 'link' in gateway:
+                        continue
+                        
+                    # Verify it has an IP
+                    check = subprocess.run(
+                        ['ifconfig', interface],
+                        capture_output=True,
+                        text=True
+                    )
+                    if 'inet ' in check.stdout and 'status: active' in check.stdout:
+                        ethernet_gateway = gateway
+                        ethernet_interface = interface
+                        click.secho(f"✓ Found ethernet: {interface} with gateway {gateway}", fg='green')
+                        break
+    
+    if not ethernet_gateway:
+        click.secho("⚠️  No active ethernet with internet found", fg='yellow')
+        click.echo("Make sure ethernet is connected and has internet before running this")
+        if not click.confirm("Try to continue anyway?"):
+            return
+    
     # Connect
     click.echo(f"Connecting to {device['ssid']}...")
     if manager.connect_to_network(device['ssid']):
         click.secho(f"✅ Connected to {device['ssid']}", fg='green')
+        
+        # Fix network routing to maintain internet through ethernet
+        if ethernet_gateway:
+            click.echo(f"\nFixing network routing to maintain internet via {ethernet_interface}...")
+            
+            # Step 1: Set network service order to prioritize ethernet
+            click.echo("  Setting network service order (ethernet first)...")
+            # Get list of network services
+            services_out = subprocess.run(
+                ['networksetup', '-listnetworkserviceorder'],
+                capture_output=True,
+                text=True
+            ).stdout
+            
+            # Find ethernet service name (might be "USB 10/100/1000 LAN" or "AX88179A" etc)
+            ethernet_service = None
+            for line in services_out.split('\n'):
+                if ethernet_interface in line:
+                    # Previous line has the service name
+                    idx = services_out.split('\n').index(line)
+                    if idx > 0:
+                        service_line = services_out.split('\n')[idx - 1]
+                        if ')' in service_line:
+                            ethernet_service = service_line.split(')', 1)[1].strip()
+                            break
+            
+            if ethernet_service:
+                # Set ethernet as highest priority
+                subprocess.run(
+                    ['networksetup', '-ordernetworkservices', ethernet_service, 'Wi-Fi'],
+                    capture_output=True
+                )
+                click.echo(f"  Set {ethernet_service} as primary network")
+            
+            # Step 2: Remove any default routes created by WiFi
+            click.echo("  Removing WiFi default routes...")
+            subprocess.run(
+                ['sudo', 'route', 'delete', 'default', '-interface', 'en0'],
+                capture_output=True
+            )
+            
+            # Step 3: Ensure ethernet has the default route
+            click.echo(f"  Ensuring default route via ethernet ({ethernet_gateway})...")
+            subprocess.run(
+                ['sudo', 'route', 'delete', 'default'],
+                capture_output=True
+            )
+            subprocess.run(
+                ['sudo', 'route', 'add', 'default', ethernet_gateway],
+                capture_output=True
+            )
+            
+            # Step 4: Add specific route for PixelBlaze subnet ONLY
+            click.echo("  Adding route for PixelBlaze (192.168.4.0/24) via WiFi...")
+            subprocess.run(
+                ['sudo', 'route', 'add', '-net', '192.168.4.0/24', '-interface', 'en0'],
+                capture_output=True
+            )
+            
+            # Test both connections
+            click.echo("\nTesting connections:")
+            
+            # Test internet via ethernet
+            internet_test = subprocess.run(
+                ['ping', '-c', '1', '-t', '1', '8.8.8.8'],
+                capture_output=True
+            )
+            
+            if internet_test.returncode == 0:
+                click.secho("  ✅ Internet working via ethernet", fg='green')
+            else:
+                click.secho("  ❌ Internet test failed", fg='red')
+                click.echo("  Try: sudo route add default " + ethernet_gateway)
+            
+            # Test PixelBlaze access
+            pb_test = subprocess.run(
+                ['ping', '-c', '1', '-t', '1', '192.168.4.1'],
+                capture_output=True
+            )
+            
+            if pb_test.returncode == 0:
+                click.secho("  ✅ PixelBlaze accessible via WiFi", fg='green')
+            else:
+                click.echo("  ⚠️  Can't ping PixelBlaze yet (may still be connecting)")
+        
         click.echo(f"\nPixelBlaze config page: http://{AP_IP}")
         
         if click.confirm("Open in browser?"):
@@ -414,7 +655,127 @@ def list(manager):
 @click.option('--name', '-n', help='Custom name for the device')
 @click.pass_obj
 def label(manager, device_id, label, name):
-    """Label/name a PixelBlaze device for identification"""
+    """Label/name a PixelBlaze device for identification
+    
+    With no arguments: Continuously scan and prompt for unlabeled devices
+    """
+    # If no arguments, run continuous labeling mode
+    if not label and not name and not device_id:
+        click.secho("Continuous labeling mode - scanning for devices", fg='cyan')
+        click.echo("Press Ctrl+C to stop\n")
+        
+        seen_devices = set()  # Track what we've seen
+        scan_count = 0
+        
+        try:
+            while True:
+                scan_count += 1
+                timestamp = time.strftime('%H:%M:%S')
+                
+                # Scan for devices
+                click.echo(f"[{timestamp}] Scanning... (#{scan_count})", nl=False)
+                networks = manager.scan_networks()
+                pixelblaze_networks = manager.find_pixelblaze_networks(networks)
+                click.echo(f" - found {len(pixelblaze_networks)} PixelBlaze(s)")
+                
+                # Load current config each time
+                config = manager.load_fleet_config()
+                existing_devices = {d['device_id']: d for d in config.get('devices', [])}
+                
+                current_scan_ids = set()
+                
+                for pb in pixelblaze_networks:
+                    device_id = pb['ssid'].split('_')[-1] if '_' in pb['ssid'] else pb['ssid']
+                    current_scan_ids.add(device_id)
+                    
+                    # Log if newly appeared
+                    if device_id not in seen_devices:
+                        click.secho(f"  📡 Appeared: {pb['ssid']} (ID: {device_id})", fg='green')
+                        seen_devices.add(device_id)
+                        
+                        # Save to config if new
+                        if device_id not in existing_devices:
+                            device = {
+                                'ssid': pb['ssid'],
+                                'device_id': device_id,
+                                'channel': pb.get('channel', ''),
+                                'discovered': datetime.now().isoformat()
+                            }
+                            config.setdefault('devices', []).append(device)
+                            existing_devices[device_id] = device
+                            
+                            # Save config
+                            config['last_scan'] = datetime.now().isoformat()
+                            with open(FLEET_CONFIG, 'w') as f:
+                                json.dump(config, f, indent=2)
+                    
+                    # Check if needs labeling or naming
+                    if device_id in existing_devices:
+                        device = existing_devices[device_id]
+                        needs_update = False
+                        
+                        if device.get('label') is None:
+                            # Found unlabeled device
+                            click.secho(f"\n  ⚠️  Unlabeled: {pb['ssid']}", fg='yellow')
+                            click.echo(f"     ID: {device_id}")
+                            if pb.get('channel'):
+                                click.echo(f"     Channel: {pb['channel']}")
+                            
+                            # Prompt for label
+                            label_input = click.prompt('     Enter label number (or press Enter to skip)', default='', show_default=False)
+                            
+                            if label_input.strip():
+                                try:
+                                    label_num = int(label_input)
+                                    device['label'] = label_num
+                                    device['name'] = str(label_num)  # Use label as name by default
+                                    device['labeled_time'] = datetime.now().isoformat()
+                                    needs_update = True
+                                    click.secho(f"     ✅ Labeled as: {label_num}", fg='green')
+                                except ValueError:
+                                    click.secho("     Invalid label number", fg='red')
+                        
+                        elif not device.get('name') or device.get('name') == str(device.get('label')):
+                            # Has label but missing custom name
+                            click.secho(f"\n  ⚠️  Missing name: {pb['ssid']} (labeled: {device['label']})", fg='yellow')
+                            
+                            # Prompt for name
+                            name_input = click.prompt('     Enter custom name (or press Enter to keep label as name)', default='', show_default=False)
+                            
+                            if name_input.strip():
+                                device['name'] = name_input.strip()
+                                needs_update = True
+                                click.secho(f"     ✅ Named: {name_input.strip()}", fg='green')
+                        
+                        else:
+                            # Already labeled and named, just show it's there
+                            click.echo(f"  ✓ {device.get('name', pb['ssid'])} (label: {device['label']})")
+                        
+                        if needs_update:
+                            # Save config
+                            with open(FLEET_CONFIG, 'w') as f:
+                                json.dump(config, f, indent=2)
+                
+                # Check for disappeared devices
+                disappeared = seen_devices - current_scan_ids
+                for device_id in disappeared:
+                    if device_id in existing_devices:
+                        name = existing_devices[device_id].get('name', device_id)
+                        click.secho(f"  ❌ Disappeared: {name} (ID: {device_id})", fg='red')
+                    seen_devices.remove(device_id)
+                
+                # No wait - scan immediately again
+                
+        except KeyboardInterrupt:
+            click.echo("\n\nLabeling stopped")
+            
+            # Summary
+            labeled = sum(1 for d in config.get('devices', []) if d.get('label') is not None)
+            total = len(config.get('devices', []))
+            click.echo(f"\nSummary: {labeled}/{total} devices labeled")
+            return
+    
+    # Original single-device labeling logic
     if not label and not name:
         click.secho("Must specify --label and/or --name", fg='red')
         return
@@ -433,8 +794,11 @@ def label(manager, device_id, label, name):
         if not device:
             click.secho(f"Device {device_id} not found", fg='red')
             return
+    elif len(devices) == 1:
+        # Only one device, use it automatically
+        device = devices[0]
     else:
-        # Show device list
+        # Multiple devices, show list
         click.echo("Available devices:")
         for i, d in enumerate(devices, 1):
             existing_label = f" [Label: {d.get('label')}]" if d.get('label') else ""

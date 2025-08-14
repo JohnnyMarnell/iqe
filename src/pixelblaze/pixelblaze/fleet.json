@@ -1,0 +1,14 @@
+{
+  "devices": [
+    {
+      "ssid": "Pixelblaze_4001A4",
+      "device_id": "4001A4",
+      "channel": "6 (2GHz, 40MHz)",
+      "discovered": "2025-08-13T18:24:22.630012",
+      "label": 2,
+      "name": "2",
+      "labeled_time": "2025-08-13T18:24:36.030895"
+    }
+  ],
+  "last_scan": "2025-08-13T18:24:22.630048"
+}
