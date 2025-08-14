@@ -16,23 +16,38 @@ public class SmoothDMXParCanFixture extends StripFixture {
     
     // Parameter to control smoothing amount
     public final CompoundParameter smoothing = 
-        new CompoundParameter("Smoothing", 0.85, 0, 0.99)
-        .setDescription("Temporal smoothing factor (0=none, 0.99=maximum)");
+        new CompoundParameter("Smoothing", 0.85, 0.7, 0.99)
+        .setDescription("Temporal smoothing factor (0.7=subtle, 0.99=maximum)")
+        .setExponent(2.0);  // Exponential curve for finer control near 1.0
     
     public SmoothDMXParCanFixture(LX lx) {
         super(lx);
         
-        // Create encoder with default smoothing
-        this.smoothEncoder = new SmoothParCanByteEncoder(0.85f);
+        // Sync with global smoothing value if it exists
+        double initialSmoothing = GlobalControls.parcanSmoothing != null ? 
+            GlobalControls.parcanSmoothing.getValue() : 0.85;
+        
+        // Create encoder with initial smoothing from global
+        this.smoothEncoder = new SmoothParCanByteEncoder((float) initialSmoothing);
         
         // Add smoothing parameter to fixture
         addParameter(smoothing);
+        
+        // Set initial value from global
+        smoothing.setValue(initialSmoothing);
         
         // Listen for smoothing changes
         smoothing.addListener(p -> {
             smoothEncoder.setSmoothingFactor((float) smoothing.getValue());
             LOG.info("SmoothDMXParCanFixture smoothing updated to: {}", smoothing.getValue());
         });
+        
+        // Also listen to global smoothing parameter if it exists
+        if (GlobalControls.parcanSmoothing != null) {
+            GlobalControls.parcanSmoothing.addListener(p -> {
+                smoothing.setValue(GlobalControls.parcanSmoothing.getValue());
+            });
+        }
         
         // Set protocol to ArtNet by default
         this.protocol.setValue(Protocol.ARTNET.ordinal());

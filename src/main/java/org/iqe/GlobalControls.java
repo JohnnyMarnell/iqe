@@ -4,8 +4,10 @@ import heronarts.lx.*;
 import heronarts.lx.effect.LXEffect;
 import heronarts.lx.parameter.BooleanParameter;
 import heronarts.lx.parameter.BoundedParameter;
+import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.DiscreteParameter;
 import heronarts.lx.parameter.TriggerParameter;
+import heronarts.lx.structure.LXFixture;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +36,10 @@ public class GlobalControls extends LXEffect {
     public static final BooleanParameter bassBounce = new BooleanParameter("bassBnc")
             .setDescription("Toggle global bass bounce mode")
             .setValue(false);
+    
+    public static final CompoundParameter parcanSmoothing = new CompoundParameter("parcanSmoothing", 0.85, 0.7, 0.99)
+            .setDescription("Global smoothing for all DMX ParCan fixtures")
+            .setExponent(2.0);  // Exponential curve for finer control near 1.0
 
     public static final TriggerParameter build = new TriggerParameter("build")
             .setDescription("Trigger a build up dynamic event");
@@ -63,6 +69,7 @@ public class GlobalControls extends LXEffect {
         this.addParameter("defaultSyncMode", defaultClick);
         this.addParameter("bassDynamics", bassDynamics);
         this.addParameter("bassBnc", bassBounce);
+        this.addParameter("parcanSmoothing", parcanSmoothing);
         this.addParameter("build", build);
         this.addParameter("freeBass", freeBass);
         this.addParameter("highIntensity", highIntensity);
@@ -71,6 +78,11 @@ public class GlobalControls extends LXEffect {
         this.addParameter("color", color);
 
         defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
+        
+        // Listen for parcanSmoothing changes and update all SmoothDMXParCanFixtures
+        parcanSmoothing.addListener(p -> {
+            updateAllParCanSmoothing(lx, parcanSmoothing.getValue());
+        });
 
         AudioModulators.register(this);
     }
@@ -86,5 +98,18 @@ public class GlobalControls extends LXEffect {
         clicks.add(BASS, "BASS");
         Arrays.stream(Tempo.Division.values()).forEach(div -> clicks.add(div.toString()));
         return clicks;
+    }
+    
+    private static void updateAllParCanSmoothing(LX lx, double smoothingValue) {
+        // Access fixtures through structure
+        if (lx.structure != null) {
+            for (LXFixture fixture : lx.structure.fixtures) {
+                if (fixture instanceof SmoothDMXParCanFixture) {
+                    SmoothDMXParCanFixture parcan = (SmoothDMXParCanFixture) fixture;
+                    parcan.smoothing.setValue(smoothingValue);
+                    LOG.info("Updated ParCan fixture smoothing to: {}", smoothingValue);
+                }
+            }
+        }
     }
 }

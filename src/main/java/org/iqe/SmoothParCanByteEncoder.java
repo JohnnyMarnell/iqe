@@ -30,7 +30,7 @@ public class SmoothParCanByteEncoder implements LXBufferOutput.ByteEncoder {
     }
     
     public SmoothParCanByteEncoder(float smoothingFactor) {
-        this.smoothingFactor = Math.max(0, Math.min(smoothingFactor, 0.99f));
+        this.smoothingFactor = Math.max(0.7f, Math.min(smoothingFactor, 0.99f));
     }
     
     @Override
@@ -85,7 +85,7 @@ public class SmoothParCanByteEncoder implements LXBufferOutput.ByteEncoder {
     }
     
     public void setSmoothingFactor(float factor) {
-        this.smoothingFactor = Math.max(0, Math.min(factor, 0.99f));
+        this.smoothingFactor = Math.max(0.7f, Math.min(factor, 0.99f));
     }
     
     public float getSmoothingFactor() {
