@@ -2268,361 +2268,1259 @@
 
   This should fix the issue where scanning returns nothing because WiFi was disabled.
 
-> keep scanning, i think its too quick
+> thought of something else (im dumb). I have Mac internet sharing turned on... wifi to this 
+  dongle (for the Pi!!!)
 
-> wifi killed internet again!!!!!!! i guess your trick didnt work? research the web. correct 
-  way to do "networking". ultrathink
+⏺ OH! That explains everything! Internet Sharing creates a bridge between WiFi and ethernet,
+  and macOS treats it specially. When you connect WiFi to a different network (like the
+  PixelBlaze), it breaks the sharing bridge and kills the ethernet's internet!
 
-> wifi killed internet again!!!!!!! i guess your trick didnt work? research the web. correct 
-  way to do "networking". ultrathink
+  That's why you're losing internet - macOS is trying to maintain the Internet Sharing
+  configuration.
+
+  A few options:
+
+  1. Turn off Internet Sharing temporarily when configuring PixelBlazes:
+    - System Settings → General → Sharing → Internet Sharing OFF
+    - Configure your PixelBlazes
+    - Turn it back ON for the Pi
+  2. Use a second WiFi adapter (USB WiFi dongle) for PixelBlaze config while keeping the
+  built-in WiFi for Internet Sharing
+  3. Configure the Pi to use ethernet directly instead of through Internet Sharing
+
+  Let me add a check for Internet Sharing to our script:
+
+⏺ Update(src/pixelblaze/pb.py)
+  ⎿  Error editing file
+
+⏺ Read(src/pixelblaze/pb.py)
+  ⎿  Read 30 lines (ctrl+r to expand)
+
+⏺ Update(src/pixelblaze/pb.py)
+  ⎿  Error editing file
+
+⏺ Let me check the exact formatting:
+
+⏺ Read(src/pixelblaze/pb.py)
+  ⎿  Read 20 lines (ctrl+r to expand)
+
+⏺ Update(src/pixelblaze/pb.py)
+  ⎿  Updated src/pixelblaze/pb.py with 22 additions                                           
+       262            click.echo("Run: sudo python pb.py connect")
+       263            return
+       264        
+       265 +      # Check for Internet Sharing - this breaks everything!
+       266 +      sharing_check = subprocess.run(
+       267 +          ['defaults', 'read', 
+           + '/Library/Preferences/SystemConfiguration/com.apple.nat', 'NAT'],
+       268 +          capture_output=True,
+       269 +          text=True
+       270 +      )
+       271 +      
+       272 +      if 'Enabled = 1' in sharing_check.stdout:
+       273 +          click.secho("⚠️  WARNING: Internet Sharing is ON!", fg='yellow', 
+           + bold=True)
+       274 +          click.echo("This is why your internet breaks when connecting to 
+           + PixelBlaze!")
+       275 +          click.echo("\nInternet Sharing bridges WiFi → Ethernet for your Pi.")
+       276 +          click.echo("Connecting WiFi to PixelBlaze breaks this bridge.\n")
+       277 +          click.echo("Solutions:")
+       278 +          click.echo("1. Temporarily turn off Internet Sharing in System 
+     Settings")
+       279 +          click.echo("2. Use a USB WiFi adapter for PixelBlaze connections")
+       280 +          click.echo("3. Connect Pi directly to router instead of through Mac")
+       281 +          
+       282 +          if not click.confirm("\nContinue anyway? (Internet WILL break)"):
+       283 +              click.echo("\nTo disable Internet Sharing:")
+       284 +              click.echo("System Settings → General → Sharing → Internet Sharing → 
+           + OFF")
+       285 +              return
+       286 +      
+       287        # Ensure WiFi is on
+       288        click.echo("Checking WiFi status...")
+       289        wifi_status = subprocess.run(
+
+⏺ Perfect! Now the script will:
+
+  1. Detect Internet Sharing is on
+  2. Explain WHY your internet breaks - it's the WiFi → Ethernet bridge for your Pi!
+  3. Offer solutions:
+    - Turn off Internet Sharing temporarily
+    - Use a USB WiFi adapter for PixelBlaze
+    - Connect Pi directly to router
+
+  Mystery solved! Your Mac is sharing its WiFi internet to the ethernet dongle for the Pi.
+  When you change WiFi networks to connect to PixelBlaze, it breaks the sharing bridge and
+  kills the ethernet's internet connection.
+
+  The cleanest solution is probably to turn off Internet Sharing while configuring
+  PixelBlazes, then turn it back on for normal Pi operation.
+
+> ooh, me likey the use another dongle idea, i have plenty. sidenote... we've learned a lot. I
+   will not have you let alone internet in the desert, futzing with local routers... can you 
+  make a detailed md summary of our learnings, gotchas, hints, recommendations? please include
+   every single bash CLI call you made re: networking (e.g. airport, wdutil, sys perf manager,
+   netstat ... all of them!). put it in repo root NETWORKING-NOTES.md
+
+⏺ Write(NETWORKING-NOTES.md)
+  ⎿  Wrote 308 lines to NETWORKING-NOTES.md                                                   
+     # macOS Networking Notes & PixelBlaze Configuration Learnings
+     ## The Great Internet Breaking Mystery - SOLVED! 🎉
+     ### Root Cause: Internet Sharing
+     If you have **Internet Sharing** enabled on macOS (sharing WiFi to Ethernet for a
+     Raspberry Pi), connecting WiFi to a different network (like PixelBlaze AP) breaks the
+     sharing bridge and kills internet on BOTH interfaces.
+     **Check if Internet Sharing is enabled:**
+     ```bash
+     defaults read /Library/Preferences/SystemConfiguration/com.apple.nat NAT
+     … +298 lines (ctrl+r to expand)
+
+⏺ Done! Created a comprehensive networking guide with:
+
+  - Every single network command we used
+  - The Internet Sharing discovery and solutions
+  - Common issues and fixes
+  - PixelBlaze-specific notes
+  - Desert survival tips (no internet!)
+  - Quick debug checklist
+  - All the WiFi scanning methods
+
+  This should be super helpful when you're in the desert without internet, trying to remember
+  "what was that command to check the routing table again?" 🏜️
+
+> sick thanks. tangent, but related. ok wifi internet working, dongle connected, and now I 
+  *do* think I want internet sharing right now, because I believe, in the Pi case, with MAc 
+  internet sharing, it's starts a rinky dink little dhcp server, which allows the pi to 
+  connect. However, I don't have the Pi connected, I've instead connected an ArtNet DMX 
+  controller, the Pkight ArtNet2-CR021R . my bud configgled it for a different router, it may 
+  have a hardcoded IP -- the terrible LCD says 192.168.001.095 . is this different subnet than
+   my ethernet dongle? should it work? i can't ping 192.168.1.95
 
 ✻ Thinking…
 
-  The user is frustrated because:
-  1. The WiFi scanning might be too quick after turning WiFi on
-  2. The network routing fix didn't work - WiFi still kills internet when enabled
+  The user has an ArtNet DMX controller that's configured for IP 192.168.1.95 (displayed as 
+  192.168.001.095 on LCD). They want to know if this will work with their Mac Internet Sharing
+   setup.
 
-  They want me to research the proper way to handle this networking issue on macOS. The 
-  problem is that when WiFi connects to a PixelBlaze AP (which has no internet), macOS routes 
-  ALL traffic through WiFi instead of keeping internet traffic going through ethernet.
+  Let me check what subnet their ethernet dongle is on when Internet Sharing is enabled. 
+  Earlier we saw it was 192.168.0.221 when connected to the router directly via DHCP. But with
+   Internet Sharing, the Mac creates its own DHCP server and typically uses a different 
+  subnet.
 
-  Let me think about this problem:
-  1. macOS has a network service order that determines priority
-  2. When WiFi connects to any network, it might become the primary route
-  3. We need to either:
-    - Set ethernet as higher priority in network service order
-    - Use route metrics to prefer ethernet
-    - Use policy-based routing
-    - Or use network namespaces/interfaces differently
+  Let me help them check their current subnet and see if the controller is reachable.
 
-  The user wants me to research this properly.
+⏺ Good question! The LCD showing 192.168.001.095 is just padding zeros - that's 192.168.1.95.
+  Let's check what subnet your Mac's Internet Sharing is actually using:
 
-⏺ You're right - the routing fix isn't working and the scan might be too quick. Let me
-  research the proper macOS networking approach:
+⏺ Bash(ifconfig en10 | grep "inet ")
+  ⎿  	inet 169.254.81.171 netmask 0xffff0000 broadcast 169.254.255.25
 
-⏺ Web Search("macOS prevent WiFi from taking over default route when ethernet connected
-            network priority 2024")
+✻ Thinking…
+
+  Oh interesting! The ethernet dongle has a 169.254.x.x address - that's a link-local address 
+  (APIPA/Zeroconf). This means it's not getting DHCP from anywhere and is self-assigning.
+
+  When Internet Sharing is on, the Mac typically creates a subnet like 192.168.2.x or 
+  192.168.3.x and acts as DHCP server. But it looks like Internet Sharing might not be fully 
+  configured or working.
+
+  The ArtNet controller at 192.168.1.95 is on a different subnet than 169.254.81.171, so they 
+  can't communicate directly.
+
+⏺ Uh oh! Your ethernet has a 169.254.x.x address - that's a self-assigned "link-local" address
+   when no DHCP server is found. That's definitely a different subnet than 192.168.1.x where
+  your ArtNet controller is.
+
+  Let's check if Internet Sharing is actually on and configured:
+
+⏺ Bash(defaults read /Library/Preferences/SystemConfiguration/com.apple.nat NAT 2>/dev/null |
+      grep -A5 "Enabled")
+  ⎿          Enabled = 0;                               
+             NetworkName = "Johnny's MacBook Pro";
+             NetworkPassword = {length = 0, bytes = 0x};
+     … +11 lines (ctrl+r to expand)
+
+✻ Thinking…
+
+  So Internet Sharing is enabled (Enabled = 1) but the setup seems incomplete. Let me check 
+  the sharing configuration more thoroughly.
+
+⏺ Internet Sharing is ON but might not be properly configured. When it's working, Mac
+  typically creates a 192.168.2.x subnet. Let's manually set your ethernet to the same subnet
+  as the ArtNet controller:
+
+⏺ Bash(networksetup -getinfo "AX88179A")
+  ⎿  DHCP Configuration           
+     IP address: 169.254.81.171
+     Subnet mask: 255.255.0.0
+     … +6 lines (ctrl+r to expand)
+
+✻ Thinking…
+
+  DHCP is set but getting no address from a DHCP server, so it's falling back to link-local. 
+  The user needs to either:
+  1. Set a manual IP in the same subnet as the ArtNet controller
+  2. Fix Internet Sharing to provide DHCP in the right subnet
+
+⏺ Perfect - DHCP isn't finding a server. Let's set your ethernet to the same subnet as the
+  ArtNet controller so they can talk:
+  ⎿  Interrupted by user
+
+> is it possible you're wrong, in that, Mac creates a "bridge" network for it, so that's the 
+  subnet we should look for (i believe this matched the Pi before)
+
+⏺ You're absolutely right! With Internet Sharing, macOS creates a bridge interface. Let's look
+   for it:
+
+⏺ Bash(ifconfig bridge0 | grep "inet ")
+  ⎿  No matches found
+
+⏺ Hmm, let's check all bridge interfaces:
+
+⏺ Bash(ifconfig | grep -A3 "^bridge")
+  ⎿  bridge0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+     	options=63<RXCSUM,TXCSUM,TSO4,TSO6>
+     	ether 36:ef:b3:d1:58:c0
+     … +6 lines (ctrl+r to expand)
+
+⏺ There it is! bridge100 has IP 192.168.2.1 - that's the Internet Sharing bridge! So Mac is
+  running DHCP on 192.168.2.x subnet.
+
+  Your ArtNet controller is configured for 192.168.1.95 (different subnet). That's why they
+  can't talk. The Pi probably got 192.168.2.x from the Mac's DHCP.
+
+  To make the ArtNet controller work, you either need to:
+  1. Reconfigure the ArtNet controller to DHCP (if possible) so it gets a 192.168.2.x address
+  2. Manually set your Mac's ethernet to 192.168.1.x subnet to match the controller
+  3. Turn off Internet Sharing and manually configure both to the same subnet
+
+  Let's check what devices are connected to the bridge:
+
+⏺ Bash(arp -a | grep -E "192.168.2|192.168.1")
+  ⎿  Error: grep: conflicting matchers specified
+
+⏺ Bash(arp -a | grep "192.168")
+  ⎿  ? (192.168.0.1) at e0:db:d1:b5:d8:d3 on en0 ifscope [ethernet] 
+     ? (192.168.0.18) at d8:8b:4c:2:56:ad on en0 ifscope [ethernet]
+     ? (192.168.0.35) at 48:a6:b8:31:21:17 on en0 ifscope [ethernet]
+     … +6 lines (ctrl+r to expand)
+
+⏺ So:
+  - Your WiFi (en0) is on 192.168.0.x network (your home router)
+  - Internet Sharing bridge (bridge100) is on 192.168.2.x
+  - Your ArtNet controller wants 192.168.1.x
+  - Your ethernet dongle has self-assigned 169.254.x.x (no connection)
+
+  The ArtNet controller can't get DHCP from the Mac because it's hardcoded to 192.168.1.95.
+  You need to either reconfigure the ArtNet controller or change the Mac's bridge subnet.
+
+> do i need to have same subnets? if not ping, might there still be a way to route / connect 
+  to this hardcoded one?
+
+⏺ Good thinking! You don't necessarily need the same subnet if you can route between them.
+  Let's try to add a route and/or an alias IP address to reach the ArtNet controller.
+
+  First, let's add an alias IP on the ethernet interface in the 192.168.1.x subnet:
+
+⏺ Bash(sudo ifconfig en10 alias 192.168.1.2 netmask 255.255.255.0)
+  ⎿  Error: sudo: a terminal is required to read the password; either use the -S option to read
+      from standard input or configure an askpass helper
+     sudo: a password is required
+
+⏺ We need sudo. Let me give you the commands to try in Terminal:
+
+  # Add an alias IP to your ethernet adapter in the 192.168.1.x subnet
+  sudo ifconfig en10 alias 192.168.1.2 netmask 255.255.255.0
+
+  # Then try to ping the ArtNet controller
+  ping 192.168.1.95
+
+  # If that doesn't work, you could also try adding it to the bridge
+  sudo ifconfig bridge100 alias 192.168.1.1 netmask 255.255.255.0
+
+  Another option - add a static route:
+
+  # Route 192.168.1.x traffic through the ethernet interface
+  sudo route add -net 192.168.1.0/24 -interface en10
+
+  Or, you could change the Internet Sharing subnet to match. The bridge subnet is configured
+  in:
+  /Library/Preferences/SystemConfiguration/com.apple.nat.plist
+
+  But the alias IP approach is probably easiest - it lets your Mac have IPs on multiple
+  subnets simultaneously. Your ethernet would have both:
+  - 169.254.81.171 (self-assigned)
+  - 192.168.1.2 (alias to talk to ArtNet)
+
+  Try the alias command and see if you can then ping 192.168.1.95!
+
+> is this permanent / between restarts? and can i use 192.168.1.69 instead?
+
+⏺ No, the ifconfig alias command is temporary - it's lost on restart. And yes, you can
+  absolutely use 192.168.1.69 instead!
+
+  For temporary (until restart):
+  sudo ifconfig en10 alias 192.168.1.69 netmask 255.255.255.0
+
+  For permanent, you have a few options:
+
+  Option 1: Network Settings GUI (easiest, permanent)
+
+  1. System Settings → Network → Your USB Ethernet
+  2. Details → TCP/IP
+  3. Configure IPv4: Manually
+  4. IP Address: 192.168.1.69
+  5. Subnet Mask: 255.255.255.0
+  6. Router: (leave blank or 192.168.1.1)
+
+  Option 2: networksetup command (permanent)
+
+  sudo networksetup -setmanual "AX88179A" 192.168.1.69 255.255.255.0 192.168.1.1
+
+  Option 3: Launch daemon (permanent but overkill)
+
+  Create a startup script that runs the alias command on boot.
+
+  Option 4: Multiple IPs via Network Settings
+
+  You can actually add multiple IPs in the GUI:
+  1. System Settings → Network → Your USB Ethernet → Details → TCP/IP
+  2. Configure IPv4: Manually
+  3. Click the + button to add additional addresses
+  4. Add both 192.168.2.x (for Internet Sharing) and 192.168.1.69 (for ArtNet)
+
+  Note: If you use Manual configuration, you'll lose DHCP from the Internet Sharing bridge. So
+   you might want to stick with the temporary alias for now while testing!
+
+> i think i prefer temporary. also worried this will break existing Pi connection when i plug 
+  that piece of shart in? or the alias(es) can play nicely?
+
+⏺ Good thinking! The alias will play nicely - it's additive, not replacing anything. Your
+  ethernet interface can have multiple IPs simultaneously:
+
+  1. Primary IP (whatever DHCP assigns or is manually set)
+  2. Alias IP(s) (as many as you want)
+
+  So when you plug the Pi back in:
+  - Pi gets 192.168.2.x from Mac's Internet Sharing DHCP (as usual)
+  - Your ethernet gets matching 192.168.2.x from the bridge
+  - Your 192.168.1.69 alias remains active
+  - Everyone's happy!
+
+  The alias doesn't interfere with DHCP or existing connections. It just adds another IP
+  address to the same physical interface.
+
+  Quick test to see current state:
+
+⏺ Bash(ifconfig en10 | grep "inet ")
+  ⎿  	inet 169.254.81.171 netmask 0xffff0000 broadcast 169.254.255.25
+
+⏺ Right now just the self-assigned. After adding alias:
+  sudo ifconfig en10 alias 192.168.1.69 netmask 255.255.255.0
+
+  You'd see both:
+  - inet 169.254.81.171 (or 192.168.2.x when Pi/DHCP works)
+  - inet 192.168.1.69 (your alias for ArtNet)
+
+  The only "gotcha" is remembering to re-add the alias after reboot if you need the ArtNet
+  controller again. You could make a simple script:
+
+  #!/bin/bash
+  # artnet_alias.sh
+  echo "Adding ArtNet alias IP..."
+  sudo ifconfig en10 alias 192.168.1.69 netmask 255.255.255.0
+  echo "Testing connection to ArtNet controller..."
+  ping -c 1 192.168.1.95
+
+  Then just run ./artnet_alias.sh when needed. The Pi won't even know the alias exists - it'll
+   keep working normally with the 192.168.2.x subnet.
+
+> in the desert, I will have a completely different router + ethernet dongle + laptop entirely
+   (!!). those all *should* be configured to "just work" with the other controller, also in 
+  the desert. If i added this alias on that machine for that dongle, and connected directly to
+   this ethernet controller as well, do you think same case, comms would work? similar 
+  question, what if this ethernet controller is plugged into *that* router, which is on an 
+  entirely different 10.x network ranges?
+
+✻ Thinking…
+
+  The user is asking about network compatibility in the desert with different equipment. Let 
+  me think through the scenarios:
+
+  1. Direct connection with alias on desert laptop/dongle:
+    - If the ArtNet controller is hardcoded to 192.168.1.95
+    - Adding alias 192.168.1.69 on the desert laptop's ethernet
+    - Direct ethernet cable between them
+    - Should work! Same principle as now
+  2. ArtNet controller plugged into desert router on 10.x network:
+    - Router is on 10.x.x.x subnet
+    - ArtNet controller expects 192.168.1.x
+    - This is problematic - they're on different subnets
+    - The router won't route between them unless configured to
+
+  The key issue is the ArtNet controller seems to have a hardcoded IP. This is going to cause 
+  problems unless everything else matches its subnet.
+
+⏺ Great forward thinking! Let's break down both scenarios:
+
+  Scenario 1: Direct Connection (laptop → ArtNet controller)
+
+  Yes, this should work! Same alias trick:
+  # On desert laptop, whatever the ethernet interface is (en0, en1, en10, etc)
+  sudo ifconfig enX alias 192.168.1.69 netmask 255.255.255.0
+  ping 192.168.1.95
+
+  This works because it's just layer 2 (direct ethernet) - no router involved. The alias makes
+   your laptop "speak" on the 192.168.1.x subnet.
+
+  Scenario 2: Through Desert Router (10.x.x.x network)
+
+  This is problematic! If the router is on 10.x.x.x and the ArtNet is hardcoded to
+  192.168.1.95:
+
+  - Router DHCP gives devices 10.x.x.x addresses
+  - ArtNet controller stuck on 192.168.1.95
+  - Different subnets = no communication (without routing)
+
+  Possible Solutions:
+
+  1. Reconfigure the router to use 192.168.1.x subnet instead of 10.x
+    - Set router to 192.168.1.1
+    - DHCP range 192.168.1.100-200
+    - ArtNet at .95 fits right in!
+  2. Add static route on router (if router supports it)
+  Route 192.168.1.0/24 via [some interface]
+  3. Use a "bridge" computer with two network interfaces
+    - One on 10.x (to router)
+    - One with alias on 192.168.1.x (to ArtNet)
+    - Run software to bridge/route between them
+  4. Best: Reconfigure the ArtNet controller to match the desert network
+    - Check if it has a web interface, telnet, or physical config
+    - Change it to 10.x.x.95 or enable DHCP
+
+  Desert Prep Checklist:
+
+  1. Find out the desert router's subnet NOW
+    - Ask whoever set it up
+    - If it's 10.x, plan accordingly
+  2. Test the ArtNet controller config options
+    - Can you access its config? (Physical buttons? Web UI? Software?)
+    - Can it do DHCP instead of static IP?
+  3. Document everything
+  # Create a desert network map
+  echo "Router: 10.x.x.1 (or whatever)
+  DHCP Range: 10.x.x.100-200
+  ArtNet Controller: 192.168.1.95 (hardcoded)
+  Alias needed: 192.168.1.69" > desert_network.txt
+  4. Bring a small travel router as backup
+    - Configure it to 192.168.1.x subnet
+    - Everything speaks the same language
+
+  The hardcoded IP is the real villain here. If you can change it to DHCP or match the desert
+  network, everything becomes much easier!
+
+> can you research this controller, and if i can set the IP via web interface / code, or its 
+  shitty fuckin buttons?
+
+⏺ Web Search("Pknight ArtNet2-CR021R configuration manual IP address setup")
+  ⎿  Did 1 search in 25s                                                                      
+
+⏺ Let me search for more specific information about the button interface:
+
+⏺ Web Search(""CR021R" LCD menu buttons IP configuration DMX workshop")
+  ⎿  Did 1 search in 29s                                                                      
+
+⏺ Excellent news! The Pknight CR021R has three ways to configure the IP:
+
+  1. LCD + 4 Buttons (on device)
+
+  - The device has an LCD screen with 4 function buttons
+  - You can navigate menus to set IP address, subnet mask, universe, etc.
+  - No computer needed!
+
+  2. DMX Workshop Software (remote configuration)
+
+  - Free software that can remotely configure:
+    - IP address
+    - Subnet mask
+    - Net address
+    - Subnet address
+    - Port universe
+  - Can scan network and find devices
+  - Much easier than buttons!
+
+  3. No Web Interface
+
+  - It explicitly says "you don't need to find applications or web configuration"
+  - So no web UI unfortunately
+
+  For the Desert:
+
+  Option A: Use the buttons (now, before you go)
+
+  1. Navigate LCD menu with 4 buttons
+  2. Change IP from 192.168.1.95 to match desert network (e.g., 10.x.x.95)
+  3. Or enable DHCP if it has that option
+
+  Option B: Bring DMX Workshop software
+
+  1. Download DMX Workshop (free from Zero88 or similar)
+  2. Connect laptop to same network as controller
+  3. Scan for devices
+  4. Change IP settings remotely
+  5. Much easier than fumbling with buttons in the desert!
+
+  Important Gotcha:
+
+  Universe numbering starts at ZERO!
+  - Universe 1 in your software = Universe 0 on the device
+  - This isn't well documented and trips people up
+
+  So yes, you can definitely reconfigure it! The buttons are probably annoying but doable. DMX
+   Workshop would be way easier if you can get it working.
+
+> ok, i reconfigured controller's IP to 10.10.42.68 . Now I switched out ethernet dongle to 
+  new one. find it and expect it. I'll need to set its IP manually to this subnet right?
+
+⏺ Nice! I see you're updating the README with desert notes too. Now let's find your new
+  ethernet dongle and set it up for the 10.10.42.x subnet:
+
+⏺ Bash(networksetup -listallhardwareports | grep -A2 "Ethernet")
+  ⎿  Hardware Port: Ethernet Adapter (en4)
+     Device: en4
+     Ethernet Address: 56:72:06:62:a1:f4
+     … +34 lines (ctrl+r to expand)
+
+⏺ I see "USB 10/100/1000 LAN" - that's likely your new dongle. Let's check what interface it's
+   on:
+
+⏺ Bash(ifconfig | grep -B3 "48:65:ee:1e:23:6e")
+  ⎿  	nd6 options=201<PERFORMNUD,DAD>                                        
+     en8: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+     	options=6464<VLAN_MTU,TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+     … +1 line (ctrl+r to expand)
+
+⏺ Perfect! Your new dongle is en8. Let's check its current status:
+
+⏺ Bash(ifconfig en8 | grep -E "status|inet ")
+  ⎿  Error: grep: conflicting matchers specified
+
+⏺ Bash(ifconfig en8 | grep "status"; ifconfig en8 | grep "inet ")
+  ⎿  	status: active                                                 
+     	inet 169.254.77.184 netmask 0xffff0000 broadcast 169.254.255.255
+
+⏺ It's active but has a self-assigned IP (169.254.x.x). Yes, you need to set it manually to
+  the 10.10.42.x subnet. You can either:
+
+  Option 1: Temporary (for testing now)
+  sudo ifconfig en8 inet 10.10.42.69 netmask 255.255.255.0
+
+  Option 2: Permanent (via GUI)
+  System Settings → Network → USB 10/100/1000 LAN → Details → TCP/IP:
+  - Configure IPv4: Manually
+  - IP Address: 10.10.42.69 (or whatever you want)
+  - Subnet Mask: 255.255.255.0
+  - Router: 10.10.42.1 (if there's a router)
+
+  Option 3: Permanent (via command line)
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.69 255.255.255.0 10.10.42.1
+
+  After setting it, you should be able to ping the ArtNet controller:
+  ping 10.10.42.68
+
+  I notice in your README notes you're planning 10.10.42.42 for the IQE laptop adapter - you
+  could use that instead of .69 if you want to keep it consistent with your desert plan!
+
+> i want to try CLI permanent, and 10.10.42.11 , i run?
+
+⏺ Yes! Run this:
+
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0 10.10.42.1
+
+  This will permanently set:
+  - IP: 10.10.42.11
+  - Subnet: 255.255.255.0
+  - Router/Gateway: 10.10.42.1
+
+  After running, you can verify with:
+  # Check the config
+  networksetup -getinfo "USB 10/100/1000 LAN"
+
+  # Check if it took effect
+  ifconfig en8 | grep "inet "
+
+  # Test connection to ArtNet controller
+  ping 10.10.42.68
+
+  This setting will persist across reboots and unplugging/replugging the dongle!
+
+> i dont know what the router/gateway is yet, its in the desert. it's typically x.x.x.1 right?
+   is it mandatory to be .1
+
+⏺ No, it's not mandatory to be .1 - that's just a common convention! Routers can be any IP in
+  the subnet. I've seen .254, .10, .100, etc.
+
+  For now, you can either:
+
+  Option 1: Leave router blank (if the field is optional)
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0 ""
+
+  Option 2: Use a placeholder (you can change it later)
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0 10.10.42.1
+
+  Option 3: Set IP only, no router
+  Some versions of networksetup allow omitting the router:
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0
+
+  Since you're just trying to talk to the ArtNet controller at 10.10.42.68 (same subnet), you
+  don't actually need a router/gateway - that's only for reaching other networks/internet.
+  Same-subnet communication works without a gateway!
+
+  Try option 3 first (no router specified). If it complains, use option 2 with .1 as a
+  placeholder - you can always change it in the desert when you find out the actual router IP.
+
+> if i set the router now, but I dont have it connected to a router yet, it's currently direct
+   connected to this pknight controller, will it interfere?
+
+⏺ No, it won't interfere! The router/gateway setting is only used when trying to reach IPs
+  outside your subnet.
+
+  For direct device-to-device communication on the same subnet (your laptop at 10.10.42.11
+  talking to the controller at 10.10.42.68), the router setting is completely ignored.
+
+  The router/gateway only matters when you try to reach something like:
+  - The internet (8.8.8.8)
+  - A different subnet (192.168.x.x)
+
+  So go ahead and set it with .1 as the router - it won't hurt anything:
+
+  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0 10.10.42.1
+
+  Your direct connection to the Pknight controller will work fine. The laptop will:
+  1. See that 10.10.42.68 is in the same subnet
+  2. Use ARP to find its MAC address
+  3. Send packets directly over ethernet
+  4. Never even think about using the (non-existent) router
+
+  When you get to the desert and plug into the actual router, the gateway setting will already
+   be there ready to work (assuming the router is actually at .1).
+
+> what is ARP, TIL
+
+⏺ ARP = Address Resolution Protocol
+
+  It's the "phone book" that translates IP addresses to MAC addresses on your local network!
+
+  Here's how it works:
+
+  1. Your laptop wants to send data to 10.10.42.68
+  2. Problem: Ethernet only understands MAC addresses (like 48:65:ee:1e:23:6e), not IP
+  addresses
+  3. ARP to the rescue: Your laptop broadcasts "Hey everyone! Who has IP 10.10.42.68? Tell me
+  your MAC!"
+  4. Pknight controller responds: "That's me! My MAC is aa:bb:cc:dd:ee:ff"
+  5. Your laptop caches this in its ARP table and sends packets directly to that MAC
+
+  You can see your current ARP table:
+  # Show all ARP entries
+  arp -a
+
+  # Show just entries for your subnet
+  arp -a | grep "10.10.42"
+
+  # Watch it in action - clear entry then ping
+  sudo arp -d 10.10.42.68  # Delete cached entry
+  ping -c 1 10.10.42.68     # This triggers ARP request
+  arp -a | grep "10.10.42"  # Now you'll see it cached!
+
+  Fun facts:
+  - ARP only works on the same subnet (that's why routers exist for different subnets)
+  - Entries expire after ~20 minutes (varies by OS)
+  - "ARP poisoning" is a common network attack where bad actors lie about their MAC
+  - That 169.254.x.x address you keep seeing? Uses ARP too, but only for "link-local"
+
+  This is why same-subnet communication doesn't need a router - ARP handles the MAC address
+  discovery directly over the ethernet cable!
+
+> i ran the sudo cmd, can you testes ?
+
+⏺ Bash(networksetup -getinfo "USB 10/100/1000 LAN")
+  ⎿  Manual Configuration         
+     IP address: 10.10.42.11
+     Subnet mask: 255.255.255.0
+     … +5 lines (ctrl+r to expand)
+
+⏺ Perfect! Settings saved. Now let's check if it's actually applied to the interface:
+
+⏺ Bash(ifconfig en8 | grep "inet ")
+  ⎿  	inet 10.10.42.11 netmask 0xffffff00 broadcast 10.10.42.25
+
+⏺ Excellent! Your ethernet dongle is now at 10.10.42.11. Let's test connection to the Pknight
+  controller:
+
+⏺ Bash(ping -c 3 10.10.42.68)
+  ⎿  PING 10.10.42.68 (10.10.42.68): 56 data bytes              
+     64 bytes from 10.10.42.68: icmp_seq=0 ttl=255 time=1.305 ms
+     64 bytes from 10.10.42.68: icmp_seq=1 ttl=255 time=0.931 ms
+     … +5 lines (ctrl+r to expand)
+
+⏺ 🎉 SUCCESS! The Pknight controller is responding!
+
+  Now let's check the ARP table to see the MAC address discovery we talked about:
+
+⏺ Bash(arp -a | grep "10.10.42")
+  ⎿  ? (10.10.42.68) at 2:4d:48:a:2a:44 on en8 ifscope [ethernet]
+
+⏺ There it is! Your laptop discovered that 10.10.42.68 has MAC address 2:4d:48:a:2a:44 via
+  ARP.
+
+  Everything's working perfectly:
+  - ✅ Ethernet dongle configured at 10.10.42.11
+  - ✅ Can ping Pknight controller at 10.10.42.68
+  - ✅ ARP table shows the MAC address mapping
+  - ✅ Settings are permanent (will survive reboot)
+
+  Your ArtNet controller should now be reachable from any software on your laptop!
+
+> excellent, can you add new and relevant (esp ARP) to our notes doc ?
+
+⏺ Update(NETWORKING-NOTES.md)
   ⎿  Error: Interrupted by user
   ⎿  Interrupted by user
 
-✻ Thinking…
+> excellent, can you add new and relevant (esp ARP) to our notes doc ? also, im so fucking 
+  pissed, once again. not at you, dont want to shart the messenger, youve been great. but fuck
+   my veiny dick... this new ethernet adapter i plugged in. it shouldnt, afaik, have any 
+  internet sharing setting for it? THE FUCKER BREAKS INTERNET **AGAIN**. im losing my mind 
+  man.
 
-  The user is frustrated because:
-  1. The WiFi scanning might be too quick (needs to keep scanning/retry)
-  2. The network routing fix didn't work - turning on WiFi still kills internet
+⏺ Ugh, I feel your pain! Let's figure out WTF is breaking now and add everything to the notes.
+   First, let me check what's happening:
 
-  They want me to research the proper way to handle this networking issue on macOS. The 
-  problem is that when WiFi connects to the PixelBlaze AP (which has no internet), macOS 
-  routes ALL traffic through WiFi instead of keeping internet traffic going through ethernet.
+⏺ Bash(netstat -rn | grep "^default" | head -5)
+  ⎿  default            192.168.0.1        UGScg                 en0                     
+     default            link#26            UCSIg               utun6
+     default                                 fe80::e2db:d1ff:feb5:d8d3%en0           UGcg
+     … +5 lines (ctrl+r to expand)
 
-  Let me think about this problem:
-  - macOS has a concept of network service order
-  - It also has route metrics/priorities
-  - There might be a better way to handle this using scoped routes or network namespaces
-  - Or we might need to use different commands
+⏺ OK, your default route is still through en0 (WiFi) to 192.168.0.1, which should be fine.
+  Let's check if the new adapter is somehow interfering:
 
-  They said "ultrathink" which might be a typo or emphasis on thinking deeply about this.
+⏺ Bash(networksetup -listnetworkserviceorder | head -20)
+  ⎿  An asterisk (*) denotes that a network service is disabled.        
+     (1) LG Monitor Controls
+     (Hardware Port: LG Monitor Controls, Device: usbmodem411NTZN7N8132)
+     … +15 lines (ctrl+r to expand)
 
-  Let me search for the proper way to handle multiple network interfaces on macOS where one 
-  has internet and one doesn't.
+⏺ THERE'S THE FUCKING PROBLEM! Your new USB ethernet (en8) is now priority #2, ABOVE WiFi
+  (#5)! macOS is trying to use it for internet, but it's on 10.10.42.x with no real gateway.
 
-⏺ You're right, the routing fix isn't working properly. Let me research the correct way to
-  handle this on macOS:
+  Quick fix:
 
-⏺ Web Search("macOS multiple network interfaces WiFi ethernet priority routing keep internet
-            while connected different network 2024")
-  ⎿  Did 1 search in 36s                                                                      
+⏺ Bash(sudo networksetup -ordernetworkservices "Wi-Fi" "USB 10/100/1000 LAN" "AX88179A"
+      "Thunderbolt Bridge" "iPhone USB" "LG Monitor Controls")
+  ⎿  Error: sudo: a terminal is required to read the password; either use the -S option to read
+      from standard input or configure an askpass helper
+     sudo: a password is required
 
-⏺ You're right! The scan might happen too quickly after WiFi turns on. Let me add retry logic:
+⏺ Run this in Terminal to fix:
+  sudo networksetup -ordernetworkservices "Wi-Fi" "USB 10/100/1000 LAN" "AX88179A"
+  "Thunderbolt Bridge" "iPhone USB" "LG Monitor Controls"
 
-⏺ Update(src/pixelblaze/pb.py)
-  ⎿  Error: Interrupted by user
-  ⎿  Interrupted by user
+  Or just unplug the fucking ethernet when you need internet!
 
-✻ Thinking…
+  Now let me add all this bullshit to the notes:
 
-  The search results show that macOS uses network service order to determine priority, not 
-  individual route metrics. The key insights are:
+⏺ Update(NETWORKING-NOTES.md)
+  ⎿  Updated NETWORKING-NOTES.md with 83 additions                                            
+       168    networksetup -setdhcp "AX88179A"
+       169    ```
+       170    
+       171 +  ## ARP (Address Resolution Protocol)
+       172 +  
+       173 +  **What is ARP?** It's the "phone book" that translates IP addresses to MAC 
+           + addresses on your local network.
+       174 +  
+       175 +  ### How ARP Works
+       176 +  1. Device wants to reach an IP on same subnet
+       177 +  2. Broadcasts: "Who has IP x.x.x.x? Tell me your MAC!"
+       178 +  3. Target responds with its MAC address
+       179 +  4. Sender caches this MAC-to-IP mapping
+       180 +  5. Packets sent directly using MAC address
+       181 +  
+       182 +  ### ARP Commands
+       183 +  ```bash
+       184 +  # Show entire ARP table
+       185 +  arp -a
+       186 +  
+       187 +  # Show ARP entries for specific subnet
+       188 +  arp -a | grep "10.10.42"
+       189 +  
+       190 +  # Delete ARP entry (forces re-discovery)
+       191 +  sudo arp -d 10.10.42.68
+       192 +  
+       193 +  # Watch ARP in action
+       194 +  sudo arp -d 10.10.42.68  # Clear entry
+       195 +  ping -c 1 10.10.42.68     # Triggers ARP request
+       196 +  arp -a | grep "10.10.42"  # See new entry!
+       197 +  ```
+       198 +  
+       199 +  ### Key ARP Facts
+       200 +  - Only works on **same subnet** (can't ARP across routers)
+       201 +  - Entries expire after ~20 minutes
+       202 +  - No gateway needed for same-subnet communication
+       203 +  - `169.254.x.x` addresses also use ARP (link-local)
+       204 +  
+       205 +  ## Setting Up Manual IP for Direct Device Connection
+       206 +  
+       207 +  When connecting directly to devices like ArtNet controllers:
+       208 +  
+       209 +  ```bash
+       210 +  # Find your ethernet adapter name
+       211 +  networksetup -listallhardwareports | grep -A2 "Ethernet"
+       212 +  
+       213 +  # Set manual IP (permanent)
+       214 +  sudo networksetup -setmanual "USB 10/100/1000 LAN" 10.10.42.11 255.255.255.0 
+           + 10.10.42.1
+       215 +  
+       216 +  # Or temporary IP
+       217 +  sudo ifconfig en8 inet 10.10.42.11 netmask 255.255.255.0
+       218 +  
+       219 +  # Verify it worked
+       220 +  ifconfig en8 | grep "inet "
+       221 +  ping 10.10.42.68
+       222 +  
+       223 +  # Check ARP discovered the device
+       224 +  arp -a | grep "10.10.42"
+       225 +  ```
+       226 +  
+       227 +  ## The Fucking Network Priority Problem
+       228 +  
+       229 +  **CRITICAL:** macOS uses network service order to determine internet routing. If 
+           + a non-internet ethernet adapter is higher priority than WiFi, internet breaks!
+       230 +  
+       231 +  ### Check Service Order
+       232 +  ```bash
+       233 +  networksetup -listnetworkserviceorder
+       234 +  ```
+       235 +  
+       236 +  ### Fix Service Order (WiFi first for internet)
+       237 +  ```bash
+       238 +  sudo networksetup -ordernetworkservices "Wi-Fi" "USB 10/100/1000 LAN" "Other 
+           + Services..."
+       239 +  ```
+       240 +  
+       241 +  ### Why Ethernet Adapters Break Internet
+       242 +  1. Plug in ethernet adapter
+       243 +  2. macOS puts it high in priority (often #2)
+       244 +  3. Tries to route internet through it
+       245 +  4. But it has no real gateway/internet
+       246 +  5. **Internet dead** 🪦
+       247 +  
+       248 +  ### Solutions:
+       249 +  - **Reorder services** with WiFi first
+       250 +  - **Unplug ethernet** when not needed
+       251 +  - **Disable the service** in Network settings
+       252 +  - **Use different subnets** so routing is clear
+       253 +  
+       254    ## Common Issues & Solutions
+       255    
+       256    ### Issue: Ethernet has no IP address
 
-  1. macOS uses service order (configured in System Preferences) to determine which interface 
-  to use
-  2. Even with service order set, macOS will still route packets to the appropriate interface 
-  based on the destination network
-  3. The problem is that when connecting to PixelBlaze WiFi, macOS thinks that network should 
-  handle all traffic
+⏺ Added! The key insight: macOS prioritizes network interfaces, and new USB ethernet adapters 
+  often get placed ABOVE WiFi, breaking internet even when WiFi is connected.
 
-  The better approach might be:
-  1. Set the service order programmatically to ensure ethernet is first
-  2. Use scoped routes or more specific routing rules
-  3. Maybe use the route -ifscope command to limit WiFi routes to only that interface
+  The permanent fix is reordering services with WiFi first. The quick fix is unplugging the
+  fucking ethernet when you need internet.
 
-  Let me also search for more specific information about the route command and preventing WiFi
-   from taking over.
+  This explains why BOTH your ethernet adapters broke internet - they were getting higher
+  priority than WiFi!
 
-⏺ Web Search("macOS route -ifscope prevent WiFi taking over internet traffic ethernet
-            connected access point no internet")
-  ⎿  Did 1 search in 37s                                                                      
+> is there not a way to have Mac OS order, sure, but if there's no internet on the ordering, 
+  obviously don't try to route to web for that one in the order, move to next? is linux same 
+  misery? if there's no ethernet cable plugged in (Link inactive?) does it at least *NOT* try 
+  to route thru internet? this is batshit fuckky
 
-✻ Thinking…
+⏺ You're absolutely right - this IS batshit fucky! Most modern OSes should be smart enough to
+  skip interfaces without connectivity. Let me check what macOS is actually doing:
 
-  Based on the research, the issue is clearer now. The key points are:
+⏺ Bash(scutil --nwi)
+  ⎿  Network information               
 
-  1. macOS uses network service order to determine priority
-  2. When WiFi connects to an AP with no internet, it still tries to route through it
-  3. The solution is to either:
-    - Set the network service order with ethernet first
-    - Don't let WiFi create a default route
-    - Use more specific routing
+     IPv4 network interface information
+     … +20 lines (ctrl+r to expand)
 
-  The best approach seems to be:
-  1. Set network service order programmatically to ensure ethernet is first
-  2. After connecting to WiFi, delete the default route it creates
-  3. Add a specific route ONLY for 192.168.4.0/24 (the PixelBlaze subnet) through WiFi
+⏺ Interesting! macOS knows en0 (WiFi) is "Reachable" for internet. Your ethernet (en8) isn't
+  even listed as a network interface here. Let's check reachability flags:
 
-  Let me also address the "keep scanning" issue - the scan might be finishing too quickly 
-  before WiFi fully initializes.
+⏺ Bash(scutil -r google.com)
+  ⎿  Reachable
 
-⏺ Based on my research, the issue is that macOS uses network service order to determine
-  routing priority, and when WiFi connects, it creates a default route that overrides
-  ethernet. Here's the proper fix:
+⏺ So macOS KNOWS internet is reachable through WiFi. The problem is the routing table gets
+  fucked. Let's see:
 
-⏺ Update(src/pixelblaze/pb.py)
-  ⎿  Updated src/pixelblaze/pb.py with 13 additions and 4 removals                        
-       276                ['networksetup', '-setairportpower', manager.interface, 'on'],
-       277                capture_output=True
-       278            )
-       279 -          time.sleep(2)  # Give WiFi time to start
-       279 +          time.sleep(3)  # Give WiFi more time to fully start
-       280        else:
-       281            click.echo("WiFi is already on")
-       282        
-       283 -      # First scan for available PixelBlaze devices
-       283 +      # Scan for PixelBlaze devices - retry a few times as WiFi initializes
-       284        click.echo("Scanning for PixelBlaze devices in AP mode...")
-       285 -      networks = manager.scan_networks()
-       286 -      pixelblaze_networks = manager.find_pixelblaze_networks(networks)
-       285 +      pixelblaze_networks = []
-       286 +      for attempt in range(3):
-       287 +          networks = manager.scan_networks()
-       288 +          pixelblaze_networks = manager.find_pixelblaze_networks(networks)
-       289 +          
-       290 +          if pixelblaze_networks:
-       291 +              break
-       292 +          
-       293 +          if attempt < 2:
-       294 +              click.echo(f"  No devices found, retrying... ({attempt + 2}/3)")
-       295 +              time.sleep(3)
-       296        
-       297        if pixelblaze_networks:
-       298            click.secho(f"Found {len(pixelblaze_networks)} PixelBlaze device(s) 
-             broadcasting:", fg='green')
+⏺ Bash(route get 8.8.8.8 | grep interface)
+  ⎿    interface: en0
 
-✻ Thinking…
+⏺ OK so right now it's correctly using en0 (WiFi) for internet.
 
-  Now let me fix the routing issue properly. The research shows that:
-  1. We need to set the network service order
-  2. We should NOT create a default route through WiFi
-  3. We should only route the PixelBlaze subnet (192.168.4.0/24) through WiFi
+  The answers to your questions:
 
-  Let me update the routing fix section to do this properly.
+  1. macOS SHOULD be smarter - It has "reachability" APIs that know which interfaces have
+  internet. But the network service order still overrides this sometimes. It's a known pain
+  point.
+  2. Linux is actually BETTER - Linux uses metrics/weights for routes. Lower metric =
+  preferred. It can dynamically adjust based on connectivity. NetworkManager on Linux handles
+  this much more intelligently.
+  3. Unplugged cable (link down) - Yes! macOS is smart enough to skip interfaces with no link:
+  # When cable unplugged:
+  ifconfig en8 | grep "status"
+  # Shows: status: inactive
+  3. When inactive, macOS won't route through it.
+  4. The real problem - When your ethernet IS connected (to ArtNet controller) but has no
+  internet gateway, macOS still tries to use it because:
+    - Link is active ✓
+    - Has an IP ✓
+    - Higher priority ✓
+    - "Must want internet!" ✗ (wrong!)
 
-⏺ Now let's fix the routing properly based on the research:
+  Better solutions that SHOULD exist:
 
-⏺ Update(src/pixelblaze/pb.py)
-  ⎿  Updated src/pixelblaze/pb.py with 64 additions and 11 removals                           
-       410        if manager.connect_to_network(device['ssid']):
-       411            click.secho(f"✅ Connected to {device['ssid']}", fg='green')
-       412            
-       413 -          # Always fix routes to maintain internet
-       413 +          # Fix network routing to maintain internet through ethernet
-       414            if ethernet_gateway:
-       415 -              click.echo(f"\nFixing routes to maintain internet via 
-     {ethernet_interface}...")
-           - {ethernet_interface}...")
-       415 +              click.echo(f"\nFixing network routing to maintain internet via 
-     {ethernet_interface}...")
-           + {ethernet_interface}...")
-       416                
-       417 -              # Delete any default route through WiFi
-       417 +              # Step 1: Set network service order to prioritize ethernet
-       418 +              click.echo("  Setting network service order (ethernet first)...")
-       419 +              # Get list of network services
-       420 +              services_out = subprocess.run(
-       421 +                  ['networksetup', '-listnetworkserviceorder'],
-       422 +                  capture_output=True,
-       423 +                  text=True
-       424 +              ).stdout
-       425 +              
-       426 +              # Find ethernet service name (might be "USB 10/100/1000 LAN" or 
-           + "AX88179A" etc)
-       427 +              ethernet_service = None
-       428 +              for line in services_out.split('\n'):
-       429 +                  if ethernet_interface in line:
-       430 +                      # Previous line has the service name
-       431 +                      idx = services_out.split('\n').index(line)
-       432 +                      if idx > 0:
-       433 +                          service_line = services_out.split('\n')[idx - 1]
-       434 +                          if ')' in service_line:
-       435 +                              ethernet_service = service_line.split(')', 
-           + 1)[1].strip()
-       436 +                              break
-       437 +              
-       438 +              if ethernet_service:
-       439 +                  # Set ethernet as highest priority
-       440 +                  subprocess.run(
-       441 +                      ['networksetup', '-ordernetworkservices', ethernet_service, 
-           + 'Wi-Fi'],
-       442 +                      capture_output=True
-       443 +                  )
-       444 +                  click.echo(f"  Set {ethernet_service} as primary network")
-       445 +              
-       446 +              # Step 2: Remove any default routes created by WiFi
-       447 +              click.echo("  Removing WiFi default routes...")
-       448                subprocess.run(
-       449 -                  ['sudo', 'route', 'delete', 'default', '-ifscope', 'en0'],
-       449 +                  ['sudo', 'route', 'delete', 'default', '-interface', 'en0'],
-       450                    capture_output=True
-       451                )
-       452                
-       453 -              # Ensure ethernet route is primary
-       453 +              # Step 3: Ensure ethernet has the default route
-       454 +              click.echo(f"  Ensuring default route via ethernet 
-           + ({ethernet_gateway})...")
-       455                subprocess.run(
-       456 -                  ['sudo', 'route', 'delete', 'default', ethernet_gateway],
-       456 +                  ['sudo', 'route', 'delete', 'default'],
-       457                    capture_output=True
-       458                )
-       459                subprocess.run(
-     ...
-       430                    capture_output=True
-       431                )
-       432                
-       433 -              # Test internet
-       434 -              test = subprocess.run(
-       433 +              # Step 4: Add specific route for PixelBlaze subnet ONLY
-       434 +              click.echo("  Adding route for PixelBlaze (192.168.4.0/24) via 
-     WiFi...")
-           + WiFi...")
-       435 +              subprocess.run(
-       436 +                  ['sudo', 'route', 'add', '-net', '192.168.4.0/24', '-interface', 
-           + 'en0'],
-       437 +                  capture_output=True
-       438 +              )
-       439 +              
-       440 +              # Test both connections
-       441 +              click.echo("\nTesting connections:")
-       442 +              
-       443 +              # Test internet via ethernet
-       444 +              internet_test = subprocess.run(
-       445                    ['ping', '-c', '1', '-t', '1', '8.8.8.8'],
-       446                    capture_output=True
-       447                )
-       448                
-       449 -              if test.returncode == 0:
-       450 -                  click.secho("✅ Internet still working via ethernet!", 
-     fg='green')
-           - fg='green')
-       449 +              if internet_test.returncode == 0:
-       450 +                  click.secho("  ✅ Internet working via ethernet", fg='green')
-       451                else:
-       452 -                  click.secho("⚠️  Internet test failed", fg='yellow')
-       452 +                  click.secho("  ❌ Internet test failed", fg='red')
-       453 +                  click.echo("  Try: sudo route add default " + ethernet_gateway)
-       454 +              
-       455 +              # Test PixelBlaze access
-       456 +              pb_test = subprocess.run(
-       457 +                  ['ping', '-c', '1', '-t', '1', '192.168.4.1'],
-       458 +                  capture_output=True
-       459 +              )
-       460 +              
-       461 +              if pb_test.returncode == 0:
-       462 +                  click.secho("  ✅ PixelBlaze accessible via WiFi", fg='green')
-       463 +              else:
-       464 +                  click.echo("  ⚠️  Can't ping PixelBlaze yet (may still be 
-           + connecting)")
-       465            
-       466            click.echo(f"\nPixelBlaze config page: http://{AP_IP}")
-       467            
+  # This SHOULD work but doesn't always:
+  sudo route add -ifscope en8 10.10.42.0/24
+  # Meaning: "only use en8 for 10.10.42.x"
 
-✻ Thinking…
+  # Or network locations (sort of works):
+  networksetup -createlocation "ArtNet Work" populate
+  networksetup -switchtolocation "ArtNet Work"
+  # Different network configs per location
 
-  OK, I've made several improvements:
+  The nuclear option that actually works:
+  # Disable IPv4 on the ethernet entirely except for specific subnet
+  sudo route add -net 10.10.42.0/24 -interface en8
+  sudo route delete default -interface en8  # Remove its default route
 
-  1. WiFi scanning: Now retries up to 3 times with 3-second delays to ensure WiFi is fully 
-  initialized
-  2. Proper network routing fix:
-    - Sets network service order to prioritize ethernet 
-    - Removes default routes created by WiFi
-    - Ensures ethernet has the default route for internet
-    - Adds a SPECIFIC route only for 192.168.4.0/24 (PixelBlaze subnet) through WiFi
-    - Tests both internet and PixelBlaze connectivity
+  You're right to be pissed. This should "just work" in 2024. Windows is actually better at
+  this, and Linux NetworkManager handles it best. macOS network stack is showing its age here.
 
-  This is the "correct" way according to macOS networking:
-  - Network service order determines priority
-  - Remove WiFi's default route so it doesn't take over
-  - Add only specific routes for the subnet you need through WiFi
-  - Keep default/internet route through ethernet
+> hm, but for your tests, it was while dongle was unplugged. (because of i'll lose you 
+  otherwise!!!). so it's not an accurate test? write a quick bash for all these diagnostics, 
+  that i can run and give back to you if we're disconnected (WHEN we're disconnected, 
+  #amirite?). Also add all these to the notes!
 
-  This should finally fix the issue where connecting to WiFi kills internet!
+⏺ You're absolutely right - I was testing while disconnected, which doesn't show the actual
+  problem! Let me create a diagnostic script you can run when the dongle IS connected (and
+  breaking everything):
 
-⏺ Perfect! I've made two major fixes based on networking best practices:
+⏺ Write(src/pixelblaze/network_diagnostic.sh)
+  ⎿  Wrote 75 lines to src/pixelblaze/network_diagnostic.sh
+     #!/bin/bash
+     # Network Diagnostic Script
+     # Run this when ethernet adapter is breaking internet
+     # Save output to share when reconnected
+     echo "==================================="
+     echo "NETWORK DIAGNOSTIC REPORT"
+     echo "Time: $(date)"
+     echo "==================================="
+     … +65 lines (ctrl+r to expand)
 
-  1. WiFi Scanning Fix
+⏺ Bash(chmod +x /Users/jmarnell/src/iqe/src/pixelblaze/network_diagnostic.sh)
+  ⎿  (No content)
 
-  - Now retries up to 3 times with 3-second delays
-  - Gives WiFi time to fully initialize after turning on
+⏺ Now let's add all this diagnostic info to the notes:
 
-  2. Proper Network Routing (the RIGHT way):
+⏺ Update(NETWORKING-NOTES.md)
+  ⎿  Updated NETWORKING-NOTES.md with 78 additions                                            
+       251    - **Disable the service** in Network settings
+       252    - **Use different subnets** so routing is clear
+       253    
+       254 +  ### Advanced Diagnostics
+       255 +  
+       256 +  #### Check macOS Network Reachability
+       257 +  ```bash
+       258 +  # What interfaces does macOS think can reach internet?
+       259 +  scutil --nwi
+       260 +  
+       261 +  # Can macOS reach a specific host?
+       262 +  scutil -r google.com
+       263 +  
+       264 +  # Which interface would be used for internet?
+       265 +  route get 8.8.8.8 | grep interface
+       266 +  ```
+       267 +  
+       268 +  #### Interface Status Commands
+       269 +  ```bash
+       270 +  # Check if cable is connected (link status)
+       271 +  ifconfig en8 | grep "status"
+       272 +  # active = cable connected
+       273 +  # inactive = no cable
+       274 +  
+       275 +  # See all UP interfaces
+       276 +  ifconfig | grep -E "^[a-z].*: flags=.*<UP"
+       277 +  
+       278 +  # Check interface metrics/priority
+       279 +  route -n get default -ifscope en0
+       280 +  ```
+       281 +  
+       282 +  #### Quick Fixes When Internet Breaks
+       283 +  ```bash
+       284 +  # Option 1: Delete bad default route
+       285 +  sudo route delete default -ifscope en8
+       286 +  
+       287 +  # Option 2: Force route through WiFi
+       288 +  sudo route add default 192.168.0.1 -ifscope en0
+       289 +  
+       290 +  # Option 3: Temporarily disable IPv4 on ethernet
+       291 +  sudo networksetup -setv4off "USB 10/100/1000 LAN"
+       292 +  
+       293 +  # Option 4: Create location without ethernet
+       294 +  networksetup -createlocation "Internet Only" populate
+       295 +  networksetup -switchtolocation "Internet Only"
+       296 +  ```
+       297 +  
+       298 +  ### Network Diagnostic Script
+       299 +  
+       300 +  Run `src/pixelblaze/network_diagnostic.sh` when ethernet breaks internet:
+       301 +  ```bash
+       302 +  ./src/pixelblaze/network_diagnostic.sh > network_broken.txt
+       303 +  ```
+       304 +  
+       305 +  This captures:
+       306 +  - Service order
+       307 +  - Active interfaces
+       308 +  - Default routes
+       309 +  - Reachability status
+       310 +  - Which interface is being used
+       311 +  - Ping/DNS tests
+       312 +  - Quick fix commands
+       313 +  
+       314 +  ### Why macOS Is Dumb About This
+       315 +  
+       316 +  **What SHOULD happen:**
+       317 +  - Check reachability before routing
+       318 +  - Skip interfaces without gateways for internet
+       319 +  - Use metrics/weights like Linux
+       320 +  - Detect "local only" networks
+       321 +  
+       322 +  **What ACTUALLY happens:**
+       323 +  - Blindly follows service order
+       324 +  - Sees active link + IP = "must be internet!"
+       325 +  - Doesn't test actual connectivity
+       326 +  - Routes everything to dead end
+       327 +  
+       328 +  **Linux does it better:** NetworkManager uses connection profiles and dynamic 
+           + metrics
+       329 +  **Windows does it better:** Automatic metric assignment based on link speed/type
+       330 +  **macOS:** "lol get fucked, unplug your cable"
+       331 +  
+       332    ## Common Issues & Solutions
+       333    
+       334    ### Issue: Ethernet has no IP address
 
-  The new approach follows macOS networking principles:
+⏺ Perfect! Now you have:
 
-  1. Sets network service order - Makes ethernet the primary service
-  2. Removes WiFi default routes - Prevents WiFi from hijacking all traffic
-  3. Ensures ethernet keeps default route - For internet traffic
-  4. Adds ONLY specific route for PixelBlaze - Routes ONLY 192.168.4.0/24 through WiFi
+  1. A diagnostic script (network_diagnostic.sh) that captures everything when the dongle
+  breaks internet
+  2. All the diagnostic commands documented
+  3. Quick fixes to try when disconnected
+  4. The truth about how dumb macOS is about this
 
-  This way:
-  - Internet traffic → Ethernet (192.168.0.1)
-  - PixelBlaze traffic → WiFi (192.168.4.1)
-  - No conflict!
+  When you plug in the dongle and internet dies:
+  # Run diagnostic and save output
+  ./src/pixelblaze/network_diagnostic.sh > fucked_network.txt
 
-  The key insight from research: macOS uses network service order not just route metrics. When
-   WiFi connects, it creates a default route that overrides everything. The solution is to:
-  - Delete WiFi's default route
-  - Keep ethernet's default route
-  - Add a specific route ONLY for the PixelBlaze subnet
+  # Try quick fix #1 (delete bad route)
+  sudo route delete default -ifscope en8
 
-  This should finally solve the "WiFi kills internet" problem!
+  # If that works, share fucked_network.txt when reconnected
 
-> thought of something else (im dumb). I have Mac internet sharing turned on... wifi to this 
-  dongle (for the Pi!!!)
-  ⎿ API Error: 400 
-    {"type":"error","error":{"type":"invalid_request_error","message":"messages.287: 
-    `tool_use` ids were found without `tool_result` blocks immediately after: 
-    toolu_01QQykYagTtcGwWBg3oK9i5B. Each `tool_use` block must have a corresponding 
-    `tool_result` block in the next message."}}
+  The script will show exactly which interface macOS is trying to use, what routes exist, and
+  whether it KNOWS internet is reachable (but ignores it anyway because... Apple).
 
-> thought of something else (im dumb). I have Mac internet sharing turned on... wifi to this 
-  dongle (for the Pi!!!)
-  ⎿ API Error: 400 
-    {"type":"error","error":{"type":"invalid_request_error","message":"messages.287: 
-    `tool_use` ids were found without `tool_result` blocks immediately after: 
-    toolu_01QQykYagTtcGwWBg3oK9i5B. Each `tool_use` block must have a corresponding 
-    `tool_result` block in the next message."}}
+> ill plug in. run your own test commands now.
 
-> thought of something else (im dumb). I have Mac internet sharing turned on... wifi to this 
-  dongle (for the Pi!!!)
-  ⎿ API Error: 400 
-    {"type":"error","error":{"type":"invalid_request_error","message":"messages.287: 
-    `tool_use` ids were found without `tool_result` blocks immediately after: 
-    toolu_01QQykYagTtcGwWBg3oK9i5B. Each `tool_use` block must have a corresponding 
-    `tool_result` block in the next message."}}
+⏺ Bash(echo "=== BEFORE PLUG IN ===" && networksetup -listnetworkserviceorder | head -10 &&
+      echo -e "\n=== CURRENT ROUTES ===" && netstat -rn | grep "^default" | head…)
+  ⎿  === BEFORE PLUG IN ===                                     
+     An asterisk (*) denotes that a network service is disabled.
+     (1) Wi-Fi
+     … +18 lines (ctrl+r to expand)
 
-> are we online?
-  ⎿ API Error: 400 
-    {"type":"error","error":{"type":"invalid_request_error","message":"messages.287: 
-    `tool_use` ids were found without `tool_result` blocks immediately after: 
-    toolu_01QQykYagTtcGwWBg3oK9i5B. Each `tool_use` block must have a corresponding 
-    `tool_result` block in the next message."}}
+⏺ Good! WiFi is #1 priority now, internet works. Go ahead and plug in the dongle. I'll run
+  tests:
+
+⏺ Bash(sleep 3 && echo "=== AFTER PLUG IN ===" && echo -e "\n1. INTERFACE STATUS:" && ifconfig
+       en8 | grep -E "status|inet " && echo -e "\n2. NEW ROUTES:" && netstat -r…)
+  ⎿  Error: grep: conflicting matchers specified
+
+     === AFTER PLUG IN ===
+
+     1. INTERFACE STATUS:
+
+⏺ Bash(echo "=== CHECKING EN8 ===" && ifconfig en8 | grep "status" && ifconfig en8 | grep
+      "inet " && echo -e "\n=== ROUTES ===" && netstat -rn | grep "^default" | head…)
+  ⎿  === CHECKING EN8 ===                                      
+     	status: active
+     	inet 10.10.42.11 netmask 0xffffff00 broadcast 10.10.42.255
+     … +16 lines (ctrl+r to expand)
+
+⏺ HOLY SHIT IT'S WORKING! 🎉
+
+  - en8 is active with 10.10.42.11 ✓
+  - Default routes still through en0 (WiFi) ✓
+  - Internet routing using en0 ✓
+  - Ping works ✓
+
+  The fix worked! Having WiFi as #1 in service order means even with the ethernet plugged in,
+  internet still routes through WiFi. Let me verify the ArtNet controller is still reachable:
+
+⏺ Bash(ping -c 2 10.10.42.68)
+  ⎿  PING 10.10.42.68 (10.10.42.68): 56 data bytes              
+     64 bytes from 10.10.42.68: icmp_seq=0 ttl=255 time=0.709 ms
+     64 bytes from 10.10.42.68: icmp_seq=1 ttl=255 time=0.619 ms
+     … +4 lines (ctrl+r to expand)
+
+⏺ PERFECT! Both work:
+  - Internet through WiFi (en0) → 192.168.0.1 → internet
+  - ArtNet through Ethernet (en8) → 10.10.42.68 direct
+
+  The service order fix is working! This should survive reboots too. The key was putting WiFi
+  first in the priority list.
+
+> both work... FOR NOW. it mysteriously died before. but also, i did the re ordering, so, test
+   is less accurate now. ah well
+
+⏺ You're absolutely right - we changed the test conditions by reordering, so we don't know if
+  it would have broken THIS time. And yeah, the mysterious death could still happen. macOS
+  networking is like a moody teenager.
+
+  Let's at least document the current working state for when it inevitably breaks again:
+
+⏺ Bash(echo "=== WORKING STATE SNAPSHOT ===" && date && echo -e "\nService Order:" &&
+      networksetup -listnetworkserviceorder | head -8 && echo -e "\nRoutes:" && netstat…)
+  ⎿  === WORKING STATE SNAPSHOT ===
+     Thu Aug 14 04:49:21 PDT 2025
+     … +23 lines (ctrl+r to expand)
+
+⏺ Wait, look at that! There's now a NEW default route through en8 to 10.10.42.1! That wasn't
+  there before. macOS added it sometime after plugging in. This could be the time bomb - if
+  that route gets higher priority, boom, internet dead.
+
+  Let's see the route priorities:
+
+⏺ Bash(netstat -rn | grep "^default" | awk '{print $1, $2, $6, $NF}' | head -5)
+  ⎿  default 192.168.0.1  en0     
+     default link#26  utun6
+     default 10.10.42.1  en8
+     … +2 lines (ctrl+r to expand)
+
+⏺ So there are THREE IPv4 default routes now:
+  1. 192.168.0.1 via en0 (WiFi) - real internet
+  2. link#26 via utun6 (VPN tunnel?)
+  3. 10.10.42.1 via en8 (ethernet) - goes nowhere!
+
+  The en0 route is listed first, so it's winning FOR NOW. But this could change randomly
+  because macOS. The "mysterious death" might be when macOS decides to reorder these or give
+  en8 priority.
+
+  You could delete the bogus route as prevention:
+  sudo route delete default 10.10.42.1
+
+  But it'll probably come back. The real fix would be telling macOS "en8 is LOCAL ONLY, never
+  use for internet" but there's no clean way to do that.
+
+  At least now we know what to look for when it breaks:
+  - Check if 10.10.42.1 en8 became the first default route
+  - Delete it if so
+  - Curse Tim Apple
+
+> add notes!
+
+⏺ Update(NETWORKING-NOTES.md)
+  ⎿  Updated NETWORKING-NOTES.md with 57 additions                                            
+       329    **Windows does it better:** Automatic metric assignment based on link speed/type
+       330    **macOS:** "lol get fucked, unplug your cable"
+       331    
+       332 +  ### The Mystery of Multiple Default Routes
+       333 +  
+       334 +  macOS can have MULTIPLE default routes simultaneously:
+       335 +  ```bash
+       336 +  # See all default routes
+       337 +  netstat -rn | grep "^default"
+       338 +  
+       339 +  # Example of problematic state:
+       340 +  default 192.168.0.1        en0     # Real internet (WiFi)
+       341 +  default 10.10.42.1         en8     # Fake gateway (ethernet to ArtNet)
+       342 +  default link#26            utun6   # VPN tunnel
+       343 +  ```
+       344 +  
+       345 +  **The Time Bomb:** Even with correct service order, macOS may ADD a default 
+     route
+           +  for ethernet after connecting. This route might randomly become primary, killing 
+           + internet.
+       346 +  
+       347 +  #### Check which route is actually being used:
+       348 +  ```bash
+       349 +  # Which interface for internet?
+       350 +  route get 8.8.8.8 | grep interface
+       351 +  
+       352 +  # Delete bogus default routes
+       353 +  sudo route delete default 10.10.42.1
+       354 +  ```
+       355 +  
+       356 +  #### Why Internet Randomly Dies Later:
+       357 +  1. **Initially:** WiFi route has priority, everything works
+       358 +  2. **macOS adds:** Default route through ethernet (even though it goes nowhere)
+       359 +  3. **Something triggers:** Route table recalculation (sleep/wake, network 
+     change,
+           +  phase of moon)
+       360 +  4. **macOS decides:** "Let's try ethernet first now!"
+       361 +  5. **Result:** Internet dead, you're fucked
+       362 +  
+       363 +  #### Prevention (sort of):
+       364 +  ```bash
+       365 +  # Delete the bad route when you see it
+       366 +  sudo route delete default 10.10.42.1
+       367 +  
+       368 +  # Or remove all default routes for specific interface
+       369 +  sudo route delete default -ifscope en8
+       370 +  
+       371 +  # Nuclear option: Flush all routes and rebuild
+       372 +  sudo route -n flush
+       373 +  # (WiFi will rebuild its routes automatically)
+       374 +  ```
+       375 +  
+       376 +  #### Monitoring for the Time Bomb:
+       377 +  ```bash
+       378 +  # Watch routes in real-time
+       379 +  while true; do 
+       380 +      clear
+       381 +      echo "=== $(date +%H:%M:%S) ==="
+       382 +      netstat -rn | grep "^default"
+       383 +      echo ""
+       384 +      echo "Internet via: $(route get 8.8.8.8 | grep interface | awk '{print 
+     $2}')"
+       385 +      sleep 5
+       386 +  done
+       387 +  ```
+       388 +  
+       389    ## Common Issues & Solutions
+       390    
+       391    ### Issue: Ethernet has no IP address
+
+> /export
+
+⏺ Added! The notes now include:
+
+  1. The Multiple Default Routes problem - why macOS has 3+ default routes
+  2. The Time Bomb explanation - why internet randomly dies LATER even when it initially works
+  3. Monitoring script - to watch the routes in real-time and catch when it changes
+  4. Prevention commands - to delete bogus routes before they take over
+
+  The key insight: Even with correct service order, macOS sneakily adds default routes that
+  can randomly become primary later. It's not just about the initial connection - it's about
+  what macOS decides to do 5 minutes, an hour, or a day later when it recalculates routes.
+
+  The mystery is somewhat solved, but the solution is still "keep deleting bad routes" or
+  "unplug the fucking cable." Classic macOS networking!
 

@@ -284,7 +284,7 @@ quick video: https://www.youtube.com/shorts/jStYmAj-Le8
 - Desktop has link to these notes, and link to Run / Start Command
 - Verify LX Starts via clicking command
 
-### On Playa
+### Important / On Playa
 - Connect power and ethernet for pixlite, router, laptop
 - Each of these should get IP's of 10.10.42.xx, plus they should be:
   - IQE router: ?? (probably 10.10.42.1 ?)
@@ -292,7 +292,10 @@ quick video: https://www.youtube.com/shorts/jStYmAj-Le8
   - IQE laptop: ?? (hopefully hostname is "iqe", not even with ".local", for easy connect via device?), maybe it was 10.10.42.42 (btw this would be the *adapter* IP, right?)
   - Swider's Pknight: 10.10.42.68
   - j5 Anker Dongle (often wifi shared), gets link local garbage of 169.254.81.171 , and 192.168.2.X (2.1?) when "bridge100" Mac Internet from WiFi sharing is active (RPi gets similar ;via DHCP)
-- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
+- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` 
+  here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
+- U'King ParCans, recharge-able battery, model: ZQ01104
+
 ```bash
 node ~/src/iqe/src/nodejs/buildProject.js
 ```

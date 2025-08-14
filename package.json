@@ -1,0 +1,57 @@
+{
+  "name": "iqe",
+  "version": "2.0.0",
+  "description": "IQE LED Control System - Chromatik/LX Studio controls, ArtNet visualization, and audio reactive tools",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnnyMarnell/iqe.git"
+  },
+  "author": "IQE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JohnnyMarnell/iqe/issues"
+  },
+  "homepage": "https://github.com/JohnnyMarnell/iqe#readme",
+  "scripts": {
+    "// Main Tools": "",
+    "render": "cd src/touch-designer/iqe-artnet-electron && npm run start",
+    "render:dev": "cd src/touch-designer/iqe-artnet-electron && npm run dev",
+    "render:build": "cd src/touch-designer/iqe-artnet-electron && npm run build",
+    
+    "// Control UI": "",
+    "control": "cd src/control-ui && npm run start",
+    "control:dev": "cd src/control-ui && npm run dev",
+    "control:build": "cd src/control-ui && npm run build",
+    "midi": "cd src/control-ui && npm run midi",
+    
+    "// NodeJS OSC Bridge": "",
+    "bridge": "cd src/nodejs && npm run start",
+    "lxp": "cd src/nodejs && npm run lxp",
+    
+    "// Java/Chromatik": "",
+    "build:java": "./mvnw clean package -DskipTests",
+    "run:lx": "./RUN.sh",
+    
+    "// Setup": "",
+    "install:all": "npm install && cd src/control-ui && npm install && cd ../nodejs && npm install && cd ../touch-designer/iqe-artnet-electron && npm install",
+    "clean": "rm -rf node_modules src/*/node_modules src/*/*/node_modules",
+    
+    "// Development": "",
+    "dev": "concurrently \"npm run render:dev\" \"npm run control:dev\" \"npm run bridge\"",
+    "test": "echo \"Run tests in individual packages\" && exit 0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "osc-js": "^2.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.5"
+  },
+  "workspaces": [
+    "src/control-ui",
+    "src/nodejs",
+    "src/touch-designer/iqe-artnet-electron"
+  ]
+}
