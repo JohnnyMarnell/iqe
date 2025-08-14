@@ -23,11 +23,26 @@ interface Stats {
   lastPacket: number;
 }
 
+interface SocketBinding {
+  socket: dgram.Socket;
+  ip: string;
+  port: number;
+  name: string;
+}
+
+interface ParCanData {
+  r: number;
+  g: number;
+  b: number;
+  universe: number;
+  channel: number;
+  lastUpdate: number;
+}
+
 export class ArtNetReceiver {
-  private socket: dgram.Socket | null = null;
-  private bindIp = '0.0.0.0';
-  private port = 6454; // Standard ArtNet port
+  private sockets: SocketBinding[] = [];
   private running = false;
+  private seenSources = new Set<string>();
 
   // LED configuration - 420x24 grid
   private readonly width = 420;
@@ -39,6 +54,9 @@ export class ArtNetReceiver {
   private universes: Map<number, UniverseData> = new Map();
   private universeMap: Map<number, UniverseMapping[]> = new Map();
 
+  // ParCan fixtures data
+  private parCans: Map<string, ParCanData> = new Map();
+
   // Statistics
   private packetCount = 0;
   private lastPacketTime = 0;
@@ -48,6 +66,21 @@ export class ArtNetReceiver {
     // Initialize pixel buffer (height x width x 3 for RGB)
     this.pixels = new Uint8Array(this.height * this.width * 3);
     this.buildUniverseMap();
+    
+    // Initialize ParCan data
+    this.parCans.set('parcan1', {
+      r: 0, g: 0, b: 0,
+      universe: 1,
+      channel: 1, // 0-indexed, so channel 2 in DMX
+      lastUpdate: 0
+    });
+    
+    this.parCans.set('parcan2', {
+      r: 0, g: 0, b: 0,
+      universe: 1,
+      channel: 8, // 0-indexed, so channel 9 in DMX
+      lastUpdate: 0
+    });
     
     // Periodic status log
     setInterval(() => {
@@ -59,19 +92,28 @@ export class ArtNetReceiver {
             nonZeroPixels++;
           }
         }
-        console.log(`ArtNet status: ${this.packetCount} packets, ${this.universes.size} universes, ${nonZeroPixels} lit pixels`);
+        
+        // Check ParCan status
+        let parCanStatus = '';
+        this.parCans.forEach((data, name) => {
+          if (data.r > 0 || data.g > 0 || data.b > 0) {
+            parCanStatus += ` ${name}:RGB(${data.r},${data.g},${data.b})`;
+          }
+        });
+        
+        console.log(`ArtNet status: ${this.packetCount} packets, ${this.universes.size} universes, ${nonZeroPixels} lit pixels${parCanStatus}`);
       }
     }, 2000);
   }
 
   private buildUniverseMap(): void {
-    let currentUniverse = 1;
+    let currentUniverse = 1; // Main grid starts at universe 1
 
     for (let row = 0; row < 24; row++) {
       // Apply vertical flip - Row 1 in LX appears at bottom
       const visualRow = 23 - row;
 
-      // Based on actual data pattern:
+      // Based on actual data pattern for PixLite controller:
       // Universe pattern: 510, 510, 240 bytes repeating
 
       // First universe: 510 bytes = 170 pixels max
@@ -104,40 +146,60 @@ export class ArtNetReceiver {
   }
 
   start(): void {
-    this.socket = dgram.createSocket('udp4');
+    // Default binding for main LED grid (PixLite controller)
+    this.addSocketBinding('0.0.0.0', 6454, 'Main LED Grid');
     
-    this.socket.on('message', (data, rinfo) => {
-      // Only log first packet
-      if (this.packetCount === 0) {
-        console.log(`First packet received from ${rinfo.address}:${rinfo.port}, size: ${data.length}`);
+    // Additional binding for ParCan controller if needed
+    // Note: Usually one port can receive from multiple controllers
+    // but we can add multiple bindings if needed
+    // this.addSocketBinding('0.0.0.0', 6455, 'ParCan Controller');
+    
+    this.running = true;
+  }
+
+  private addSocketBinding(ip: string, port: number, name: string): void {
+    const socket = dgram.createSocket('udp4');
+    
+    socket.on('message', (data, rinfo) => {
+      // Log first packet from each unique source
+      const sourceKey = `${rinfo.address}:${rinfo.port}`;
+      if (!this.seenSources.has(sourceKey)) {
+        this.seenSources.add(sourceKey);
+        const controllerName = 
+          rinfo.address === '10.10.42.68' ? 'Pknight ParCan Controller' :
+          rinfo.address === '10.10.42.80' ? 'PixLite LED Controller' :
+          rinfo.address === '127.0.0.1' ? 'Localhost (Test)' :
+          'Unknown Controller';
+        console.log(`${name}: First packet from ${controllerName} at ${rinfo.address}:${rinfo.port}, size: ${data.length}`);
       }
-      this.processArtNetPacket(data, rinfo.address);
+      this.processArtNetPacket(data, rinfo.address, name);
     });
 
-    this.socket.on('error', (err) => {
-      console.error('ArtNet receiver error:', err);
+    socket.on('error', (err) => {
+      console.error(`${name} ArtNet error:`, err);
     });
 
-    this.socket.on('listening', () => {
-      const address = this.socket!.address();
-      console.log(`ArtNet receiver listening on ${address.address}:${address.port}`);
+    socket.on('listening', () => {
+      const address = socket.address();
+      console.log(`${name} listening on ${address.address}:${address.port}`);
     });
 
-    this.socket.bind(this.port, this.bindIp, () => {
-      this.running = true;
-      console.log(`ArtNet receiver bound to ${this.bindIp}:${this.port}`);
+    socket.bind(port, ip, () => {
+      console.log(`${name} bound to ${ip}:${port}`);
     });
+
+    this.sockets.push({ socket, ip, port, name });
   }
 
   stop(): void {
     this.running = false;
-    if (this.socket) {
-      this.socket.close();
-      this.socket = null;
+    for (const binding of this.sockets) {
+      binding.socket.close();
     }
+    this.sockets = [];
   }
 
-  private processArtNetPacket(data: Buffer, addr: string): void {
+  private processArtNetPacket(data: Buffer, addr: string, source: string): void {
     if (data.length < 18) {
       return;
     }
@@ -178,8 +240,45 @@ export class ArtNetReceiver {
       time: this.lastPacketTime
     });
 
-    // Update pixel buffer
-    this.updatePixelsMapped(universe, dmxData);
+    // Route based on source IP address
+    // ParCan controller is at 10.10.42.68
+    // PixLite controller is at 10.10.42.80
+    if (addr === '10.10.42.68' && universe === 1) {
+      // ParCan data from Pknight controller
+      this.updateParCans(dmxData);
+    } else if (addr === '10.10.42.80' || addr === '127.0.0.1') {
+      // Main LED grid data from PixLite controller (or localhost for testing)
+      this.updatePixelsMapped(universe, dmxData);
+    } else {
+      // Unknown source, try to process as main grid
+      this.updatePixelsMapped(universe, dmxData);
+    }
+  }
+
+  private updateParCans(dmxData: Buffer): void {
+    const currentTime = Date.now();
+    
+    // Update each ParCan
+    this.parCans.forEach((parCan, name) => {
+      if (parCan.universe === 1) {
+        const channelStart = parCan.channel;
+        
+        // Make sure we have enough data
+        if (dmxData.length > channelStart + 2) {
+          parCan.r = dmxData[channelStart];
+          parCan.g = dmxData[channelStart + 1];
+          parCan.b = dmxData[channelStart + 2];
+          parCan.lastUpdate = currentTime;
+          
+          // Log significant changes
+          if (parCan.r > 10 || parCan.g > 10 || parCan.b > 10) {
+            if (this.packetCount % 30 === 0) { // Log every second at 30fps
+              console.log(`${name}: RGB(${parCan.r}, ${parCan.g}, ${parCan.b})`);
+            }
+          }
+        }
+      }
+    });
   }
 
   private updatePixelsMapped(universe: number, dmxData: Buffer): void {
@@ -213,6 +312,10 @@ export class ArtNetReceiver {
     return this.pixels;
   }
 
+  getParCans(): Map<string, ParCanData> {
+    return this.parCans;
+  }
+
   getStats(): Stats {
     const currentTime = Date.now();
     const activeUniverses: number[] = [];
@@ -224,7 +327,7 @@ export class ArtNetReceiver {
       }
     });
 
-    // Get expected universes
+    // Get expected universes (universe 1 is shared between ParCans and main grid)
     const expectedUniverses = Array.from(this.universeMap.keys());
     const missingUniverses = expectedUniverses.filter(u => !activeUniverses.includes(u));
 

@@ -2,9 +2,19 @@
 (() => {
   interface ArtNetAPI {
     getPixels: () => Promise<number[]>;
+    getParCans: () => Promise<{ [key: string]: ParCanData }>;
     getStats: () => Promise<Stats>;
     setConfig: (config: { spacedRows?: boolean }) => Promise<void>;
     fatalError: (message: string) => Promise<void>;
+  }
+
+  interface ParCanData {
+    r: number;
+    g: number;
+    b: number;
+    universe: number;
+    channel: number;
+    lastUpdate: number;
   }
 
   interface Stats {
@@ -23,6 +33,8 @@
 class LEDVisualizer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
+  private parcanvas: HTMLCanvasElement;
+  private parcanvasCtx: CanvasRenderingContext2D;
   private canvasInfo: HTMLElement;
   private spacedMode = false;
   private showGrid = true;
@@ -53,6 +65,8 @@ class LEDVisualizer {
   constructor() {
     this.canvas = document.getElementById('led-canvas') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d', { alpha: false })!;
+    this.parcanvas = document.getElementById('parcanvas') as HTMLCanvasElement;
+    this.parcanvasCtx = this.parcanvas.getContext('2d', { alpha: false })!;
     this.canvasInfo = document.getElementById('canvas-info')!;
     this.logContainer = document.getElementById('log-container')!;
     
@@ -154,7 +168,7 @@ class LEDVisualizer {
     const containerWidth = container.clientWidth - 40; // Padding
     const containerHeight = container.clientHeight - 40;
     
-    // Calculate display dimensions
+    // Calculate display dimensions for main canvas ONLY
     if (this.spacedMode) {
       // Dynamic spacing based on slider
       this.displayHeight = 24 + 23 * this.rowGap;
@@ -165,9 +179,10 @@ class LEDVisualizer {
     }
     
     if (this.autoScale) {
-      // Calculate scale to fit container
+      // Calculate scale to fit container (reserve some space for ParCan canvas)
+      const availableHeight = containerHeight - 150; // Reserve 150px for ParCan canvas
       const scaleX = containerWidth / this.displayWidth;
-      const scaleY = containerHeight / this.displayHeight;
+      const scaleY = availableHeight / this.displayHeight;
       this.scale = Math.min(scaleX, scaleY);
       
       // Limit max scale for performance
@@ -176,9 +191,13 @@ class LEDVisualizer {
       this.scale = 1;
     }
     
-    // Set canvas size
+    // Set main canvas size
     this.canvas.width = Math.floor(this.displayWidth * this.scale);
     this.canvas.height = Math.floor(this.displayHeight * this.scale);
+    
+    // Set ParCanvas size (fixed height, width matches main canvas)
+    this.parcanvas.width = Math.min(400, containerWidth);
+    this.parcanvas.height = 100;
     
     // Update canvas info
     this.canvasInfo.textContent = `${this.displayWidth}×${this.displayHeight} @ ${this.scale.toFixed(1)}x`;
@@ -215,8 +234,9 @@ class LEDVisualizer {
     try {
       // Get pixel data
       const pixels = await artnetAPI.getPixels();
+      const parCans = await artnetAPI.getParCans();
       
-      // Clear canvas
+      // Clear main canvas
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       
@@ -227,12 +247,15 @@ class LEDVisualizer {
         this.log('Drew test red rectangle at 10,10', 'info');
       }
       
-      // Draw pixels
+      // Draw pixels on main canvas
       this.drawPixels(pixels);
       
-      // Draw overlays
+      // Draw overlays on main canvas
       if (this.showGrid) this.drawGrid();
       if (this.showLabels) this.drawLabels();
+      
+      // Draw ParCans on separate canvas
+      this.drawParCans(parCans);
       
       // Update stats periodically
       const now = Date.now();
@@ -411,6 +434,86 @@ class LEDVisualizer {
         y + 5
       );
     }
+  }
+
+  private drawParCans(parCans: { [key: string]: ParCanData }): void {
+    // Clear ParCanvas
+    this.parcanvasCtx.fillStyle = '#000';
+    this.parcanvasCtx.fillRect(0, 0, this.parcanvas.width, this.parcanvas.height);
+    
+    const centerY = this.parcanvas.height / 2;
+    const radius = 30;
+    const spacing = 120;
+    const startX = 60;
+    
+    // Draw title
+    this.parcanvasCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    this.parcanvasCtx.font = '11px monospace';
+    this.parcanvasCtx.fillText('DMX ParCans (Universe 1)', 10, 15);
+    
+    // Draw ParCan 1
+    const parCan1 = parCans['parcan1'];
+    if (parCan1) {
+      this.drawParCanCircle(startX, centerY, radius, parCan1.r, parCan1.g, parCan1.b, 'ParCan 1', this.parcanvasCtx);
+    }
+    
+    // Draw ParCan 2
+    const parCan2 = parCans['parcan2'];
+    if (parCan2) {
+      this.drawParCanCircle(startX + spacing, centerY, radius, parCan2.r, parCan2.g, parCan2.b, 'ParCan 2', this.parcanvasCtx);
+    }
+  }
+
+  private drawParCanCircle(x: number, y: number, radius: number, r: number, g: number, b: number, label: string, ctx: CanvasRenderingContext2D): void {
+    // Draw outer ring
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Draw filled circle with color
+    if (r > 0 || g > 0 || b > 0) {
+      // Create gradient for glow effect
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius * 1.5);
+      
+      // Calculate brightness
+      const brightness = Math.max(r, g, b);
+      const glowIntensity = brightness / 255;
+      
+      // Inner core
+      gradient.addColorStop(0, `rgba(${Math.min(255, r * 1.5)},${Math.min(255, g * 1.5)},${Math.min(255, b * 1.5)},1)`);
+      // Mid glow
+      gradient.addColorStop(0.4, `rgba(${r},${g},${b},0.9)`);
+      // Outer glow
+      gradient.addColorStop(0.8, `rgba(${r},${g},${b},${0.4 * glowIntensity})`);
+      gradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw solid center
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // Draw dark circle when off
+      ctx.fillStyle = 'rgba(50, 50, 50, 0.5)';
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    // Draw label
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.font = '12px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x, y + radius + 20);
+    ctx.fillText(`Ch ${label === 'ParCan 1' ? '2-4' : '9-11'}`, x, y + radius + 35);
+    ctx.textAlign = 'left'; // Reset alignment
   }
 
   private async updateStats(): Promise<void> {

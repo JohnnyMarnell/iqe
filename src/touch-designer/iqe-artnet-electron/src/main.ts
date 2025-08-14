@@ -46,6 +46,19 @@ app.whenReady().then(() => {
     return Array.from(pixels);
   });
 
+  ipcMain.handle('get-parcans', () => {
+    const parcans = artnetReceiver?.getParCans();
+    if (!parcans) {
+      return {};
+    }
+    // Convert Map to object for IPC transfer
+    const result: any = {};
+    parcans.forEach((value, key) => {
+      result[key] = value;
+    });
+    return result;
+  });
+
   ipcMain.handle('get-stats', () => {
     return artnetReceiver?.getStats() || {
       universesReceived: 0,

@@ -29,11 +29,13 @@
     #canvas-container {
       flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 20px;
       position: relative;
       background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+      gap: 20px;
     }
 
     #led-canvas {
@@ -45,6 +47,15 @@
       image-rendering: optimizeQuality;
       box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
       border: 1px solid rgba(0, 255, 0, 0.1);
+    }
+
+    #parcanvas {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      image-rendering: optimizeQuality;
+      box-shadow: 0 0 20px rgba(255, 100, 0, 0.3);
+      border: 1px solid rgba(255, 100, 0, 0.1);
     }
 
     #controls {
@@ -300,6 +311,7 @@
   <div id="main-container">
     <div id="canvas-container">
       <canvas id="led-canvas"></canvas>
+      <canvas id="parcanvas"></canvas>
       <div id="canvas-info"></div>
     </div>
     
