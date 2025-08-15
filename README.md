@@ -295,6 +295,12 @@ quick video: https://www.youtube.com/shorts/jStYmAj-Le8
 - If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` 
   here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
 - U'King ParCans, recharge-able battery, model: ZQ01104
+- In LX geometry, the ceiling is about y=700, if north is looking in from road pointing at shipping containers, then northwest
+  corner is about above 0,0,0 origin, X+ is north, Z+ is west. NE corner is about 0, 700, -2000 (z), and SE is -2400, 700, -2000
+- So rows are about 10 LX pixels apart and about 2000 long, 2400 x 2000
+- Parcans at corners, for visibility... non origin, kitty corners: -2400, 720, 20 // 60, 720, -1980
+- Corners, NE is x max, z min,   NW (CCW) is x max, z max,   SW is x min, z max,   SE is x min, z min
+  -            60, 720, -1980,        60, 720, 20,                -2400, 720, 20    -2400, 720, -1980
 
 ```bash
 node ~/src/iqe/src/nodejs/buildProject.js
