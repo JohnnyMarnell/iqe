@@ -42,7 +42,7 @@ public class UIAutopilot extends UICollapsibleSection {
     int col = 0;
     for (LXNormalizedParameter param : autopilot.visibleParameters) {
       if (col++ == 4) {
-        col = 0;
+        col = 1;  // Reset to 1 because we're about to add the current param to the new row
         y += row.getHeight();
         row = createRow();
       }

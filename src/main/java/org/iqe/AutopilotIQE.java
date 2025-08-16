@@ -5,7 +5,9 @@ import heronarts.lx.Tempo;
 import heronarts.lx.blend.DissolveBlend;
 import heronarts.lx.blend.LXBlend;
 import heronarts.lx.color.LXPalette;
+import heronarts.lx.mixer.LXAbstractChannel;
 import heronarts.lx.mixer.LXChannel;
+import heronarts.lx.mixer.LXGroup;
 import heronarts.lx.mixer.LXChannel.AutoCycleMode;
 import heronarts.lx.modulation.LXCompoundModulation;
 import heronarts.lx.modulation.LXParameterModulation.ModulationException;
@@ -20,6 +22,8 @@ import heronarts.lx.utils.LXUtils;
 import jkbstudio.autopilot.Autopilot;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A project-specific autopilot
@@ -52,11 +56,32 @@ public class AutopilotIQE extends Autopilot {
       .setDescription("Maximum transition time in milliseconds")
       .setUnits(Units.MILLISECONDS);
   
+  // Channel solo parameters
+  public final CompoundParameter soloChannel = 
+      new CompoundParameter("SoloCh", 0, 0, 10)
+      .setDescription("Solo channel selector (0=None, 1-N=Channel)");
+  
+  public final TriggerParameter clearSolo =
+      new TriggerParameter("ClearSolo")
+      .setDescription("Clear solo and restore all channels");
+  
+  public final CompoundParameter soloAutoRestoreTime =
+      new CompoundParameter("SoloTime", 0, 0, 300)
+      .setDescription("Auto-restore time in seconds (0 = disabled)")
+      .setUnits(Units.SECONDS);
+  
   private Timer pauseTimer = null;
   private boolean transitionsPaused = false;
   private long pauseEndTime = 0;
   private LXModulator dumbPixelBlazeHackLFO = null;
   private boolean dumbPixelBlazeHackLFOWasRunning = false;
+  
+  // Channel solo state tracking
+  private Timer soloTimer = null;
+  private long soloEndTime = 0;
+  private Map<LXAbstractChannel, Boolean> savedChannelStates = new HashMap<>();
+  private Map<LXAbstractChannel, Double> savedFaderPositions = new HashMap<>();
+  private int currentSoloChannel = 0; // 0 means no solo
 
   public AutopilotIQE(LX lx) {
     super(lx);
@@ -68,6 +93,9 @@ public class AutopilotIQE extends Autopilot {
     addVisibleParameter("transitionPalette", this.transitionPalette);
     addVisibleParameter("pauseTransitions", this.pauseTransitions);
     addVisibleParameter("maxTransitionMs", this.maxTransitionMs);
+    addVisibleParameter("soloChannel", this.soloChannel);
+    addVisibleParameter("soloAutoRestoreTime", this.soloAutoRestoreTime);
+    addVisibleParameter("clearSolo", this.clearSolo);
 
     // Add other class' parameters to UI for convenience
     setParameterVisible(this.lx.engine.speed);
@@ -99,6 +127,31 @@ public class AutopilotIQE extends Autopilot {
         updateAllTransitionTimes();
       }
     });
+    
+    // Add listener for solo channel changes
+    this.soloChannel.addListener(p -> {
+      // Round to nearest integer for channel selection
+      int selectedChannel = Math.round((float)this.soloChannel.getValue());
+      if (selectedChannel != currentSoloChannel) {
+        if (selectedChannel == 0) {
+          // Clear solo
+          clearChannelSolo();
+        } else {
+          // Solo the selected channel
+          soloChannelByIndex(selectedChannel - 1); // Convert to 0-based index
+        }
+      }
+    });
+    
+    // Add listener for clear solo button
+    this.clearSolo.addListener(p -> {
+      if (this.clearSolo.getValueb()) {
+        this.soloChannel.setValue(0); // This will trigger the soloChannel listener
+      }
+    });
+    
+    // Register OSC listener for solo control
+    registerOscSoloControl();
   }
 
   /**
@@ -243,6 +296,195 @@ public class AutopilotIQE extends Autopilot {
       }
     }
     return null;
+  }
+  
+  private void registerOscSoloControl() {
+    // Register custom OSC paths for solo control
+    Audio.get().osc.on("/lx/autopilot/solo", msg -> {
+      // Accept either int or float values
+      float value;
+      try {
+        value = msg.getFloat(0);
+      } catch (Exception e) {
+        // Try as int if float fails
+        try {
+          value = (float) msg.getInt(0);
+        } catch (Exception e2) {
+          LX.log("Invalid OSC solo value");
+          return;
+        }
+      }
+      
+      if (value >= 0 && value <= this.soloChannel.getRange()) {
+        this.soloChannel.setValue(value);
+        LX.log("OSC solo channel set to: " + value);
+      }
+    });
+    
+    Audio.get().osc.on("/lx/autopilot/solo/clear", msg -> {
+      this.clearSolo.bang();
+      LX.log("OSC solo cleared");
+    });
+  }
+  
+  private void soloChannelByIndex(int channelIndex) {
+    // Save current states if not already soloing
+    if (currentSoloChannel == 0) {
+      saveChannelStates();
+    }
+    
+    // Find the target channel and determine what needs to be enabled
+    LXAbstractChannel targetChannel = null;
+    LXGroup parentGroup = null;
+    int index = 0;
+    
+    // First pass: find the target channel
+    for (LXAbstractChannel abstractChannel : this.lx.engine.mixer.getChannels()) {
+      if (abstractChannel instanceof LXChannel || abstractChannel instanceof LXGroup) {
+        if (index == channelIndex) {
+          targetChannel = abstractChannel;
+          // If it's a regular channel, check if it has a parent group
+          if (targetChannel instanceof LXChannel) {
+            LXChannel ch = (LXChannel) targetChannel;
+            // Check if this channel belongs to a group
+            // Try to get the group using getGroup() method
+            try {
+              LXGroup group = ch.getGroup();
+              if (group != null) {
+                parentGroup = group;
+              }
+            } catch (Exception e) {
+              // Method might not exist in this version
+            }
+          }
+          break;
+        }
+        index++;
+      }
+    }
+    
+    if (targetChannel == null) {
+      LX.log("Channel index " + channelIndex + " not found");
+      return;
+    }
+    
+    // Second pass: enable/disable channels based on solo logic
+    for (LXAbstractChannel abstractChannel : this.lx.engine.mixer.getChannels()) {
+      if (abstractChannel instanceof LXChannel || abstractChannel instanceof LXGroup) {
+        boolean shouldEnable = false;
+        
+        if (abstractChannel == targetChannel) {
+          // This is the selected channel
+          shouldEnable = true;
+        } else if (targetChannel instanceof LXGroup && abstractChannel instanceof LXChannel) {
+          // Target is a group, check if this channel is a child of it
+          LXChannel ch = (LXChannel) abstractChannel;
+          try {
+            LXGroup group = ch.getGroup();
+            if (group == targetChannel) {
+              shouldEnable = true;
+            }
+          } catch (Exception e) {
+            // Method might not exist
+          }
+        } else if (parentGroup != null && abstractChannel == parentGroup) {
+          // Target has a parent group, enable the parent too
+          shouldEnable = true;
+        }
+        
+        abstractChannel.enabled.setValue(shouldEnable);
+        
+        if (shouldEnable) {
+          // Set fader to full for soloed channels
+          abstractChannel.fader.setValue(1.0);
+          LX.log("Solo enabled for: " + abstractChannel.getLabel() + " (fader set to 100%)");
+        }
+      }
+    }
+    
+    currentSoloChannel = channelIndex + 1; // Store as 1-based
+    
+    // Start auto-restore timer if configured
+    double restoreTime = this.soloAutoRestoreTime.getValue();
+    if (restoreTime > 0) {
+      startSoloRestoreTimer(restoreTime);
+    }
+  }
+  
+  private void saveChannelStates() {
+    // Save the current enabled state and fader position of each channel and group
+    savedChannelStates.clear();
+    savedFaderPositions.clear();
+    for (LXAbstractChannel abstractChannel : this.lx.engine.mixer.getChannels()) {
+      if (abstractChannel instanceof LXChannel || abstractChannel instanceof LXGroup) {
+        savedChannelStates.put(abstractChannel, abstractChannel.enabled.getValueb());
+        savedFaderPositions.put(abstractChannel, abstractChannel.fader.getValue());
+      }
+    }
+    LX.log("Saved states and fader positions for " + savedChannelStates.size() + " channels/groups");
+  }
+  
+  private void clearChannelSolo() {
+    if (currentSoloChannel == 0) {
+      return; // Nothing to clear
+    }
+    
+    // Restore saved channel states and fader positions
+    for (Map.Entry<LXAbstractChannel, Boolean> entry : savedChannelStates.entrySet()) {
+      LXAbstractChannel channel = entry.getKey();
+      // Restore enabled state
+      channel.enabled.setValue(entry.getValue());
+      // Restore fader position
+      Double savedFaderValue = savedFaderPositions.get(channel);
+      if (savedFaderValue != null) {
+        channel.fader.setValue(savedFaderValue);
+      }
+    }
+    
+    currentSoloChannel = 0;
+    soloEndTime = 0;
+    
+    // Cancel any active timer
+    if (soloTimer != null) {
+      soloTimer.cancel();
+      soloTimer = null;
+    }
+    
+    LX.log("Solo cleared, restored " + savedChannelStates.size() + " channel/group states and fader positions");
+    savedChannelStates.clear();
+    savedFaderPositions.clear();
+  }
+  
+  private void startSoloRestoreTimer(double seconds) {
+    long currentTime = System.currentTimeMillis();
+    long delayMs = (long)(seconds * 1000);
+    
+    // Check if we're extending an existing timer
+    if (soloEndTime > currentTime) {
+      // Timer already running, extend it
+      soloEndTime = currentTime + delayMs;
+      LX.log("Extended solo timer to " + seconds + " seconds from now");
+    } else {
+      // Start new timer
+      soloEndTime = currentTime + delayMs;
+      LX.log("Starting solo auto-restore timer for " + seconds + " seconds");
+      
+      // Cancel existing timer if any
+      if (soloTimer != null) {
+        soloTimer.cancel();
+      }
+      
+      // Create new timer
+      soloTimer = new Timer();
+      soloTimer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          // Clear solo when timer expires
+          soloChannel.setValue(0);
+          LX.log("Solo auto-restore timer expired");
+        }
+      }, delayMs);
+    }
   }
   
   private void pauseTransitionsFor30Seconds() {

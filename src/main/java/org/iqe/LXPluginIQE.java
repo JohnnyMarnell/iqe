@@ -240,6 +240,12 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         LOG.info("LX number of mixer channels {}", lx.engine.mixer.getChannels().size());
         lx.engine.mixer.getChannels().forEach(c -> LOG.info("Adding listener that never fires for channel name: {}", c.label.getString()));
         lx.engine.mixer.getChannels().forEach(c -> c.addListener(channelListener));
+        
+        // Reset solo channel to 0 after project loads to avoid accidental soloing
+        if (this.autopilot != null) {
+            this.autopilot.soloChannel.setValue(0);
+            LOG.info("Reset solo channel to 0 after project load");
+        }
     }
 
     @Override
