@@ -40,33 +40,33 @@ public class AutopilotIQE extends Autopilot {
       .setUnits(Units.PERCENT);
 
   public final TriggerParameter transitionAll =
-      new TriggerParameter("PattTrx")
+      new TriggerParameter("pattChg")
       .setDescription("Transition all active patterns to their next pattern");
   
   public final TriggerParameter transitionPalette =
-      new TriggerParameter("PalTrx")
+      new TriggerParameter("colChg")
       .setDescription("Transition to next color palette");
   
   public final TriggerParameter pauseTransitions =
-      new TriggerParameter("Pause30s")
+      new TriggerParameter("hold")
       .setDescription("Pause all transitions for 30 seconds");
 
   public final CompoundParameter maxTransitionMs =
-      new CompoundParameter("MaxTrxMs", 500, 100, 15000)
+      new CompoundParameter("trxMx", 500, 100, 15000)
       .setDescription("Maximum transition time in milliseconds")
       .setUnits(Units.MILLISECONDS);
   
   // Channel solo parameters
   public final CompoundParameter soloChannel = 
-      new CompoundParameter("SoloCh", 0, 0, 10)
+      new CompoundParameter("soloCh", 0, 0, 10)
       .setDescription("Solo channel selector (0=None, 1-N=Channel)");
   
   public final TriggerParameter clearSolo =
-      new TriggerParameter("ClearSolo")
+      new TriggerParameter("clearSolo")
       .setDescription("Clear solo and restore all channels");
   
   public final CompoundParameter soloAutoRestoreTime =
-      new CompoundParameter("SoloTime", 0, 0, 300)
+      new CompoundParameter("soloTime", 0, 0, 30)
       .setDescription("Auto-restore time in seconds (0 = disabled)")
       .setUnits(Units.SECONDS);
   
@@ -408,6 +408,9 @@ public class AutopilotIQE extends Autopilot {
     double restoreTime = this.soloAutoRestoreTime.getValue();
     if (restoreTime > 0) {
       startSoloRestoreTimer(restoreTime);
+      LX.log("Solo will auto-clear in " + restoreTime + " seconds");
+    } else {
+      LX.log("Solo activated (no auto-restore timer)");
     }
   }
   
@@ -456,98 +459,118 @@ public class AutopilotIQE extends Autopilot {
   }
   
   private void startSoloRestoreTimer(double seconds) {
-    long currentTime = System.currentTimeMillis();
-    long delayMs = (long)(seconds * 1000);
-    
-    // Check if we're extending an existing timer
-    if (soloEndTime > currentTime) {
-      // Timer already running, extend it
-      soloEndTime = currentTime + delayMs;
-      LX.log("Extended solo timer to " + seconds + " seconds from now");
-    } else {
-      // Start new timer
-      soloEndTime = currentTime + delayMs;
-      LX.log("Starting solo auto-restore timer for " + seconds + " seconds");
-      
-      // Cancel existing timer if any
-      if (soloTimer != null) {
-        soloTimer.cancel();
-      }
-      
-      // Create new timer
-      soloTimer = new Timer();
-      soloTimer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-          // Clear solo when timer expires
-          soloChannel.setValue(0);
-          LX.log("Solo auto-restore timer expired");
-        }
-      }, delayMs);
+    // Cancel existing timer if any
+    if (soloTimer != null) {
+      soloTimer.cancel();
     }
+    
+    Object[] result = startOrExtendTimer(
+      soloEndTime,
+      seconds,
+      "solo auto-restore timer",
+      null,  // No special first-start action needed
+      () -> {
+        soloChannel.setValue(0);  // Clear solo when timer expires
+      }
+    );
+    
+    soloEndTime = (long) result[0];
+    soloTimer = (Timer) result[1];
+  }
+  
+  /**
+   * Generic timer extension helper that adds time to existing timer or starts new one
+   * @param currentEndTime Current end time of the timer (0 if not running)
+   * @param additionalSeconds Seconds to add
+   * @param timerName Name for logging
+   * @param onFirstStart Callback to run only when timer first starts (not on extension)
+   * @param onExpire Callback to run when timer expires
+   * @return Array with [newEndTime, newTimer]
+   */
+  private Object[] startOrExtendTimer(long currentEndTime, double additionalSeconds, String timerName,
+                                      Runnable onFirstStart, Runnable onExpire) {
+    long currentTime = System.currentTimeMillis();
+    long additionalMs = (long)(additionalSeconds * 1000);
+    long newEndTime;
+    
+    if (currentEndTime > currentTime) {
+      // Timer already running, add to existing end time
+      newEndTime = currentEndTime + additionalMs;
+      long totalSeconds = (newEndTime - currentTime) / 1000;
+      LX.log("Extended " + timerName + " by " + additionalSeconds + " seconds, total remaining: " + totalSeconds + " seconds");
+    } else {
+      // First start or timer expired
+      newEndTime = currentTime + additionalMs;
+      LX.log("Starting " + timerName + " for " + additionalSeconds + " seconds");
+      
+      // Run first-start callback if provided
+      if (onFirstStart != null) {
+        onFirstStart.run();
+      }
+    }
+    
+    // Create new timer scheduled for the end time
+    Timer newTimer = new Timer();
+    long delay = newEndTime - currentTime;
+    newTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        LX.log(timerName + " expired");
+        if (onExpire != null) {
+          onExpire.run();
+        }
+      }
+    }, delay);
+    
+    return new Object[] { newEndTime, newTimer };
   }
   
   private void pauseTransitionsFor30Seconds() {
-    // Calculate new end time (add 30 seconds to existing or current time)
-    long currentTime = System.currentTimeMillis();
-    if (pauseEndTime > currentTime) {
-      // Timer is already running, add 30 seconds to existing end time
-      pauseEndTime += 30000;
-      long totalSeconds = (pauseEndTime - currentTime) / 1000;
-      LX.log("Extended pause by 30 seconds, total pause time: " + totalSeconds + " seconds");
-    } else {
-      // First press or timer expired, set new end time
-      pauseEndTime = currentTime + 30000;
-      LX.log("Paused all transitions for 30 seconds");
-      
-      // Only disable transitions on first press
-      if (!transitionsPaused) {
-        // Disable all channel transitions immediately
-        this.lx.engine.mixer.getChannels().forEach(channel -> {
-          if (channel instanceof LXChannel) {
-            LXChannel lxChannel = (LXChannel) channel;
-            lxChannel.transitionEnabled.setValue(false);
-            lxChannel.autoCycleEnabled.setValue(false);
-          }
-        });
-        
-        // Also disable palette transitions
-        LXPalette palette = this.lx.engine.palette;
-        palette.transitionEnabled.setValue(false);
-        palette.autoCycleEnabled.setValue(false);
-        
-        // Find and pause the DumbPixelBlazeHackLFO if it exists
-        if (dumbPixelBlazeHackLFO == null) {
-          dumbPixelBlazeHackLFO = findDumbPixelBlazeHackLFO();
-        }
-        if (dumbPixelBlazeHackLFO != null) {
-          dumbPixelBlazeHackLFOWasRunning = dumbPixelBlazeHackLFO.running.isOn();
-          if (dumbPixelBlazeHackLFOWasRunning) {
-            dumbPixelBlazeHackLFO.running.setValue(false);
-            LX.log("Paused DumbPixelBlazeHackLFO modulator");
-          }
-        } else {
-          LX.log("DumbPixelBlazeHackLFO modulator not found");
-        }
-        
-        transitionsPaused = true;
-      }
-    }
-    
     // Cancel existing timer if any
     if (pauseTimer != null) {
       pauseTimer.cancel();
     }
     
-    // Schedule new timer for the updated end time
-    pauseTimer = new Timer();
-    long delay = pauseEndTime - currentTime;
-    pauseTimer.schedule(new TimerTask() {
-      @Override
-      public void run() {
-        resumeTransitions();
-      }
-    }, delay);
+    Object[] result = startOrExtendTimer(
+      pauseEndTime, 
+      30, 
+      "pause timer",
+      !transitionsPaused ? () -> {
+          // Disable all channel transitions immediately
+          this.lx.engine.mixer.getChannels().forEach(channel -> {
+            if (channel instanceof LXChannel) {
+              LXChannel lxChannel = (LXChannel) channel;
+              lxChannel.transitionEnabled.setValue(false);
+              lxChannel.autoCycleEnabled.setValue(false);
+            }
+          });
+          
+          // Also disable palette transitions
+          LXPalette palette = this.lx.engine.palette;
+          palette.transitionEnabled.setValue(false);
+          palette.autoCycleEnabled.setValue(false);
+          
+          // Find and pause the DumbPixelBlazeHackLFO if it exists
+          if (dumbPixelBlazeHackLFO == null) {
+            dumbPixelBlazeHackLFO = findDumbPixelBlazeHackLFO();
+          }
+          if (dumbPixelBlazeHackLFO != null) {
+            dumbPixelBlazeHackLFOWasRunning = dumbPixelBlazeHackLFO.running.isOn();
+            if (dumbPixelBlazeHackLFOWasRunning) {
+              dumbPixelBlazeHackLFO.running.setValue(false);
+              LX.log("Paused DumbPixelBlazeHackLFO modulator");
+            }
+          } else {
+            LX.log("DumbPixelBlazeHackLFO modulator not found");
+          }
+          
+          transitionsPaused = true;
+      } : null,
+      () -> resumeTransitions()
+    );
+    
+    pauseEndTime = (long) result[0];
+    pauseTimer = (Timer) result[1];
   }
   
   private void resumeTransitions() {

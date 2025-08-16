@@ -1,6 +1,7 @@
 package org.iqe;
 
 import heronarts.lx.*;
+import heronarts.lx.mixer.LXAbstractChannel;
 import heronarts.lx.mixer.LXChannel;
 import heronarts.lx.model.LXModel;
 import heronarts.lx.pattern.LXPattern;
@@ -245,6 +246,119 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         if (this.autopilot != null) {
             this.autopilot.soloChannel.setValue(0);
             LOG.info("Reset solo channel to 0 after project load");
+        }
+        
+        // Set up OSC string listener for testing
+        setupOscStringListener();
+    }
+    
+    private void setupOscStringListener() {
+        // Listen for string messages on /iqe/string path
+        Audio.get().osc.on("/iqe/string", msg -> {
+            try {
+                // Try to get string from the message
+                String receivedString = msg.getString(0);
+                LOG.info("OSC String received: '{}'", receivedString);
+                
+                // You could also broadcast it back out or trigger other actions
+                Audio.get().osc.sendOutgoing("/iqe/string/echo", receivedString);
+            } catch (Exception e) {
+                LOG.error("Error processing OSC string message: {}", e.getMessage());
+            }
+        });
+        
+        // Listen for command messages on /iqe/cmd
+        Audio.get().osc.on("/iqe/cmd", msg -> {
+            try {
+                if (msg.size() >= 1) {
+                    String fullCommand = msg.getString(0);
+                    LOG.info("OSC Command received: '{}'", fullCommand);
+                    
+                    // Split by whitespace, with limit of 2 to keep everything after first space together
+                    String[] parts = fullCommand.split("\\s+", 2);
+                    
+                    if (parts.length >= 2) {
+                        String command = parts[0].toLowerCase();
+                        String arg = parts[1];
+                        
+                        LOG.info("Parsed command: '{}' with arg: '{}'", command, arg);
+                        
+                        if ("solo".equals(command)) {
+                            handleSoloCommand(arg);
+                        } else {
+                            LOG.info("Unknown command: '{}'", command);
+                        }
+                    } else {
+                        LOG.error("OSC Command must be in format: 'command argument'");
+                    }
+                } else {
+                    LOG.error("OSC Command requires at least 1 string argument");
+                }
+            } catch (Exception e) {
+                LOG.error("Error processing OSC command: {}", e.getMessage());
+            }
+        });
+        
+        // Also listen for test messages with multiple arguments
+        Audio.get().osc.on("/iqe/test", msg -> {
+            LOG.info("OSC Test message received with {} arguments", msg.size());
+            String typeTag = msg.getTypeTag().toString();
+            for (int i = 0; i < msg.size(); i++) {
+                try {
+                    char type = typeTag.charAt(i);
+                    // Try different types
+                    if (type == 's') {
+                        LOG.info("  Arg[{}] (string): '{}'", i, msg.getString(i));
+                    } else if (type == 'f') {
+                        LOG.info("  Arg[{}] (float): {}", i, msg.getFloat(i));
+                    } else if (type == 'i') {
+                        LOG.info("  Arg[{}] (int): {}", i, msg.getInt(i));
+                    } else {
+                        LOG.info("  Arg[{}] (type '{}'): [raw data]", i, type);
+                    }
+                } catch (Exception e) {
+                    LOG.info("  Arg[{}]: unable to parse ({})", i, e.getMessage());
+                }
+            }
+        });
+        
+        LOG.info("OSC String listeners registered on /iqe/string, /iqe/cmd and /iqe/test");
+    }
+    
+    private void handleSoloCommand(String channelNamePattern) {
+        // Find channel by name (case-insensitive partial match)
+        String pattern = channelNamePattern.toLowerCase();
+        
+        // Search through all channels to find a match
+        int channelIndex = 0;
+        boolean found = false;
+        
+        for (LXAbstractChannel channel : lx.engine.mixer.getChannels()) {
+            if (channel.getLabel().toLowerCase().contains(pattern)) {
+                LOG.info("Found matching channel: '{}' at index {}", channel.getLabel(), channelIndex);
+                
+                // Use autopilot's solo functionality
+                if (this.autopilot != null) {
+                    // Set the solo channel value (1-based index for the UI parameter)
+                    this.autopilot.soloChannel.setValue(channelIndex + 1);
+                    LOG.info("Solo activated for channel '{}'", channel.getLabel());
+                } else {
+                    LOG.error("Autopilot not initialized");
+                }
+                
+                found = true;
+                break;
+            }
+            channelIndex++;
+        }
+        
+        if (!found) {
+            LOG.info("No channel found matching pattern: '{}'", channelNamePattern);
+            // Could also send feedback via OSC
+            Audio.get().osc.sendOutgoing("/iqe/cmd/response", "error", "No channel found: " + channelNamePattern);
+        } else {
+            // Send success feedback
+            Audio.get().osc.sendOutgoing("/iqe/cmd/response", "success", "Solo activated: " + channelNamePattern);
         }
     }
 
