@@ -1,10 +1,10 @@
 {
   "version": "0.4.2-SNAPSHOT",
-  "projectFileName": "iqe.lxp",
+  "projectFileName": "iqe-play-quit.lxp",
   "windowWidth": 1440,
   "windowHeight": 847,
   "windowPosX": 0,
-  "windowPosY": 53,
+  "windowPosY": 54,
   "uiZoom": 100,
   "focusChannelOnCue": true,
   "focusActivePattern": true,
