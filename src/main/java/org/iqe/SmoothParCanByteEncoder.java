@@ -2,12 +2,13 @@ package org.iqe;
 
 import heronarts.lx.output.LXBufferOutput;
 import heronarts.lx.output.LXOutput;
+import heronarts.lx.color.LXColor;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Smoothed ByteEncoder for 7-channel DMX ParCans
- * Uses exponential smoothing to create fluid transitions
+ * Uses HSV space smoothing with rate limiting for fluid transitions
  * Prevents jumpy/strobe-like effects on spot lights
  */
 public class SmoothParCanByteEncoder implements LXBufferOutput.ByteEncoder {
@@ -19,11 +20,15 @@ public class SmoothParCanByteEncoder implements LXBufferOutput.ByteEncoder {
     // Start with moderate smoothing - can be tuned
     private float smoothingFactor = 0.85f;
     
-    // Store smoothed RGB values per offset (for multiple ParCans)
-    private Map<Integer, float[]> smoothedValues = new HashMap<>();
+    // Store smoothed HSV values per offset (for multiple ParCans)
+    // Format: [hue (0-360), saturation (0-100), value/brightness (0-100)]
+    private Map<Integer, float[]> smoothedHSV = new HashMap<>();
     
-    // Minimum change threshold - ignore tiny changes to reduce flicker
-    private static final float THRESHOLD = 2.0f;
+    // Maximum rate of change per frame (in HSV units)
+    // These prevent large jumps even when smoothing is lower
+    private static final float MAX_HUE_CHANGE = 15.0f;  // degrees per frame
+    private static final float MAX_SAT_CHANGE = 8.0f;   // percent per frame  
+    private static final float MAX_VAL_CHANGE = 10.0f;  // percent per frame
     
     public SmoothParCanByteEncoder() {
         this(0.85f);
@@ -40,35 +45,61 @@ public class SmoothParCanByteEncoder implements LXBufferOutput.ByteEncoder {
     
     @Override
     public void writeBytes(int color, LXOutput.GammaTable.Curve gamma, byte[] output, int offset) {
-        // Extract target RGB from color
-        float targetR = (color >> 16) & 0xFF;
-        float targetG = (color >> 8) & 0xFF;
-        float targetB = color & 0xFF;
+        // Convert target color to HSV for smoother transitions
+        float targetH = LXColor.h(color);  // 0-360
+        float targetS = LXColor.s(color);  // 0-100
+        float targetV = LXColor.b(color);  // 0-100 (brightness/value)
         
-        // Get or initialize smoothed values for this offset
-        float[] smoothed = smoothedValues.computeIfAbsent(offset, k -> new float[]{targetR, targetG, targetB});
+        // Get or initialize smoothed HSV values for this offset
+        float[] smoothed = smoothedHSV.computeIfAbsent(offset, k -> new float[]{targetH, targetS, targetV});
         
-        // Apply exponential smoothing
-        // New = (1-α) * Target + α * Previous
-        // Higher α = more smoothing, slower response
-        smoothed[0] = (1 - smoothingFactor) * targetR + smoothingFactor * smoothed[0];
-        smoothed[1] = (1 - smoothingFactor) * targetG + smoothingFactor * smoothed[1];
-        smoothed[2] = (1 - smoothingFactor) * targetB + smoothingFactor * smoothed[2];
+        // Calculate desired changes
+        float deltaH = targetH - smoothed[0];
+        float deltaS = targetS - smoothed[1];
+        float deltaV = targetV - smoothed[2];
         
-        // Apply threshold to reduce tiny flickers
-        if (Math.abs(smoothed[0] - targetR) < THRESHOLD) smoothed[0] = targetR;
-        if (Math.abs(smoothed[1] - targetG) < THRESHOLD) smoothed[1] = targetG;
-        if (Math.abs(smoothed[2] - targetB) < THRESHOLD) smoothed[2] = targetB;
+        // Handle hue wrapping (shortest path around the color wheel)
+        if (deltaH > 180) deltaH -= 360;
+        if (deltaH < -180) deltaH += 360;
         
-        // Convert to bytes with gamma correction
-        int r = Math.round(smoothed[0]);
-        int g = Math.round(smoothed[1]);
-        int b = Math.round(smoothed[2]);
+        // Apply rate limiting BEFORE smoothing
+        // This ensures we never jump more than the max amount per frame
+        deltaH = Math.max(-MAX_HUE_CHANGE, Math.min(MAX_HUE_CHANGE, deltaH));
+        deltaS = Math.max(-MAX_SAT_CHANGE, Math.min(MAX_SAT_CHANGE, deltaS));
+        deltaV = Math.max(-MAX_VAL_CHANGE, Math.min(MAX_VAL_CHANGE, deltaV));
         
-        // Clamp to valid range
-        r = Math.max(0, Math.min(255, r));
-        g = Math.max(0, Math.min(255, g));
-        b = Math.max(0, Math.min(255, b));
+        // Calculate rate-limited target
+        float limitedTargetH = smoothed[0] + deltaH;
+        float limitedTargetS = smoothed[1] + deltaS;
+        float limitedTargetV = smoothed[2] + deltaV;
+        
+        // Apply exponential smoothing to the rate-limited values
+        // This gives us smooth transitions that never jump too far
+        smoothed[0] = (1 - smoothingFactor) * limitedTargetH + smoothingFactor * smoothed[0];
+        smoothed[1] = (1 - smoothingFactor) * limitedTargetS + smoothingFactor * smoothed[1];
+        smoothed[2] = (1 - smoothingFactor) * limitedTargetV + smoothingFactor * smoothed[2];
+        
+        // Keep hue in 0-360 range
+        if (smoothed[0] < 0) smoothed[0] += 360;
+        if (smoothed[0] >= 360) smoothed[0] -= 360;
+        
+        // Clamp saturation and value to valid ranges
+        smoothed[1] = Math.max(0, Math.min(100, smoothed[1]));
+        smoothed[2] = Math.max(0, Math.min(100, smoothed[2]));
+        
+        // Special handling for very low brightness to avoid jumps near black
+        // When brightness is very low, reduce the importance of hue/saturation changes
+        if (smoothed[2] < 5) {
+            // Near black - heavily smooth hue and saturation to prevent jumps
+            smoothed[0] = smoothed[0] * 0.9f + targetH * 0.1f;
+            smoothed[1] = smoothed[1] * 0.9f + targetS * 0.1f;
+        }
+        
+        // Convert smoothed HSV back to RGB
+        int smoothedColor = LXColor.hsb(smoothed[0], smoothed[1], smoothed[2]);
+        int r = (smoothedColor >> 16) & 0xFF;
+        int g = (smoothedColor >> 8) & 0xFF;
+        int b = smoothedColor & 0xFF;
         
         // Channel 1: Dimmer - ALWAYS 255 for full brightness
         output[offset] = (byte) 0xFF;
