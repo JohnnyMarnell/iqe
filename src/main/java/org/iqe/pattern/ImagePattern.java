@@ -43,13 +43,8 @@ public class ImagePattern extends LXPattern {
     private final CompoundParameter bounceSpeed = new CompoundParameter("bounceSpeed", 0, 0, 5)
         .setDescription("Bounce speed (0 = static)");
     
-    // Cached bounds for the highest fixtures
-    private double minX = Double.MAX_VALUE;
-    private double maxX = Double.MIN_VALUE;
-    private double minZ = Double.MAX_VALUE;
-    private double maxZ = Double.MIN_VALUE;
-    private double targetY = Double.MIN_VALUE;
-    private boolean boundsCalculated = false;
+    // Cached bounds for the plane with most pixels
+    private PlaneBounds bounds = null;
     
     // Bounce animation state
     private double bounceX = 0;
@@ -70,33 +65,6 @@ public class ImagePattern extends LXPattern {
         loadImage(imagePath.getString());
     }
     
-    private void calculateBounds() {
-        // Find the highest Y value (ceiling fixtures)
-        for (LXModel child : model.children) {
-            for (LXPoint p : child.points) {
-                if (p.y > targetY) {
-                    targetY = p.y;
-                }
-            }
-        }
-        
-        // Now find the bounds of only the highest fixtures
-        double threshold = targetY - 10; // Allow some tolerance
-        for (LXModel child : model.children) {
-            for (LXPoint p : child.points) {
-                if (p.y >= threshold) {
-                    minX = Math.min(minX, p.x);
-                    maxX = Math.max(maxX, p.x);
-                    minZ = Math.min(minZ, p.z);
-                    maxZ = Math.max(maxZ, p.z);
-                }
-            }
-        }
-        
-        boundsCalculated = true;
-        LOG.info("ImagePattern bounds calculated: X[{}, {}], Z[{}, {}], targetY: {}", 
-                 minX, maxX, minZ, maxZ, targetY);
-    }
     
     private void loadImage(String path) {
         try {
@@ -122,9 +90,9 @@ public class ImagePattern extends LXPattern {
             loadImage(currentImagePath);
         }
         
-        // Calculate bounds if needed
-        if (!boundsCalculated) {
-            calculateBounds();
+        // Get bounds if needed (calculated only once per model)
+        if (bounds == null) {
+            bounds = PlaneBounds.getBounds(model);
         }
         
         // Clear all pixels first
@@ -137,8 +105,8 @@ public class ImagePattern extends LXPattern {
             return;
         }
         
-        double xRange = maxX - minX;
-        double zRange = maxZ - minZ;
+        double xRange = bounds.maxX - bounds.minX;
+        double zRange = bounds.maxZ - bounds.minZ;
         
         // Calculate aspect ratios
         double fixtureAspect = xRange / zRange;
@@ -197,17 +165,15 @@ public class ImagePattern extends LXPattern {
         double sinRot = Math.sin(rotationRad);
         
         // Apply to pixels
-        double threshold = targetY - 10; // Same threshold as bounds calculation
-        
         for (LXPoint p : model.points) {
-            // Only render on the highest fixtures
-            if (p.y < threshold) {
+            // Only render on pixels in the selected plane
+            if (!bounds.isInPlane(p)) {
                 continue;
             }
             
             // Normalize position within the bounds
-            double normalizedX = (p.x - minX) / xRange - 0.5; // -0.5 to 0.5
-            double normalizedZ = (p.z - minZ) / zRange - 0.5; // -0.5 to 0.5
+            double normalizedX = (p.x - bounds.minX) / xRange - 0.5; // -0.5 to 0.5
+            double normalizedZ = (p.z - bounds.minZ) / zRange - 0.5; // -0.5 to 0.5
             
             // Apply offset (including bounce offset)
             normalizedX -= xOffset.getValue() + bounceX;

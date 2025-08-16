@@ -89,6 +89,9 @@ public class VideoPattern extends LXPattern {
     private final BooleanParameter loop = new BooleanParameter("loop", true)
         .setDescription("Loop the video");
     
+    private final BooleanParameter pingPong = new BooleanParameter("pingPong", true)
+        .setDescription("Play forward then backward (ping-pong mode)");
+    
     private final BooleanParameter playing = new BooleanParameter("playing", true)
         .setDescription("Play/Pause");
     
@@ -133,17 +136,14 @@ public class VideoPattern extends LXPattern {
     private double fps = 30.0;
     private int resampledWidth = MAX_RESAMPLED_WIDTH;
     private int resampledHeight = MAX_RESAMPLED_HEIGHT;
+    private int playbackDirection = 1; // 1 for forward, -1 for backward
     
     private Future<?> currentLoadTask = null;
     private boolean hasLoggedEmpty = false;
     private boolean hasLoggedLoading = false;
     
-    private double minX = Double.MAX_VALUE;
-    private double maxX = Double.MIN_VALUE;
-    private double minZ = Double.MAX_VALUE;
-    private double maxZ = Double.MIN_VALUE;
-    private double targetY = Double.MIN_VALUE;
-    private boolean boundsCalculated = false;
+    // Cached bounds for the plane with most pixels
+    private PlaneBounds bounds = null;
     
     public VideoPattern(LX lx) {
         super(lx);
@@ -151,6 +151,7 @@ public class VideoPattern extends LXPattern {
         addParameter(videoPath);
         addParameter(playbackSpeed);
         addParameter(loop);
+        addParameter(pingPong);
         addParameter(playing);
         addParameter(scale);
         addParameter(xOffset);
@@ -196,6 +197,7 @@ public class VideoPattern extends LXPattern {
         numFrames.set(0);
         currentFrameIndex.set(0);
         frameAccumulator = 0;
+        playbackDirection = 1; // Reset to forward
         
         // Clear the current path so it reloads when reactivated
         currentVideoPath.set("");
@@ -203,31 +205,6 @@ public class VideoPattern extends LXPattern {
         LOG.info("VideoPattern buffer released");
     }
     
-    private void calculateBounds() {
-        for (LXModel child : model.children) {
-            for (LXPoint p : child.points) {
-                if (p.y > targetY) {
-                    targetY = p.y;
-                }
-            }
-        }
-        
-        double threshold = targetY - 10;
-        for (LXModel child : model.children) {
-            for (LXPoint p : child.points) {
-                if (p.y >= threshold) {
-                    minX = Math.min(minX, p.x);
-                    maxX = Math.max(maxX, p.x);
-                    minZ = Math.min(minZ, p.z);
-                    maxZ = Math.max(maxZ, p.z);
-                }
-            }
-        }
-        
-        boundsCalculated = true;
-        LOG.info("VideoPattern bounds calculated: X[{}, {}], Z[{}, {}], targetY: {}", 
-                 minX, maxX, minZ, maxZ, targetY);
-    }
     
     private void loadVideoAsync(String path) {
         LOG.info("loadVideoAsync called for path: {}", path);
@@ -415,6 +392,7 @@ public class VideoPattern extends LXPattern {
             resampledHeight = targetHeight;
             currentFrameIndex.set(0);
             frameAccumulator = 0;
+            playbackDirection = 1; // Reset to forward when loading new video
             
             loadingStatus.set("");
             LOG.info("Successfully loaded {} frames from video (resampled to {}x{})", 
@@ -478,8 +456,9 @@ public class VideoPattern extends LXPattern {
             loadVideoAsync(newPath);
         }
 
-        if (!boundsCalculated) {
-            calculateBounds();
+        // Get bounds if needed (calculated only once per model)
+        if (bounds == null) {
+            bounds = PlaneBounds.getBounds(model);
         }
 
         for (LXPoint p : model.points) {
@@ -533,18 +512,39 @@ public class VideoPattern extends LXPattern {
             while (frameAccumulator >= 1.0) {
                 frameAccumulator -= 1.0;
                 int oldIndex = currentFrameIndex.get();
-                int newIndex = oldIndex + 1;
+                int newIndex = oldIndex + playbackDirection;
                 
-                if (newIndex >= frameCount) {
-                    if (loop.isOn()) {
-                        currentFrameIndex.set(0);
-                        LOG.info("Looping video back to frame 0");
-                    } else {
-                        currentFrameIndex.set(frameCount - 1);
-                        playing.setValue(false);
+                // Handle boundaries based on mode
+                if (pingPong.isOn()) {
+                    // Ping-pong mode: reverse direction at boundaries
+                    if (newIndex >= frameCount) {
+                        playbackDirection = -1;
+                        newIndex = frameCount - 2; // Start going backward from second-to-last frame
+                        if (newIndex < 0) newIndex = 0;
+                        LOG.info("Reversing video playback direction (backward)");
+                    } else if (newIndex < 0) {
+                        playbackDirection = 1;
+                        newIndex = 1; // Start going forward from second frame
+                        if (newIndex >= frameCount) newIndex = frameCount - 1;
+                        LOG.info("Reversing video playback direction (forward)");
                     }
-                } else {
                     currentFrameIndex.set(newIndex);
+                } else {
+                    // Normal mode: loop or stop at end
+                    if (newIndex >= frameCount) {
+                        if (loop.isOn()) {
+                            currentFrameIndex.set(0);
+                            LOG.info("Looping video back to frame 0");
+                        } else {
+                            currentFrameIndex.set(frameCount - 1);
+                            playing.setValue(false);
+                        }
+                    } else if (newIndex < 0) {
+                        // Shouldn't happen in normal mode, but handle it
+                        currentFrameIndex.set(0);
+                    } else {
+                        currentFrameIndex.set(newIndex);
+                    }
                 }
             }
         } else {
@@ -562,7 +562,17 @@ public class VideoPattern extends LXPattern {
         
         // Calculate interpolation for smooth slow-motion
         double interpolationFactor = frameAccumulator;
-        int nextFrameIndex = (frameIndex + 1) % frameCount;
+        int nextFrameIndex;
+        if (playbackDirection > 0) {
+            // Forward playback
+            nextFrameIndex = (frameIndex + 1) % frameCount;
+        } else {
+            // Backward playback
+            nextFrameIndex = frameIndex - 1;
+            if (nextFrameIndex < 0) {
+                nextFrameIndex = pingPong.isOn() ? 0 : frameCount - 1;
+            }
+        }
         
         int[][] currentFramePixels = currentFrames[frameIndex];
         int[][] nextFramePixels = currentFrames[nextFrameIndex];
@@ -571,8 +581,8 @@ public class VideoPattern extends LXPattern {
             return;
         }
         
-        double xRange = maxX - minX;
-        double zRange = maxZ - minZ;
+        double xRange = bounds.maxX - bounds.minX;
+        double zRange = bounds.maxZ - bounds.minZ;
         
         double effectiveScale = scale.getValue();
         double videoXScale, videoZScale;
@@ -596,17 +606,17 @@ public class VideoPattern extends LXPattern {
             videoZScale = effectiveScale;
         }
         
-        double threshold = targetY - 10;
         double bright = brightness.getValue();
         
         for (LXPoint p : model.points) {
-            if (p.y < threshold) {
+            // Only render on pixels in the selected plane
+            if (!bounds.isInPlane(p)) {
                 continue;
             }
             
             // Map LED coordinates to normalized space
-            double normalizedX = (p.x - minX) / xRange - 0.5;
-            double normalizedZ = (p.z - minZ) / zRange - 0.5;
+            double normalizedX = (p.x - bounds.minX) / xRange - 0.5;
+            double normalizedZ = (p.z - bounds.minZ) / zRange - 0.5;
             
             // Apply offsets
             normalizedX -= xOffset.getValue();
