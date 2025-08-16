@@ -10,7 +10,7 @@ const OSC_PORT = 3232  // Send to LX OSC receiver port
 const osc = new OSC({ 
   plugin: new OSC.DatagramPlugin({ 
     send: { port: OSC_PORT, host: 'localhost' } 
-  }) 
+  } as any) 
 })
 
 console.log('🎹 MIDI Bridge Starting...')
@@ -74,7 +74,7 @@ WebMidi
       
       // Handle speed control
       if (controller === MIDI_CC_SPEED) {
-        const oscValue = value
+        const oscValue = typeof value === 'number' ? value : 0
         
         console.log(`🎚️  Speed CC ${MIDI_CC_SPEED}: ${value} → OSC ${oscValue.toFixed(3)}`)
         

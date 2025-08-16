@@ -1,4 +1,5 @@
-import { OscClient } from './osc-client'
+// Use the unified client if available, otherwise fall back to osc-js
+import { OscClient } from './osc-client-unified'
 import { logger } from './logger'
 import './styles.css'
 

@@ -277,19 +277,21 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                     // Split by whitespace, with limit of 2 to keep everything after first space together
                     String[] parts = fullCommand.split("\\s+", 2);
                     
-                    if (parts.length >= 2) {
+                    if (parts.length >= 1) {
                         String command = parts[0].toLowerCase();
-                        String arg = parts[1];
+                        String arg = parts.length >= 2 ? parts[1] : "";
                         
                         LOG.info("Parsed command: '{}' with arg: '{}'", command, arg);
                         
                         if ("solo".equals(command)) {
                             handleSoloCommand(arg);
+                        } else if ("toggleparcans".equals(command)) {
+                            handleToggleParcans();
                         } else {
                             LOG.info("Unknown command: '{}'", command);
                         }
                     } else {
-                        LOG.error("OSC Command must be in format: 'command argument'");
+                        LOG.error("OSC Command requires at least 1 argument");
                     }
                 } else {
                     LOG.error("OSC Command requires at least 1 string argument");
@@ -359,6 +361,45 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         } else {
             // Send success feedback
             Audio.get().osc.sendOutgoing("/iqe/cmd/response", "success", "Solo activated: " + channelNamePattern);
+        }
+    }
+    
+    private void handleToggleParcans() {
+        int parcanCount = 0;
+        boolean currentState = false;
+        boolean firstParcan = true;
+        
+        // Find all parcan fixtures and toggle their deactivate state
+        if (lx.structure != null) {
+            for (heronarts.lx.structure.LXFixture fixture : lx.structure.fixtures) {
+                String className = fixture.getClass().getName().toLowerCase();
+                
+                // Check if this is a parcan fixture (DMXParCanFixture or SmoothDMXParCanFixture)
+                if (className.contains("parcan")) {
+                    // Get the current deactivate state from the first parcan we find
+                    if (firstParcan) {
+                        currentState = fixture.deactivate.getValueb();
+                        firstParcan = false;
+                    }
+                    
+                    // Toggle the deactivate state
+                    fixture.deactivate.setValue(!currentState);
+                    parcanCount++;
+                    
+                    LOG.info("Toggled parcan '{}' - deactivate now: {}", 
+                        fixture.getLabel(), !currentState);
+                }
+            }
+        }
+        
+        if (parcanCount > 0) {
+            String action = currentState ? "activated" : "deactivated";
+            String message = String.format("Toggled %d parcans - now %s", parcanCount, action);
+            LOG.info(message);
+            Audio.get().osc.sendOutgoing("/iqe/cmd/response", "success", message);
+        } else {
+            LOG.info("No parcan fixtures found to toggle");
+            Audio.get().osc.sendOutgoing("/iqe/cmd/response", "error", "No parcan fixtures found");
         }
     }
 

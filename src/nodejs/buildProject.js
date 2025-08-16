@@ -514,13 +514,25 @@ addScreen(18, 16, 10, 0)
 universes.push({id: universes.length, pixels: 0})
 addScreen(18, 16, 10, -1200)
 
-// Load project file, overwrite fixtures, re-write file.
+// Load project file, update only specific fixture types, preserve others
 const path = `${__dirname}/../../Projects/iqe.lxp`
 const project = JSON.parse(fs.readFileSync(path))
-// project.model.fixtures = buildNagBugglerSaberOfLightFixtures()
-project.model.fixtures = fixtures
+
+// Preserve fixtures that aren't managed by this script
+const preservedFixtures = project.model.fixtures.filter(f => {
+    // Keep parcans and any other non-strip fixtures
+    const className = f.class.toLowerCase()
+    return !className.includes('nagbugglersaberoflightfixture') && 
+           !className.includes('patchedstripfixture') &&
+           !className.includes('netstrip')
+})
+
+// Combine preserved fixtures with newly generated ones
+project.model.fixtures = [...preservedFixtures, ...fixtures]
+
 console.log(JSON.stringify(project, null, 2))
-console.error(`Regenerated ${project.model.fixtures.length} fixtures`)
+console.error(`Preserved ${preservedFixtures.length} fixtures, regenerated ${fixtures.length} fixtures`)
+console.error(`Total fixtures: ${project.model.fixtures.length}`)
 
 console.log(universes)
 fs.writeFileSync(path, JSON.stringify(project, null, 2))
