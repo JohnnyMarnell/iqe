@@ -13,6 +13,8 @@
   },
   "homepage": "https://github.com/JohnnyMarnell/iqe#readme",
   "scripts": {
+    "// Quick Start": "",
+    "start": "cd src/control-ui && npm install && npm run build && npm run start",
     "// Main Tools": "",
     "render": "cd src/touch-designer/iqe-artnet-electron && npm run start",
     "render:dev": "cd src/touch-designer/iqe-artnet-electron && npm run dev",
