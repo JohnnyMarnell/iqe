@@ -11,12 +11,15 @@ import heronarts.lx.modulation.LXCompoundModulation;
 import heronarts.lx.modulation.LXParameterModulation.ModulationException;
 import heronarts.lx.modulator.LXVariablePeriodModulator.ClockMode;
 import heronarts.lx.modulator.VariableLFO;
+import heronarts.lx.modulator.LXModulator;
 import heronarts.lx.parameter.CompoundParameter;
 import heronarts.lx.parameter.LXParameter.Units;
 import heronarts.lx.parameter.TriggerParameter;
 import heronarts.lx.pattern.LXPattern;
 import heronarts.lx.utils.LXUtils;
 import jkbstudio.autopilot.Autopilot;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A project-specific autopilot
@@ -33,17 +36,27 @@ public class AutopilotIQE extends Autopilot {
       .setUnits(Units.PERCENT);
 
   public final TriggerParameter transitionAll =
-      new TriggerParameter("TransitionAll")
+      new TriggerParameter("PattTrx")
       .setDescription("Transition all active patterns to their next pattern");
   
   public final TriggerParameter transitionPalette =
-      new TriggerParameter("TransitionPalette")
+      new TriggerParameter("PalTrx")
       .setDescription("Transition to next color palette");
+  
+  public final TriggerParameter pauseTransitions =
+      new TriggerParameter("Pause30s")
+      .setDescription("Pause all transitions for 30 seconds");
 
   public final CompoundParameter maxTransitionMs =
-      new CompoundParameter("MaxTransMs", 500, 100, 15000)
+      new CompoundParameter("MaxTrxMs", 500, 100, 15000)
       .setDescription("Maximum transition time in milliseconds")
       .setUnits(Units.MILLISECONDS);
+  
+  private Timer pauseTimer = null;
+  private boolean transitionsPaused = false;
+  private long pauseEndTime = 0;
+  private LXModulator dumbPixelBlazeHackLFO = null;
+  private boolean dumbPixelBlazeHackLFOWasRunning = false;
 
   public AutopilotIQE(LX lx) {
     super(lx);
@@ -53,6 +66,7 @@ public class AutopilotIQE extends Autopilot {
     addVisibleParameter("audioPercent", this.percentAudioReactive);
     addVisibleParameter("transitionAll", this.transitionAll);
     addVisibleParameter("transitionPalette", this.transitionPalette);
+    addVisibleParameter("pauseTransitions", this.pauseTransitions);
     addVisibleParameter("maxTransitionMs", this.maxTransitionMs);
 
     // Add other class' parameters to UI for convenience
@@ -69,6 +83,13 @@ public class AutopilotIQE extends Autopilot {
     this.transitionPalette.addListener(p -> {
       if (this.transitionPalette.getValueb()) {
         transitionPalette();
+      }
+    });
+    
+    // Add listener to pause transitions for 30 seconds
+    this.pauseTransitions.addListener(p -> {
+      if (this.pauseTransitions.getValueb()) {
+        pauseTransitionsFor30Seconds();
       }
     });
     
@@ -145,14 +166,15 @@ public class AutopilotIQE extends Autopilot {
   }
 
   private void transitionAllPatterns() {
-    // Iterate through all channels and trigger next pattern for active ones
+    // Use OSC commands for each channel to be consistent and avoid double triggering
     this.lx.engine.mixer.getChannels().forEach(channel -> {
       if (channel instanceof LXChannel) {
         LXChannel lxChannel = (LXChannel) channel;
         // Only transition if channel is enabled/active
         if (lxChannel.enabled.getValueb()) {
-          lxChannel.goNextPattern();
-          LX.log("Transitioned channel '" + lxChannel.getLabel() + "' to next pattern");
+          int channelIndex = lxChannel.getIndex() + 1; // OSC uses 1-based indexing
+          Audio.get().osc.command("/lx/mixer/channel/" + channelIndex + "/triggerPatternCycle");
+          LX.log("Transitioned channel '" + lxChannel.getLabel() + "' to next pattern via OSC");
         }
       }
     });
@@ -160,6 +182,11 @@ public class AutopilotIQE extends Autopilot {
 
   @Override
   protected void enableTransitions(LXChannel channel) {
+    // Skip if transitions are paused
+    if (transitionsPaused) {
+      return;
+    }
+    
     // Set to dissolve blend
     for (LXBlend blend : channel.transitionBlendMode.getObjects()) {
       if (blend instanceof DissolveBlend) {
@@ -203,9 +230,113 @@ public class AutopilotIQE extends Autopilot {
   }
   
   private void transitionPalette() {
-    // Trigger palette transition to next swatch
-    this.lx.engine.palette.triggerSwatchCycle.bang();
-    LX.log("Triggered palette transition");
+    // Use only OSC command to avoid double triggering
+    Audio.get().osc.command("/lx/palette/triggerSwatchCycle");
+    LX.log("Triggered palette transition via OSC");
+  }
+  
+  private LXModulator findDumbPixelBlazeHackLFO() {
+    // Search through global modulators for the one with matching label
+    for (LXModulator modulator : this.lx.engine.modulation.modulators) {
+      if ("DumbPixelBlazeHackLFO".equals(modulator.label.getString())) {
+        return modulator;
+      }
+    }
+    return null;
+  }
+  
+  private void pauseTransitionsFor30Seconds() {
+    // Calculate new end time (add 30 seconds to existing or current time)
+    long currentTime = System.currentTimeMillis();
+    if (pauseEndTime > currentTime) {
+      // Timer is already running, add 30 seconds to existing end time
+      pauseEndTime += 30000;
+      long totalSeconds = (pauseEndTime - currentTime) / 1000;
+      LX.log("Extended pause by 30 seconds, total pause time: " + totalSeconds + " seconds");
+    } else {
+      // First press or timer expired, set new end time
+      pauseEndTime = currentTime + 30000;
+      LX.log("Paused all transitions for 30 seconds");
+      
+      // Only disable transitions on first press
+      if (!transitionsPaused) {
+        // Disable all channel transitions immediately
+        this.lx.engine.mixer.getChannels().forEach(channel -> {
+          if (channel instanceof LXChannel) {
+            LXChannel lxChannel = (LXChannel) channel;
+            lxChannel.transitionEnabled.setValue(false);
+            lxChannel.autoCycleEnabled.setValue(false);
+          }
+        });
+        
+        // Also disable palette transitions
+        LXPalette palette = this.lx.engine.palette;
+        palette.transitionEnabled.setValue(false);
+        palette.autoCycleEnabled.setValue(false);
+        
+        // Find and pause the DumbPixelBlazeHackLFO if it exists
+        if (dumbPixelBlazeHackLFO == null) {
+          dumbPixelBlazeHackLFO = findDumbPixelBlazeHackLFO();
+        }
+        if (dumbPixelBlazeHackLFO != null) {
+          dumbPixelBlazeHackLFOWasRunning = dumbPixelBlazeHackLFO.running.isOn();
+          if (dumbPixelBlazeHackLFOWasRunning) {
+            dumbPixelBlazeHackLFO.running.setValue(false);
+            LX.log("Paused DumbPixelBlazeHackLFO modulator");
+          }
+        } else {
+          LX.log("DumbPixelBlazeHackLFO modulator not found");
+        }
+        
+        transitionsPaused = true;
+      }
+    }
+    
+    // Cancel existing timer if any
+    if (pauseTimer != null) {
+      pauseTimer.cancel();
+    }
+    
+    // Schedule new timer for the updated end time
+    pauseTimer = new Timer();
+    long delay = pauseEndTime - currentTime;
+    pauseTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        resumeTransitions();
+      }
+    }, delay);
+  }
+  
+  private void resumeTransitions() {
+    transitionsPaused = false;
+    pauseEndTime = 0;  // Reset the end time
+    
+    // Re-enable channel transitions
+    this.lx.engine.mixer.getChannels().forEach(channel -> {
+      if (channel instanceof LXChannel) {
+        enableTransitions((LXChannel) channel);
+      }
+    });
+    
+    // Re-enable palette transitions
+    LXPalette palette = this.lx.engine.palette;
+    palette.transitionEnabled.setValue(true);
+    palette.autoCycleEnabled.setValue(true);
+    
+    // Resume the DumbPixelBlazeHackLFO if it was running before
+    if (dumbPixelBlazeHackLFO != null && dumbPixelBlazeHackLFOWasRunning) {
+      dumbPixelBlazeHackLFO.running.setValue(true);
+      LX.log("Resumed DumbPixelBlazeHackLFO modulator");
+    }
+    
+    LX.log("Resumed all transitions after pause expired");
+    
+    // Clean up timer
+    if (pauseTimer != null) {
+      pauseTimer.cancel();
+      pauseTimer = null;
+    }
   }
 
 }
