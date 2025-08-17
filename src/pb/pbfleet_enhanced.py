@@ -51,6 +51,9 @@ class Device:
     pattern_count: int = 0
     sequencer_mode: str = ""
     playlist_length: int = 0
+    playlist_position: int = 0
+    playlist_remaining_ms: int = 0
+    is_sequencer_running: bool = False
     last_api_update: float = 0
     api_error: str = ""
     
@@ -74,11 +77,21 @@ class DeviceManager:
     def update_device(self, device_id: str, ip: str):
         """Update or add device from discovery"""
         is_new = False
+        needs_api_update = False
+        
         with self.lock:
             if device_id in self.devices:
-                self.devices[device_id].ip = ip
-                self.devices[device_id].last_seen = time.time()
-                self.devices[device_id].online = True
+                device = self.devices[device_id]
+                was_offline = not device.online
+                device.ip = ip
+                device.last_seen = time.time()
+                device.online = True
+                
+                # If device came back online or never had API data, update it
+                if was_offline or not device.api_name:
+                    needs_api_update = True
+                    if was_offline:
+                        print(f"🔄 Device {device_id} back online")
             else:
                 is_new = True
                 print(f"✨ New device discovered: {device_id} at {ip}")
@@ -88,9 +101,10 @@ class DeviceManager:
                     name=f"PB_{device_id[-4:]}",
                     last_seen=time.time()
                 )
+                needs_api_update = True
         
-        # Fetch API data for new devices immediately
-        if is_new and HAS_PB_CLIENT:
+        # Fetch API data for new devices or devices that came back online
+        if needs_api_update and HAS_PB_CLIENT:
             threading.Thread(target=self.update_device_api_data, args=(device_id,), daemon=True).start()
         
         self.save_state()
@@ -163,36 +177,58 @@ class DeviceManager:
                 patterns = {}
                 pattern_count = 0
             
-            # Get current pattern
+            # Get current pattern and sequencer info
+            playlist_position = 0
+            playlist_remaining_ms = 0
+            is_sequencer_running = False
+            playlist_length = 0
+            
             try:
-                active = pb.getActivePattern()
-                if active:
-                    current_pattern_name = active.get("name", "Unknown")
-                    current_pattern_id = active.get("id", "")
+                # Try new method first - gives us sequencer info too!
+                sequencer = pb.getConfigSequencer()
+                if sequencer and 'activeProgram' in sequencer:
+                    active_prog = sequencer['activeProgram']
+                    current_pattern_name = active_prog.get('name', 'Unknown')
+                    current_pattern_id = active_prog.get('activeProgramId', '')
+                    
+                    # Get playlist info if available
+                    playlist_info = sequencer.get('playlist', {})
+                    playlist_position = playlist_info.get('position', 0)
+                    playlist_remaining_ms = playlist_info.get('remainingMs', 0)
+                    sequencer_mode_num = sequencer.get('sequencerMode', 0)
+                    is_sequencer_running = sequencer.get('runSequencer', False)
+                    
+                    # Convert mode number to string
+                    sequencer_mode = ["Off", "Shuffle All", "Playlist"][sequencer_mode_num] if sequencer_mode_num < 3 else f"Mode {sequencer_mode_num}"
+                    
+                    # Log playlist info if running
+                    if is_sequencer_running and playlist_info:
+                        print(f"  🎵 Playlist position {playlist_position}, {playlist_remaining_ms/1000:.1f}s remaining")
                 else:
-                    # Fallback: look up in pattern list
-                    current_pattern_id = pb.ws.activePatternId if hasattr(pb, 'ws') else ""
-                    current_pattern_name = patterns.get(current_pattern_id, {}).get("name", "Unknown")
-            except:
+                    # Fallback to old method
+                    active = pb.getActivePattern()
+                    if active:
+                        current_pattern_name = active.get("name", "Unknown")
+                        current_pattern_id = active.get("id", "")
+                    else:
+                        current_pattern_id = ""
+                        current_pattern_name = "Unknown"
+                    sequencer_mode = "Off"
+                    
+            except Exception as e:
+                print(f"  ⚠️ Error getting sequencer info: {e}")
                 current_pattern_name = "Unknown"
                 current_pattern_id = ""
+                sequencer_mode = "Off"
             
-            # Brightness already retrieved from config above
-            
-            # Get sequencer info
-            sequencer_mode = "Off"
-            playlist_length = 0
-            try:
-                # This is device-specific, might not work on all
-                if hasattr(pb, 'ws') and hasattr(pb.ws, 'sequencerMode'):
-                    modes = ["Off", "Shuffle All", "Playlist"]
-                    mode_idx = pb.ws.sequencerMode
-                    sequencer_mode = modes[mode_idx] if 0 <= mode_idx < len(modes) else "Unknown"
-                    
-                    if hasattr(pb.ws, 'playlist'):
-                        playlist_length = len(pb.ws.playlist)
-            except:
-                pass
+            # Get playlist length from settings if in playlist mode
+            if sequencer_mode == "Playlist":
+                try:
+                    settings = pb.getSettings()
+                    playlist = settings.get('sequencerConfig', {}).get('playlist', [])
+                    playlist_length = len(playlist)
+                except:
+                    pass
             
             # Pixel count already retrieved from ws.pixelCount above
             
@@ -244,9 +280,17 @@ class DeviceManager:
                     d.pixel_count = pixel_count
                     d.sequencer_mode = sequencer_mode
                     d.playlist_length = playlist_length
+                    d.playlist_position = playlist_position
+                    d.playlist_remaining_ms = playlist_remaining_ms
+                    d.is_sequencer_running = is_sequencer_running
                     d.last_api_update = time.time()
                     d.api_error = ""
-                    print(f"📊 Device {device_id} ({device_name}): {pattern_count} patterns, playing '{current_pattern_name}'")
+                    
+                    # Only log key info
+                    status = f"📊 Device {device_id} ({device_name}): {pattern_count} patterns, playing '{current_pattern_name}'"
+                    if is_sequencer_running:
+                        status += f" [Playlist {playlist_position+1}/{playlist_length}, {playlist_remaining_ms/1000:.0f}s left]"
+                    print(status)
             
             self.save_state()
             

@@ -1,7 +1,7 @@
 {
   "device_id": "2a0000005608",
   "ip": "192.168.0.241",
-  "timestamp": "2025-08-17T10:33:28.768975",
+  "timestamp": "2025-08-17T10:42:54.114496",
   "config": {
     "name": "colorPalette",
     "brandName": "",
@@ -13,7 +13,7 @@
     "ledType": 2,
     "sequenceTimer": 15,
     "transitionDuration": 0,
-    "sequencerMode": 0,
+    "sequencerMode": 2,
     "runSequencer": false,
     "simpleUiMode": false,
     "learningUiMode": false,
