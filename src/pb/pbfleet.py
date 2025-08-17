@@ -556,10 +556,14 @@ class PixelBlazeDiscovery:
         logger.info("Restored original patterns")
 
 
-# Global instances - will be initialized in main
-manager = None
-provisioning = None
-discovery = None
+# Check for force provision flag early (module level)
+import sys
+force_provision_flag = "--force-provision" in sys.argv
+
+# Global instances - initialized at module level
+manager = ConnectionManager()
+provisioning = ProvisioningManager(force_provision=force_provision_flag)
+discovery = PixelBlazeDiscovery(manager, provisioning)
 
 # Lifespan context manager
 @asynccontextmanager
@@ -571,8 +575,22 @@ async def lifespan(app: FastAPI):
     discovery.stop()
     provisioning.stop()
 
-# App will be created in main
-app = None
+# Create FastAPI app at module level
+app = FastAPI(
+    title="PixelBlaze Fleet Monitor",
+    lifespan=lifespan,
+    docs_url=None,
+    redoc_url=None
+)
+
+# Add CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Complete HTML with all features
 COMPLETE_HTML = '''
@@ -737,97 +755,72 @@ setInterval(refresh,10000);
 '''
 
 
-if __name__ == "__main__":
-    import sys
+@app.get("/", response_class=HTMLResponse)
+async def index():
+    return COMPLETE_HTML
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
     
+    # Send initial devices
+    await websocket.send_json({
+        "type": "devices_list",
+        "devices": discovery.get_devices()
+    })
+    
+    try:
+        while True:
+            data = await websocket.receive_json()
+            
+            if data.get("type") == "get_devices":
+                await websocket.send_json({
+                    "type": "devices_list",
+                    "devices": discovery.get_devices()
+                })
+                
+            elif data.get("type") == "sync_pulse":
+                # Trigger synchronized pulse
+                if discovery.fleet:
+                    success = await discovery.sync_pulse()
+                    await websocket.send_json({
+                        "type": "sync_pulse_response",
+                        "success": success
+                    })
+                else:
+                    logger.warning("Fleet API not available for sync pulse")
+                
+            elif data.get("type") == "set_pattern":
+                # Set pattern on specific device
+                if discovery.fleet:
+                    device_id = data.get("device_id")
+                    pattern_id = data.get("pattern_id")
+                    if device_id in discovery.fleet.devices:
+                        api = discovery.fleet.devices[device_id]
+                        if api.connected:
+                            await api.set_pattern(pattern_id)
+                        
+            elif data.get("type") == "set_brightness":
+                # Set brightness on specific device
+                if discovery.fleet:
+                    device_id = data.get("device_id")
+                    brightness = data.get("brightness", 0.5)
+                    if device_id in discovery.fleet.devices:
+                        api = discovery.fleet.devices[device_id]
+                        if api.connected:
+                            await api.set_brightness(brightness)
+                
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+
+if __name__ == "__main__":
     # Parse command line arguments
     is_pi = platform.machine().startswith('arm') or os.path.exists('/proc/device-tree/model')
     dev_mode = "--dev" in sys.argv
     force_provision = "--force-provision" in sys.argv
     
-    # Initialize global instances with force provision flag
-    manager = ConnectionManager()
-    provisioning = ProvisioningManager(force_provision=force_provision)
-    discovery = PixelBlazeDiscovery(manager, provisioning)
-    
-    # Create FastAPI app after globals are initialized
-    app = FastAPI(
-        title="PixelBlaze Fleet Monitor",
-        lifespan=lifespan,
-        docs_url=None,
-        redoc_url=None
-    )
-    
-    # Add CORS
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-    
-    # Register routes
-    @app.get("/", response_class=HTMLResponse)
-    async def index():
-        return COMPLETE_HTML
-
-    @app.websocket("/ws")
-    async def websocket_endpoint(websocket: WebSocket):
-        await manager.connect(websocket)
-        
-        # Send initial devices
-        await websocket.send_json({
-            "type": "devices_list",
-            "devices": discovery.get_devices()
-        })
-        
-        try:
-            while True:
-                data = await websocket.receive_json()
-                
-                if data.get("type") == "get_devices":
-                    await websocket.send_json({
-                        "type": "devices_list",
-                        "devices": discovery.get_devices()
-                    })
-                    
-                elif data.get("type") == "sync_pulse":
-                    # Trigger synchronized pulse
-                    if discovery.fleet:
-                        success = await discovery.sync_pulse()
-                        await websocket.send_json({
-                            "type": "sync_pulse_response",
-                            "success": success
-                        })
-                    else:
-                        logger.warning("Fleet API not available for sync pulse")
-                    
-                elif data.get("type") == "set_pattern":
-                    # Set pattern on specific device
-                    if discovery.fleet:
-                        device_id = data.get("device_id")
-                        pattern_id = data.get("pattern_id")
-                        if device_id in discovery.fleet.devices:
-                            api = discovery.fleet.devices[device_id]
-                            if api.connected:
-                                await api.set_pattern(pattern_id)
-                            
-                elif data.get("type") == "set_brightness":
-                    # Set brightness on specific device
-                    if discovery.fleet:
-                        device_id = data.get("device_id")
-                        brightness = data.get("brightness", 0.5)
-                        if device_id in discovery.fleet.devices:
-                            api = discovery.fleet.devices[device_id]
-                            if api.connected:
-                                await api.set_brightness(brightness)
-                    
-        except WebSocketDisconnect:
-            manager.disconnect(websocket)
-    
     logger.info("Starting PixelBlaze Fleet Monitor with Auto-Provisioning")
-    if force_provision:
+    if force_provision or force_provision_flag:
         logger.info("FORCE PROVISION MODE - All devices will be re-provisioned")
     logger.info(f"Platform: {platform.system()} on {platform.machine()}")
     logger.info("Access at http://localhost:8000")
