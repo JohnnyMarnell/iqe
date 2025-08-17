@@ -49,6 +49,15 @@ here in LX ecosystem.
 - Access parameter values with `.getValue()`, `.getValueb()`, or `.getValuei()`
 - LOG class uses `.info()` and `.error()` (no `.warn()` method)
 
+# Network Tools Note
+- DO NOT USE `/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport` - Apple has locked this down and deprecated it
+- Use `system_profiler SPAirPortDataType -json` for WiFi scanning instead
+- Example to scan for networks:
+  ```bash
+  system_profiler SPAirPortDataType -json | python3 -c "import sys, json; data = json.load(sys.stdin); [print(n.get('_name', 'Unknown')) for iface in data.get('SPAirPortDataType', []) for n in iface.get('spairport_airport_interfaces', [{}])[0].get('spairport_airport_other_local_wireless_networks', [])]"
+  ```
+- Our pb.py script in src/pixelblaze/ uses this method
+
 # Fixture Management
 
 ## Current Setup (as of Aug 2024)

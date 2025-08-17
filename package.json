@@ -33,7 +33,8 @@
     "clean": "rm -rf node_modules src/*/node_modules src/*/*/node_modules",
     "// Development": "",
     "dev": "concurrently \"npm run render:dev\" \"npm run control:dev\" \"npm run bridge\"",
-    "test": "echo \"Run tests in individual packages\" && exit 0"
+    "test": "echo \"Run tests in individual packages\" && exit 0",
+    "wifi": "system_profiler SPAirPortDataType -json"
   },
   "dependencies": {
     "express": "^4.18.2",
