@@ -1,9 +1,12 @@
 # PixelBlaze Fleet Monitor Requirements
-# Core web framework
+
+# Simple Flask version (recommended)
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# For the FastAPI version (if you still want it)
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
-
-# WebSocket support
 websockets>=12.0
 websocket-client>=1.6.0
 

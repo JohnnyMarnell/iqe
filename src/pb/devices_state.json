@@ -1,0 +1,23 @@
+{
+  "devices": [
+    {
+      "id": "2a000000a401",
+      "ip": "192.168.0.96",
+      "name": "PB_a401",
+      "last_seen": 1755405008.76349,
+      "online": true,
+      "provisioned": false,
+      "last_seen_formatted": "21:30:08"
+    },
+    {
+      "id": "2a0000005608",
+      "ip": "192.168.0.241",
+      "name": "PB_5608",
+      "last_seen": 1755405008.148872,
+      "online": true,
+      "provisioned": false,
+      "last_seen_formatted": "21:30:08"
+    }
+  ],
+  "saved_at": "2025-08-16T21:30:08.763648"
+}
