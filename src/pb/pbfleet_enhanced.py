@@ -936,6 +936,8 @@ HTML = '''
                 🎆 Swell & Scatter
             </button>
             <button class="btn" onclick="updateDevices()">🔄 Refresh</button>
+            <button class="btn" onclick="runPulse()" style="background: #ff4444">🔴 Pulse & Scatter (40s)</button>
+            <button class="btn" onclick="quickPulse()" style="background: #4444ff">⚡ Quick Test (5s)</button>
         </div>
         <div class="devices" id="devices">
             <div class="no-devices">
@@ -1181,6 +1183,48 @@ HTML = '''
                 });
         }
         
+        function runPulse() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '⏳ Running (40s)...';
+            
+            fetch('/api/pulse', { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    showToast(data.success ? 
+                        '🔴 Pulse sequence started!' : 
+                        '❌ ' + (data.message || 'Failed'));
+                })
+                .catch(err => showToast('❌ Error: ' + err))
+                .finally(() => {
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = '🔴 Pulse & Scatter (40s)';
+                    }, 40000);  // Re-enable after 40 seconds
+                });
+        }
+        
+        function quickPulse() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '⏳ Running...';
+            
+            fetch('/api/pulse-quick', { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    showToast(data.success ? 
+                        '⚡ Quick test started!' : 
+                        '❌ ' + (data.message || 'Failed'));
+                })
+                .catch(err => showToast('❌ Error: ' + err))
+                .finally(() => {
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = '⚡ Quick Test (5s)';
+                    }, 5000);  // Re-enable after 5 seconds
+                });
+        }
+        
         // Initial load and refresh every 3 seconds
         updateDevices();
         loadPatterns();
@@ -1257,6 +1301,48 @@ def swell_and_scatter():
     
     result = manager.dramatic_swell_and_scatter(duration, color_hue)
     return jsonify(result)
+
+@app.route('/api/pulse', methods=['POST'])
+def pulse():
+    """Run 2 cycles of simplePulse then scatter"""
+    import threading
+    from pb_pulse_and_scatter import pulse_and_scatter
+    
+    online_devices = [(d.id, d.ip) for d in manager.devices.values() if d.online]
+    online_ips = [ip for _, ip in online_devices]
+    
+    if not online_ips:
+        return jsonify({'success': False, 'message': 'No online devices'})
+    
+    def run():
+        pulse_and_scatter(online_ips, pulse_cycles=2, cycle_duration=20)
+    
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({'success': True, 'message': f'Started on {len(online_ips)} devices'})
+
+@app.route('/api/pulse-quick', methods=['POST'])
+def pulse_quick():
+    """Run quick test - quarter cycle (5 seconds)"""
+    import threading
+    from pb_pulse_and_scatter import pulse_and_scatter
+    
+    online_devices = [(d.id, d.ip) for d in manager.devices.values() if d.online]
+    online_ips = [ip for _, ip in online_devices]
+    
+    if not online_ips:
+        return jsonify({'success': False, 'message': 'No online devices'})
+    
+    def run():
+        pulse_and_scatter(online_ips, pulse_cycles=0.25, cycle_duration=20)
+    
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({'success': True, 'message': f'Quick test on {len(online_ips)} devices'})
 
 def main():
     """Start the enhanced app"""

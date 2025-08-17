@@ -1,7 +1,7 @@
 {
   "device_id": "2a0000005608",
   "ip": "192.168.0.241",
-  "timestamp": "2025-08-16T22:16:10.417011",
+  "timestamp": "2025-08-17T10:17:01.142660",
   "patterns": {
     "iYDPEfGzNLkCiHdnG": "opposites",
     "D2xuondCcLLi2jvMr": "spin cycle",
@@ -50,7 +50,7 @@
     "iaqkBjExhRRiYcfuY": "cursor_test",
     "jbBnXPnCZmhMPiG4m": "matrix 2D honeycomb",
     "vz4wrjhbfipf4WgHg": "Phase 4b Color Mood Plasma",
-    "kdtP6eACgr84kmcua": "swell"
+    "kdtP6eACgr84kmcua": "simplePulse"
   },
   "pattern_count": 48
 }

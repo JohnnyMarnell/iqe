@@ -1,7 +1,7 @@
 {
   "device_id": "2a000000a401",
   "ip": "192.168.0.96",
-  "timestamp": "2025-08-16T22:16:10.293607",
+  "timestamp": "2025-08-17T10:17:01.039174",
   "patterns": {
     "iYDPEfGzNLkCiHdnG": "opposites",
     "D2xuondCcLLi2jvMr": "spin cycle",
@@ -48,7 +48,8 @@
     "G3MR4bG4GFAjdRmSh": "Beating Heart",
     "BvZoMSk6wu37yZ8zY": "fast pulse 2D/3D",
     "aE5YEvSnbXWsu5ob2": "pulse 2D",
-    "Fvhhj7uo6xaDciS46": "spotlights / rotation 3D"
+    "Fvhhj7uo6xaDciS46": "spotlights / rotation 3D",
+    "Z6NrX6B3CztPevQXX": "simplePulse.js"
   },
-  "pattern_count": 46
+  "pattern_count": 47
 }

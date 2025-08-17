@@ -366,6 +366,46 @@ def health():
         'online_devices': sum(1 for d in devices if d['online'])
     })
 
+@app.route('/api/pulse', methods=['POST'])
+def pulse():
+    """Run 2 cycles of simplePulse then scatter"""
+    import threading
+    from pb_pulse_and_scatter import pulse_and_scatter
+    
+    devices = manager.get_all()
+    online_ips = [d['ip'] for d in devices if d['online']]
+    if not online_ips:
+        return jsonify({'success': False, 'message': 'No online devices'})
+    
+    def run():
+        pulse_and_scatter(online_ips, pulse_cycles=2, cycle_duration=20)
+    
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({'success': True, 'message': f'Started on {len(online_ips)} devices'})
+
+@app.route('/api/pulse-quick', methods=['POST'])
+def pulse_quick():
+    """Run quick test - quarter cycle"""
+    import threading
+    from pb_pulse_and_scatter import pulse_and_scatter
+    
+    devices = manager.get_all()
+    online_ips = [d['ip'] for d in devices if d['online']]
+    if not online_ips:
+        return jsonify({'success': False, 'message': 'No online devices'})
+    
+    def run():
+        pulse_and_scatter(online_ips, pulse_cycles=0.25, cycle_duration=20)
+    
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({'success': True, 'message': f'Quick test on {len(online_ips)} devices'})
+
 def main():
     """Start the app"""
     print("🚀 PixelBlaze Fleet Monitor - Simple Flask Version")
