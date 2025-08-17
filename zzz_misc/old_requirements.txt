@@ -1,0 +1,10 @@
+argparse
+black
+librosa
+mypy
+numpy
+opencv-python
+pixelblaze-clientscipy==1.16.1
+PyAudio
+pylint
+python-osc

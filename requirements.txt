@@ -1,10 +1,8 @@
-argparse
-black
-librosa
-mypy
-numpy
-opencv-python
-pixelblaze-clientscipy==1.16.1
-PyAudio
-pylint
-python-osc
+# PixelBlaze Fleet Monitor Requirements - FastAPI Version
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+pixelblaze-client>=1.0.0
+websocket-client>=1.6.0
+requests>=2.31.0
+pytz>=2023.3

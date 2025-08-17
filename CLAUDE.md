@@ -71,3 +71,10 @@ here in LX ecosystem.
 - Located around line 41500+ in iqe.lxp
 - Can hold multiple patterns for testing
 - Pattern transitions use alpha blending (importance of CLEAR vs BLACK)
+
+# PixelBlaze Fleet Management
+See [PIXELBLAZE_FLEET.md](./PIXELBLAZE_FLEET.md) for:
+- Live device monitoring web app
+- Firestorm integration for multi-device sync
+- Python client library usage
+- Network discovery and management

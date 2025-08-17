@@ -1,0 +1,20 @@
+[Unit]
+Description=PixelBlaze Fleet Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/iqe
+ExecStart=/usr/bin/python3 /home/pi/iqe/pixelblaze_monitor_pi.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Memory limits for Pi Zero
+MemoryMax=128M
+MemorySwapMax=128M
+
+[Install]
+WantedBy=multi-user.target
