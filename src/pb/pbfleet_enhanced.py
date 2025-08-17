@@ -116,10 +116,10 @@ class DeviceManager:
             # Get device name using the ACTUAL method that works!
             try:
                 device_name = pb.getDeviceName()
-                print(f"✨ Got device name: {device_name}")
+                pass  # Got device name
             except:
                 device_name = f"PB_{device_id[-4:]}"
-                print(f"⚠️  Could not get device name for {device_id}, using default")
+                pass  # Could not get device name
             
             # Get full config which has everything we need
             try:
@@ -137,9 +137,9 @@ class DeviceManager:
                         'config': config,
                         'device_name': device_name
                     }, f, indent=2)
-                print(f"💾 Saved config to {config_file}")
+                pass  # Saved config
             except Exception as e:
-                print(f"Could not get config: {e}")
+                pass  # Could not get config
                 pixel_count = 0
             
             # Get pattern list
@@ -157,9 +157,9 @@ class DeviceManager:
                         'patterns': patterns,
                         'pattern_count': pattern_count
                     }, f, indent=2)
-                print(f"💾 Saved {pattern_count} patterns to {patterns_file}")
+                pass  # Saved patterns
             except Exception as e:
-                print(f"⚠️  Could not get patterns for {device_id}: {e}")
+                pass  # Could not get patterns
                 patterns = {}
                 pattern_count = 0
             
@@ -222,15 +222,15 @@ class DeviceManager:
                             'timestamp': datetime.now().isoformat(),
                             'websocket_attributes': ws_data
                         }, f, indent=2)
-                    print(f"💾 Saved WebSocket data to {ws_file}")
+                    pass  # Saved WebSocket data
                     
                     # Check specifically for name in ws attributes
                     if 'name' in ws_data:
-                        print(f"✨ Found ws.name: {ws_data['name']}")
+                        pass  # Found ws.name
                         if not device_name or device_name.startswith("PB_"):
                             device_name = ws_data['name']
             except Exception as e:
-                print(f"Could not save WebSocket data: {e}")
+                pass  # Could not save WebSocket data
             
             # Update device with API data
             with self.lock:
@@ -246,7 +246,7 @@ class DeviceManager:
                     d.playlist_length = playlist_length
                     d.last_api_update = time.time()
                     d.api_error = ""
-                    print(f"📊 Updated {device_id}: {device_name}, pattern: {current_pattern_name}, {pattern_count} patterns")
+                    print(f"📊 Device {device_id} ({device_name}): {pattern_count} patterns, playing '{current_pattern_name}'")
             
             self.save_state()
             
@@ -727,21 +727,12 @@ def discovery_thread(manager: DeviceManager):
 
 
 def monitor_thread(manager: DeviceManager):
-    """Monitor devices and update API data"""
-    last_api_update = 0
-    
+    """Monitor devices for offline status"""
     while True:
         time.sleep(5)
         
-        # Check for offline devices
+        # Check for offline devices only
         manager.check_timeouts()
-        
-        # Update API data periodically
-        current_time = time.time()
-        if current_time - last_api_update > API_UPDATE_INTERVAL:
-            print("🔄 Updating device API data...")
-            manager.update_all_api_data()
-            last_api_update = current_time
 
 
 # Enhanced HTML UI

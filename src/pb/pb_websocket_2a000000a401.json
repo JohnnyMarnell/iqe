@@ -1,26 +1,26 @@
 {
   "device_id": "2a000000a401",
   "ip": "192.168.0.96",
-  "timestamp": "2025-08-17T10:30:27.657270",
+  "timestamp": "2025-08-17T10:33:28.658841",
   "websocket_attributes": {
     "connected": true,
-    "cont_frame": "<websocket._abnf.continuous_frame object at 0x103471b50>",
-    "frame_buffer": "<websocket._abnf.frame_buffer object at 0x103471a60>",
+    "cont_frame": "<websocket._abnf.continuous_frame object at 0x1077a3f20>",
+    "frame_buffer": "<websocket._abnf.frame_buffer object at 0x10505b9e0>",
     "get_mask_key": null,
-    "handshake_response": "<websocket._handshake.handshake_response object at 0x103472120>",
+    "handshake_response": "<websocket._handshake.handshake_response object at 0x105161b20>",
     "headers": {
       "server": "arduino-WebSocketsServer",
       "upgrade": "websocket",
       "connection": "Upgrade",
       "sec-websocket-version": "13",
-      "sec-websocket-accept": "IH9m1oyvFk7A5RBK9rHJ+K/aXGI="
+      "sec-websocket-accept": "F75c6b6p95VG/VBQcK3vVBSllIo="
     },
-    "lock": "<unlocked _thread.lock object at 0x1034686c0>",
-    "readlock": "<unlocked _thread.lock object at 0x103468700>",
-    "sock": "<socket.socket fd=7, family=2, type=1, proto=6, laddr=('192.168.0.91', 57429), raddr=('192.168.0.96', 81)>",
-    "sock_opt": "<websocket._socket.sock_opt object at 0x102f9d9a0>",
+    "lock": "<unlocked _thread.lock object at 0x105acdbc0>",
+    "readlock": "<unlocked _thread.lock object at 0x1077cc7c0>",
+    "sock": "<socket.socket fd=9, family=2, type=1, proto=6, laddr=('192.168.0.91', 58558), raddr=('192.168.0.96', 81)>",
+    "sock_opt": "<websocket._socket.sock_opt object at 0x1077a3ef0>",
     "status": 101,
     "subprotocol": null,
-    "timeout": 3
+    "timeout": 1
   }
 }
