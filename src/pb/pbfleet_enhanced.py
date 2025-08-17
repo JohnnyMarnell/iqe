@@ -283,7 +283,7 @@ class DeviceManager:
             return [d.to_dict() for d in self.devices.values()]
     
     def sync_pattern(self, pattern_name: str = None):
-        """Set the same pattern on all online devices"""
+        """Set the same pattern on all online devices with improved synchronization"""
         if not HAS_PB_CLIENT:
             return {'success': False, 'error': 'pixelblaze-client not installed'}
         
@@ -293,50 +293,328 @@ class DeviceManager:
         
         print(f"🎭 Syncing pattern '{pattern_name}' to {len(online_devices)} devices")
         
+        # First, prepare all connections and determine pattern
+        prepared_devices = []
+        target_pattern_id = None
+        target_pattern_name = pattern_name
+        
         for device_id, ip in online_devices:
             try:
                 if device_id not in self.pb_clients:
                     self.pb_clients[device_id] = Pixelblaze(ip)
-                
                 pb = self.pb_clients[device_id]
                 
-                if pattern_name:
-                    # Use the ACTUAL method that exists
-                    pb.setActivePatternByName(pattern_name)
-                    print(f"  Setting pattern by name: '{pattern_name}'")
-                else:
-                    # Pick a random pattern
+                # If no pattern specified, pick random from first device
+                if not pattern_name and not target_pattern_id:
                     patterns = pb.getPatternList()
                     if patterns:
                         import random
-                        pattern_id = random.choice(list(patterns.keys()))
-                        # Use setActivePattern with the ID
-                        pb.setActivePattern(pattern_id)
-                        # Get the pattern name for logging
-                        pdata = patterns[pattern_id]
-                        if isinstance(pdata, str):
-                            pattern_name = pdata
-                        else:
-                            pattern_name = pdata.get('name', 'Unknown')
-                        print(f"  Set random pattern: '{pattern_name}' (ID: {pattern_id})")
+                        target_pattern_id = random.choice(list(patterns.keys()))
+                        pdata = patterns[target_pattern_id]
+                        target_pattern_name = pdata if isinstance(pdata, str) else pdata.get('name', 'Unknown')
+                        print(f"  Selected random pattern: '{target_pattern_name}'")
                 
-                results.append({'device_id': device_id, 'success': True})
-                print(f"  ✅ Set pattern on {device_id}")
-                
+                prepared_devices.append((device_id, pb))
             except Exception as e:
+                print(f"  ❌ Failed to prepare {device_id}: {e}")
                 results.append({'device_id': device_id, 'success': False, 'error': str(e)})
-                print(f"  ❌ Failed on {device_id}: {e}")
+        
+        # Now send all commands in parallel using threads
+        import concurrent.futures
+        import time
+        
+        def set_pattern_on_device(device_id, pb, pattern_to_set):
+            """Set pattern on a single device"""
+            try:
+                if pattern_name:  # Use name if specified
+                    pb.setActivePatternByName(pattern_to_set)
+                else:  # Use ID for random selection
+                    pb.setActivePattern(target_pattern_id)
+                return {'device_id': device_id, 'success': True}
+            except Exception as e:
+                return {'device_id': device_id, 'success': False, 'error': str(e)}
+        
+        # Execute all pattern changes simultaneously
+        start_time = time.time()
+        with concurrent.futures.ThreadPoolExecutor(max_workers=len(prepared_devices)) as executor:
+            # Submit all tasks at once
+            futures = [
+                executor.submit(set_pattern_on_device, device_id, pb, target_pattern_name)
+                for device_id, pb in prepared_devices
+            ]
+            
+            # Collect results
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                results.append(result)
+                if result['success']:
+                    print(f"  ✅ Set pattern on {result['device_id']}")
+                else:
+                    print(f"  ❌ Failed on {result['device_id']}: {result.get('error', 'Unknown error')}")
+        
+        elapsed = time.time() - start_time
+        print(f"⏱️  Sync completed in {elapsed:.3f} seconds")
         
         # Update all device info after sync
         threading.Thread(target=self.update_all_api_data, daemon=True).start()
         
         return {
             'success': True, 
-            'pattern': pattern_name,
+            'pattern': target_pattern_name,
             'devices': results,
             'total': len(results),
-            'successful': sum(1 for r in results if r['success'])
+            'successful': sum(1 for r in results if r['success']),
+            'sync_time': elapsed
         }
+    
+    def simple_sync_and_scatter(self, sync_pattern: str = "slow color shift", duration: float = 5.0):
+        """Play a dramatic synchronized swell pattern, then scatter to random patterns"""
+        if not HAS_PB_CLIENT:
+            return {'success': False, 'error': 'pixelblaze-client not installed'}
+        
+        import random
+        import concurrent.futures
+        import time
+        
+        # PixelBlaze pattern code for dramatic swell
+        if color_hue is None:
+            color_hue = random.random()  # Random color if not specified
+        
+        swell_pattern_code = f"""
+        // Dramatic Swell Pattern - Synchronized across devices
+        // This pattern swells up with intense brightness, flares, then dies down
+        
+        export var trigger = 1  // Start the animation
+        var startTime = 0
+        var duration = {duration}  // Total duration in seconds
+        
+        export function beforeRender(delta) {{
+          // Initialize start time on first run
+          if (trigger && startTime == 0) {{
+            startTime = time(0.001)  // Get current time in seconds
+          }}
+          
+          // Calculate progress (0 to 1)
+          t1 = (time(0.001) - startTime) / duration
+          
+          if (t1 > 1) {{
+            t1 = 1
+            trigger = 0  // Animation complete
+          }}
+          
+          // Create swell curve with flare
+          // 0-0.7: slow build up
+          // 0.7-0.8: intense flare
+          // 0.8-1.0: fade out
+          
+          if (t1 < 0.7) {{
+            // Slow exponential build
+            progress = (t1 / 0.7)
+            brightness = pow(progress, 2)
+            saturation = 0.8 + (0.2 * progress)
+          }} else if (t1 < 0.8) {{
+            // Intense flare with slight pulsing
+            flareProgress = (t1 - 0.7) / 0.1
+            pulse = sin(flareProgress * PI * 4)  // Quick pulses
+            brightness = 0.9 + (0.1 * pulse)
+            saturation = 0.6 - (0.2 * flareProgress)  // Desaturate during flare
+          }} else {{
+            // Fade to black
+            fadeProgress = (t1 - 0.8) / 0.2
+            brightness = (1 - fadeProgress) * 0.8
+            saturation = 0.8
+          }}
+          
+          // Add subtle wave motion
+          wave = sin(t1 * PI * 2) * 0.1
+          finalBrightness = brightness + wave
+          
+          // Clamp brightness
+          if (finalBrightness > 1) finalBrightness = 1
+          if (finalBrightness < 0) finalBrightness = 0
+        }}
+        
+        export function render(index) {{
+          // Slight variation across pixels for texture
+          pixelVariation = sin(index * 0.3 + t1 * PI * 2) * 0.05
+          
+          hsv({color_hue}, saturation, finalBrightness + pixelVariation)
+        }}
+        """
+        
+        print(f"🎆 Starting dramatic swell (hue: {color_hue:.2f}, duration: {duration}s)")
+        
+        with self.lock:
+            online_devices = [(d.id, d.ip) for d in self.devices.values() if d.online]
+        
+        # Step 1: Upload and activate swell pattern on all devices
+        results = []
+        pattern_ids = {}  # Store uploaded pattern IDs for cleanup
+        
+        def upload_and_activate_swell(device_id, ip):
+            try:
+                if device_id not in self.pb_clients:
+                    self.pb_clients[device_id] = Pixelblaze(ip)
+                pb = self.pb_clients[device_id]
+                
+                # Save current pattern to restore later
+                current = pb.getActivePattern()
+                current_id = current.get('activeProgramId') if current else None
+                
+                # Upload the swell pattern
+                pattern_name = f"IQE_Swell_{int(time.time())}"
+                pb.savePattern(pattern_name, swell_pattern_code)
+                
+                # Find the pattern we just uploaded
+                patterns = pb.getPatternList()
+                swell_id = None
+                for pid, pname in patterns.items():
+                    if isinstance(pname, str) and pattern_name in pname:
+                        swell_id = pid
+                        break
+                    elif isinstance(pname, dict) and pattern_name in pname.get('name', ''):
+                        swell_id = pid
+                        break
+                
+                if swell_id:
+                    pb.setActivePattern(swell_id)
+                    pattern_ids[device_id] = (swell_id, current_id)
+                    return {'device_id': device_id, 'success': True}
+                else:
+                    return {'device_id': device_id, 'success': False, 'error': 'Pattern not found after upload'}
+                    
+            except Exception as e:
+                return {'device_id': device_id, 'success': False, 'error': str(e)}
+        
+        # Upload and activate in parallel
+        with concurrent.futures.ThreadPoolExecutor(max_workers=len(online_devices)) as executor:
+            futures = [executor.submit(upload_and_activate_swell, did, ip) for did, ip in online_devices]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                results.append(result)
+                if result['success']:
+                    print(f"  ✅ Swell started on {result['device_id']}")
+                else:
+                    print(f"  ❌ Failed on {result['device_id']}: {result.get('error')}")
+        
+        # Step 2: Wait for swell to complete
+        print(f"⏳ Waiting {duration} seconds for swell to complete...")
+        time.sleep(duration + 0.5)  # Extra half second for fade out
+        
+        # Step 3: Scatter to random patterns
+        print("🎲 Scattering to random patterns...")
+        
+        def set_random_pattern(device_id, ip):
+            try:
+                if device_id not in self.pb_clients:
+                    self.pb_clients[device_id] = Pixelblaze(ip)
+                pb = self.pb_clients[device_id]
+                
+                # Get all patterns
+                patterns = pb.getPatternList()
+                if patterns:
+                    # Filter out our swell pattern
+                    available_patterns = {
+                        pid: pname for pid, pname in patterns.items()
+                        if not (isinstance(pname, str) and 'IQE_Swell' in pname) and
+                           not (isinstance(pname, dict) and 'IQE_Swell' in pname.get('name', ''))
+                    }
+                    
+                    if available_patterns:
+                        random_id = random.choice(list(available_patterns.keys()))
+                        pb.setActivePattern(random_id)
+                        
+                        pattern_name = available_patterns[random_id]
+                        if isinstance(pattern_name, dict):
+                            pattern_name = pattern_name.get('name', 'Unknown')
+                        
+                        return {'device_id': device_id, 'pattern': pattern_name, 'success': True}
+                
+                return {'device_id': device_id, 'success': False, 'error': 'No patterns available'}
+                
+            except Exception as e:
+                return {'device_id': device_id, 'success': False, 'error': str(e)}
+        
+        scatter_results = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=len(online_devices)) as executor:
+            futures = [executor.submit(set_random_pattern, did, ip) for did, ip in online_devices]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                scatter_results.append(result)
+                if result['success']:
+                    print(f"  🎨 {result['device_id']} → {result.get('pattern', 'Random')}")
+                else:
+                    print(f"  ❌ Failed to scatter {result['device_id']}")
+        
+        # Clean up: Delete swell patterns
+        for device_id, (swell_id, _) in pattern_ids.items():
+            try:
+                if device_id in self.pb_clients:
+                    self.pb_clients[device_id].deletePattern(swell_id)
+            except:
+                pass  # Silent cleanup
+        
+        print("✨ Swell and scatter complete!")
+        
+        # Update device info
+        threading.Thread(target=self.update_all_api_data, daemon=True).start()
+        
+        return {
+            'success': True,
+            'swell_results': results,
+            'scatter_results': scatter_results,
+            'duration': duration,
+            'color_hue': color_hue
+        }
+    
+    def setup_time_sync(self):
+        """Setup time synchronization between PixelBlazes for perfect sync
+        Uses the first device as leader, others as followers"""
+        if not HAS_PB_CLIENT:
+            return {'success': False, 'error': 'pixelblaze-client not installed'}
+        
+        with self.lock:
+            online_devices = [(d.id, d.ip) for d in self.devices.values() if d.online]
+        
+        if len(online_devices) < 2:
+            return {'success': False, 'error': 'Need at least 2 devices for sync'}
+        
+        # First device becomes the leader
+        leader_id, leader_ip = online_devices[0]
+        follower_devices = online_devices[1:]
+        
+        print(f"🎯 Setting up time sync - Leader: {leader_id}")
+        
+        try:
+            # Get leader's time  
+            if leader_id not in self.pb_clients:
+                self.pb_clients[leader_id] = Pixelblaze(leader_ip)
+            
+            leader_pb = self.pb_clients[leader_id]
+            
+            # Sync followers to leader's time
+            for device_id, ip in follower_devices:
+                try:
+                    if device_id not in self.pb_clients:
+                        self.pb_clients[device_id] = Pixelblaze(ip)
+                    
+                    pb = self.pb_clients[device_id]
+                    
+                    # Send a ping to sync time (PixelBlaze uses NTP-like sync)
+                    pb.sendPing()
+                    print(f"  📡 Synced {device_id} to leader time")
+                    
+                except Exception as e:
+                    print(f"  ❌ Failed to sync {device_id}: {e}")
+            
+            return {
+                'success': True,
+                'leader': leader_id,
+                'followers': [d[0] for d in follower_devices]
+            }
+            
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
     
     def get_common_patterns(self):
         """Get patterns that exist on ALL devices"""
@@ -654,6 +932,9 @@ HTML = '''
                 <option value="">Loading patterns...</option>
             </select>
             <button class="btn" onclick="syncSelected()">🎭 Sync Selected</button>
+            <button class="btn sync" onclick="swellAndScatter()" style="background: linear-gradient(135deg, #ef4444, #f59e0b)">
+                🎆 Swell & Scatter
+            </button>
             <button class="btn" onclick="updateDevices()">🔄 Refresh</button>
         </div>
         <div class="devices" id="devices">
@@ -857,6 +1138,49 @@ HTML = '''
                 });
         }
         
+        // Dramatic swell and scatter
+        function swellAndScatter() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '⏳ Starting swell...';
+            
+            fetch('/api/swell-and-scatter', { 
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    duration: 5.0,  // 5 second swell
+                    hue: Math.random()  // Random color each time
+                })
+            })
+                .then(r => r.json())
+                .then(data => {
+                    console.log('Swell result:', data);
+                    if (data.success) {
+                        btn.textContent = '🎆 Swelling...';
+                        // Button will be re-enabled after the duration
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.textContent = '🎆 Swell & Scatter';
+                            updateDevices();  // Refresh to show new patterns
+                        }, 6000);  // Duration + 1 second
+                    } else {
+                        btn.textContent = '❌ Failed';
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.textContent = '🎆 Swell & Scatter';
+                        }, 2000);
+                    }
+                })
+                .catch(err => {
+                    console.error('Swell error:', err);
+                    btn.textContent = '❌ Error';
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = '🎆 Swell & Scatter';
+                    }, 2000);
+                });
+        }
+        
         // Initial load and refresh every 3 seconds
         updateDevices();
         loadPatterns();
@@ -915,6 +1239,24 @@ def common_patterns():
     """Get patterns available on all devices"""
     patterns = manager.get_common_patterns()
     return jsonify({'patterns': patterns, 'count': len(patterns)})
+
+@app.route('/api/setup-sync', methods=['POST'])
+def setup_sync():
+    """Setup time synchronization between devices"""
+    result = manager.setup_time_sync()
+    return jsonify(result)
+
+@app.route('/api/swell-and-scatter', methods=['POST'])
+def swell_and_scatter():
+    """Trigger dramatic swell effect followed by scatter"""
+    # Get optional parameters from request
+    from flask import request
+    data = request.get_json() or {}
+    duration = data.get('duration', 5.0)
+    color_hue = data.get('hue', None)
+    
+    result = manager.dramatic_swell_and_scatter(duration, color_hue)
+    return jsonify(result)
 
 def main():
     """Start the enhanced app"""

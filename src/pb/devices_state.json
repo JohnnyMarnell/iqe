@@ -3,15 +3,15 @@
     {
       "id": "2a000000a401",
       "ip": "192.168.0.96",
-      "name": "PB_a401",
+      "name": "johnny5",
       "provisioned": false
     },
     {
       "id": "2a0000005608",
       "ip": "192.168.0.241",
-      "name": "PB_5608",
+      "name": "colorPalette",
       "provisioned": false
     }
   ],
-  "saved_at": "2025-08-16T21:53:50.728391"
+  "saved_at": "2025-08-16T22:16:19.678062"
 }
