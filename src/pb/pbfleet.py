@@ -366,15 +366,15 @@ class PixelBlazeDiscovery:
                         if self.fleet:
                             self.fleet.add_device(device_id, ip)
                         
-                        # Always queue update so device appears in UI
-                        self.update_queue.put(device.to_dict())
-                        
                         # Queue for provisioning if needed
                         if not is_provisioned:
                             logger.info(f"New unprovisioned device {device_id} - queuing for provisioning")
                             self.provisioning_manager.queue_provisioning(device_id, ip)
                         else:
                             logger.info(f"Device {device_id} already provisioned")
+                        
+                        # Always queue update so device appears in UI
+                        self.update_queue.put(device.to_dict())
                     else:
                         device = self.devices[device_id]
                         was_offline = not device.online
@@ -386,9 +386,9 @@ class PixelBlazeDiscovery:
                             logger.info(f"PixelBlaze {device_id} back online")
                             if self.fleet:
                                 self.fleet.add_device(device_id, ip)
-                    
-                    # Queue update
-                    self.update_queue.put(device.to_dict())
+                        
+                        # Always queue update
+                        self.update_queue.put(device.to_dict())
                             
         except Exception as e:
             logger.error(f"Packet processing error: {e}")
@@ -475,14 +475,16 @@ class PixelBlazeDiscovery:
                 try:
                     try:
                         device_dict = self.update_queue.get(timeout=0.1)
+                        logger.debug(f"Broadcasting device update: {device_dict.get('id', 'unknown')}")
                         await self.connection_manager.broadcast({
                             "type": "device_update",
                             "device": device_dict
                         })
+                        logger.debug(f"Broadcast complete for device {device_dict.get('id', 'unknown')}")
                     except queue.Empty:
                         await asyncio.sleep(0.1)
                 except Exception as e:
-                    logger.error(f"Broadcast error: {e}")
+                    logger.error(f"Broadcast error: {e}", exc_info=True)
                     await asyncio.sleep(0.1)
         
         loop.run_until_complete(process_updates())
@@ -749,6 +751,19 @@ function refresh(){if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'get_de
 
 connect();
 setInterval(refresh,10000);
+
+// Also poll the API endpoint as fallback
+setInterval(async () => {
+    try {
+        const response = await fetch('/api/devices');
+        const data = await response.json();
+        if (data.devices) {
+            data.devices.forEach(d => updateDevice(d));
+        }
+    } catch (e) {
+        console.error('API poll error:', e);
+    }
+}, 5000);
 </script>
 </body>
 </html>
@@ -758,6 +773,13 @@ setInterval(refresh,10000);
 @app.get("/", response_class=HTMLResponse)
 async def index():
     return COMPLETE_HTML
+
+@app.get("/api/devices")
+async def get_devices():
+    """API endpoint to get all devices"""
+    devices = discovery.get_devices()
+    logger.info(f"API request for devices, returning {len(devices)} devices")
+    return {"devices": devices, "count": len(devices)}
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

@@ -114,29 +114,57 @@ class PixelBlazeAPI:
     async def get_config(self):
         """Get device configuration including name"""
         response = await self.send_command({"getConfig": True})
-        if response and "name" in response:
-            self.state.name = response["name"]
+        if response:
+            # The actual device name is usually in the root response
+            if "name" in response:
+                self.state.name = response["name"]
+            elif isinstance(response, dict):
+                # Sometimes it's nested
+                for key, value in response.items():
+                    if key == "name" and isinstance(value, str):
+                        self.state.name = value
+                        break
+            
             self.state.brightness = response.get("brightness", 1.0)
             logger.info(f"Got config for {self.state.name} at {self.ip}")
             
     async def get_patterns(self):
         """Get list of patterns"""
-        response = await self.send_command({"listPrograms": True})
+        # Try the correct command - it might be getPatternList
+        response = await self.send_command({"getPatternList": True})
+        
+        if not response or response.get("raw"):
+            # Fallback to listPrograms
+            response = await self.send_command({"listPrograms": True})
+        
+        # Log what we got back for debugging
+        if response:
+            logger.info(f"Pattern list response from {self.ip}: {list(response.keys())[:10] if isinstance(response, dict) else str(response)[:100]}")
+        
         if response and not response.get("raw"):
             self.state.patterns = []
+            
+            # Skip config fields that aren't patterns
+            config_fields = {"name", "brandName", "colorOrder", "timezone", "autoOffStart", "autoOffEnd", "ver", "brightness"}
+            
             for pattern_id, pattern_data in response.items():
-                if pattern_id == "raw":
+                if pattern_id == "raw" or pattern_id in config_fields:
                     continue
+                    
+                # These should be actual patterns
                 if isinstance(pattern_data, dict) and "n" in pattern_data:
                     self.state.patterns.append(
                         PatternInfo(id=pattern_id, name=pattern_data["n"])
                     )
-                elif isinstance(pattern_data, str):
+                elif isinstance(pattern_data, str) and pattern_id not in config_fields:
                     # Sometimes pattern data is just the name
                     self.state.patterns.append(
                         PatternInfo(id=pattern_id, name=pattern_data)
                     )
-            logger.info(f"Got {len(self.state.patterns)} patterns from {self.ip}")
+            
+            logger.info(f"Got {len(self.state.patterns)} patterns from {self.ip} (filtered from {len(response)} items)")
+        else:
+            logger.warning(f"No valid pattern response from {self.ip}")
             
     async def get_current_pattern(self):
         """Get currently running pattern"""
