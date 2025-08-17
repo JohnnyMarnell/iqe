@@ -197,8 +197,8 @@ class ProvisioningManager:
     def stop(self):
         """Stop provisioning thread"""
         self.running = False
-        if self.provisioning_thread:
-            self.provisioning_thread.join(timeout=2)
+        # Don't wait, thread is daemon
+        logger.info("Provisioning thread stopping...")
     
     def _provisioning_loop(self):
         """Process provisioning queue"""
@@ -306,10 +306,8 @@ class PixelBlazeDiscovery:
     def stop(self):
         """Stop all threads"""
         self.running = False
-        for thread in [self.discovery_thread, self.monitor_thread, 
-                      self.api_thread, self.broadcast_thread]:
-            if thread:
-                thread.join(timeout=2)
+        # Don't wait for threads, they'll clean up as daemons
+        logger.info("Discovery threads stopping...")
                 
     def _discovery_loop(self):
         """UDP discovery listener"""
@@ -475,12 +473,12 @@ class PixelBlazeDiscovery:
                 try:
                     try:
                         device_dict = self.update_queue.get(timeout=0.1)
-                        logger.debug(f"Broadcasting device update: {device_dict.get('id', 'unknown')}")
+                        logger.info(f"Broadcasting device update: {device_dict.get('id', 'unknown')}, online: {device_dict.get('online')}")
                         await self.connection_manager.broadcast({
                             "type": "device_update",
                             "device": device_dict
                         })
-                        logger.debug(f"Broadcast complete for device {device_dict.get('id', 'unknown')}")
+                        logger.info(f"Broadcast complete for device {device_dict.get('id', 'unknown')}")
                     except queue.Empty:
                         await asyncio.sleep(0.1)
                 except Exception as e:
@@ -785,10 +783,15 @@ async def get_devices():
 async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
     
+    # Small delay to ensure devices are populated
+    await asyncio.sleep(0.5)
+    
     # Send initial devices
+    devices = discovery.get_devices()
+    logger.info(f"Sending initial devices to WebSocket: {len(devices)} devices")
     await websocket.send_json({
         "type": "devices_list",
-        "devices": discovery.get_devices()
+        "devices": devices
     })
     
     try:
@@ -836,6 +839,15 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 if __name__ == "__main__":
+    import signal
+    
+    # Handle Ctrl-C gracefully
+    def signal_handler(sig, frame):
+        logger.info("\nShutting down gracefully...")
+        sys.exit(0)
+    
+    signal.signal(signal.SIGINT, signal_handler)
+    
     # Parse command line arguments
     is_pi = platform.machine().startswith('arm') or os.path.exists('/proc/device-tree/model')
     dev_mode = "--dev" in sys.argv
