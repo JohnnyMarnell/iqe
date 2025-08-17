@@ -40,10 +40,13 @@ const RECTANGLE = {
 // Track DMX channel automatically
 let currentDmxChannel = 0;
 
+// Track ID automatically starting from 3001
+let currentId = 3001;
+
 // Add a parcan at normalized position (0-1, 0-1) where (0,0) is NW corner
 // xNorm: 0 = west edge, 1 = east edge
 // yNorm: 0 = north edge, 1 = south edge
-const addParcan = (template: any, id: number, xNorm: number, yNorm: number) => {
+const addParcan = (template: any, xNorm: number, yNorm: number) => {
   // Interpolate between corners
   const x = RECTANGLE.nw.x + (RECTANGLE.sw.x - RECTANGLE.nw.x) * yNorm;
   const z = RECTANGLE.nw.z + (RECTANGLE.ne.z - RECTANGLE.nw.z) * xNorm;
@@ -51,7 +54,7 @@ const addParcan = (template: any, id: number, xNorm: number, yNorm: number) => {
   
   const parcan = {
     ...template,
-    id: id,
+    id: currentId++,
     parameters: {
       ...template.parameters,
       label: `DMX ParCan ${Math.floor(currentDmxChannel / 7) + 1}`,
@@ -128,25 +131,30 @@ if (parcans.length > 0) {
   const fixturesPath = '$.model.fixtures';
   const fixtures = JSONPath({ path: fixturesPath, json: data })[0];
   
-  // Reset DMX channel counter
+  // Reset counters
   currentDmxChannel = 0;
+  currentId = 3001;
   
-  // Add four corner parcans explicitly - CCW from NE
-  const parcan1 = addParcan(template, 3001, 1, 0);   // NE corner - (1,0)
-  const parcan2 = addParcan(template, 3002, 0, 0);   // NW corner - (0,0)  
-  const parcan3 = addParcan(template, 3003, 0, 1);   // SW corner - (0,1)
-  const parcan4 = addParcan(template, 3004, 1, 1);   // SE corner - (1,1)
+  // Create list of parcans
+  const pcs = [];
   
-  console.log('\nNew parcans at corners (CCW from NE):');
-  console.log(`  NE (1,0): x=${parcan1.parameters.x}, z=${parcan1.parameters.z}, dmxChannel=${parcan1.parameters.dmxChannel}`);
-  console.log(`  NW (0,0): x=${parcan2.parameters.x}, z=${parcan2.parameters.z}, dmxChannel=${parcan2.parameters.dmxChannel}`);
-  console.log(`  SW (0,1): x=${parcan3.parameters.x}, z=${parcan3.parameters.z}, dmxChannel=${parcan3.parameters.dmxChannel}`);
-  console.log(`  SE (1,1): x=${parcan4.parameters.x}, z=${parcan4.parameters.z}, dmxChannel=${parcan4.parameters.dmxChannel}`);
+  // 8 parcans total, starting from SE corner going CCW to SW
+  // SE corner
+  pcs.push(addParcan(template, 1, 1));   // SE corner
   
-  fixtures.push(parcan1);
-  fixtures.push(parcan2);
-  fixtures.push(parcan3);
-  fixtures.push(parcan4);
+  // 6 along north wall (from east to west)
+  pcs.push(addParcan(template, 1, 0));   // NE corner
+  pcs.push(addParcan(template, 0.8, 0)); // North wall position 1
+  pcs.push(addParcan(template, 0.6, 0)); // North wall position 2
+  pcs.push(addParcan(template, 0.4, 0)); // North wall position 3
+  pcs.push(addParcan(template, 0.2, 0)); // North wall position 4
+  pcs.push(addParcan(template, 0, 0));   // NW corner
+  
+  // SW corner
+  pcs.push(addParcan(template, 0, 1));   // SW corner
+  
+  // Add all parcans to fixtures at once
+  fixtures.push(...pcs); 
   
   saveJson('./Projects/iqe_modified.lxp', data);
   console.log('\nSaved to iqe_modified.lxp');
