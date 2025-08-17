@@ -24,9 +24,10 @@ def pulse_and_scatter(device_ips, pulse_cycles=2, cycle_duration=20):
     print(f"  Pulse cycles: {pulse_cycles}")
     print(f"  Total duration: {pulse_cycles * cycle_duration} seconds")
     
-    # Connect to all devices
+    # Connect to all devices and save their sequencer state
     pb_clients = {}
     available_patterns = {}
+    initial_sequencer_states = {}
     
     for ip in device_ips:
         try:
@@ -37,7 +38,18 @@ def pulse_and_scatter(device_ips, pulse_cycles=2, cycle_duration=20):
             patterns = pb.getPatternList()
             available_patterns[ip] = patterns
             
+            # Save initial sequencer state BEFORE we change anything
+            seq_state = pb.getConfigSequencer()
+            initial_sequencer_states[ip] = {
+                'mode': seq_state.get('sequencerMode', 0),
+                'running': seq_state.get('runSequencer', False)
+            }
+            
             print(f"  ✅ Connected to '{device_name}' at {ip}")
+            mode = initial_sequencer_states[ip]['mode']
+            running = initial_sequencer_states[ip]['running']
+            mode_name = ["Off", "Shuffle", "Playlist"][mode] if mode < 3 else f"Mode {mode}"
+            print(f"     Sequencer: {mode_name}, Running: {running}")
         except Exception as e:
             print(f"  ❌ Failed to connect to {ip}: {e}")
     
@@ -91,39 +103,53 @@ def pulse_and_scatter(device_ips, pulse_cycles=2, cycle_duration=20):
             cycles_left = remaining / cycle_duration
             print(f"  {remaining} seconds ({cycles_left:.1f} cycles remaining)...")
     
-    # Phase 3: Scatter to random patterns
-    print(f"\n🎆 Phase 3: Scattering to random patterns...")
+    # Phase 3: Restore playlist mode or scatter to random
+    print(f"\n🎆 Phase 3: Restoring playlist mode or scattering...")
     
-    def scatter_to_random(ip, pb):
+    def restore_playlist_or_random(ip, pb):
         try:
-            patterns = available_patterns[ip]
-            if patterns:
-                # Exclude simplePulse from random selection
-                pattern_choices = {
-                    pid: pname for pid, pname in patterns.items()
-                    if not (isinstance(pname, str) and "simplepulse" in pname.lower())
-                }
-                
-                if pattern_choices:
-                    random_pid = random.choice(list(pattern_choices.keys()))
-                    pattern_name = pattern_choices[random_pid]
-                    if not isinstance(pattern_name, str):
-                        pattern_name = "Unknown"
+            # Check if device WAS in playlist/shuffle mode before we started
+            initial_state = initial_sequencer_states.get(ip, {})
+            was_sequencer_running = initial_state.get('running', False)
+            sequencer_mode = initial_state.get('mode', 0)
+            
+            # If device was running playlist (2) or shuffle (1), resume it
+            if sequencer_mode in [1, 2] and was_sequencer_running:
+                # Make sure sequencer is running and advance to next
+                pb.playSequencer()  # This starts the sequencer if not running
+                pb.nextSequencer()  # This advances to the next pattern
+                mode_name = "playlist" if sequencer_mode == 2 else "shuffle"
+                return True, f"Resumed {mode_name} mode"
+            else:
+                # Device wasn't in sequencer mode, pick random pattern
+                patterns = available_patterns[ip]
+                if patterns:
+                    # Exclude simplePulse from random selection
+                    pattern_choices = {
+                        pid: pname for pid, pname in patterns.items()
+                        if not (isinstance(pname, str) and "simplepulse" in pname.lower())
+                    }
                     
-                    pb.setActivePattern(random_pid)
-                    return True, pattern_name
-                else:
-                    # All patterns are simplePulse? Just pick any
-                    random_pid = random.choice(list(patterns.keys()))
-                    pb.setActivePattern(random_pid)
-                    return True, "Random pattern"
-            return False, "No patterns"
+                    if pattern_choices:
+                        random_pid = random.choice(list(pattern_choices.keys()))
+                        pattern_name = pattern_choices[random_pid]
+                        if not isinstance(pattern_name, str):
+                            pattern_name = "Unknown"
+                        
+                        pb.setActivePattern(random_pid)
+                        return True, f"Random: {pattern_name}"
+                    else:
+                        # Fallback if all patterns are simplePulse
+                        random_pid = random.choice(list(patterns.keys()))
+                        pb.setActivePattern(random_pid)
+                        return True, "Random pattern"
+                return False, "No patterns"
         except Exception as e:
             return False, str(e)
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=len(pb_clients)) as executor:
         futures = {
-            executor.submit(scatter_to_random, ip, pb): ip 
+            executor.submit(restore_playlist_or_random, ip, pb): ip 
             for ip, pb in pb_clients.items()
         }
         
