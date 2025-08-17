@@ -1,7 +1,7 @@
 {
   "device_id": "2a0000005608",
   "ip": "192.168.0.241",
-  "timestamp": "2025-08-17T10:17:01.189058",
+  "timestamp": "2025-08-17T10:18:43.705649",
   "websocket_attributes": {
     "connected": true,
     "cont_frame": "<websocket._abnf.continuous_frame object at 0x105955eb0>",
