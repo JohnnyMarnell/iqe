@@ -1,8 +1,23 @@
-# PixelBlaze Fleet Monitor Requirements - FastAPI Version
+# PixelBlaze Fleet Monitor Requirements
+# Core web framework
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+
+# WebSocket support
 websockets>=12.0
-pixelblaze-client>=1.0.0
 websocket-client>=1.6.0
+
+# PixelBlaze integration
+pixelblaze-client>=1.0.0
+
+# HTTP and networking
 requests>=2.31.0
+aiohttp>=3.9.0
+
+# Utilities
 pytz>=2023.3
+python-dateutil>=2.8.2
+
+# For Pi Zero deployment (optional, lightweight)
+# Comment out if not needed:
+# RPi.GPIO>=0.7.0  # For GPIO access on Pi

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-PixelBlaze Fleet Monitor - Raspberry Pi Zero Optimized
-Lightweight version for resource-constrained devices
-Works on Pi Zero W and other ARM devices
+PixelBlaze Fleet Monitor with Auto-Provisioning
+Complete solution with API integration, pattern management, and device provisioning
 """
 
 import asyncio
@@ -14,15 +13,60 @@ import logging
 import os
 import platform
 import queue
+import random
+import pickle
+from pathlib import Path
 from contextlib import asynccontextmanager
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+
+# Import PixelBlaze API modules
+try:
+    from pixelblaze_api import PixelBlazeAPI, PixelBlazeFleet
+    from patterns import PATTERNS, get_pattern
+except ImportError:
+    # Embedded versions if modules not found
+    logger = logging.getLogger(__name__)
+    logger.warning("Using embedded PixelBlaze modules")
+    
+    # Embedded pattern definitions
+    SYNC_PULSE_PATTERN = """
+    export var hue = 0.5
+    export var pulseSpeed = 2
+    export var minBrightness = 0.1
+    export var maxBrightness = 1.0
+    var startTime = 0
+    var initialized = false
+    export function beforeRender(delta) {
+      if (!initialized) {
+        startTime = time(0.001)
+        initialized = true
+      }
+      t1 = time(0.001) - startTime
+      wave = (sin(t1 * pulseSpeed * PI2) + 1) / 2
+      pulseBrightness = minBrightness + (maxBrightness - minBrightness) * wave
+    }
+    export function render(index) {
+      hsv(hue, 1, pulseBrightness)
+    }
+    """
+    
+    PATTERNS = {
+        "sync_pulse": {
+            "name": "IQE Sync Pulse",
+            "code": SYNC_PULSE_PATTERN,
+            "description": "Synchronized breathing pulse"
+        }
+    }
+    
+    def get_pattern(key): 
+        return PATTERNS.get(key)
 
 # Configure logging
 logging.basicConfig(
@@ -31,24 +75,161 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Provisioning state file
+PROVISION_STATE_FILE = Path("provisioned_devices.pkl")
+
 @dataclass
 class PixelBlazeDevice:
-    """Represents a discovered PixelBlaze device"""
+    """Enhanced device info with provisioning status"""
     id: str
     ip: str
     name: str = "Unknown"
     last_seen: float = 0
     online: bool = False
+    api_connected: bool = False
+    current_pattern: str = ""
+    patterns: List[dict] = field(default_factory=list)
+    brightness: float = 0.5
+    fps: int = 0
+    provisioned: bool = False
+    provision_date: Optional[float] = None
     
     def to_dict(self):
         return {
             **asdict(self),
-            'last_seen_formatted': datetime.fromtimestamp(self.last_seen).strftime('%H:%M:%S')
+            'last_seen_formatted': datetime.fromtimestamp(self.last_seen).strftime('%H:%M:%S'),
+            'provision_date_formatted': datetime.fromtimestamp(self.provision_date).strftime('%Y-%m-%d %H:%M:%S') if self.provision_date else None
         }
 
 
+class ProvisioningManager:
+    """Manages device provisioning and pattern uploads"""
+    
+    def __init__(self, force_provision=False):
+        self.force_provision = force_provision
+        self.provisioned_devices = self.load_provisioned() if not force_provision else set()
+        self.provisioned_this_run = set()  # Track what we've done this session
+        self.provisioning_queue = queue.Queue()
+        self.provisioning_thread = None
+        self.running = False
+        
+        if force_provision:
+            logger.info("Force provisioning mode enabled - will provision all devices")
+        
+    def load_provisioned(self) -> set:
+        """Load set of provisioned device IDs"""
+        if PROVISION_STATE_FILE.exists():
+            try:
+                with open(PROVISION_STATE_FILE, 'rb') as f:
+                    return pickle.load(f)
+            except:
+                pass
+        return set()
+    
+    def save_provisioned(self):
+        """Save provisioned device IDs"""
+        try:
+            with open(PROVISION_STATE_FILE, 'wb') as f:
+                pickle.dump(self.provisioned_devices, f)
+        except Exception as e:
+            logger.error(f"Failed to save provision state: {e}")
+    
+    def is_provisioned(self, device_id: str) -> bool:
+        """Check if device has been provisioned"""
+        if self.force_provision:
+            # In force mode, only consider it provisioned if we did it this run
+            return device_id in self.provisioned_this_run
+        return device_id in self.provisioned_devices
+    
+    def mark_provisioned(self, device_id: str):
+        """Mark device as provisioned"""
+        self.provisioned_devices.add(device_id)
+        self.provisioned_this_run.add(device_id)
+        self.save_provisioned()
+        logger.info(f"Device {device_id} marked as provisioned")
+    
+    async def provision_device(self, device_id: str, ip: str) -> bool:
+        """Provision a new device with IQE patterns"""
+        try:
+            logger.info(f"Starting provisioning for {device_id} at {ip}")
+            
+            # Create API connection
+            api = PixelBlazeAPI(ip)
+            if not await api.connect():
+                logger.error(f"Failed to connect to {device_id} for provisioning")
+                return False
+            
+            # Upload all IQE patterns
+            uploaded = 0
+            for pattern_key, pattern_data in PATTERNS.items():
+                try:
+                    pattern_id = await api.upload_pattern(
+                        pattern_data["name"],
+                        pattern_data["code"]
+                    )
+                    if pattern_id:
+                        uploaded += 1
+                        logger.info(f"Uploaded {pattern_data['name']} to {device_id}")
+                except Exception as e:
+                    logger.error(f"Failed to upload {pattern_key} to {device_id}: {e}")
+            
+            # Disconnect
+            await api.disconnect()
+            
+            if uploaded > 0:
+                self.mark_provisioned(device_id)
+                logger.info(f"Provisioning complete for {device_id}: {uploaded} patterns uploaded")
+                return True
+            else:
+                logger.error(f"No patterns uploaded to {device_id}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Provisioning error for {device_id}: {e}")
+            return False
+    
+    def start(self):
+        """Start provisioning thread"""
+        self.running = True
+        self.provisioning_thread = threading.Thread(target=self._provisioning_loop, daemon=True)
+        self.provisioning_thread.start()
+    
+    def stop(self):
+        """Stop provisioning thread"""
+        self.running = False
+        if self.provisioning_thread:
+            self.provisioning_thread.join(timeout=2)
+    
+    def _provisioning_loop(self):
+        """Process provisioning queue"""
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        async def process_queue():
+            while self.running:
+                try:
+                    # Check for devices to provision
+                    try:
+                        device_id, ip = self.provisioning_queue.get(timeout=1)
+                        await self.provision_device(device_id, ip)
+                    except queue.Empty:
+                        pass
+                except Exception as e:
+                    logger.error(f"Provisioning loop error: {e}")
+                await asyncio.sleep(0.1)
+        
+        loop.run_until_complete(process_queue())
+        loop.close()
+    
+    def queue_provisioning(self, device_id: str, ip: str):
+        """Add device to provisioning queue"""
+        if not self.is_provisioned(device_id):
+            self.provisioning_queue.put((device_id, ip))
+            logger.info(f"Queued {device_id} for provisioning")
+
+
 class ConnectionManager:
-    """Lightweight WebSocket connection manager"""
+    """WebSocket connection manager"""
     def __init__(self):
         self.active_connections: List[WebSocket] = []
         self.lock = threading.Lock()
@@ -77,7 +258,6 @@ class ConnectionManager:
             except:
                 disconnected.append(connection)
         
-        # Clean up disconnected clients
         if disconnected:
             with self.lock:
                 for conn in disconnected:
@@ -86,42 +266,51 @@ class ConnectionManager:
 
 
 class PixelBlazeDiscovery:
-    """Lightweight discovery for PixelBlaze devices"""
+    """Discovery with API integration and auto-provisioning"""
     
     DISCOVERY_PORT = 1889
     DEVICE_TIMEOUT = 30.0
+    API_UPDATE_INTERVAL = 10.0
     
-    def __init__(self, connection_manager: ConnectionManager):
+    def __init__(self, connection_manager: ConnectionManager, provisioning_manager: ProvisioningManager):
         self.devices: Dict[str, PixelBlazeDevice] = {}
         self.lock = threading.Lock()
         self.running = False
         self.discovery_thread = None
         self.monitor_thread = None
+        self.api_thread = None
         self.broadcast_thread = None
         self.connection_manager = connection_manager
+        self.provisioning_manager = provisioning_manager
         self.update_queue = queue.Queue()
+        self.fleet = PixelBlazeFleet() if 'PixelBlazeFleet' in globals() else None
+        self.saved_states = {}
         
     def start(self):
-        """Start discovery and monitoring threads"""
+        """Start all threads"""
         self.running = True
         self.discovery_thread = threading.Thread(target=self._discovery_loop, daemon=True)
         self.monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
         self.broadcast_thread = threading.Thread(target=self._broadcast_loop, daemon=True)
+        
+        if self.fleet:
+            self.api_thread = threading.Thread(target=self._api_loop, daemon=True)
+            self.api_thread.start()
+        
         self.discovery_thread.start()
         self.monitor_thread.start()
         self.broadcast_thread.start()
-        logger.info("PixelBlaze discovery started")
+        
+        logger.info("PixelBlaze discovery started with auto-provisioning")
         
     def stop(self):
-        """Stop discovery and monitoring"""
+        """Stop all threads"""
         self.running = False
-        if self.discovery_thread:
-            self.discovery_thread.join(timeout=2)
-        if self.monitor_thread:
-            self.monitor_thread.join(timeout=2)
-        if self.broadcast_thread:
-            self.broadcast_thread.join(timeout=2)
-            
+        for thread in [self.discovery_thread, self.monitor_thread, 
+                      self.api_thread, self.broadcast_thread]:
+            if thread:
+                thread.join(timeout=2)
+                
     def _discovery_loop(self):
         """UDP discovery listener"""
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -148,7 +337,7 @@ class PixelBlazeDiscovery:
             sock.close()
             
     def _process_discovery_packet(self, data: bytes, ip: str):
-        """Process discovery packet"""
+        """Process discovery packet and trigger provisioning if needed"""
         try:
             if len(data) >= 6:
                 device_id = data[:6].hex()
@@ -157,15 +346,35 @@ class PixelBlazeDiscovery:
                     is_new = device_id not in self.devices
                     
                     if is_new:
-                        logger.info(f"New PixelBlaze: {device_id} at {ip}")
+                        logger.info(f"New PixelBlaze discovered: {device_id} at {ip}")
+                        
+                        # Check if provisioned
+                        is_provisioned = self.provisioning_manager.is_provisioned(device_id)
+                        
                         device = PixelBlazeDevice(
                             id=device_id,
                             ip=ip,
                             name=f"PB_{device_id[-4:]}",
                             last_seen=time.time(),
-                            online=True
+                            online=True,
+                            provisioned=is_provisioned,
+                            provision_date=time.time() if is_provisioned else None
                         )
                         self.devices[device_id] = device
+                        
+                        # Add to fleet if available
+                        if self.fleet:
+                            self.fleet.add_device(device_id, ip)
+                        
+                        # Always queue update so device appears in UI
+                        self.update_queue.put(device.to_dict())
+                        
+                        # Queue for provisioning if needed
+                        if not is_provisioned:
+                            logger.info(f"New unprovisioned device {device_id} - queuing for provisioning")
+                            self.provisioning_manager.queue_provisioning(device_id, ip)
+                        else:
+                            logger.info(f"Device {device_id} already provisioned")
                     else:
                         device = self.devices[device_id]
                         was_offline = not device.online
@@ -175,8 +384,10 @@ class PixelBlazeDiscovery:
                         
                         if was_offline:
                             logger.info(f"PixelBlaze {device_id} back online")
+                            if self.fleet:
+                                self.fleet.add_device(device_id, ip)
                     
-                    # Queue update for async broadcast
+                    # Queue update
                     self.update_queue.put(device.to_dict())
                             
         except Exception as e:
@@ -194,20 +405,74 @@ class PixelBlazeDiscovery:
                         if device.online and (current_time - device.last_seen) > self.DEVICE_TIMEOUT:
                             logger.info(f"PixelBlaze {device_id} went offline")
                             device.online = False
-                            # Queue update for async broadcast
+                            device.api_connected = False
+                            if self.fleet:
+                                self.fleet.remove_device(device_id)
                             self.update_queue.put(device.to_dict())
             except Exception as e:
                 logger.error(f"Monitor error: {e}")
+                
+    def _api_loop(self):
+        """Update device info via API"""
+        if not self.fleet:
+            return
+            
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        async def update_loop():
+            while self.running:
+                try:
+                    await self.fleet.update_all()
+                    
+                    with self.lock:
+                        for device_id, api in self.fleet.devices.items():
+                            if device_id in self.devices:
+                                device = self.devices[device_id]
+                                state = api.state
+                                
+                                device.name = state.name
+                                device.current_pattern = state.current_pattern_name
+                                device.brightness = state.brightness
+                                device.fps = state.fps
+                                device.api_connected = api.connected
+                                
+                                device.patterns = [
+                                    {"id": p.id, "name": p.name} 
+                                    for p in state.patterns
+                                ]
+                                
+                                # Check provisioning status
+                                if not device.provisioned:
+                                    # Check if IQE patterns exist
+                                    has_iqe_patterns = any(
+                                        "IQE" in p.name 
+                                        for p in state.patterns
+                                    )
+                                    if has_iqe_patterns:
+                                        device.provisioned = True
+                                        device.provision_date = time.time()
+                                        self.provisioning_manager.mark_provisioned(device_id)
+                                
+                                self.update_queue.put(device.to_dict())
+                    
+                    await asyncio.sleep(self.API_UPDATE_INTERVAL)
+                    
+                except Exception as e:
+                    logger.error(f"API update error: {e}")
+                    await asyncio.sleep(5)
+        
+        loop.run_until_complete(update_loop())
+        loop.close()
                         
     def _broadcast_loop(self):
-        """Thread to handle async broadcasts from queue"""
+        """Handle async broadcasts from queue"""
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
         async def process_updates():
             while self.running:
                 try:
-                    # Check for updates with timeout
                     try:
                         device_dict = self.update_queue.get(timeout=0.1)
                         await self.connection_manager.broadcast({
@@ -227,328 +492,369 @@ class PixelBlazeDiscovery:
         """Get all discovered devices"""
         with self.lock:
             return [device.to_dict() for device in self.devices.values()]
-
-
-def get_network_info():
-    """Get network info that works on Pi and other Linux systems"""
-    try:
-        # Try to get a real network IP by connecting to a public DNS
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.settimeout(1)
+            
+    async def sync_pulse(self, duration: float = 5.0):
+        """Trigger synchronized pulse on all devices"""
+        if not self.fleet:
+            logger.error("Fleet API not available")
+            return False
+            
         try:
-            # Connect to Google DNS (doesn't actually send data)
-            s.connect(("8.8.8.8", 80))
-            local_ip = s.getsockname()[0]
-            s.close()
-            return local_ip, '.'.join(local_ip.split('.')[:-1])
-        except:
-            s.close()
-    except:
-        pass
-    
-    # Fallback for Linux systems
-    try:
-        import subprocess
+            # Save current states
+            self.saved_states = {}
+            for device_id, api in self.fleet.devices.items():
+                if api.connected:
+                    self.saved_states[device_id] = api.state.current_pattern_id
+            
+            # Get sync pulse pattern
+            pattern = get_pattern("sync_pulse")
+            if not pattern:
+                logger.error("Sync pulse pattern not found")
+                return False
+            
+            # Random color for this pulse
+            hue = random.random()
+            code = pattern["code"].replace("export var hue = 0.5", f"export var hue = {hue}")
+            
+            # Upload to all devices
+            pattern_ids = await self.fleet.upload_to_all(pattern["name"], code)
+            
+            # Activate pattern on all devices
+            tasks = []
+            for device_id, pattern_id in pattern_ids.items():
+                api = self.fleet.devices.get(device_id)
+                if api:
+                    tasks.append(api.set_pattern(pattern_id))
+            
+            await asyncio.gather(*tasks, return_exceptions=True)
+            
+            logger.info(f"Sync pulse started on {len(pattern_ids)} devices with hue {hue:.2f}")
+            
+            # Schedule restoration
+            asyncio.create_task(self._restore_patterns(duration))
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Sync pulse error: {e}")
+            return False
+            
+    async def _restore_patterns(self, delay: float):
+        """Restore original patterns after delay"""
+        await asyncio.sleep(delay)
         
-        # Try ip command (modern Linux)
-        try:
-            result = subprocess.run(
-                ['ip', 'addr', 'show'], 
-                capture_output=True, 
-                text=True, 
-                timeout=2
-            )
-            import re
-            # Look for inet addresses (not localhost)
-            for line in result.stdout.split('\n'):
-                match = re.search(r'inet (\d+\.\d+\.\d+\.\d+)', line)
-                if match:
-                    ip = match.group(1)
-                    if not ip.startswith('127.'):
-                        return ip, '.'.join(ip.split('.')[:-1])
-        except:
-            pass
+        if not self.fleet:
+            return
+            
+        tasks = []
+        for device_id, pattern_id in self.saved_states.items():
+            api = self.fleet.devices.get(device_id)
+            if api and api.connected:
+                tasks.append(api.set_pattern(pattern_id))
         
-        # Try ifconfig (older Linux/Unix)
-        try:
-            result = subprocess.run(
-                ['ifconfig'], 
-                capture_output=True, 
-                text=True, 
-                timeout=2
-            )
-            import re
-            ips = re.findall(r'inet (?:addr:)?(\d+\.\d+\.\d+\.\d+)', result.stdout)
-            for ip in ips:
-                if not ip.startswith('127.'):
-                    return ip, '.'.join(ip.split('.')[:-1])
-        except:
-            pass
-    except:
-        pass
-    
-    # Final fallback
-    return "192.168.0.1", "192.168.0"
+        await asyncio.gather(*tasks, return_exceptions=True)
+        logger.info("Restored original patterns")
 
 
-# Global instances
-manager = ConnectionManager()
-discovery = PixelBlazeDiscovery(manager)
+# Global instances - will be initialized in main
+manager = None
+provisioning = None
+discovery = None
 
 # Lifespan context manager
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    provisioning.start()
     discovery.start()
-    
-    # Log system info
-    logger.info(f"Platform: {platform.machine()} - {platform.system()}")
-    local_ip, subnet = get_network_info()
-    logger.info(f"Network: {local_ip} (subnet: {subnet}.0/24)")
-    
+    logger.info("PixelBlaze Fleet Monitor started with auto-provisioning")
     yield
-    
-    # Shutdown
     discovery.stop()
+    provisioning.stop()
 
-# Create FastAPI app
-app = FastAPI(
-    title="PixelBlaze Fleet Monitor", 
-    lifespan=lifespan,
-    docs_url=None,  # Disable docs to save memory
-    redoc_url=None
-)
+# App will be created in main
+app = None
 
-# Add CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Minimal mobile HTML
-MOBILE_HTML = '''
+# Complete HTML with all features
+COMPLETE_HTML = '''
 <!DOCTYPE html>
 <html>
 <head>
-<title>PB Monitor</title>
+<title>PB Fleet</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:8px}
-.container{max-width:100%;margin:0 auto}
-h1{color:#fff;text-align:center;font-size:1.3rem;margin-bottom:10px;text-shadow:1px 1px 2px rgba(0,0,0,0.2)}
-.controls{background:#fff;border-radius:6px;padding:10px;margin-bottom:10px;box-shadow:0 2px 4px rgba(0,0,0,0.1);display:flex;gap:8px;flex-wrap:wrap}
-.controls button{background:#667eea;color:#fff;border:none;padding:8px 12px;border-radius:4px;font-size:13px;font-weight:500;flex:1;min-width:80px}
-.controls button:active{background:#5a67d8;transform:scale(0.98)}
-.status{flex:1 100%;text-align:center;color:#666;font-size:12px;margin-top:4px}
-.status.connected{color:#48bb78;font-weight:500}
-.devices{display:flex;flex-direction:column;gap:8px}
-.device{background:#fff;border-radius:6px;padding:10px;box-shadow:0 2px 4px rgba(0,0,0,0.1);position:relative}
-.device.offline{opacity:0.6;background:#f9f9f9}
-.device-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.device-name{font-size:14px;font-weight:600;color:#333}
-.device-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:8px}
+h1{color:#fff;text-align:center;font-size:1.3rem;margin-bottom:10px}
+.controls{background:#fff;border-radius:8px;padding:10px;margin-bottom:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+.controls button{background:#667eea;color:#fff;border:none;padding:10px 14px;border-radius:6px;font-size:13px;font-weight:500;margin:4px}
+.controls button:active{transform:scale(0.98)}
+.sync-btn{background:#e53e3e!important}
+.sync-btn:active{background:#48bb78!important}
+.status{text-align:center;color:#666;font-size:12px;margin-top:8px}
+.status.connected{color:#48bb78}
+.devices{display:flex;flex-direction:column;gap:10px}
+.device{background:#fff;border-radius:8px;padding:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1);position:relative}
+.device.offline{opacity:0.5;background:#f5f5f5}
+.device.unprovisioned{border-left:4px solid #f6ad55}
+.device-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.device-name{font-size:15px;font-weight:600;color:#333}
+.device-status{width:10px;height:10px;border-radius:50%}
 .device-status.online{background:#48bb78;animation:pulse 2s infinite}
 .device-status.offline{background:#f56565}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(72,187,120,0.7)}70%{box-shadow:0 0 0 6px rgba(72,187,120,0)}100%{box-shadow:0 0 0 0 rgba(72,187,120,0)}}
-.device-info{color:#666;font-size:12px;line-height:1.4}
-.device-row{display:flex;justify-content:space-between;margin-bottom:2px}
-.device-ip{font-family:monospace;font-size:13px;background:#f0f0f0;padding:1px 4px;border-radius:3px}
-.device-id{font-family:monospace;font-size:10px;color:#999}
-.no-devices{text-align:center;color:#fff;padding:20px;background:rgba(255,255,255,0.1);border-radius:6px;font-size:13px}
-.new{animation:slideIn 0.3s ease-out}
-@keyframes slideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:320px){body{padding:6px}h1{font-size:1.2rem}.controls button{font-size:12px;padding:6px 10px}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(72,187,120,0.7)}70%{box-shadow:0 0 0 8px rgba(72,187,120,0)}100%{box-shadow:0 0 0 0 rgba(72,187,120,0)}}
+.device-info{font-size:12px;line-height:1.5;color:#666}
+.device-row{display:flex;justify-content:space-between;margin:2px 0}
+.device-ip{font-family:monospace;background:#f0f0f0;padding:2px 4px;border-radius:3px;font-size:11px}
+.pattern-select{width:100%;padding:6px;margin-top:6px;border:1px solid #ddd;border-radius:4px;font-size:12px;background:#fff}
+.pattern-current{background:#e6fffa;font-weight:600}
+.brightness{display:flex;align-items:center;gap:8px;margin-top:6px}
+.brightness input{flex:1}
+.provision-badge{background:#f6ad55;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600}
+.no-devices{text-align:center;color:#fff;padding:20px;background:rgba(255,255,255,0.1);border-radius:8px}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>PixelBlaze Monitor</h1>
+<h1>🌟 PixelBlaze Fleet</h1>
 <div class="controls">
+<button onclick="syncPulse()" class="sync-btn">🔴 Sync Pulse</button>
 <button onclick="scan()">Scan</button>
 <button onclick="refresh()">Refresh</button>
 <div class="status" id="status">Connecting...</div>
 </div>
 <div id="devices" class="devices">
-<div class="no-devices">Searching for devices...</div>
-</div>
+<div class="no-devices">Searching for PixelBlaze devices...</div>
 </div>
 <script>
-let ws=null,devices=new Map(),reconnectTimer=null;
+let ws=null,devices=new Map();
+
 function connect(){
-const wsUrl=(location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+'/ws';
-ws=new WebSocket(wsUrl);
+ws=new WebSocket((location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+'/ws');
 ws.onopen=()=>{
 document.getElementById('status').innerHTML='Connected ✓';
 document.getElementById('status').className='status connected';
-if(reconnectTimer){clearTimeout(reconnectTimer);reconnectTimer=null;}
 ws.send(JSON.stringify({type:'get_devices'}));
 };
 ws.onmessage=(e)=>{
 const data=JSON.parse(e.data);
-if(data.type==='device_update'){updateDevice(data.device);}
-else if(data.type==='devices_list'){data.devices.forEach(d=>updateDevice(d));}
+if(data.type==='device_update')updateDevice(data.device);
+else if(data.type==='devices_list')data.devices.forEach(d=>updateDevice(d));
 };
-ws.onerror=(e)=>console.error('WS error:',e);
+ws.onerror=()=>console.error('WS error');
 ws.onclose=()=>{
 document.getElementById('status').innerHTML='Reconnecting...';
 document.getElementById('status').className='status';
-if(!reconnectTimer){reconnectTimer=setTimeout(()=>{reconnectTimer=null;connect();},2000);}
+setTimeout(connect,2000);
 };
 }
+
 function updateDevice(d){
-const isNew=!devices.has(d.id);
 devices.set(d.id,d);
 render();
-if(isNew&&d.online){
-setTimeout(()=>{
-const card=document.querySelector(`[data-id="${d.id}"]`);
-if(card)card.classList.add('new');
-},10);
 }
-}
+
 function render(){
 const c=document.getElementById('devices');
 if(devices.size===0){
-c.innerHTML='<div class="no-devices">Searching for devices...</div>';
+c.innerHTML='<div class="no-devices">Searching for PixelBlaze devices...</div>';
 return;
 }
 const sorted=Array.from(devices.values()).sort((a,b)=>{
 if(a.online!==b.online)return b.online-a.online;
-return a.id.localeCompare(b.id);
+return a.name.localeCompare(b.name);
 });
 c.innerHTML=sorted.map(d=>`
-<div class="device ${d.online?'':'offline'}" data-id="${d.id}">
+<div class="device ${d.online?'':'offline'} ${!d.provisioned?'unprovisioned':''}">
 <div class="device-header">
-<div class="device-name">${d.name}</div>
+<div>
+<span class="device-name">${d.name||d.id}</span>
+${!d.provisioned?'<span class="provision-badge">NEW</span>':''}
+</div>
 <div class="device-status ${d.online?'online':'offline'}"></div>
 </div>
 <div class="device-info">
 <div class="device-row">
-<span>IP:</span>
-<span class="device-ip">${d.ip}</span>
+<span>IP:</span><span class="device-ip">${d.ip}</span>
 </div>
 <div class="device-row">
-<span>Status:</span>
-<span>${d.online?'Online':'Offline'}</span>
+<span>Pattern:</span><span style="font-weight:500">${d.current_pattern||'---'}</span>
 </div>
-<div class="device-row">
-<span>Last:</span>
-<span>${d.last_seen_formatted}</span>
+${d.provisioned?`<div class="device-row">
+<span>Provisioned:</span><span>${d.provision_date_formatted||'Yes'}</span>
+</div>`:'<div class="device-row" style="color:#f6ad55">
+<span>Status:</span><span>Provisioning...</span>
+</div>'}
+${d.patterns&&d.patterns.length?`
+<select class="pattern-select" onchange="setPattern('${d.id}',this.value)">
+<option value="">-- Select Pattern --</option>
+${d.patterns.map(p=>`
+<option value="${p.id}" ${p.name===d.current_pattern?'selected class="pattern-current"':''}>${p.name}</option>
+`).join('')}
+</select>
+`:''}
+<div class="brightness">
+<span>Bright:</span>
+<input type="range" min="0" max="100" value="${Math.round((d.brightness||0.5)*100)}" 
+onchange="setBrightness('${d.id}',this.value/100)">
+<span>${Math.round((d.brightness||0.5)*100)}%</span>
 </div>
-<div class="device-id">ID: ${d.id}</div>
 </div>
 </div>
 `).join('');
 }
-function scan(){
-if(ws&&ws.readyState===WebSocket.OPEN){
-document.getElementById('status').innerHTML='Scanning...';
-ws.send(JSON.stringify({type:'scan_network'}));
+
+function syncPulse(){
+if(ws&&ws.readyState===1){
+ws.send(JSON.stringify({type:'sync_pulse'}));
+document.querySelector('.sync-btn').style.background='#48bb78';
 setTimeout(()=>{
-if(document.getElementById('status').innerHTML==='Scanning...'){
-document.getElementById('status').innerHTML='Connected ✓';
-}
+document.querySelector('.sync-btn').style.background='#e53e3e';
 },5000);
 }
 }
-function refresh(){
-if(ws&&ws.readyState===WebSocket.OPEN){
-ws.send(JSON.stringify({type:'get_devices'}));
+
+function setPattern(deviceId,patternId){
+if(ws&&ws.readyState===1&&patternId){
+ws.send(JSON.stringify({type:'set_pattern',device_id:deviceId,pattern_id:patternId}));
 }
 }
+
+function setBrightness(deviceId,brightness){
+if(ws&&ws.readyState===1){
+ws.send(JSON.stringify({type:'set_brightness',device_id:deviceId,brightness:brightness}));
+}
+}
+
+function scan(){if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'scan'}));}
+function refresh(){if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'get_devices'}));}
+
 connect();
 setInterval(refresh,10000);
-let lastTouchEnd=0;
-document.addEventListener('touchend',(e)=>{
-const now=Date.now();
-if(now-lastTouchEnd<=300){e.preventDefault();}
-lastTouchEnd=now;
-},false);
 </script>
 </body>
 </html>
 '''
 
-@app.get("/", response_class=HTMLResponse)
-async def index():
-    """Serve dashboard"""
-    return MOBILE_HTML
-
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    """WebSocket endpoint"""
-    await manager.connect(websocket)
-    
-    # Send initial devices
-    await websocket.send_json({
-        "type": "devices_list",
-        "devices": discovery.get_devices()
-    })
-    
-    try:
-        while True:
-            data = await websocket.receive_json()
-            
-            if data.get("type") == "get_devices":
-                await websocket.send_json({
-                    "type": "devices_list",
-                    "devices": discovery.get_devices()
-                })
-            
-            elif data.get("type") == "scan_network":
-                # Network scan for Pi
-                local_ip, subnet = get_network_info()
-                logger.info(f"Scan requested for subnet: {subnet}")
-                # Note: Active scanning disabled on Pi Zero to save resources
-                # Relying on passive UDP discovery instead
-                
-    except WebSocketDisconnect:
-        manager.disconnect(websocket)
-    except Exception as e:
-        logger.error(f"WebSocket error: {e}")
-        manager.disconnect(websocket)
 
 if __name__ == "__main__":
     import sys
     
-    # Detect if running on Pi
+    # Parse command line arguments
     is_pi = platform.machine().startswith('arm') or os.path.exists('/proc/device-tree/model')
+    dev_mode = "--dev" in sys.argv
+    force_provision = "--force-provision" in sys.argv
     
-    if is_pi:
-        logger.info("Running on Raspberry Pi - using optimized settings")
+    # Initialize global instances with force provision flag
+    manager = ConnectionManager()
+    provisioning = ProvisioningManager(force_provision=force_provision)
+    discovery = PixelBlazeDiscovery(manager, provisioning)
+    
+    # Create FastAPI app after globals are initialized
+    app = FastAPI(
+        title="PixelBlaze Fleet Monitor",
+        lifespan=lifespan,
+        docs_url=None,
+        redoc_url=None
+    )
+    
+    # Add CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    
+    # Register routes
+    @app.get("/", response_class=HTMLResponse)
+    async def index():
+        return COMPLETE_HTML
+
+    @app.websocket("/ws")
+    async def websocket_endpoint(websocket: WebSocket):
+        await manager.connect(websocket)
+        
+        # Send initial devices
+        await websocket.send_json({
+            "type": "devices_list",
+            "devices": discovery.get_devices()
+        })
+        
+        try:
+            while True:
+                data = await websocket.receive_json()
+                
+                if data.get("type") == "get_devices":
+                    await websocket.send_json({
+                        "type": "devices_list",
+                        "devices": discovery.get_devices()
+                    })
+                    
+                elif data.get("type") == "sync_pulse":
+                    # Trigger synchronized pulse
+                    if discovery.fleet:
+                        success = await discovery.sync_pulse()
+                        await websocket.send_json({
+                            "type": "sync_pulse_response",
+                            "success": success
+                        })
+                    else:
+                        logger.warning("Fleet API not available for sync pulse")
+                    
+                elif data.get("type") == "set_pattern":
+                    # Set pattern on specific device
+                    if discovery.fleet:
+                        device_id = data.get("device_id")
+                        pattern_id = data.get("pattern_id")
+                        if device_id in discovery.fleet.devices:
+                            api = discovery.fleet.devices[device_id]
+                            if api.connected:
+                                await api.set_pattern(pattern_id)
+                            
+                elif data.get("type") == "set_brightness":
+                    # Set brightness on specific device
+                    if discovery.fleet:
+                        device_id = data.get("device_id")
+                        brightness = data.get("brightness", 0.5)
+                        if device_id in discovery.fleet.devices:
+                            api = discovery.fleet.devices[device_id]
+                            if api.connected:
+                                await api.set_brightness(brightness)
+                    
+        except WebSocketDisconnect:
+            manager.disconnect(websocket)
+    
+    logger.info("Starting PixelBlaze Fleet Monitor with Auto-Provisioning")
+    if force_provision:
+        logger.info("FORCE PROVISION MODE - All devices will be re-provisioned")
+    logger.info(f"Platform: {platform.system()} on {platform.machine()}")
+    logger.info("Access at http://localhost:8000")
+    
+    if is_pi and not dev_mode:
         # Pi optimized settings
         uvicorn.run(
             app,
             host="0.0.0.0",
             port=8000,
-            log_level="warning",  # Less logging
-            access_log=False,      # No access logs
-            loop="asyncio",        # Explicit loop
-            limit_concurrency=10   # Limit connections
+            log_level="warning",
+            access_log=False,
+            loop="asyncio",
+            limit_concurrency=10
+        )
+    elif dev_mode:
+        uvicorn.run(
+            "pbfleet:app",
+            host="0.0.0.0",
+            port=8000,
+            reload=True,
+            log_level="info"
         )
     else:
-        # Development mode
-        dev_mode = "--dev" in sys.argv
-        logger.info(f"Running on {platform.system()} - dev mode: {dev_mode}")
-        
-        if dev_mode:
-            uvicorn.run(
-                "pixelblaze_monitor_pi:app",
-                host="0.0.0.0",
-                port=8000,
-                reload=True,
-                log_level="info"
-            )
-        else:
-            uvicorn.run(
-                app,
-                host="0.0.0.0",
-                port=8000,
-                log_level="info"
-            )
+        uvicorn.run(
+            app,
+            host="0.0.0.0",
+            port=8000,
+            log_level="info"
+        )

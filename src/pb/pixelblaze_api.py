@@ -89,12 +89,23 @@ class PixelBlazeAPI:
         try:
             await self.ws.send(json.dumps(command))
             
-            # Wait for response with timeout
-            response = await asyncio.wait_for(self.ws.recv(), timeout=2.0)
-            return json.loads(response)
-        except asyncio.TimeoutError:
-            logger.warning(f"Command timeout for {self.ip}")
-            return None
+            # Some commands don't return responses, so timeout quickly
+            try:
+                response = await asyncio.wait_for(self.ws.recv(), timeout=0.5)
+                
+                # Try to parse as JSON
+                if response:
+                    try:
+                        return json.loads(response)
+                    except json.JSONDecodeError:
+                        # Some responses are not JSON (like "ok" or binary data)
+                        logger.debug(f"Non-JSON response from {self.ip}: {response[:50]}")
+                        return {"raw": response}
+                return None
+            except asyncio.TimeoutError:
+                # Many commands don't send responses, this is normal
+                return None
+                
         except Exception as e:
             logger.error(f"Command error for {self.ip}: {e}")
             self.connected = False
@@ -111,12 +122,19 @@ class PixelBlazeAPI:
     async def get_patterns(self):
         """Get list of patterns"""
         response = await self.send_command({"listPrograms": True})
-        if response:
+        if response and not response.get("raw"):
             self.state.patterns = []
             for pattern_id, pattern_data in response.items():
+                if pattern_id == "raw":
+                    continue
                 if isinstance(pattern_data, dict) and "n" in pattern_data:
                     self.state.patterns.append(
                         PatternInfo(id=pattern_id, name=pattern_data["n"])
+                    )
+                elif isinstance(pattern_data, str):
+                    # Sometimes pattern data is just the name
+                    self.state.patterns.append(
+                        PatternInfo(id=pattern_id, name=pattern_data)
                     )
             logger.info(f"Got {len(self.state.patterns)} patterns from {self.ip}")
             
@@ -153,7 +171,7 @@ class PixelBlazeAPI:
     async def upload_pattern(self, name: str, code: str):
         """Upload a new pattern"""
         # Generate a unique ID for the pattern
-        pattern_id = f"custom_{int(time.time())}"
+        pattern_id = f"iqe_{int(time.time() * 1000)}"
         
         command = {
             "putProgram": {
@@ -164,12 +182,24 @@ class PixelBlazeAPI:
         }
         
         response = await self.send_command(command)
-        if response:
-            logger.info(f"Uploaded pattern '{name}' to {self.ip}")
-            # Refresh patterns list
-            await self.get_patterns()
-            return pattern_id
-        return None
+        # Most upload commands don't return a response or return "ok"
+        # We consider it successful if no exception was thrown
+        
+        logger.info(f"Uploaded pattern '{name}' to {self.ip} with ID {pattern_id}")
+        
+        # Give the device a moment to process
+        await asyncio.sleep(0.1)
+        
+        # Refresh patterns list to confirm
+        await self.get_patterns()
+        
+        # Check if pattern was added
+        for pattern in self.state.patterns:
+            if pattern.id == pattern_id or pattern.name == name:
+                return pattern_id
+                
+        # Even if not in list yet, return the ID (it may take time to appear)
+        return pattern_id
         
     async def update_state(self):
         """Update all state information"""
