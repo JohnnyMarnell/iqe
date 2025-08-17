@@ -4,20 +4,14 @@
       "id": "2a000000a401",
       "ip": "192.168.0.96",
       "name": "PB_a401",
-      "last_seen": 1755405010.7100742,
-      "online": true,
-      "provisioned": false,
-      "last_seen_formatted": "21:30:10"
+      "provisioned": false
     },
     {
       "id": "2a0000005608",
       "ip": "192.168.0.241",
       "name": "PB_5608",
-      "last_seen": 1755405011.1172748,
-      "online": true,
-      "provisioned": false,
-      "last_seen_formatted": "21:30:11"
+      "provisioned": false
     }
   ],
-  "saved_at": "2025-08-16T21:30:11.117516"
+  "saved_at": "2025-08-16T21:53:50.728391"
 }

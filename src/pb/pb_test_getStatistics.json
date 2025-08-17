@@ -1,0 +1,17 @@
+{
+  "method": "getStatistics",
+  "result": {
+    "fps": 299.4012,
+    "vmerr": 0,
+    "vmerrpc": -1,
+    "mem": 10138,
+    "exp": 0,
+    "renderType": 1,
+    "uptime": 8475835,
+    "storageUsed": 837336,
+    "storageSize": 2884241,
+    "rr0": 1,
+    "rr1": 14,
+    "rebootCounter": 0
+  }
+}

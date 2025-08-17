@@ -1,0 +1,6 @@
+{
+  "method": "getConfigExpander",
+  "result": {
+    "expanders": []
+  }
+}

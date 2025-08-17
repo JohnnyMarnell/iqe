@@ -1,0 +1,18 @@
+{
+  "method": "getConfigSequencer",
+  "result": {
+    "activeProgram": {
+      "name": "KITT",
+      "activeProgramId": "BxgkrQTHPkhcM6a24",
+      "controls": {}
+    },
+    "sequencerMode": 2,
+    "runSequencer": false,
+    "playlist": {
+      "position": 0,
+      "id": "_defaultplaylist_",
+      "ms": 30000,
+      "remainingMs": 17246
+    }
+  }
+}
