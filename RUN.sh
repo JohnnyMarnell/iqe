@@ -5,6 +5,10 @@ cd "$(dirname $0)"
 # Function to kill all child processes
 cleanup() {
     echo "Cleaning up..."
+    # Kill any node processes on our ports
+    lsof -ti:8282 | xargs kill -9 2>/dev/null || true
+    lsof -ti:8080 | xargs kill -9 2>/dev/null || true
+    # Kill all child processes
     pkill -P $$
 }
 
@@ -21,13 +25,21 @@ run_flamecaster &
 
 function run_control_ui() {
     (
-        cd src/control-ui
+        # Kill any existing process on ports (updated to 8282 for web)
+        lsof -ti:8282 | xargs kill -9 2>/dev/null || true
+        lsof -ti:8080 | xargs kill -9 2>/dev/null || true
+        
+        # Give it a moment to release the ports
+        sleep 2
+        
         # Use nvm if available
         if [ -s "$HOME/.nvm/nvm.sh" ]; then
             source "$HOME/.nvm/nvm.sh"
             nvm use
         fi
-        npm install  # Ensure dependencies are installed
+        
+        # Run from the main iqe directory, not from src/control-ui
+        # This uses the parent package.json script which builds then starts
         npm run control
     )
 }
