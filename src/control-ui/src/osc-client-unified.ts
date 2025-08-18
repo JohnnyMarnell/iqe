@@ -89,4 +89,67 @@ export class OscClient {
     console.log('📤 Querying current state')
     this.ws.send(JSON.stringify(message))
   }
+
+  sendTrigger(paramName: string) {
+    if (!this.connected || !this.ws) {
+      console.warn(`⚠️ WebSocket not connected, cannot send ${paramName}`)
+      return
+    }
+    
+    // All triggers go through GlobalControls which is effect 1 on master
+    const message = {
+      address: `/lx/mixer/master/effect/1/${paramName}`,
+      args: [1]
+    }
+    
+    console.log(`📤 Sending ${paramName} trigger`)
+    this.ws.send(JSON.stringify(message))
+  }
+  
+  sendParameter(path: string, value: number) {
+    if (!this.connected || !this.ws) {
+      console.warn('⚠️ WebSocket not connected')
+      return
+    }
+    
+    const message = {
+      address: path,
+      args: [value]
+    }
+    
+    console.log('📤 Sending:', message)
+    this.ws.send(JSON.stringify(message))
+  }
+  
+  sendCommand(command: string, arg: string) {
+    if (!this.connected || !this.ws) {
+      console.warn('⚠️ WebSocket not connected')
+      return
+    }
+    
+    const message = {
+      address: '/iqe/cmd',
+      args: [`${command} ${arg}`]
+    }
+    
+    console.log(`📤 Sending command: ${command} ${arg}`)
+    this.ws.send(JSON.stringify(message))
+  }
+  
+  // Debug helper to find all autopilot paths
+  queryAutopilotPaths() {
+    if (!this.connected || !this.ws) {
+      console.warn('⚠️ WebSocket not connected')
+      return
+    }
+    
+    // This queries all OSC paths from LX
+    const message = {
+      address: '/lx/osc-query',
+      args: [1]
+    }
+    
+    console.log('📤 Querying ALL OSC paths - look for "autopilot" in the response')
+    this.ws.send(JSON.stringify(message))
+  }
 }

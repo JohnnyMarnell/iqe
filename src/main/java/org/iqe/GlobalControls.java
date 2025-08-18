@@ -58,6 +58,15 @@ public class GlobalControls extends LXEffect {
     public static final TriggerParameter color = new TriggerParameter("color")
             .setDescription("Cycle next color");
 
+    public static final TriggerParameter transitionAll = new TriggerParameter("pattChg")
+            .setDescription("Transition all active patterns to their next pattern");
+    
+    public static final TriggerParameter pauseTransitions = new TriggerParameter("hold")
+            .setDescription("Pause all transitions for 30 seconds");
+    
+    public static final TriggerParameter transitionPalette = new TriggerParameter("colChg")
+            .setDescription("Transition to next color palette");
+
     public static final int BASS = 0;
     public static final int TEMPO = 1;
 
@@ -76,6 +85,9 @@ public class GlobalControls extends LXEffect {
         this.addParameter("pFire", pFire);
         this.addParameter("pattern", pattern);
         this.addParameter("color", color);
+        this.addParameter("transitionAll", transitionAll);
+        this.addParameter("pauseTransitions", pauseTransitions);
+        this.addParameter("transitionPalette", transitionPalette);
 
         defaultClick.setValue(clicks.indexOf(Tempo.Division.QUARTER.toString()), true);
         

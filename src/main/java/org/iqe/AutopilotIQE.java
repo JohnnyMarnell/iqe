@@ -39,17 +39,7 @@ public class AutopilotIQE extends Autopilot {
       .setDescription("Percentage of modulators that are audio reactive.  Must be set before first run of Autopilot.")
       .setUnits(Units.PERCENT);
 
-  public final TriggerParameter transitionAll =
-      new TriggerParameter("pattChg")
-      .setDescription("Transition all active patterns to their next pattern");
-  
-  public final TriggerParameter transitionPalette =
-      new TriggerParameter("colChg")
-      .setDescription("Transition to next color palette");
-  
-  public final TriggerParameter pauseTransitions =
-      new TriggerParameter("hold")
-      .setDescription("Pause all transitions for 30 seconds");
+  // These are now in GlobalControls
 
   public final CompoundParameter maxTransitionMs =
       new CompoundParameter("trxMx", 500, 100, 15000)
@@ -89,9 +79,7 @@ public class AutopilotIQE extends Autopilot {
     // Add our parameters and make them visible in UI
     addVisibleParameter("audio", this.audio);
     addVisibleParameter("audioPercent", this.percentAudioReactive);
-    addVisibleParameter("transitionAll", this.transitionAll);
-    addVisibleParameter("transitionPalette", this.transitionPalette);
-    addVisibleParameter("pauseTransitions", this.pauseTransitions);
+    // transitionAll, pauseTransitions, and transitionPalette are now in GlobalControls
     addVisibleParameter("maxTransitionMs", this.maxTransitionMs);
     addVisibleParameter("soloChannel", this.soloChannel);
     addVisibleParameter("soloAutoRestoreTime", this.soloAutoRestoreTime);
@@ -100,23 +88,23 @@ public class AutopilotIQE extends Autopilot {
     // Add other class' parameters to UI for convenience
     setParameterVisible(this.lx.engine.speed);
     
-    // Add listener to transition all patterns when triggered
-    this.transitionAll.addListener(p -> {
-      if (this.transitionAll.getValueb()) {
+    // Add listener to transition all patterns when triggered (now from GlobalControls)
+    GlobalControls.transitionAll.addListener(p -> {
+      if (GlobalControls.transitionAll.getValueb()) {
         transitionAllPatterns();
       }
     });
     
-    // Add listener to transition palette when triggered
-    this.transitionPalette.addListener(p -> {
-      if (this.transitionPalette.getValueb()) {
+    // Add listener to transition palette when triggered (now from GlobalControls)
+    GlobalControls.transitionPalette.addListener(p -> {
+      if (GlobalControls.transitionPalette.getValueb()) {
         transitionPalette();
       }
     });
     
-    // Add listener to pause transitions for 30 seconds
-    this.pauseTransitions.addListener(p -> {
-      if (this.pauseTransitions.getValueb()) {
+    // Add listener to pause transitions for 30 seconds (now from GlobalControls)
+    GlobalControls.pauseTransitions.addListener(p -> {
+      if (GlobalControls.pauseTransitions.getValueb()) {
         pauseTransitionsFor30Seconds();
       }
     });

@@ -22,6 +22,7 @@ import jkbstudio.autopilot.UIAutopilot;
 
 import org.iqe.pattern.*;
 import org.iqe.pattern.EqVisualizerPattern;
+import org.iqe.pattern.PongPatternOSC;
 import org.iqe.pattern.pixelblaze.PixelBlazeBlowser;
 import org.iqe.pattern.pixelblaze.PixelblazePatterns;
 import org.iqe.pattern.pixelblaze.UIPixelblazePattern;
@@ -69,6 +70,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                 MindLikeWaterPattern.class,
                 EqVisualizerPattern.class,
                 PongPattern.class,
+                PongPatternOSC.class,
                 ImagePattern.class,
                 VideoPattern.class,
 
@@ -287,6 +289,10 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
                             handleSoloCommand(arg);
                         } else if ("toggleparcans".equals(command)) {
                             handleToggleParcans();
+                        } else if ("pong1".equals(command)) {
+                            handlePongPaddle(1, arg);
+                        } else if ("pong2".equals(command)) {
+                            handlePongPaddle(2, arg);
                         } else {
                             LOG.info("Unknown command: '{}'", command);
                         }
@@ -400,6 +406,38 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         } else {
             LOG.info("No parcan fixtures found to toggle");
             Audio.get().osc.sendOutgoing("/iqe/cmd/response", "error", "No parcan fixtures found");
+        }
+    }
+    
+    private void handlePongPaddle(int player, String valueStr) {
+        try {
+            float value = Float.parseFloat(valueStr);
+            String paramName = (player == 1) ? "paddle1" : "paddle2";
+            
+            // Find ALL PongPatternOSC instances across all channels
+            boolean found = false;
+            for (LXAbstractChannel channel : lx.engine.mixer.getChannels()) {
+                if (channel instanceof LXChannel) {
+                    LXChannel lxChannel = (LXChannel) channel;
+                    for (LXPattern pattern : lxChannel.getPatterns()) {
+                        if (pattern instanceof PongPatternOSC) {
+                            PongPatternOSC pong = (PongPatternOSC) pattern;
+                            heronarts.lx.parameter.LXParameter paddle = pong.getParameter(paramName);
+                            if (paddle != null) {
+                                paddle.setValue(value);
+                                LOG.info("Pong P{} set to {} on channel {}", player, value, channel.getLabel());
+                                found = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (!found) {
+                LOG.info("No PongPatternOSC found to control");
+            }
+        } catch (NumberFormatException e) {
+            LOG.error("Invalid value for pong paddle: {}", valueStr);
         }
     }
 

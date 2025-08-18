@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "start": "tsx src/server.ts",
     "start:dev": "concurrently \"vite --port 8282 --host\" \"tsx src/server.ts\"",
+    "control": "concurrently \"vite --port 8282 --host\" \"tsx src/server.ts\"",
     "server": "tsx src/server.ts",
     "midi": "tsx src/midi-bridge.ts"
   },

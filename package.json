@@ -20,7 +20,7 @@
     "render:dev": "cd src/touch-designer/iqe-artnet-electron && npm run dev",
     "render:build": "cd src/touch-designer/iqe-artnet-electron && npm run build",
     "// Control UI": "",
-    "control": "cd src/control-ui && npm run start",
+    "control": "cd src/control-ui && npm run build && npm run start",
     "control:dev": "cd src/control-ui && npm run dev",
     "control:build": "cd src/control-ui && npm run build",
     "midi": "cd src/control-ui && npm run midi",

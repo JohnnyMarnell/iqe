@@ -19,6 +19,20 @@ function run_flamecaster() {
 }
 run_flamecaster &
 
+function run_control_ui() {
+    (
+        cd src/control-ui
+        # Use nvm if available
+        if [ -s "$HOME/.nvm/nvm.sh" ]; then
+            source "$HOME/.nvm/nvm.sh"
+            nvm use
+        fi
+        npm install  # Ensure dependencies are installed
+        npm run control
+    )
+}
+run_control_ui &
+
 cd `dirname $0`
 
 ./src/scripts/download_chromatik.sh
