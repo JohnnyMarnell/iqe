@@ -85,6 +85,14 @@ class Controls {
             this.oscClient.sendCommand('pong2', value.toString())
           }
         }
+      },
+      {
+        type: 'button',
+        label: 'Toggle Parcans',
+        className: 'toggle-parcans-btn',
+        onAction: () => {
+          this.oscClient.sendCommand('toggleparcans', '')
+        }
       }
     ]
 
