@@ -93,6 +93,32 @@ class Controls {
         onAction: () => {
           this.oscClient.sendCommand('toggleparcans', '')
         }
+      },
+      {
+        type: 'button',
+        label: 'Mindshow',
+        className: 'mindshow-btn',
+        onAction: () => {
+          // Toggle between 1.0 and 0.0
+          const currentState = this.controls.get('mindshow-state') as any
+          const newValue = currentState?.value === 1.0 ? 0.0 : 1.0
+          
+          // Store the new state
+          if (!this.controls.has('mindshow-state')) {
+            this.controls.set('mindshow-state', { value: newValue } as any)
+          } else {
+            (this.controls.get('mindshow-state') as any).value = newValue
+          }
+          
+          // Send the OSC message
+          this.oscClient.sendParameter('/lx/mixer/master/effect/5/enabled', newValue)
+        }
+      },
+      {
+        type: 'slider',
+        label: 'Mindshow Sensitivity',
+        oscPath: '/lx/mixer/master/effect/5/sensitivity',
+        className: 'mindshow-sensitivity-slider'
       }
     ]
 
@@ -104,6 +130,12 @@ class Controls {
       this.statusEl.textContent = 'Connected'
       this.statusEl.classList.add('connected')
       this.oscClient.queryCurrentState()
+      
+      // Set initial value for Mindshow Sensitivity slider to 1.0
+      const sensitivityTrack = this.controls.get('mindshow-sensitivity-slider-track') as HTMLElement
+      if (sensitivityTrack) {
+        this.updateSliderValue(sensitivityTrack, 1.0, false)
+      }
     }, 1000)
   }
 

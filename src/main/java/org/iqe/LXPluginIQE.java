@@ -26,6 +26,7 @@ import org.iqe.pattern.PongPatternOSC;
 import org.iqe.pattern.pixelblaze.PixelBlazeBlowser;
 import org.iqe.pattern.pixelblaze.PixelblazePatterns;
 import org.iqe.pattern.pixelblaze.UIPixelblazePattern;
+import org.iqe.effect.MindshowEffect;
 import titanicsend.pattern.pixelblaze.PBAudio1;
 import titanicsend.pattern.pixelblaze.PBFireworkNova;
 import titanicsend.pattern.pixelblaze.PBXorcery;
@@ -89,6 +90,8 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         lx.registry.addFixture(FlamecasterFixtures.NWCorner.class);
         lx.registry.addFixture(DMXParCanFixture.class);
         lx.registry.addFixture(SmoothDMXParCanFixture.class);
+        
+        lx.registry.addEffect(MindshowEffect.class);
 
         initializeAutopilot();
 
