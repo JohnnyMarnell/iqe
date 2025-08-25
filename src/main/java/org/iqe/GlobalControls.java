@@ -40,6 +40,9 @@ public class GlobalControls extends LXEffect {
     public static final CompoundParameter parcanSmoothing = new CompoundParameter("parcanSmoothing", 0.85, 0.7, 0.99)
             .setDescription("Global smoothing for all DMX ParCan fixtures")
             .setExponent(2.0);  // Exponential curve for finer control near 1.0
+    
+    public static final CompoundParameter parcanSpatialRadius = new CompoundParameter("parcanSpatialRadius", 0.05, 0.01, 0.20)
+            .setDescription("Global spatial averaging radius for ParCan fixtures (% of pixels)");
 
     public static final TriggerParameter build = new TriggerParameter("build")
             .setDescription("Trigger a build up dynamic event");
@@ -79,6 +82,7 @@ public class GlobalControls extends LXEffect {
         this.addParameter("bassDynamics", bassDynamics);
         this.addParameter("bassBnc", bassBounce);
         this.addParameter("parcanSmoothing", parcanSmoothing);
+        this.addParameter("parcanSpatialRadius", parcanSpatialRadius);
         this.addParameter("build", build);
         this.addParameter("freeBass", freeBass);
         this.addParameter("highIntensity", highIntensity);
@@ -94,6 +98,11 @@ public class GlobalControls extends LXEffect {
         // Listen for parcanSmoothing changes and update all SmoothDMXParCanFixtures
         parcanSmoothing.addListener(p -> {
             updateAllParCanSmoothing(lx, parcanSmoothing.getValue());
+        });
+        
+        // Listen for parcanSpatialRadius changes and update all SpatialAveragingParCanFixtures
+        parcanSpatialRadius.addListener(p -> {
+            updateAllParCanSpatialRadius(lx, parcanSpatialRadius.getValue());
         });
 
         AudioModulators.register(this);
@@ -120,6 +129,19 @@ public class GlobalControls extends LXEffect {
                     SmoothDMXParCanFixture parcan = (SmoothDMXParCanFixture) fixture;
                     parcan.smoothing.setValue(smoothingValue);
                     LOG.info("Updated ParCan fixture smoothing to: {}", smoothingValue);
+                }
+            }
+        }
+    }
+    
+    private static void updateAllParCanSpatialRadius(LX lx, double radiusValue) {
+        // Access fixtures through structure
+        if (lx.structure != null) {
+            for (LXFixture fixture : lx.structure.fixtures) {
+                if (fixture instanceof SpatialAveragingParCanFixture) {
+                    SpatialAveragingParCanFixture parcan = (SpatialAveragingParCanFixture) fixture;
+                    parcan.samplingRadius.setValue(radiusValue);
+                    LOG.info("Updated ParCan fixture spatial radius to: {}%", radiusValue * 100);
                 }
             }
         }

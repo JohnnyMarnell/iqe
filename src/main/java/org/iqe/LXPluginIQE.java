@@ -90,6 +90,7 @@ public class LXPluginIQE implements LXStudio.Plugin, LX.ProjectListener, LX.List
         lx.registry.addFixture(FlamecasterFixtures.NWCorner.class);
         lx.registry.addFixture(DMXParCanFixture.class);
         lx.registry.addFixture(SmoothDMXParCanFixture.class);
+        lx.registry.addFixture(SpatialAveragingParCanFixture.class);
         
         lx.registry.addEffect(MindshowEffect.class);
 
