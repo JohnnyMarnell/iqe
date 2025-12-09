@@ -32,34 +32,37 @@ public class MindshowEffect extends LXEffect {
     
     @Override
     protected void run(double deltaMs, double dampedAmount) {
-        // Update phase regardless of colorBlend value so speed always works
+        // Update phase based on speed - controls pulsing frequency
         double speedValue = speed.getValue();
         if (speedValue > 0) {
             phase += deltaMs * speedValue * 0.001;
             phase = phase % (2 * Math.PI);
         }
-        
+
         double blendValue = colorBlend.getValue();
-        
+
         // Calculate pulse amount - will be used to modulate the effect strength
         double pulseAmount = (Math.sin(phase) + 1) * 0.5;
-        
+
         // Use full color range from blue (240°) through purple/magenta to red (0°)
         // This gives us a full spectrum transition
         float baseHue = (float)(240 - blendValue * 240) / 360f;  // 240° to 0°
         float baseSaturation = 80 + (float)(blendValue * 20);  // 80 to 100
         float baseBrightness = 30 + (float)(blendValue * 70);  // 30 to 100
-        
-        // Pulse the effect strength itself, not just brightness
-        // When speed is 0, pulseAmount stays at 0.5 (no pulsing)
+
+        // Apply the pulsed strength based on speed (when speed is 0, effect is steady)
         // When speed > 0, it oscillates between 0 and 1
         float pulsedStrength = speedValue > 0 ? (float)pulseAmount : 1.0f;
-        
-        // Apply the pulsed strength to the overall effect
+
+        // COLOR BLEND controls overall effect strength (visibility)
+        // SPEED controls the pulsing intensity
         // Sensitivity scales the effect strength
         float sensitivityValue = (float)sensitivity.getValue();
-        float effectStrength = (float)(blendValue * dampedAmount * pulsedStrength * sensitivityValue);
-        
+        float effectStrength = (float)(blendValue * dampedAmount * sensitivityValue);
+
+        // Apply speed modulation to the effect strength (pulsing)
+        effectStrength *= pulsedStrength;
+
         // If effect strength is 0, skip processing
         if (effectStrength == 0) {
             return;

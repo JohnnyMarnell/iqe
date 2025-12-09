@@ -22,28 +22,30 @@ class UnifiedServer {
 
   constructor() {
     this.app = express()
-    this.setupWebServer()
     this.setupOSCBridge()
+
+    // Only start HTTP server in production (check for dist AND specific env var)
+    if (process.env.NODE_ENV === 'production' || process.argv.includes('--production')) {
+      this.setupWebServer()
+    } else {
+      console.log('📦 Running in DEV mode - Vite handles web serving on port 8282')
+      console.log('📦 This server provides OSC/WebSocket bridge only')
+    }
   }
 
   private setupWebServer() {
     // Serve static files from dist directory (after build)
     const distPath = path.join(__dirname, '..', 'dist')
-    
-    // Check if running in dev mode (no dist folder)
-    if (!fs.existsSync(distPath)) {
-      console.log('📦 No dist folder found. Please run "npm run build" first, or use "npm run dev" for development')
-      // In dev mode, vite will handle serving files
-    } else {
-      this.app.use(express.static(distPath))
-      
-      // Serve index.html for all routes (SPA support)
-      this.app.get('*', (req: any, res: any) => {
-        res.sendFile(path.join(distPath, 'index.html'))
-      })
-    }
 
-    // Start web server
+    // Production mode - serve static files
+    this.app.use(express.static(distPath))
+
+    // Serve index.html for all routes (SPA support)
+    this.app.get('*', (req: any, res: any) => {
+      res.sendFile(path.join(distPath, 'index.html'))
+    })
+
+    // Start web server (production mode only)
     const server = createServer(this.app)
     server.listen(WEB_PORT, () => {
       console.log(`🌐 Web UI server running on http://localhost:${WEB_PORT}`)
