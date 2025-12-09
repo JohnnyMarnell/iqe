@@ -119,6 +119,12 @@ class Controls {
         label: 'Mindshow Sensitivity',
         oscPath: '/lx/mixer/master/effect/5/sensitivity',
         className: 'mindshow-sensitivity-slider'
+      },
+      {
+        type: 'slider',
+        label: 'ParCan Spatial Radius',
+        oscPath: '/lx/mixer/master/effect/1/parcanSpatialRadius',
+        className: 'parcan-spatial-slider'
       }
     ]
 
@@ -135,6 +141,12 @@ class Controls {
       const sensitivityTrack = this.controls.get('mindshow-sensitivity-slider-track') as HTMLElement
       if (sensitivityTrack) {
         this.updateSliderValue(sensitivityTrack, 1.0, false)
+      }
+      
+      // Set initial value for ParCan Spatial Radius slider to 0.05 (5%)
+      const parcanTrack = this.controls.get('parcan-spatial-slider-track') as HTMLElement
+      if (parcanTrack) {
+        this.updateSliderValue(parcanTrack, 0.05, false)
       }
     }, 1000)
   }
@@ -295,7 +307,13 @@ class Controls {
     
     fill.style.height = `${100 - percent}%`  // Fill from bottom up
     thumb.style.bottom = `${100 - percent}%`  // Position thumb
-    valueDisplay.textContent = value.toFixed(2)
+    
+    // Special formatting for ParCan Spatial Radius (show as percentage)
+    if (track.parentElement?.classList.contains('parcan-spatial-slider')) {
+      valueDisplay.textContent = `${(value * 100).toFixed(1)}%`
+    } else {
+      valueDisplay.textContent = value.toFixed(2)
+    }
 
     if (sendOsc) {
       if (track.dataset.oscPath) {

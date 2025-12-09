@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IQE ArtNet Sniffer - LED Grid + ParCans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #sidebar {
+      width: 300px;
+      background: #1a1a1a;
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid #333;
+      transition: margin-left 0.3s;
+    }
+
+    #sidebar.collapsed {
+      margin-left: -300px;
+    }
+
+    #sidebar h2 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: #00ff88;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .control-group {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #222;
+      border-radius: 8px;
+    }
+
+    .control-group h3 {
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .control-row label {
+      flex: 1;
+      font-size: 12px;
+    }
+
+    .control-row input[type="checkbox"] {
+      margin-left: auto;
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      background: #333;
+      outline: none;
+      border-radius: 2px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #00ff88;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .slider-value {
+      min-width: 40px;
+      font-size: 11px;
+      color: #00ff88;
+      text-align: right;
+    }
+
+    #main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    #canvas-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050505;
+      position: relative;
+      padding: 20px;
+    }
+
+    #led-canvas {
+      background: #000;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      box-shadow: 0 0 50px rgba(0, 255, 136, 0.1);
+    }
+
+    #canvas-info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 11px;
+      color: #666;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    #stats {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 11px;
+      color: #888;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
+    #stats.loading::after {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-left: 8px;
+      border: 2px solid #00ff88;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .stat-line {
+      margin-bottom: 4px;
+    }
+
+    .universe-info {
+      color: #00ff88;
+    }
+
+    .warning {
+      color: #ff8800;
+    }
+
+    .error {
+      color: #ff3333;
+    }
+
+    #toggle-sidebar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 8px 12px;
+      background: #222;
+      border: 1px solid #444;
+      color: #888;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    #toggle-sidebar:hover {
+      background: #333;
+      color: #fff;
+      border-color: #666;
+    }
+
+    #log-container {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+    }
+
+    .log-entry {
+      margin-bottom: 4px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .log-time {
+      color: #666;
+    }
+
+    .log-info { color: #888; }
+    .log-success { color: #00ff88; }
+    .log-warning { color: #ff8800; }
+    .log-error { color: #ff3333; }
+
+    button {
+      padding: 6px 12px;
+      background: #333;
+      border: 1px solid #555;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 11px;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #444;
+      border-color: #666;
+    }
+
+    /* ParCan specific styles */
+    .parcan-controls {
+      background: #1a1a2e;
+      border: 1px solid #16213e;
+    }
+
+    .parcan-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .sniff-status {
+      padding: 8px;
+      background: #1a2a1a;
+      border: 1px solid #2a4a2a;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .sniff-status.active {
+      background: #2a3a2a;
+      border-color: #00ff88;
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>ArtNet Sniffer Controls</h2>
+    
+    <div class="sniff-status" id="sniff-status">
+      <strong>Mode:</strong> <span id="sniff-mode">Standard</span><br>
+      <strong>Status:</strong> <span id="sniff-state">Waiting...</span>
+    </div>
+
+    <div class="control-group">
+      <h3>Display Options</h3>
+      <div class="control-row">
+        <label for="spaced-mode">Spaced Rows</label>
+        <input type="checkbox" id="spaced-mode">
+      </div>
+      <div id="spacing-slider-container" class="slider-container" style="display: none;">
+        <input type="range" id="spacing-slider" min="2" max="40" value="14">
+        <span class="slider-value" id="spacing-value">14</span>
+      </div>
+      <div class="control-row">
+        <label for="show-grid">Show Grid</label>
+        <input type="checkbox" id="show-grid" checked>
+      </div>
+      <div class="control-row">
+        <label for="show-labels">Show Labels</label>
+        <input type="checkbox" id="show-labels" checked>
+      </div>
+      <div class="control-row">
+        <label for="auto-scale">Auto Scale</label>
+        <input type="checkbox" id="auto-scale" checked>
+      </div>
+      <div class="control-row">
+        <label for="enable-glow">Enable Glow</label>
+        <input type="checkbox" id="enable-glow" checked>
+      </div>
+    </div>
+
+    <div class="control-group parcan-controls">
+      <h3>ParCan Flood Lights</h3>
+      <div class="control-row">
+        <label for="show-parcans">Show ParCans</label>
+        <input type="checkbox" id="show-parcans" checked>
+      </div>
+      <div class="control-row">
+        <label for="parcan-radius">Flood Radius</label>
+      </div>
+      <div class="slider-container">
+        <input type="range" id="parcan-radius" min="10" max="200" value="50">
+        <span class="slider-value" id="parcan-radius-value">50</span>
+      </div>
+      <div class="control-row">
+        <label for="parcan-intensity">Intensity</label>
+      </div>
+      <div class="slider-container">
+        <input type="range" id="parcan-intensity" min="0.1" max="2" step="0.1" value="0.5">
+        <span class="slider-value" id="parcan-intensity-value">0.5</span>
+      </div>
+      <div id="parcan-status" style="margin-top: 10px; font-size: 10px; color: #666;">
+        <!-- ParCan status will be updated here -->
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Pixel Size</h3>
+      <div class="slider-container">
+        <input type="range" id="pixel-radius" min="1" max="10" step="0.5" value="3">
+        <span class="slider-value" id="pixel-radius-value">3</span>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Activity Log</h3>
+      <button id="clear-log">Clear Log</button>
+      <div id="log-container" style="margin-top: 10px;"></div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div id="canvas-container">
+      <canvas id="led-canvas"></canvas>
+      <div id="canvas-info">420×24</div>
+      <div id="stats" class="loading">
+        <div class="stat-line">Waiting for ArtNet data...</div>
+      </div>
+      <button id="toggle-sidebar">☰ Toggle</button>
+    </div>
+  </div>
+
+  <script>
+    // Note: This would be loaded via the renderer process
+    console.log('ArtNet Sniffer UI loaded - waiting for renderer script');
+  </script>
+</body>
+</html>
