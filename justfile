@@ -460,7 +460,7 @@ artnet-listen:
 # ceiling shape. Then open http://localhost:8080/gallery.html.
 [doc("staff-infection emulator + emulated PixelBlaze on the 24×420 ceiling shape.")]
 pb-emu *args:
-    cd {{STAFF}} && just dev --shape grid --rows 24 --cols 420 --pixels 10080 --name iqe {{args}}
+    cd {{STAFF}} && just dev --shape grid --rows 24 --cols 420 --pixels 10080 {{args}}
 
 # Render a pattern (fuzzy name) on the ceiling shape to an mp4.
 # Example: just pb-emu-render fire --duration 10
