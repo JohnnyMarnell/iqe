@@ -18,6 +18,12 @@ e.g. real time beat detection and sync.
 
 Plus Node.JS OSC backed web app control system.
 
+**2026-09 note:** there is now a root [`justfile`](./justfile) with a recipe for every
+way to run things (`just` to list), and a `docs/` folder: [`docs/RUNNING.md`](./docs/RUNNING.md)
+(every subsystem, ports, env setup, what's broken), [`docs/DMX-PARCANS.md`](./docs/DMX-PARCANS.md),
+[`docs/TOUCHDESIGNER.md`](./docs/TOUCHDESIGNER.md), [`docs/PIXELBLAZE-EMULATOR-LX.md`](./docs/PIXELBLAZE-EMULATOR-LX.md).
+Where this README and those disagree, the docs are newer.
+
 Outdated screenshart:
 ![Chromatik](src/audio-tooling/chromatik-project-screenshot.png)
 
@@ -46,7 +52,17 @@ eval "java $( [[ $(uname) == 'Darwin' ]] && echo '-XstartOnFirstThread' ) \
     heronarts.lx.studio.ChromatikIQE iqe.lxp"
 ```
 
-Note we are on an old version of Chromatik / LX Studio, haven't properly upgraded and bootstrapped yet.
+Or with [just](https://github.com/casey/just): `just build && just lx` (see `just --list`).
+
+Note we are on an old version of Chromatik / LX Studio (0.4.2-SNAPSHOT alpha from 2023-07 in
+`vendor/glxstudio.jar`), haven't properly upgraded and bootstrapped yet. The main class
+`heronarts.lx.studio.ChromatikIQE` only exists inside that jar now (`just lx-main-src` prints the
+last committed source).
+
+**Gotcha:** the 72 ceiling strips in `Projects/iqe.lxp` point at hostname `advatek-local`, which
+`/etc/hosts` on the laptop maps to `127.0.0.1` (the ArtNet simulator). To drive the real PixLite
+either change that hosts entry or run `just lxp-strip-host advatek` (10.10.42.80). `just hosts` shows
+the aliases; `just lxp-fixtures` shows what the project currently points at.
 
 # PixelBlaze Pattern Support
 
@@ -61,34 +77,40 @@ and intent here, it would be great if we could get more "stock" / crowd-sourced 
 TODO: polish these docs and notes (more).
 TODO: refactor all my node + OSC ideas to separate, licensed, NDA [🥴] lib
 
-There is a Node.JS app in [./src/nodejs](./src/nodejs).
-It's able to control LX via OSC, from any device (e.g. mobile phone
-connected to Playa RaspberryPi ad hoc wifi network ...damn, cool right?).
+There are two web control apps; the TypeScript one is the current one.
 
-Instructions:
+**Current: [./src/control-ui](./src/control-ui)** (TypeScript, Vite, 2025). Speed slider, transition /
+color / hold buttons, solo, pong paddles, parcan toggle, Mindshow. Browser → WebSocket :8080 →
+OSC UDP :3232 into the IQE plugin's `OscBridge` (LX replies on :3333).
 
 ```bash
-cd ./src/nodejs # change dir to nodejs web app dir
-
-# do once-ish:
-nvm use # requires (the great) nvm installed (node version manager)
-npm install # standard... as much as Node has standards, amirite?
-
-# Now run, first starting nodeJs bridge + web app
-npm start
+just control        # Vite dev server on http://localhost:8282 (LAN-exposed) + the OSC bridge
+just control-prod   # build dist/ and serve it from the unified server on :8282
+# or: cd src/control-ui && npm install && npm run control
 ```
 
-Next start / open LX / Chromatik (TODO: shouldn't need this ordering) ...
+Note: plain `npm start` in control-ui is **bridge-only** since Dec 2025 (no web page unless
+`NODE_ENV=production`). `start-control.sh` and `SPEED_CONTROL_README.md` predate that.
 
-Now load web UI at this URL in blowser, either on craptop
-(or scan camp QR code on camp wifi and control with
-phone / any device / we're such a fun camp!!!!):
+**Legacy: [./src/nodejs](./src/nodejs)** (2023, jQuery + Tailwind, the "IQE LED Command Staishe" page
+with the XY pad and Knobs). It's able to control LX via OSC, from any device (e.g. mobile phone
+connected to Playa RaspberryPi ad hoc wifi network ...damn, cool right?). Its own `npm start` binds
+port **80** (needs root); use the recipe for 8181:
 
-[http://localhost:8181](http://localhost:8181)
+```bash
+just legacy-web     # http://localhost:8181, OSC 3232/3333, WS 8080
+```
+
+Don't run it at the same time as control-ui (both bind WS 8080 and UDP 3333). Its channel-index
+buttons (channel 1 "Form", 2 "Color") target 2023 channel indices and are stale. The committed
+`dist/osc-js` symlink dangles under npm workspaces, so the page may 404 on `osc.min.js`.
 
 Moving knobs in LX renders webapp controls moving + feedback.
 And, ofc, moving web UI controls, controls LX.
 (Look at "Knobs" in global Modulator section in LX as [early] example).
+
+No Node at all: `just osc /lx/mixer/master/effect/1/speed 0.5` sends a raw OSC packet to LX,
+`just osc-sniff` prints everything LX emits.
 
 Lots of potentch + power here (e.g. custom/admin controls,
 party mode, Orchestrator buttons / actions)...
@@ -105,8 +127,14 @@ and re-write the `.lxp` file with it. Put another way, we generate and update th
 script. Run it via:
 
 ```bash
-(cd ./src/nodejs ; npm run lxp )
+(cd ./src/nodejs ; npm run lxp )   # or: just lxp-regen
 ```
+
+Caveats (2026-09): it overwrites `Projects/iqe.lxp` **in place** (quit LX first), resets the strip
+host to `10.10.42.80` (the file currently uses `advatek-local`), re-adds 32 Flamecaster netStrips
+(the file has 31), and discards per-fixture edits made in the Chromatik UI. Par can fixtures are
+preserved. The 8 par cans are regenerated separately by `parcan-surgery.ts` (`just parcan-surgery`,
+writes `Projects/iqe_modified.lxp`). See [`docs/DMX-PARCANS.md`](./docs/DMX-PARCANS.md).
 
 # Audio analysis
 
@@ -117,7 +145,7 @@ You can easily run the Jupyter notebooks as long as you have [Docker](https://ww
 
 ```bash
 cd src/audio-tooling/jupyter
-docker-compose up
+docker compose up          # (v2 syntax; Docker Desktop is currently uninstalled on the laptop)
 ```
 
 And visit [localhost:8888](http://localhost:8888) for locally running Jupyter Labs notebook UI.
@@ -128,7 +156,15 @@ to Jupyter server and python kernel with URL: `http://localhost:8889?token=a`).
 Re-export notebooks:
 
 ```bash
-docker-compose exec -it jupyter-lab jupyter nbconvert --to html --output-dir /out '*.ipynb'
+docker compose exec -it jupyter-lab jupyter nbconvert --to html --output-dir /out '*.ipynb'
+```
+
+The real-time tool that came out of the notebook is `src/audio-tooling/beat_detective.py`: PyAudio on a
+loopback device (BlackHole), librosa beat tracking, OSC `/lx/tempo/beat|bpm|clockSource` to LX on UDP 3232.
+
+```bash
+just venv && just venv-audio          # once (uv venv on Python 3.10, brew portaudio)
+just beat                             # -i "BlackHole 2ch" -o "Speakers"; LX must be running
 ```
 
 TODO: Look into SuperCollider https://depts.washington.edu/dxscdoc/Help/Classes/BeatTrack.html , as well as if
@@ -137,20 +173,42 @@ https://www.ableton.com/en/packs/beatseeker/
 
 # PixelBlaze / Python
 
+The conda story below is what was written in 2024; what actually existed last was a **uv** venv on
+Python 3.10 at `./.venv` (now dead, its base interpreter was uninstalled). `requirements.txt` was
+overwritten in Aug 2025 with the PixelBlaze-monitor deps and no longer lists the audio stack
+(`src/audio-tooling/old.requirements.txt` is the pinned set that worked). Rebuild with:
+
+```bash
+just venv               # uv venv --python 3.10 + requirements.txt + click
+just venv-audio         # brew portaudio + pyaudio/librosa/python-osc
+just venv-flamecaster   # ~/src/Flamecaster/requirements.txt
+just venv-all           # everything incl. opencv (video tools) and matplotlib (simulator)
+```
+
+Old instructions, for reference:
+
 ```bash
 conda create -n iqe python=3.11
 conda activate iqe
 brew install portaudio
 pip install -r ~/src/iqe/requirements.txt
 pip install -r ~/src/Flamecaster/requirements.txt
-(cd ~/src/marimapper ; pip install -e . )
+(cd ~/src/marimapper ; pip install -e . )   # no marimapper checkout exists on the laptop any more
 ```
 
 For wifi access point mode, hold button when turning on, until flashes. Join network, go to config page:
 http://192.168.4.1
-Then point to camp wifi and store IP address. (Probably better ways to scan).
+Then point to camp wifi and store IP address. (Probably better ways to scan: `just pb-scan`,
+`just pb-connect`, `just pb-flash <ssid>` wrap `src/pixelblaze/pb.py`; read `NETWORKING-NOTES.md`
+first, macOS Internet Sharing will eat your internet.)
+
+Fleet monitor (Flask, http://localhost:8000): `just pb-monitor`. See `PIXELBLAZE_FLEET.md`.
 
 ## Marimapper Automapping
+
+(2026-09: `~/src/marimapper` is gone from the laptop — `~/src/wtf` is a dangling symlink to it. The
+successor is `~/src/led-map`, a native iOS capture + reconstruction app with its own justfile. The
+notes below are kept for the PB pattern and CSV format, which are still in `src/main/resources/`.)
 
 Upload "marimapper" pattern in this repo manually (wish there were API for this?).
 See more examples in my marimapper fork.
@@ -166,7 +224,7 @@ pip install -e .
 TODO(jmarnell) - figure out where to put stuff
 
 ```bash
-pip install "marimapper[pixelblaze]" @ git+http://github.com/themariday/marimapper"
+pip install "marimapper[pixelblaze] @ git+https://github.com/themariday/marimapper"
 ```
 
 Add doc manual step of uploading .epe, API looks hard unfortch Install and set up Camo, pair iPhone. Deselect annoying watermark. Make sure high framerate?
@@ -191,9 +249,14 @@ BTF are `RGB`
 ```bash
 # make sure PixelBlazes have ArtNet pattern running
 python src/scripts/flamecaster_conf.py "192.168.0.79 192.168.0.229" "400 400" > src/main/resources/flamecaster.json
+# or: just flamecaster-conf "192.168.0.79 192.168.0.229" "400 400"
 
 (cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/flamecaster.json)
+# or: just flamecaster
 ```
+
+Note `RUN.sh` launches Flamecaster with `flamecaster-config.conf`, a file that only ever existed on the
+`playa2024` branch; on master that background step just fails. `flamecaster.json` is the right file.
 
 Random note I think binaries dir here was upgrade we never got to try
 
@@ -213,7 +276,7 @@ work with LX, tried two mutual Flamecasturbaishtion but could never get it to th
 ```bash
 # upload these
 ls src/main/resources/artNetDebug.NECorner.200BTFPebbles.pbb # @ ip 192.168.0.79
-ls src/main/resources/artNetDebug.NWCorner.400BTFecostrip.pbb # @ ip 192.168.0.229
+ls src/main/resources/artNetDebug.NWCorner.400BTFStrip.pbb # @ ip 192.168.0.229
 (cd ~/src/Flamecaster ; python Flamecaster.py --file ~/src/iqe/src/main/resources/artNetDebug.flamecaster.json)
 
 java -XstartOnFirstThread -cp ./target/iqe-1.0-SNAPSHOT-jar-with-dependencies.jar:./vendor/glxstudio.jar heronarts.lx.studio.ChromatikIQE fartNetTestes_manyUniverseTestes.lxp
@@ -250,8 +313,8 @@ I think this works!
 So in this universe (_HAhaHahahahAHHAHAHhahahaHAHA_), java fixtures can just keep incrementing in 10-sized universes,
 and the python generated config just needs to switch over.
 ```bash
-python ./src/scripts/ > ~/src/iqe/src/main/resources/artNetDebug.tens.flamecaster.json
-python > ~/src/iqe/src/main/resources/flamecaster.json
+python src/scripts/flamecaster_conf.py "<ip1> <ip2>" "<px1> <px2>" > src/main/resources/artNetDebug.tens.flamecaster.json
+python src/scripts/flamecaster_conf.py "<ip1> <ip2>" "<px1> <px2>" > src/main/resources/flamecaster.json
 ```
 
 (By the way, thought I could try skipping to a higher universe like 40 [since first 0-39 would be curtain one], confirmed
@@ -292,13 +355,19 @@ quick video: https://www.youtube.com/shorts/jStYmAj-Le8
   - IQE laptop: ?? (hopefully hostname is "iqe", not even with ".local", for easy connect via device?), maybe it was 10.10.42.42 (btw this would be the *adapter* IP, right?)
   - Swider's Pknight: 10.10.42.68
   - j5 Anker Dongle (often wifi shared), gets link local garbage of 169.254.81.171 , and 192.168.2.X (2.1?) when "bridge100" Mac Internet from WiFi sharing is active (RPi gets similar ;via DHCP)
-- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 49 of `buildProject.js` 
-  here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX):
-- U'King ParCans, recharge-able battery, model: ZQ01104
+- If pixLite is not at this IP, every fixture in LX project will have wrong address, need to change everywhere, or, change in ~line 50 of `buildProject.js` 
+  here in this repo, and run it in terminal (SAVE CHANGES IN iqe.lxp [MAIN PROJECT] FIRST AND QUIT LX).
+  Easier since 2025: the strips use hostname `advatek-local`/`advatek` — edit `/etc/hosts`, or
+  `just lxp-strip-host 10.10.42.xx` rewrites the 72 strip hosts without regenerating anything:
+- U'King ParCans, recharge-able battery, model: ZQ01104 (or ZQ01047 per `src/dmx/parcan_tester.py` — check a sticker).
+  8 of them, 7-channel mode, DMX addresses 1/8/15/22/29/36/43/50, driven from LX via Swider's Pknight
+  ArtNet→DMX node at 10.10.42.68 universe 1 — NOT via the PixLite. Full catalog + burn notes:
+  [docs/DMX-PARCANS.md](./docs/DMX-PARCANS.md). Kill switch: `just parcans-toggle`.
 - In LX geometry, the ceiling is about y=700, if north is looking in from road pointing at shipping containers, then northwest
   corner is about above 0,0,0 origin, X+ is north, Z+ is west. NE corner is about 0, 700, -2000 (z), and SE is -2400, 700, -2000
 - So rows are about 10 LX pixels apart and about 2000 long, 2400 x 2000
-- Parcans at corners, for visibility... non origin, kitty corners: -2400, 720, 20 // 60, 720, -1980
+- Parcans: 4 corners + 4 along the north/road edge (x=60, z=-1580/-1180/-780/-380), all at y=720.
+  Kitty corners: -2400, 720, 20 // 60, 720, -1980
 - Corners, NE is x max, z min,   NW (CCW) is x max, z max,   SW is x min, z max,   SE is x min, z min
   -            60, 720, -1980,        60, 720, 20,                -2400, 720, 20    -2400, 720, -1980
 

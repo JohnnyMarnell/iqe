@@ -184,7 +184,7 @@ PixelblazeSidecarPattern extends LXPattern
 gallery's broadcast drawer, and the stock IDE can all drive the same device,
 so "push from the gallery → it shows on the ceiling in LX" needs no extra
 code. Run with `just pb-emu` (boots `--shape grid --rows 24 --cols 420
---pixels 10080 --name iqe`) next to `just lx`.
+--pixels 10080`) next to `just lx`.
 
 **Map fidelity.** `grid` is an idealized row-major zigzag. LX's point order
 is the model order (rafter 1 strip 1 → 3, rafter 2 …), and the physical

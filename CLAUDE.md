@@ -26,17 +26,35 @@ WiFi to PixelBlaze hardware. But the primary focus is Java patterns
 here in LX ecosystem.
 
 # Bash
-- ./mvnw clean install -DskipTests : Build the project
+- ./mvnw clean install -DskipTests : Build the project (RUN.sh uses `clean package`; either works)
 - See @RUN.sh for java run and other commands
+- `just` (root justfile) has a recipe for every subsystem: `just build`, `just lx`, `just control`,
+  `just beat`, `just pb-monitor`, `just sim`, `just parcan-test`, `just osc <addr> <args>`, ...
+  `just --list` for all. Docs for each in docs/RUNNING.md.
+- The main class `heronarts.lx.studio.ChromatikIQE` has no source in the tree; it lives in
+  vendor/glxstudio.jar (LX 0.4.2-SNAPSHOT). `just lx-main-src` prints the last committed copy.
+- The iqe jar must precede vendor/glxstudio.jar on the classpath: src/main/java/heronarts/lx/pattern/LXPattern.java
+  is a patched copy of LX's class (global speed-up in onLoop). RUN.sh and the justfile do this.
+- Both JUnit test classes are fully @Disabled; `./mvnw test` runs 0 effective tests.
+
+# Docs
+- docs/RUNNING.md — every subsystem, ports, env setup, what's broken/dead
+- docs/DMX-PARCANS.md — the 8 U'King par cans via the Pknight ArtNet→DMX node (2025 burn)
+- docs/TOUCHDESIGNER.md — TD → ArtNet attempt, the working Electron/python simulators, how to finish
+- docs/PIXELBLAZE-EMULATOR-LX.md — ~/src/staff-infection's PixelBlaze emulator + gallery, wiring to LX
+- NETWORKING-NOTES.md, PIXELBLAZE_FLEET.md, SPEED_CONTROL_README.md — older, corrected in Sept 2026
 
 # Pattern Development
 
 ## Creating New Patterns
-- All patterns extend `LXPattern` and go in `org.iqe.pattern` package
-- Pattern classes must be named like `FooPattern.java`
-- Register patterns in `LXPluginIQE.java` in the `Stream.of()` list around line 62
+- All patterns extend `LXPattern` (the patched one, see above) and go in `org.iqe.pattern` package
+  (PixelBlaze-hosted ones live in `org.iqe.pattern.pixelblaze` and `titanicsend.pattern.pixelblaze`)
+- Pattern classes are conventionally named like `FooPattern.java` (the PB ones aren't: `PBXorcery`, `PixelBlazeBlowser`)
+- Register patterns in `LXPluginIQE.java` in the `Stream.of()` list around lines 65–87
+- On disk but NOT registered: `titanicsend.pattern.pixelblaze.PixelblazeSandbox`, `PixelblazeParallel`
 - Use `@LXCategory(LXCategory.TEST)` annotation (GAME category doesn't exist)
-- Main method is `run(double deltaMs)` where deltaMs is milliseconds since last frame
+- Main method is `run(double deltaMs)` where deltaMs is milliseconds since last frame,
+  already multiplied by `1 + GlobalControls.speed × 20` by the patched LXPattern
 - Use `LXColor.CLEAR` instead of `LXColor.BLACK` for transparency to avoid transition artifacts
 
 ## Pattern Examples
@@ -60,21 +78,38 @@ here in LX ecosystem.
 
 # Fixture Management
 
-## Current Setup (as of Aug 2024)
-- 72 ceiling strips only (24 rafters × 3 strips each)
-- Class: `org.iqe.NagBugglerSaberOfLightFixture`
-- Removed 32 `FlamecasterFixtures$PatchedStripFixture` netStrips
-- Each strip has 140 pixels
-- Fixtures stored in JSON under `model.fixtures` in iqe.lxp
+## Current Setup (verified 2026-09 against Projects/iqe.lxp at dc67bec)
+- 111 fixtures under `model.fixtures`, not 72:
+  - 72 ceiling strips `org.iqe.NagBugglerSaberOfLightFixture` (24 rafters × 3), 140 px each, 3 ArtNet
+    universes per rafter (base 1,4,7,… with rafter 16 → 73), host `advatek-local`
+  - 31 `FlamecasterFixtures$PatchedStripFixture` netStrips (→ 127.0.0.1:6455, still enabled; the
+    "removed 32" note from 2024 was wrong)
+  - 8 `org.iqe.SmoothDMXParCanFixture` (→ 10.10.42.68:6454 universe 1, ch 0/7/…/49) — see docs/DMX-PARCANS.md
+- `just lxp-fixtures` prints this histogram; `just lxp-strip-host <host>` re-points the 72 strips
+- Strip host `advatek-local` resolves to 127.0.0.1 via /etc/hosts (the ArtNet simulator); `advatek` = 10.10.42.80
+- `NagBugglerSaberOfLightFixture` is not registered in the plugin; it loads by class name from the .lxp
+- Regenerating strips: `just lxp-regen` (buildProject.js) — destructive, see README "Project File"
 
 ## Test Channel
-- Located around line 41500+ in iqe.lxp
-- Can hold multiple patterns for testing
+- There is no channel named "Test" any more; it was renamed "Visuals" (around line 41800 in iqe.lxp)
+- Channels: Foreground[group], FG Pattern, PB Patterns, Color, Background[group], BG Pattern, Color,
+  Visuals, Pong, ignore_FX, ignore_FXold
+- Master effects (1-based, as OSC paths use): 1 GlobalControls, 2 Audio NO_TOUCHY, 3 Strobe, 4 Blur, 5 Mindshow
 - Pattern transitions use alpha blending (importance of CLEAR vs BLACK)
+
+# OSC
+- LX native: receive 3030 / transmit 3131. IQE plugin `OscBridge`: clients send to **3232**, replies +
+  the whole relayed LX stream go out on **3333**. Web UIs sit behind WS 8080.
+- `/iqe/cmd "<cmd> <arg>"`: `solo <substr>`, `toggleparcans`, `pong1 <v>`, `pong2 <v>`
+- `just osc <address> <args…>` sends one message with no deps; `just osc-sniff` watches 3333
 
 # PixelBlaze Fleet Management
 See [PIXELBLAZE_FLEET.md](./PIXELBLAZE_FLEET.md) for:
-- Live device monitoring web app
-- Firestorm integration for multi-device sync
+- Live device monitoring web app (`just pb-monitor` → src/pb/pbfleet_enhanced.py, Flask, :8000)
 - Python client library usage
 - Network discovery and management
+- (No Firestorm integration exists; that section of the doc is aspirational)
+
+# Python env
+- Use uv: `just venv` (Python 3.10, requirements.txt + click), `just venv-audio`, `just venv-all`.
+  The README's conda instructions are historical. `.venv/bin/python` is what the justfile uses.

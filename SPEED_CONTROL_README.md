@@ -1,15 +1,22 @@
 # IQE Speed Control Web Interface
 
+> **Corrected 2026-09-09.** Since commit `dc67bec` (Dec 2025) `npm start` in `src/control-ui` runs the
+> OSC/WebSocket bridge **only**; the HTTP server on 8282 is opened only with `NODE_ENV=production` (or
+> `--production`). So `./start-control.sh` no longer serves a page. Use `just control` (Vite dev server
+> on 8282 + bridge) or `just control-prod` (built `dist/` on 8282 + bridge). `start-speed-control.sh`
+> is broken (starts the legacy bridge *and* this one, both on WS 8080 / UDP 3333) — don't use it.
+> Port 3232 is opened by the IQE plugin's `OscBridge` whenever the plugin loads; it is not the LX OSC
+> panel setting (that is 3030/3131).
+
 ## Quick Start
 
-1. **Start LX/Chromatik** first (using IQE.command or RUN.sh)
-   - Make sure OSC is enabled on port 3232
+1. **Start LX/Chromatik** first (using IQE.command, RUN.sh, or `just lx`)
 
 2. **Start the Speed Control System**:
    ```bash
-   ./start-control.sh
+   just control          # dev: vite :8282 + bridge   (or: cd src/control-ui && npm run control)
+   just control-prod     # prod: build + serve dist on :8282 + bridge
    ```
-   This single command starts both the OSC bridge and web UI server.
 
 3. **Open the control interface**:
    - http://localhost:8282 (on this computer)
@@ -35,8 +42,9 @@ The speed control system now uses a **unified TypeScript server** that combines:
 ```bash
 cd src/control-ui
 npm install
-npm run build  # Build the frontend
-npm start      # Start the unified server
+npm run build                      # Build the frontend
+NODE_ENV=production npm start      # Start the unified server WITH the web page on 8282
+npm start                          # bridge only (WS 8080 ↔ OSC 3232/3333), no page
 ```
 
 Or for development with hot reload:
@@ -54,4 +62,10 @@ npm run start:dev  # Runs both vite dev server and the OSC bridge
 
 ## OSC Path
 
-The speed control sends to: `/lx/mixer/master/effect/1/speed`
+The speed control sends to: `/lx/mixer/master/effect/1/speed` (GlobalControls is master effect 1).
+
+Other controls in the same page: `transitionAll`, `color`, `pauseTransitions` triggers on effect 1;
+`/lx/mixer/master/effect/5/enabled` + `/sensitivity` (Mindshow); `/iqe/cmd "solo visuals"`,
+`"pong1 <v>"`, `"pong2 <v>"`, `"toggleparcans"`. Without any Node: `just osc <address> <args>`.
+
+MIDI: `npm run midi` / `just midi` maps **CC 21** (not 22) on any channel to the speed path.
