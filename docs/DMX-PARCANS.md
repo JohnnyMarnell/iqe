@@ -156,8 +156,11 @@ nearest N% of model points around the can instead of one pixel. The flaw:
 call, and a `ByteEncoder` only ever sees the bytes LX asks it to encode for
 its own fixture. Neighbour colours are never captured, every neighbour reads
 0 and is skipped, and the code falls through to "output the direct colour".
-Net effect: same as `DMXParCanFixture` plus an O(N log N) sort per radius
-change. `brightnessWeight` is declared and never read.
+A second bug compounds it: `pixelIndex = offset / 7` ignores the 18-byte
+ArtNet header and the segment's start channel that LX includes in `offset`,
+so even the fixture's own lookup lands on the wrong index. Net effect: same
+as `DMXParCanFixture` plus an O(N log N) sort per radius change.
+`brightnessWeight` is declared and never read.
 
 The control UI's "ParCan Spatial Radius" slider (added Aug 22, two days
 before the fixture existed) writes `parcanSpatialRadius` on GlobalControls
