@@ -1,5 +1,10 @@
 # macOS Networking Notes & PixelBlaze Configuration Learnings
 
+> Tools that came out of this: `just pb-scan` / `pb-connect` / `pb-flash` (`src/pixelblaze/pb.py`),
+> `just net-diag` (`network_diagnostic.sh`), `just net-fix` (`fix_network.sh`, hard-codes gateway
+> 192.168.0.1). Playa addresses: PixLite 10.10.42.80 (`advatek` in /etc/hosts; `advatek-local` =
+> 127.0.0.1 for the simulator), Pknight DMX node 10.10.42.68, laptop dongle 10.10.42.11.
+
 ## The Great Internet Breaking Mystery - SOLVED! 🎉
 
 ### Root Cause: Internet Sharing
@@ -60,7 +65,7 @@ networksetup -getinfo "USB 10/100/1000 LAN"
 
 ### WiFi Scanning (Multiple Methods)
 
-#### Method 1: Airport (Deprecated but still works)
+#### Method 1: Airport (Deprecated — and as of macOS 14.4+ removed/locked down; do NOT rely on it. `src/pixelblaze/pb.py` uses Method 2.)
 ```bash
 # Basic scan
 /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s

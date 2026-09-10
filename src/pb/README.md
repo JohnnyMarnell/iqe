@@ -1,5 +1,17 @@
 # PixelBlaze Fleet Monitor
 
+> **Corrected 2026-09-09.** This README describes `pbfleet.py` (FastAPI), which was abandoned on
+> 2025-08-16 ("back to flask lulz"). The app that actually works is **`pbfleet_enhanced.py`** (Flask,
+> port 8000, HTTP polling, no WebSocket, no pattern upload / auto-provisioning). Run it with
+> `just pb-monitor` from the repo root (cwd must be this directory: it reads `templates/index.html`
+> relatively). Deps: `flask flask-cors pixelblaze-client` (root `requirements.txt`). Things below that are
+> wrong for the live app: WebSocket `/ws` commands, `--dev` (references a nonexistent `pbfleet_clean`
+> module), `requirements-dev.txt`/pytest (the `test_*.py` files are manual scripts), `LOG_LEVEL`
+> (the FastAPI app reads `PB_LOG_LEVEL`), `provisioned_devices.pkl` (only `old_pbfleet.py`),
+> the Dockerfile, and `pb.py` living here (it is `src/pixelblaze/pb.py`, a WiFi provisioning CLI).
+> The Pi service unit points at `/home/pi/iqe/pixelblaze_monitor_pi.py`, which does not exist.
+> See `../../PIXELBLAZE_FLEET.md` and `../../docs/RUNNING.md` §8.
+
 A real-time web-based monitoring and control system for PixelBlaze LED controllers with automatic pattern provisioning and synchronized effects.
 
 ## Features
