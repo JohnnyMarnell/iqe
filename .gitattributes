@@ -1,3 +1,4 @@
 *.mp3 !text !filter !merge !diff
 *.wav !text !filter !merge !diff
 *.jar !text !filter !merge !diff
+*.lightkeyproj !text !filter !merge !diff

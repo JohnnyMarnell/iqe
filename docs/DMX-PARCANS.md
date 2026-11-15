@@ -297,6 +297,16 @@ Did the Pknight hold its IP through power cycles? Was the toggle used?
 
 ### Lightkey on the Mac, iPad as a sidecar
 
+**Update 2026-11-13: two real show files from the burn are now in the repo** at
+[`../src/dmx/lightkey/`](../src/dmx/lightkey/) (they had been sitting in
+`~/Downloads` since 2025-08-19). Both patch nine U'King fixtures on universe 1 —
+`P1`-`P8` plus a moving head `MH1` that exists nowhere in LX. Only
+`burning-man-2025-new.lightkeyproj` uses the 7-channel 1/8/15/.../50 addressing
+that the rest of this document assumes; the other is an 8-channel patch at
+1/9/17/.../57. Neither has an Art-Net output device bound, so the Pknight hookup
+below is still the open work. Per-file notes:
+[`../src/dmx/lightkey/README.md`](../src/dmx/lightkey/README.md).
+
 Facts verified 2026-09-09 (lightkeyapp.com): Lightkey is **macOS-only**.
 There is no iPhone/iPad version. It outputs Art-Net (one node, up to four
 universes on the free/standard tier), sACN, and USB DMX interfaces. It
@@ -342,6 +352,7 @@ it on playa.
 ## Appendix — reference paths
 
 - Python: `src/dmx/{add_dmx_parcans,dimmer_test,dmx_channel_scanner,parcan_tester,test_parcans}.py`
+- Lightkey: `src/dmx/lightkey/{burning-man-2025,burning-man-2025-new}.lightkeyproj`, `src/dmx/lightkey/README.md`
 - Surgery: `parcan-surgery.ts` (root), `package.json`
 - Java: `src/main/java/org/iqe/{DMXParCanFixture,ParCanByteEncoder,SmoothDMXParCanFixture,SmoothParCanByteEncoder,SpatialAveragingParCanFixture,SpatialAveragingByteEncoder,GlobalControls,LXPluginIQE,OscBridge}.java`, `pom.xml` ~29–33
 - Projects: `Projects/{iqe,iqe-prePlayaSurgery-2025,iqe-hadFourWorkingParcanCorners,iqe_modified,defShouldntDoThis-iqe,bak.iqe}.lxp`

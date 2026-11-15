@@ -16,3 +16,6 @@ Full story, channel map, fixture layout, and next steps: [`../../docs/DMX-PARCAN
 Bench order that worked in Aug 2025: scan → dimmer → test → LX (`just lx`) with the parcans enabled.
 The LX fixtures are `src/main/java/org/iqe/SmoothDMXParCanFixture.java` + encoder; the kill switch is
 `just parcans-toggle` (OSC `/iqe/cmd toggleparcans`).
+
+[`lightkey/`](lightkey/) holds the two Lightkey (macOS DMX console) show files from the 2025 burn —
+the par cans plus a moving head that LX never knew about.
